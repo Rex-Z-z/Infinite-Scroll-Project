@@ -6,7 +6,7 @@ import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
 
 const NavBar = () => {
     const { setTheme } = useTheme();
@@ -19,7 +19,7 @@ const NavBar = () => {
                     <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
                 </a>
                 <div className="flex">
-                    <Input type="text" placeholder="Search" className='hidden md:block border-2 dark:focus:border-blue-500'/>
+                    <Input type="text" placeholder="Search" className='hidden md:block w-lg border-2 dark:focus:border-blue-500'/>
                 </div>
                 <div className="flex gap-2">
                     <Button variant="outline" size="icon" className="md:hidden border-2 dark:focus:border-blue-500 hover:cursor-pointer">
@@ -45,10 +45,27 @@ const NavBar = () => {
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
-                    <Avatar className='size-[34px] hover:cursor-pointer hover:ring-2 ring-blue-500 rounded-sm'>
-                        <AvatarImage src="/pictures/profile-pic.jpg" />
-                        <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Avatar className='size-[34px] hover:cursor-pointer hover:ring-2 ring-blue-500 rounded-sm'>
+                                <AvatarImage src="/pictures/profile-pic.jpg" />
+                                <AvatarFallback>CN</AvatarFallback>
+                            </Avatar>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem>
+                                Profile
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                Setting
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <a href="/login">Logout</a>
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                 </div>
             </div>
         </nav>

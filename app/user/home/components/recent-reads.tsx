@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { ReadItem } from './types';
 import { Button } from '@/components/ui/button';
 import { CalendarCog, Settings2 } from 'lucide-react';
+import SectionSkeleton from '@/components/ui/section-skeleton';
 
 const mockRecentReads: ReadItem[] = [
   { id: 1, imageUrl: "/pictures/image.png", title: "A Regressor's Tale of Cultivation", lastRead: "A day ago", status: "Good", chapter: "Chapter 12" },
@@ -40,7 +41,7 @@ const RecentReads = () => {
                 // setRecentReads(data);
 
                 // For now, we'll simulate a 1-second delay with mock data
-                await new Promise(resolve => setTimeout(resolve, 500));
+                await new Promise(resolve => setTimeout(resolve, 2500));
                 setRecentReads(mockRecentReads); // Using our mock data
 
             } catch (err) {
@@ -70,10 +71,10 @@ const RecentReads = () => {
         <section className='flex flex-col w-full p-4 gap-2'>
             <div className='flex flex-row justify-between'>
                 <div className='flex flex-row'>
-                <p className='text-2xl font-bold hover:underline hover:cursor-pointer'>Recent Read</p>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-7 mt-[1.5px]">
-                    <path fillRule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
-                </svg>
+                    <p className='text-2xl font-bold hover:underline hover:cursor-pointer'>Recent Read</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-7 mt-[1.5px]">
+                        <path fillRule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+                    </svg>
                 </div>
 
                 {/* Date Sort */}
@@ -89,7 +90,7 @@ const RecentReads = () => {
                     </Button>
                 </div>
             </div>
-            {loading && <p>Loading your reads...</p>}
+            {loading && <SectionSkeleton />}
             {error && <p className="text-red-500">{error}</p>}
             
             {/* Card Sections */}

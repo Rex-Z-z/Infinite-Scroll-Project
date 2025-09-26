@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { ReadItem } from './types';
 import { Button } from '@/components/ui/button';
 import { CalendarCog, Settings2 } from 'lucide-react';
+import SectionSkeleton from '@/components/ui/section-skeleton';
 
 const mockRecommendedReads: ReadItem[] = [
   { id: 1, imageUrl: "/pictures/image.png", title: "A Regressor's Tale of Cultivation", lastRead: "A day ago", status: "Good", chapter: "Chapter 12" },
@@ -39,7 +40,7 @@ const Recommendations = () => {
                 // setRecommendedReads(data);
 
                 // For now, simulate a 1-second delay with mock data
-                await new Promise(resolve => setTimeout(resolve, 500));
+                await new Promise(resolve => setTimeout(resolve, 3000));
                 setRecommendedReads(mockRecommendedReads);
 
             } catch (err) {
@@ -82,7 +83,7 @@ const Recommendations = () => {
                     </Button>
                 </div>
             </div>
-            {loading && <p>Loading your reads...</p>}
+            {loading && <SectionSkeleton />}
             {error && <p className="text-red-500">{error}</p>}
 
             {/* Card Sections */}

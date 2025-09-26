@@ -20,7 +20,7 @@ const LoginForm = () => {
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <form className="space-y-4 md:space-y-6" action="#">
+                    <div className="space-y-4 md:space-y-6">
                         <div className="grid w-full max-w-sm items-center gap-3">
                             <Label htmlFor="email">Email</Label>
                             <Input type="email" id="email" placeholder="Email" className="focus:border-2 dark:focus:border-blue-500 hover:cursor-pointer" />
@@ -38,8 +38,10 @@ const LoginForm = () => {
                                 <a href="#">Forgot password?</a>
                             </Button>
                         </div>
-                        <Button type="submit" variant="default" className="w-full text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-800 dark:hover:bg-blue-500 hover:ring-2 hover:ring-blue-500 focus:ring-2 focus:ring-blue-300 hover:cursor-pointer">Sign in</Button>
-                    </form>
+                        <Button variant="default" className="w-full text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-800 dark:hover:bg-blue-500 hover:ring-2 hover:ring-blue-500 focus:ring-2 focus:ring-blue-300 hover:cursor-pointer">
+                            <a href="/user/home">Sign in</a>
+                        </Button>
+                    </div>
                 </CardContent>
             </Card>
         </div>
