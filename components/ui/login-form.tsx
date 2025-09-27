@@ -23,22 +23,22 @@ const LoginForm = () => {
                     <div className="space-y-4 md:space-y-6">
                         <div className="grid w-full max-w-sm items-center gap-3">
                             <Label htmlFor="email">Email</Label>
-                            <Input type="email" id="email" placeholder="Email" className="focus:border-2 dark:focus:border-blue-500 hover:cursor-pointer" />
+                            <Input type="email" id="email" placeholder="Email" className="border-2 dark:focus:border-blue-500 hover:border-gray-400 hover:dark:border-gray-600" />
                         </div>
                         <div className="grid w-full max-w-sm items-center gap-3">
                             <Label htmlFor="email">Password</Label>
-                            <Input type="password" id="password" placeholder="Password" className="focus:border-2 dark:focus:border-blue-500 hover:cursor-pointer" />
+                            <Input type="password" id="password" placeholder="Password" className="border-2 dark:focus:border-blue-500 hover:border-gray-400 hover:dark:border-gray-600" />
                         </div>
                         <div className="flex items-center justify-between">
                             <div className="flex items-start gap-2">
-                                <Checkbox id="terms" />
+                                <Checkbox id="terms" className='border-2 data-[state=checked]:bg-blue-500 dark:data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700'/>
                                 <Label htmlFor="terms">Remember me</Label>
                             </div>
                             <Button variant="link">
                                 <a href="#">Forgot password?</a>
                             </Button>
                         </div>
-                        <Button variant="default" className="w-full text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-800 dark:hover:bg-blue-500 hover:ring-2 hover:ring-blue-500 focus:ring-2 focus:ring-blue-300 hover:cursor-pointer">
+                        <Button variant="default" className="w-full text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-800 dark:hover:bg-blue-500 hover:ring-2 hover:ring-blue-500 focus:ring-2 focus:ring-blue-300 hover:cursor-pointer" asChild>
                             <a href="/user/home">Sign in</a>
                         </Button>
                     </div>

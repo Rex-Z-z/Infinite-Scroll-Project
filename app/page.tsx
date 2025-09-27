@@ -19,7 +19,7 @@ const page = () => {
         </div>
         
         {/* Content */}
-        <section id="home" className='flex flex-col justify-center items-center h-[80vh] text-center'>
+        <section id="home" className='flex flex-col justify-center items-center h-[80vh] text-center mt-6'>
           <p className='text-5xl font-semibold tracking-tight text-balance text-white sm:text-7xl w-3/6'>My Personal Book Collection Project</p>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8 w-[55%]">
               This project is my first independent work after completing the full-stack development program. 
@@ -134,7 +134,7 @@ const page = () => {
                   <span className="font-semibold">Tech Stack:</span> React, Tailwind CSS, Node.js, Express, MySQL
                 </p>
                 <div className="text-right mt-10">
-                  <a href="#" className="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                  <a href="https://num-digital-scheduler.fit/signin" target="_blank" className="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
                       Read more
                       <svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                   </a>

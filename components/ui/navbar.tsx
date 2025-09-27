@@ -24,17 +24,22 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
                 </a>
                 <div className="flex">
                     {page === 'user' ? (
-                        <Input type="text" placeholder="Search" className='hidden md:block w-lg border-2 dark:focus:border-blue-500'/>
+                        <>
+                            <div className="relative hidden md:block w-lg">
+                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
+                                <input type="text" placeholder="Search" className="w-full rounded-md border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-10 py-2 text-sm text-gray-900 dark:text-gray-100 transition focus:outline-none focus:ring-3 focus:ring-gray-200 focus:dark:ring-gray-700 focus:border-blue-600 focus:dark:border-blue-500 hover:border-gray-400 hover:dark:border-gray-600"/>
+                            </div>
+                        </>
                     ) : (
                         <div className='flex flex-row'>
                             <Button variant="link" className='font-bold' asChild>
-                                <a href="/search">Home</a>
+                                <a href="#">Home</a>
                             </Button>
                             <Button variant="link" className='font-bold' asChild>
-                                <a href="/search">About</a>
+                                <a href="#about">About</a>
                             </Button>
                             <Button variant="link" className='font-bold' asChild>
-                                <a href="/search">Project</a>
+                                <a href="#projects">Project</a>
                             </Button>
                         </div>
                     )}
@@ -80,7 +85,7 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
                                 <DropdownMenuItem>
                                     Setting
                                 </DropdownMenuItem>
-                                <DropdownMenuItem>
+                                <DropdownMenuItem asChild>
                                     <a href="/login">Logout</a>
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
