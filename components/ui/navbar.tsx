@@ -1,25 +1,43 @@
 "use client"
 
 import React from 'react'
-import { Moon, Sun, Search } from "lucide-react"
+import { Moon, Sun, Search, User } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
 
-const NavBar = () => {
+interface NavBarProps {
+    page?: 'user' | 'landing';
+}
+
+const NavBar = ({ page = 'user' }: NavBarProps) => {
     const { setTheme } = useTheme();
     
     return (
-        <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b-2 border-gray-200 dark:border-gray-700">
+    <nav className={`sticky top-0 z-50 ${page === 'user' ? 'bg-white dark:bg-gray-900 border-b-2 border-gray-200 dark:border-gray-700' : ''}`}>
             <div className="flex flex-wrap items-center justify-between mx-auto p-3">
-                <a href="/user/home" className="flex items-center space-x-3 rtl:space-x-reverse">
+                <a href={page === 'user' ? "/user/home" : "/"} className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
                     <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
                 </a>
                 <div className="flex">
-                    <Input type="text" placeholder="Search" className='hidden md:block w-lg border-2 dark:focus:border-blue-500'/>
+                    {page === 'user' ? (
+                        <Input type="text" placeholder="Search" className='hidden md:block w-lg border-2 dark:focus:border-blue-500'/>
+                    ) : (
+                        <div className='flex flex-row'>
+                            <Button variant="link" className='font-bold' asChild>
+                                <a href="/search">Home</a>
+                            </Button>
+                            <Button variant="link" className='font-bold' asChild>
+                                <a href="/search">About</a>
+                            </Button>
+                            <Button variant="link" className='font-bold' asChild>
+                                <a href="/search">Project</a>
+                            </Button>
+                        </div>
+                    )}
                 </div>
                 <div className="flex gap-2">
                     <Button variant="outline" size="icon" className="md:hidden border-2 dark:focus:border-blue-500 hover:cursor-pointer">
@@ -45,27 +63,33 @@ const NavBar = () => {
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Avatar className='size-[34px] hover:cursor-pointer hover:ring-2 ring-blue-500 rounded-sm'>
-                                <AvatarImage src="/pictures/profile-pic.jpg" />
-                                <AvatarFallback>CN</AvatarFallback>
-                            </Avatar>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem>
-                                Profile
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                Setting
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <a href="/login">Logout</a>
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                    {page === 'user' ? (
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Avatar className='size-[34px] hover:cursor-pointer hover:ring-2 ring-blue-500 rounded-sm'>
+                                    <AvatarImage src="/pictures/profile-pic.jpg" />
+                                    <AvatarFallback>CN</AvatarFallback>
+                                </Avatar>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem>
+                                    Profile
+                                </DropdownMenuItem>
+                                <DropdownMenuItem>
+                                    Setting
+                                </DropdownMenuItem>
+                                <DropdownMenuItem>
+                                    <a href="/login">Logout</a>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    ) : (
+                        <Button variant="outline" size="icon" asChild className='focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:ring-1 hover:ring-blue-400 hover:cursor-pointer'>
+                           <a href="/login"><User /></a>
+                        </Button>
+                    )}
                 </div>
             </div>
         </nav>
