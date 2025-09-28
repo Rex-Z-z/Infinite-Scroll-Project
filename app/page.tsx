@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button } from '@/components/ui/button'
 import NavBar from '@/components/ui/navbar'
 
 const page = () => {
