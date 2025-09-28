@@ -9,11 +9,11 @@ import SectionSkeleton from '@/components/ui/section-skeleton';
 const mockRecentReads: ReadItem[] = [
   { id: 1, imageUrl: "/pictures/image.png", title: "A Regressor's Tale of Cultivation", lastRead: "A day ago", status: "Good", chapter: "Chapter 12" },
   { id: 2, imageUrl: "/pictures/image2.png", title: "The Regressed Mercenary Has a Plan", lastRead: "3 days ago", status: "Good", chapter: "Chapter 4" },
-  { id: 3, imageUrl: "/pictures/image3.png", title: "The Knight Who Only Lives Today", lastRead: "Last week", status: "Bad", chapter: "Chapter 8" },
+  { id: 3, imageUrl: "/pictures/image5.png", title: "The Knight Who Only Lives Today", lastRead: "Last week", status: "Bad", chapter: "Chapter 8" },
   { id: 4, imageUrl: "/pictures/image.png", title: "A Regressor's Tale of Cultivation", lastRead: "A day ago", status: "Good", chapter: "Chapter 12" },
-  { id: 5, imageUrl: "/pictures/image2.png", title: "The Regressed Mercenary Has a Plan", lastRead: "3 days ago", status: "Mid", chapter: "Chapter 4" },
+  { id: 5, imageUrl: "/pictures/image4.png", title: "The Regressed Mercenary Has a Plan", lastRead: "3 days ago", status: "Mid", chapter: "Chapter 4" },
   { id: 6, imageUrl: "/pictures/image3.png", title: "The Knight Who Only Lives Today", lastRead: "Last week", status: "Mid", chapter: "Chapter 8" },
-  { id: 7, imageUrl: "/pictures/image.png", title: "A Regressor's Tale of Cultivation", lastRead: "A day ago", status: "Good", chapter: "Chapter 12" },
+  { id: 7, imageUrl: "/pictures/image5.png", title: "A Regressor's Tale of Cultivation", lastRead: "A day ago", status: "Good", chapter: "Chapter 12" },
   { id: 8, imageUrl: "/pictures/image2.png", title: "The Regressed Mercenary Has a Plan", lastRead: "3 days ago", status: "Mid", chapter: "Chapter 4" },
   { id: 9, imageUrl: "/pictures/image3.png", title: "The Knight Who Only Lives Today", lastRead: "Last week", status: "Mid", chapter: "Chapter 8" },
 ];
@@ -100,8 +100,8 @@ const RecentReads = () => {
                 {!loading && !error && recentReads.map((read) => (
                     // The key prop is essential for React lists!
                     <div key={read.id} className="max-w-60">
-                        <a href="#" className="relative block h-75 overflow-hidden rounded-md">
-                            <img src={read.imageUrl} alt={`Cover for ${read.title}`} />
+                        <a href="#" className="relative block w-full h-75 aspect-[2/3] overflow-hidden">
+                            <img src={read.imageUrl} alt={`Cover for ${read.title}`} className="absolute h-full w-full object-cover rounded-md"/>
                             <Button variant="outline" size="icon" className="absolute size-8 top-2 left-2 bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:cursor-pointer">
                             <Settings2 />
                             </Button>

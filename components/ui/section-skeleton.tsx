@@ -5,7 +5,7 @@ const SectionSkeleton = () => {
     return (
         <div>
             <div className='flex flex-col w-full gap-2'>
-                <div className='flex flex-row gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden'>
+                <div className='flex flex-row gap-2 overflow-hidden'>
                     {[...Array(7)].map((_, index) => (
                         <div className='flex flex-col gap-3'>
                             <Skeleton className='h-76 w-60' />
