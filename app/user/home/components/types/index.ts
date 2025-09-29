@@ -5,4 +5,5 @@ export interface ReadItem {
   lastRead: string;
   status: string;
   chapter: string;
+  date: string;
 }

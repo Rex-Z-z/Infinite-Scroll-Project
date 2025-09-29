@@ -7,15 +7,15 @@ import { Button } from '@/components/ui/button';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 
 const mockRecommendedReads: ReadItem[] = [
-  { id: 1, imageUrl: "/pictures/image.png", title: "A Regressor's Tale of Cultivation", lastRead: "A day ago", status: "Good", chapter: "Chapter 12" },
-  { id: 2, imageUrl: "/pictures/image2.png", title: "The Regressed Mercenary Has a Plan", lastRead: "3 days ago", status: "Good", chapter: "Chapter 4" },
-  { id: 3, imageUrl: "/pictures/image3.png", title: "The Knight Who Only Lives Today", lastRead: "Last week", status: "Bad", chapter: "Chapter 8" },
-  { id: 4, imageUrl: "/pictures/image.png", title: "A Regressor's Tale of Cultivation", lastRead: "A day ago", status: "Good", chapter: "Chapter 12" },
-  { id: 5, imageUrl: "/pictures/image2.png", title: "The Regressed Mercenary Has a Plan", lastRead: "3 days ago", status: "Mid", chapter: "Chapter 4" },
-  { id: 6, imageUrl: "/pictures/image3.png", title: "The Knight Who Only Lives Today", lastRead: "Last week", status: "Mid", chapter: "Chapter 8" },
-  { id: 7, imageUrl: "/pictures/image.png", title: "A Regressor's Tale of Cultivation", lastRead: "A day ago", status: "Good", chapter: "Chapter 12" },
-  { id: 8, imageUrl: "/pictures/image2.png", title: "The Regressed Mercenary Has a Plan", lastRead: "3 days ago", status: "Mid", chapter: "Chapter 4" },
-  { id: 9, imageUrl: "/pictures/image3.png", title: "The Knight Who Only Lives Today", lastRead: "Last week", status: "Mid", chapter: "Chapter 8" },
+  { id: 1, imageUrl: "/pictures/image.png", title: "A Regressor's Tale of Cultivation", lastRead: "A day ago", status: "Good", chapter: "Chapter 12", date: "2023-08-01" },
+  { id: 2, imageUrl: "/pictures/image2.png", title: "The Regressed Mercenary Has a Plan", lastRead: "3 days ago", status: "Good", chapter: "Chapter 4", date: "2023-08-01"  },
+  { id: 3, imageUrl: "/pictures/image3.png", title: "The Knight Who Only Lives Today", lastRead: "Last week", status: "Bad", chapter: "Chapter 8", date: "2023-08-01"  },
+  { id: 4, imageUrl: "/pictures/image.png", title: "A Regressor's Tale of Cultivation", lastRead: "A day ago", status: "Good", chapter: "Chapter 12", date: "2023-08-01"  },
+  { id: 5, imageUrl: "/pictures/image2.png", title: "The Regressed Mercenary Has a Plan", lastRead: "3 days ago", status: "Mid", chapter: "Chapter 4", date: "2023-08-01"  },
+  { id: 6, imageUrl: "/pictures/image3.png", title: "The Knight Who Only Lives Today", lastRead: "Last week", status: "Mid", chapter: "Chapter 8", date: "2023-08-01"  },
+  { id: 7, imageUrl: "/pictures/image5.png", title: "A Regressor's Tale of Cultivation", lastRead: "A day ago", status: "Good", chapter: "Chapter 12", date: "2023-08-01"  },
+  { id: 8, imageUrl: "/pictures/image4.png", title: "The Regressed Mercenary Has a Plan", lastRead: "3 days ago", status: "Mid", chapter: "Chapter 4", date: "2023-08-01"  },
+  { id: 9, imageUrl: "/pictures/image.png", title: "The Knight Who Only Lives Today", lastRead: "Last week", status: "Mid", chapter: "Chapter 8", date: "2023-08-01"  },
 ];
 
 const statusColorMap: { [key: string]: string } = {
