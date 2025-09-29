@@ -6,15 +6,6 @@ import { Settings2 } from 'lucide-react';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import { Button } from '@/components/ui/button';
 import { fetchDroppedComicByType } from '@/services/library/comic.service';
-import { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu';
-
-type Checked = DropdownMenuCheckboxItemProps["checked"]
-
-interface DroppedProps {
-    showManga: Checked;
-    showManhwa: Checked;
-    showManhua: Checked;
-}
 
 const statusColorMap: { [key: string]: string } = {
   "Good": "text-yellow-400 size-4 mt-0.5",
@@ -22,15 +13,11 @@ const statusColorMap: { [key: string]: string } = {
   "Bad": "text-red-500 size-4 mt-0.5",
 };
 
-const fetcher = (types: string[]) => fetchDroppedComicByType(types);
+const fetcher = () => fetchDroppedComicByType();
 
-const Dropped = ({ showManga, showManhwa, showManhua }: DroppedProps) => {
-    const typesToFetch: string[] = [];
-    if (showManga) typesToFetch.push('manga');
-    if (showManhwa) typesToFetch.push('manhwa');
-    if (showManhua) typesToFetch.push('manhua');
+const Dropped = () => {
 
-    const { data: libraryReads, error, isLoading } = useSWR(['dropped', ...typesToFetch], () => fetcher(typesToFetch));
+    const { data: libraryReads, error, isLoading } = useSWR(['dropped'], fetcher);
 
     return (
         <div>

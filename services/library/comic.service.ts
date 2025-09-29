@@ -1,7 +1,7 @@
 import { mockReads } from '@/app/user/home/components/mock-data';
 import { ReadItem } from '@/app/user/home/components/types';
 
-export const fetchOngoingComicByType = (types: string[]): Promise<ReadItem[]> => {
+export const fetchOngoingComicByType = (): Promise<ReadItem[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(mockReads);
@@ -9,7 +9,7 @@ export const fetchOngoingComicByType = (types: string[]): Promise<ReadItem[]> =>
   });
 };
 
-export const fetchCompletedComicByType = (types: string[]): Promise<ReadItem[]> => {
+export const fetchCompletedComicByType = (): Promise<ReadItem[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(mockReads);
@@ -17,7 +17,7 @@ export const fetchCompletedComicByType = (types: string[]): Promise<ReadItem[]> 
   });
 };
 
-export const fetchHoldComicByType = (types: string[]): Promise<ReadItem[]> => {
+export const fetchHoldComicByType = (): Promise<ReadItem[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(mockReads);
@@ -25,7 +25,7 @@ export const fetchHoldComicByType = (types: string[]): Promise<ReadItem[]> => {
   });
 };
 
-export const fetchDroppedComicByType = (types: string[]): Promise<ReadItem[]> => {
+export const fetchDroppedComicByType = (): Promise<ReadItem[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(mockReads);

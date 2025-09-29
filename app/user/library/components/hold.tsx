@@ -6,15 +6,6 @@ import { Settings2 } from 'lucide-react';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import { Button } from '@/components/ui/button';
 import { fetchHoldComicByType } from '@/services/library/comic.service';
-import { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu';
-
-type Checked = DropdownMenuCheckboxItemProps["checked"]
-
-interface HoldProps {
-    showManga: Checked;
-    showManhwa: Checked;
-    showManhua: Checked;
-}
 
 const statusColorMap: { [key: string]: string } = {
   "Good": "text-yellow-400 size-4 mt-0.5",
@@ -22,15 +13,11 @@ const statusColorMap: { [key: string]: string } = {
   "Bad": "text-red-500 size-4 mt-0.5",
 };
 
-const fetcher = (types: string[]) => fetchHoldComicByType(types);
+const fetcher = () => fetchHoldComicByType();
 
-const Hold = ({ showManga, showManhwa, showManhua }: HoldProps) => {
-    const typesToFetch: string[] = [];
-    if (showManga) typesToFetch.push('manga');
-    if (showManhwa) typesToFetch.push('manhwa');
-    if (showManhua) typesToFetch.push('manhua');
+const Hold = () => {
 
-    const { data: libraryReads, error, isLoading } = useSWR(['on hold', ...typesToFetch], () => fetcher(typesToFetch));
+    const { data: libraryReads, error, isLoading } = useSWR(['hold'], fetcher);
     
     return (
         <div>
