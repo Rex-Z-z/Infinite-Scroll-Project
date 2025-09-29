@@ -5,18 +5,8 @@ import { Settings2 } from 'lucide-react';
 import { ReadItem } from '../../home/components/types';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import { Button } from '@/components/ui/button';
+import { mockReads } from '../../home/components/mock-data';
 
-const mockDroppedLibrary: ReadItem[] = [
-  { id: 1, imageUrl: "/pictures/image.png", title: "A Regressor's Tale of Cultivation", lastRead: "A day ago", status: "Good", chapter: "Chapter 12", date: "2023-08-01" },
-  { id: 2, imageUrl: "/pictures/image2.png", title: "The Regressed Mercenary Has a Plan", lastRead: "3 days ago", status: "Good", chapter: "Chapter 4", date: "2023-08-01"  },
-  { id: 3, imageUrl: "/pictures/image3.png", title: "The Knight Who Only Lives Today", lastRead: "Last week", status: "Bad", chapter: "Chapter 8", date: "2023-08-01"  },
-  { id: 4, imageUrl: "/pictures/image.png", title: "A Regressor's Tale of Cultivation", lastRead: "A day ago", status: "Good", chapter: "Chapter 12", date: "2023-08-01"  },
-  { id: 5, imageUrl: "/pictures/image2.png", title: "The Regressed Mercenary Has a Plan", lastRead: "3 days ago", status: "Mid", chapter: "Chapter 4", date: "2023-08-01"  },
-  { id: 6, imageUrl: "/pictures/image3.png", title: "The Knight Who Only Lives Today", lastRead: "Last week", status: "Mid", chapter: "Chapter 8", date: "2023-08-01"  },
-  { id: 7, imageUrl: "/pictures/image5.png", title: "A Regressor's Tale of Cultivation", lastRead: "A day ago", status: "Good", chapter: "Chapter 12", date: "2023-08-01"  },
-  { id: 8, imageUrl: "/pictures/image4.png", title: "The Regressed Mercenary Has a Plan", lastRead: "3 days ago", status: "Mid", chapter: "Chapter 4", date: "2023-08-01"  },
-  { id: 9, imageUrl: "/pictures/image.png", title: "The Knight Who Only Lives Today", lastRead: "Last week", status: "Mid", chapter: "Chapter 8", date: "2023-08-01"  },
-];
 
 const statusColorMap: { [key: string]: string } = {
   "Good": "text-yellow-400 size-4 mt-0.5",
@@ -39,7 +29,7 @@ const Dropped = () => {
     
                   // For now, we'll simulate a 1-second delay with mock data
                   await new Promise(resolve => setTimeout(resolve, 2500));
-                  setDroppedReads(mockDroppedLibrary);
+                  setDroppedReads(mockReads);
     
               } catch (err) {
                   setError("Failed to fetch recommended reads. Please try again later.");
