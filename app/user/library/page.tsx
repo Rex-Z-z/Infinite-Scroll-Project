@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Book, BookOpen, BookOpenCheck, BookX, Search } from 'lucide-react';
 import NavBar from '@/components/ui/navbar'
@@ -7,8 +9,15 @@ import Completed from './components/completed';
 import Hold from './components/hold';
 import Dropped from './components/dropped';
 import SearchBar from './components/search-bar';
+import { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu';
 
-const page = () => {
+type Checked = DropdownMenuCheckboxItemProps["checked"]
+
+const Page = () => {
+  const [showManga, setShowManga] = useState<Checked>(true)
+  const [showManhwa, setShowManhwa] = useState<Checked>(true)
+  const [showManhua, setShowManhua] = useState<Checked>(true)
+
   return (
     <div>
       <NavBar />
@@ -32,23 +41,30 @@ const page = () => {
                   <BookX /> Dropped
                 </TabsTrigger>
               </TabsList>
-              <SearchBar />
+              <SearchBar
+                showManga={showManga}
+                setShowManga={setShowManga}
+                showManhwa={showManhwa}
+                setShowManhwa={setShowManhwa}
+                showManhua={showManhua}
+                setShowManhua={setShowManhua}
+              />
             </div>
             
             <TabsContent value="ongoing">
-              <OnGoing />
+              <OnGoing showManga={showManga} showManhwa={showManhwa} showManhua={showManhua} />
             </TabsContent>
             
             <TabsContent value="completed">
-              <Completed />
+              <Completed showManga={showManga} showManhwa={showManhwa} showManhua={showManhua} />
             </TabsContent>
 
             <TabsContent value="hold">
-              <Hold />
+              <Hold showManga={showManga} showManhwa={showManhwa} showManhua={showManhua} />
             </TabsContent>
 
             <TabsContent value="dropped">
-              <Dropped />
+              <Dropped showManga={showManga} showManhwa={showManhwa} showManhua={showManhua} />
             </TabsContent>
           </Tabs>
         </section>
@@ -57,4 +73,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

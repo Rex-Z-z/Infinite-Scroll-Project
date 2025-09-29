@@ -1,12 +1,20 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import useSWR from 'swr';
 import { Settings2 } from 'lucide-react';
-import { ReadItem } from '../../home/components/types';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import { Button } from '@/components/ui/button';
-import { mockReads } from '../../home/components/mock-data';
+import { fetchHoldComicByType } from '@/services/comic.service';
+import { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu';
 
+type Checked = DropdownMenuCheckboxItemProps["checked"]
+
+interface HoldProps {
+    showManga: Checked;
+    showManhwa: Checked;
+    showManhua: Checked;
+}
 
 const statusColorMap: { [key: string]: string } = {
   "Good": "text-yellow-400 size-4 mt-0.5",
@@ -14,41 +22,23 @@ const statusColorMap: { [key: string]: string } = {
   "Bad": "text-red-500 size-4 mt-0.5",
 };
 
-const Hold = () => {
-    const [holdReads, setHoldReads] = useState<ReadItem[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+const fetcher = (types: string[]) => fetchHoldComicByType(types);
 
-    useEffect(() => {
-          const fetchRecommendedReads = async () => {
-              try {
-                  // THIS IS WHERE TO REAL API CALL
-                  // Example: const response = await fetch('https://api.yourapp.com/recommended-reads');
-                  // const data = await response.json();
-                  // setLibraryReads(data);
-    
-                  // For now, we'll simulate a 1-second delay with mock data
-                  await new Promise(resolve => setTimeout(resolve, 2500));
-                  setHoldReads(mockReads);
-    
-              } catch (err) {
-                  setError("Failed to fetch recommended reads. Please try again later.");
-                  console.error(err);
-              } finally {
-                  setLoading(false);
-              }
-          };
-    
-          fetchRecommendedReads();
-      }, []);
+const Hold = ({ showManga, showManhwa, showManhua }: HoldProps) => {
+    const typesToFetch = [];
+    if (showManga) typesToFetch.push('manga');
+    if (showManhwa) typesToFetch.push('manhwa');
+    if (showManhua) typesToFetch.push('manhua');
 
+    const { data: libraryReads, error, isLoading } = useSWR(typesToFetch, fetcher);
+    
     return (
         <div>
-            {loading && <SectionSkeleton page='library'/>}
+            {isLoading && <SectionSkeleton page='library'/>}
             {error && <p className="text-red-500">{error}</p>}
 
             <div className='grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-2'>
-                {!loading && !error && holdReads.map((read) => (
+                {!isLoading && !error && libraryReads && libraryReads.map((read) => (
                     <div key={read.id} className="flex flex-col overflow-hidden">
                         <a href="#" className="relative block w-full aspect-[2/3] overflow-hidden">
                             <img  src={read.imageUrl}  alt={`Cover for ${read.title}`} className="absolute h-full w-full object-cover rounded-md"/>
