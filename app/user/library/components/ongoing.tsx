@@ -7,7 +7,6 @@ import SectionSkeleton from '@/components/ui/section-skeleton';
 import { Button } from '@/components/ui/button';
 import { mockReads } from '../../home/components/mock-data';
 
-
 const statusColorMap: { [key: string]: string } = {
   "Good": "text-yellow-400 size-4 mt-0.5",
   "Mid": "text-orange-400 size-4 mt-0.5",

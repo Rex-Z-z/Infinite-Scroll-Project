@@ -3,6 +3,7 @@ export interface ReadItem {
   type: string;
   imageUrl: string;
   title: string;
+  lastRead: string;
   status: string;
   chapter: string;
   date: string;
