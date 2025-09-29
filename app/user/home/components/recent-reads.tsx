@@ -2,10 +2,11 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { CalendarCog, Settings2 } from 'lucide-react';
-import { ReadItem } from './types';
 import { Button } from '@/components/ui/button';
 import SectionSkeleton from '@/components/ui/section-skeleton';
-import { mockReads } from './mock-data';
+import { formatDistanceToNow } from '@/lib/utils';
+import { fetchRecentReads } from '@/services/home/comic.service';
+import useSWR from 'swr';
 
 const statusColorMap: { [key: string]: string } = {
   "Good": "text-yellow-400 size-4 mt-0.5",
@@ -13,36 +14,13 @@ const statusColorMap: { [key: string]: string } = {
   "Bad": "text-red-500 size-4 mt-0.5",
 };
 
+const fetcher = () => fetchRecentReads();
+
 const RecentReads = () => {
-    const [recentReads, setRecentReads] = useState<ReadItem[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
     const [isDateFilterOpen, setIsDateFilterOpen] = useState(false);
     const recentReadsContainerRef = useRef<HTMLDivElement>(null);
 
-    // Simulate fetching
-    useEffect(() => {
-        const fetchRecentReads = async () => {
-            try {
-                // THIS IS WHERE TO REAL API CALL
-                // Example: const response = await fetch('https://api.yourapp.com/recent-reads');
-                // const data = await response.json();
-                // setRecentReads(data);
-
-                // For now, we'll simulate a 1-second delay with mock data
-                await new Promise(resolve => setTimeout(resolve, 2500));
-                setRecentReads(mockReads); // Using our mock data
-
-            } catch (err) {
-                setError("Failed to fetch recent reads. Please try again later.");
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchRecentReads();
-    }, []);
+    const { data: recentReads, isLoading, error } = useSWR(['recent-reads'], fetcher);
 
     useEffect(() => {
         const container = recentReadsContainerRef.current;
@@ -81,12 +59,12 @@ const RecentReads = () => {
                     </Button>
                 </div>
             </div>
-            {loading && <SectionSkeleton />}
+            {isLoading && <SectionSkeleton />}
             {error && <p className="text-red-500">{error}</p>}
             
             {/* Card Sections */}
             <div ref={recentReadsContainerRef} className='flex flex-row gap-2 overflow-x-auto flex-nowrap pr-1 [&::-webkit-scrollbar]:hidden'>
-                {!loading && !error && recentReads.map((read) => (
+                {!isLoading && !error && recentReads && recentReads.map((read) => (
                     // The key prop is essential for React lists!
                     <div key={read.id} className="max-w-60">
                         <a href="#" className="relative block w-full h-75 aspect-[2/3] overflow-hidden">
@@ -99,7 +77,7 @@ const RecentReads = () => {
                             <a href="#">
                                 <h5 className="mb-1 text-md font-bold tracking-tight text-gray-900 dark:text-white max-w-180 truncate" title={read.title}>{read.title}</h5>
                             </a>
-                            <p className="mb-3 text-sm font-normal text-gray-700 dark:text-gray-400">{read.lastRead}</p>
+                            <p className="mb-3 text-sm font-normal text-gray-700 dark:text-gray-400">{formatDistanceToNow(read.lastRead)}</p>
                             <div className='flex flex-row justify-between text-sm font-normal text-gray-700 dark:text-gray-400'>
                                 <div className='flex flex-row gap-1'>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={statusColorMap[read.rating] || 'text-gray-400 size-4 mt-0.5'}>

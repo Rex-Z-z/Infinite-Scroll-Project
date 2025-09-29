@@ -2,10 +2,11 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { CalendarCog, Settings2 } from 'lucide-react';
-import { ReadItem } from './types';
 import { Button } from '@/components/ui/button';
 import SectionSkeleton from '@/components/ui/section-skeleton';
-import { mockReads } from './mock-data';
+import { formatDistanceToNow } from '@/lib/utils';
+import { fetchRecommendedReads } from '@/services/home/comic.service';
+import useSWR from 'swr';
 
 const statusColorMap: { [key: string]: string } = {
   "Good": "text-yellow-400 size-4 mt-0.5",
@@ -13,35 +14,12 @@ const statusColorMap: { [key: string]: string } = {
   "Bad": "text-red-500 size-4 mt-0.5",
 };
 
+const fetcher = () => fetchRecommendedReads();
+
 const Recommendations = () => {
-    const [recommendedReads, setRecommendedReads] = useState<ReadItem[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
     const recommendedContainerRef = useRef<HTMLDivElement>(null);
 
-    // Simulate fetching
-    useEffect(() => {
-        const fetchRecommendedReads = async () => {
-            try {
-                // THIS IS WHERE TO REAL API CALL
-                // Example: const response = await fetch('https://api.yourapp.com/recommended-reads');
-                // const data = await response.json();
-                // setRecommendedReads(data);
-
-                // For now, simulate a 1-second delay with mock data
-                await new Promise(resolve => setTimeout(resolve, 3000));
-                setRecommendedReads(mockReads);
-
-            } catch (err) {
-                setError("Failed to fetch recommended reads. Please try again later.");
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchRecommendedReads();
-    }, []);
+    const { data: recommendedReads, isLoading, error } = useSWR(['recommended-reads'], fetcher);
 
     useEffect(() => {
         const container = recommendedContainerRef.current;
@@ -72,12 +50,12 @@ const Recommendations = () => {
                     </Button>
                 </div>
             </div>
-            {loading && <SectionSkeleton />}
+            {isLoading && <SectionSkeleton />}
             {error && <p className="text-red-500">{error}</p>}
 
             {/* Card Sections */}
             <div ref={recommendedContainerRef} className='flex flex-row gap-2 overflow-x-auto flex-nowrap pr-1 [&::-webkit-scrollbar]:hidden'>
-                {!loading && !error && recommendedReads.map((read) => (
+                {!isLoading && !error && recommendedReads  && recommendedReads.map((read) => (
                     // The key prop is essential for React lists!
                     <div key={read.id} className="max-w-60">
                         <a href="#" className="relative block h-75 overflow-hidden rounded-md">
@@ -90,7 +68,7 @@ const Recommendations = () => {
                             <a href="#">
                                 <h5 className="mb-1 text-md font-bold tracking-tight text-gray-900 dark:text-white max-w-180 truncate" title={read.title}>{read.title}</h5>
                             </a>
-                            <p className="mb-3 text-sm font-normal text-gray-700 dark:text-gray-400">{read.lastRead}</p>
+                            <p className="mb-3 text-sm font-normal text-gray-700 dark:text-gray-400">{formatDistanceToNow(read.lastRead)}</p>
                             <div className='flex flex-row justify-between text-sm font-normal text-gray-700 dark:text-gray-400'>
                                 <div className='flex flex-row gap-1'>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={statusColorMap[read.rating] || 'text-gray-400 size-4 mt-0.5'}>

@@ -5,7 +5,7 @@ import useSWR from 'swr';
 import { Settings2 } from 'lucide-react';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import { Button } from '@/components/ui/button';
-import { fetchOngoingComicByType } from '@/services/comic.service';
+import { fetchOngoingComicByType } from '@/services/library/comic.service';
 import { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu';
 
 type Checked = DropdownMenuCheckboxItemProps["checked"]
@@ -25,12 +25,12 @@ const statusColorMap: { [key: string]: string } = {
 const fetcher = (types: string[]) => fetchOngoingComicByType(types);
 
 const OnGoing = ({ showManga, showManhwa, showManhua }: OnGoingProps) => {
-    const typesToFetch = [];
+    const typesToFetch: string[] = [];
     if (showManga) typesToFetch.push('manga');
     if (showManhwa) typesToFetch.push('manhwa');
     if (showManhua) typesToFetch.push('manhua');
 
-    const { data: libraryReads, error, isLoading } = useSWR(typesToFetch, fetcher);
+    const { data: libraryReads, error, isLoading } = useSWR(['ongoing', ...typesToFetch], () => fetcher(typesToFetch));
 
     return (
         <div>
