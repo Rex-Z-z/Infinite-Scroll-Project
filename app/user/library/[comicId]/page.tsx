@@ -10,9 +10,16 @@ import useSWR from 'swr'
 
 
 const page = ({ params }: { params: { comicId: string } }) => {
-  const fetcher = () => fetchComickById(Number(params.comicId));
-
+  const { comicId } = params;
+  const fetcher = () => fetchComickById(Number(comicId));
   const { data: read, isLoading, error } = useSWR(['read'], fetcher);
+
+  const getLastReadDate = () => {
+    if (read?.lastRead) {
+      return `${formatDistanceToNow(read.lastRead)} (${read.lastRead})`;
+    }
+    return 'N/A';
+  }
 
   return (
     <div>
@@ -62,7 +69,7 @@ const page = ({ params }: { params: { comicId: string } }) => {
               </div>
               <div>
                 <h2 className='text-[11px] text-gray-400 font-semibold'>Last Read</h2>
-                <h1 className='text-sm font-semibold'>{formatDistanceToNow(read?.lastRead)} ({read?.lastRead})</h1>
+                <h1 className='text-sm font-semibold'>{getLastReadDate()}</h1>
               </div>
             </div>
 
@@ -79,50 +86,46 @@ const page = ({ params }: { params: { comicId: string } }) => {
         </div>
         
         {/* Right Side */}
-        <div className='flex flex-col gap-2'>
-            {/* Title */}
-            <div>
-              <h1 className='text-3xl font-semibold'>{read?.title}</h1>
-              <h2 className='text-lg text-gray-500 font-semibold'>How Can There Be a Divorce When We Haven't Even Married</h2>
-            </div>
-            
-            {/* Tags */}
-            <div className='flex flex-row gap-1.5'>
-              <Badge variant="secondary" className="bg-blue-500 text-white dark:bg-blue-600 dark:hover:bg-blue-700 px-2.5 py-1.5 rounded-2xl">
-                  Action
-              </Badge>
-              <Badge variant="secondary" className="bg-blue-500 text-white dark:bg-blue-600 dark:hover:bg-blue-700 px-2.5 py-1.5 rounded-2xl">
-                  Adventure
-              </Badge>
-              <Badge variant="secondary" className="bg-blue-500 text-white dark:bg-blue-600 dark:hover:bg-blue-700 px-2.5 py-1.5 rounded-2xl">
-                  Drama
-              </Badge>
-              <Badge variant="secondary" className="bg-blue-500 text-white dark:bg-blue-600 dark:hover:bg-blue-700 px-2.5 py-1.5 rounded-2xl">
-                  Romance
-              </Badge>
-              <Badge variant="secondary" className="bg-blue-500 text-white dark:bg-blue-600 dark:hover:bg-blue-700 px-2.5 py-1.5 rounded-2xl">
-                  Thriller
-              </Badge>
-            </div>
-            
-            {/* Description */}
-            <div className='mt-2'>
-              <h1 className='text-md font-semibold'>Description</h1>
-              <h2 className='text-sm text-gray-500 font-semibold'>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</h2>
-            </div>
-            
-            {/* Source */}
-            <div className='mt-2'>
-              <h1 className='text-md font-semibold mb-1'>Source</h1>
-              <div className='flex flex-row gap-1.5'>
-                <Badge variant="secondary" className="px-2.5 py-1.5 rounded-2xl">
-                    <img src="/icons/logo.webp" alt="" className='size-4'/>
-                    Asura Scans
-                </Badge>
-                <Badge variant="secondary" className="px-2.5 py-1.5 rounded-2xl">
-                    Comick
-                </Badge>
+        <div className='flex flex-col gap-4'>
+            <div className='flex flex-col gap-2'>
+              {/* Title */}
+              <div>
+                <h1 className='text-3xl font-semibold'>{read?.title}</h1>
+                <h2 className='text-lg text-gray-500 font-semibold'>{read?.altTitle}</h2>
               </div>
+              
+              {/* Tags */}
+              <div className='flex flex-row gap-1.5'>
+                {read?.tags.map((tag) => (
+                  <Badge key={tag} variant="secondary" className="bg-blue-500 text-white dark:bg-blue-600 dark:hover:bg-blue-700 px-2.5 py-1.5 rounded-2xl">
+                      {tag}
+                  </Badge>
+                ))}
+              </div>
+              
+              {/* Description */}
+              <div className='mt-2'>
+                <h1 className='text-md font-semibold'>Description</h1>
+                <h2 className='text-sm text-gray-500 font-semibold line-clamp-5'>{read?.desc}</h2>
+              </div>
+              
+              {/* Source */}
+              <div className='mt-2'>
+                <h1 className='text-md font-semibold mb-1'>Source</h1>
+                <div className='flex flex-row gap-1.5'>
+                  {read?.source.map((source) => (
+                    <Badge key={source} variant="secondary" className="px-2.5 py-1.5 rounded-2xl">
+                        {source === 'Asura Scans' && <img src="/icons/logo.webp" alt="" className='size-4'/>}
+                        {source}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className='flex flex-col gap-2'>
+                {[...Array(5)].map((_, index) => (
+                  <div key={index} className='h-16 rounded-md bg-gray-800'></div>
+                ))}
             </div>
         </div>
       </div>
