@@ -6,7 +6,7 @@ const page = ({ params }: { params: { comicId: string } }) => {
   const { comicId } = params;
   
   return (
-    <div>
+    <div className='h-screen flex flex-col'>
       <NavBar />
       <PageInfo comicId={comicId} />
     </div>

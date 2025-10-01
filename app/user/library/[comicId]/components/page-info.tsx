@@ -34,8 +34,8 @@ const PageInfo = ({ comicId }: { comicId: string }) => {
     const needsTruncation = read?.desc && read.desc.length > TRUNCATE_LENGTH;
     
     return (
-        <div>
-            <div className='flex flex-row gap-4 p-4' style={{ height: 'calc(100vh - 60px)' }}>
+        <div className='flex-grow overflow-hidden'>
+            <div className='flex flex-row gap-4 p-4 h-full'>
 
                 {/* Left Side */}
                 <div className="flex-none flex-col w-75 h-full">
@@ -97,7 +97,7 @@ const PageInfo = ({ comicId }: { comicId: string }) => {
                 </div>
                 
                 {/* Right Side */}
-                <div className='flex flex-col justify-between w-full'>
+                <div className='flex flex-col w-full overflow-y-auto custom-scrollbar pr-4'>
                     {/* Top Section */}
                     <div className='flex flex-col gap-2'>
                         {/* Title */}

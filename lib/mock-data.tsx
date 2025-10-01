@@ -7,7 +7,7 @@ export const mockReads: ReadItem[] = [
     imageUrl: "/pictures/image.png", 
     title: "A Regressor's Tale of Cultivation", 
     altTitle: "회귀수선전",
-    desc:"It's a Korean take on the Chinese Xianxia genre. MC and his work colleagues suddenly get dropped into a world of Immortal Cultivation while on a company picnic. Every one of his colleagues have a special talent or ability except the MC, and the MC has no choice but to live as an ordinary mortal in his first life. It's a Korean take on the Chinese Xianxia genre. MC and his work colleagues suddenly get dropped into a world of Immortal Cultivation while on a company picnic. Every one of his colleagues have a special talent or ability except the MC, and the MC has no choice but to live as an ordinary mortal in his first life. It's a Korean take on the Chinese Xianxia genre. MC and his work colleagues suddenly get dropped into a world of Immortal Cultivation while on a company picnic. Every one of his colleagues have a special talent or ability except the MC, and the MC has no choice but to live as an ordinary mortal in his first life.", 
+    desc:"It's a Korean take on the Chinese Xianxia genre. MC and his work colleagues suddenly get dropped into a world of Immortal Cultivation while on a company picnic. Every one of his colleagues have a special talent or ability except the MC, and the MC has no choice but to live as an ordinary mortal in his first life. It's a Korean take on the Chinese Xianxia genre. MC and his work colleagues suddenly get dropped into a world of Immortal Cultivation while on a company picnic. Every one of his colleagues have a special talent or ability except the MC, and the MC has no choice but to live as an ordinary mortal in his first life. It's a Korean take on the Chinese Xianxia genre. MC and his work colleagues suddenly get dropped into a world of Immortal Cultivation while on a company picnic. Every one of his colleagues have a special talent or ability except the MC, and the MC has no choice but to live as an ordinary mortal in his first life. It's a Korean take on the Chinese Xianxia genre. MC and his work colleagues suddenly get dropped into a world of Immortal Cultivation while on a company picnic. Every one of his colleagues have a special talent or ability except the MC, and the MC has no choice but to live as an ordinary mortal in his first life. It's a Korean take on the Chinese Xianxia genre. MC and his work colleagues suddenly get dropped into a world of Immortal Cultivation while on a company picnic. Every one of his colleagues have a special talent or ability except the MC, and the MC has no choice but to live as an ordinary mortal in his first life. It's a Korean take on the Chinese Xianxia genre. MC and his work colleagues suddenly get dropped into a world of Immortal Cultivation while on a company picnic. Every one of his colleagues have a special talent or ability except the MC, and the MC has no choice but to live as an ordinary mortal in his first life.", 
     lastRead: "2023-09-12", 
     status: "Ongoing", 
     rating: "Good", 
@@ -27,7 +27,7 @@ export const mockReads: ReadItem[] = [
     rating: "Good", 
     chapter: "Chapter 4",
     tags: ["Action", "Fantasy", "Adventure"],
-    source: ["Webtoon"]
+    source: ["Webtoon", "Asura Scans"]
   },
   { 
     id: 3, 
@@ -69,7 +69,7 @@ export const mockReads: ReadItem[] = [
     rating: "Mid", 
     chapter: "Chapter 4",
     tags: ["Action", "Fantasy", "Adventure"],
-    source: ["Webtoon"]
+    source: ["Webtoon", "Asura Scans"]
   },
   { 
     id: 6, 
@@ -111,7 +111,7 @@ export const mockReads: ReadItem[] = [
     rating: "Mid", 
     chapter: "Chapter 4",
     tags: ["Action", "Fantasy", "Adventure"],
-    source: ["Webtoon"]
+    source: ["Webtoon", "Asura Scans"]
   },
   { 
     id: 9, 
@@ -139,7 +139,7 @@ export const mockReads: ReadItem[] = [
     rating: "Good", 
     chapter: "Chapter 4",
     tags: ["Action", "Fantasy", "Adventure"],
-    source: ["Webtoon"]
+    source: ["Webtoon", "Asura Scans"]
   },
   { 
     id: 11, 
@@ -181,6 +181,6 @@ export const mockReads: ReadItem[] = [
     rating: "Mid", 
     chapter: "Chapter 4",
     tags: ["Action", "Fantasy", "Adventure"],
-    source: ["Webtoon"]
+    source: ["Webtoon", "Asura Scans"]
   },
 ];
