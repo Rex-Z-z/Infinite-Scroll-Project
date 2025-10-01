@@ -32,3 +32,11 @@ export const fetchDroppedComicByType = (): Promise<ReadItem[]> => {
     }, 1000);
   });
 };
+
+export const fetchComickById = (id: number): Promise<ReadItem> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(mockReads[0]);
+    });
+  });
+};
