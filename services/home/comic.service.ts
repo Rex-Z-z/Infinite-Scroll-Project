@@ -1,4 +1,4 @@
-import { mockReads } from '@/app/user/home/components/mock-data';
+import { mockReads } from '@/lib/mock-data';
 import { ReadItem } from '@/app/user/home/components/types';
 
 export const fetchAllReads = (): Promise<ReadItem[]> => {

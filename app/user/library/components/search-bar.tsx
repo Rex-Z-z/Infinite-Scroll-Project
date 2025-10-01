@@ -8,18 +8,14 @@ import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMe
 
 type Checked = DropdownMenuCheckboxItemProps["checked"]
 
-interface SearchBarProps {
-    showManga: Checked;
-    setShowManga: (checked: Checked) => void;
-    showManhwa: Checked;
-    setShowManhwa: (checked: Checked) => void;
-    showManhua: Checked;
-    setShowManhua: (checked: Checked) => void;
-}
+const SearchBar = () => {
+    // Type
+    const [showManga, setShowManga] = useState<Checked>(true)
+    const [showManhwa, setShowManhwa] = useState<Checked>(true)
+    const [showManhua, setShowManhua] = useState<Checked>(true)
 
-const SearchBar = ({ showManga, setShowManga, showManhwa, setShowManhwa, showManhua, setShowManhua }: SearchBarProps) => {
     // Genres
-    const [showAction, setShowAction] = useState<Checked>(true)
+    const [showAction, setShowAction] = useState<Checked>(false)
     const [showAdventure, setShowAdventure] = useState<Checked>(false)
     const [showComedy, setShowComedy] = useState<Checked>(false)
     const [showDrama, setShowDrama] = useState<Checked>(false)

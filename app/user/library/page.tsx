@@ -14,10 +14,6 @@ import { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu';
 type Checked = DropdownMenuCheckboxItemProps["checked"]
 
 const Page = () => {
-  const [showManga, setShowManga] = useState<Checked>(true)
-  const [showManhwa, setShowManhwa] = useState<Checked>(true)
-  const [showManhua, setShowManhua] = useState<Checked>(true)
-
   return (
     <div>
       <NavBar />
@@ -41,30 +37,23 @@ const Page = () => {
                   <BookX /> Dropped
                 </TabsTrigger>
               </TabsList>
-              <SearchBar
-                showManga={showManga}
-                setShowManga={setShowManga}
-                showManhwa={showManhwa}
-                setShowManhwa={setShowManhwa}
-                showManhua={showManhua}
-                setShowManhua={setShowManhua}
-              />
+              <SearchBar />
             </div>
             
             <TabsContent value="ongoing">
-              <OnGoing showManga={showManga} showManhwa={showManhwa} showManhua={showManhua} />
+              <OnGoing />
             </TabsContent>
             
             <TabsContent value="completed">
-              <Completed showManga={showManga} showManhwa={showManhwa} showManhua={showManhua} />
+              <Completed />
             </TabsContent>
 
             <TabsContent value="hold">
-              <Hold showManga={showManga} showManhwa={showManhwa} showManhua={showManhua} />
+              <Hold />
             </TabsContent>
 
             <TabsContent value="dropped">
-              <Dropped showManga={showManga} showManhwa={showManhwa} showManhua={showManhua} />
+              <Dropped />
             </TabsContent>
           </Tabs>
         </section>

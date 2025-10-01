@@ -1,4 +1,4 @@
-import { ReadItem } from './types';
+import { ReadItem } from '../app/user/home/components/types';
 
 export const mockReads: ReadItem[] = [
   { id: 1, type: "manga", imageUrl: "/pictures/image.png", title: "A Regressor's Tale of Cultivation", desc:"", lastRead: "2023-09-12", status: "Ongoing", rating: "Good", chapter: "Chapter 12" },
