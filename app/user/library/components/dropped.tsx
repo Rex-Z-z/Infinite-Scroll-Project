@@ -29,7 +29,7 @@ const Dropped = () => {
                 {!isLoading && !error  && libraryReads && libraryReads.map((read) => (
                     <Link href={`/user/library/${read.id}`} key={read.id}>
                         <div key={read.id} className="flex flex-col overflow-hidden">
-                            <div className="relative block w-full aspect-[2/3] overflow-hidden">
+                            <div className="relative block w-full aspect-[2/3] overflow-hidden shadow-2xl">
                                 <img  src={read.imageUrl}  alt={`Cover for ${read.title}`} className="absolute h-full w-full object-cover rounded-md"/>
                                 <Button variant="outline" size="icon" className="absolute size-8 top-2 left-2 bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:cursor-pointer">
                                     <Settings2 />

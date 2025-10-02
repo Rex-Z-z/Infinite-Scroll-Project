@@ -8,6 +8,8 @@ import { formatDistanceToNow } from '@/lib/utils';
 import { fetchRecentReads } from '@/services/home/comic.service';
 import useSWR from 'swr';
 import Link from 'next/link';
+import { CircleFadingPlus } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const statusColorMap: { [key: string]: string } = {
   "Good": "text-yellow-400 size-4 mt-0.5",
@@ -65,11 +67,29 @@ const RecentReads = () => {
             
             {/* Card Sections */}
             <div ref={recentReadsContainerRef} className='flex flex-row gap-2 overflow-x-auto flex-nowrap pr-1 [&::-webkit-scrollbar]:hidden'>
+                { !isLoading && !error &&
+                    <div className="max-w-60 flex flex-col gap-2">
+                        <div className="relative flex w-full h-75 aspect-[2/2.51] items-center justify-center bg-gray-700 hover:bg-gray-800 rounded-md cursor-pointer shadow-lg">
+                            <div className="hover:scale-130 transition-all duration-300 ease-in-out">
+                                <CircleFadingPlus size={50} className='text-blue-600'/>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-2 p-2 hover:bg-gray-800 rounded-md">
+                            <div className="bg-gray-700 hover:bg-gray-700 h-4 w-full rounded-2xl"/>
+                            <div className="bg-gray-700 hover:bg-gray-700  h-4 w-1/2 rounded-2xl"/>
+                            <div className="flex flex-row justify-between mt-2.5">
+                                <div className="bg-gray-700 hover:bg-gray-700 h-4 w-1/3 rounded-2xl"/>
+                                <div className="bg-gray-700 hover:bg-gray-700 h-4 w-1/4 rounded-2xl"/>
+                            </div>
+                        </div>
+                    </div>
+                }
+                
                 {!isLoading && !error && recentReads && recentReads.map((read) => (
                     // The key prop is essential for React lists!
                     <Link href={`/user/library/${read.id}`} key={read.id}>
                         <div key={read.id} className="max-w-60">
-                            <div className="relative block w-full h-75 aspect-[2/3] overflow-hidden">
+                            <div className="relative block w-full h-75 aspect-[2/3] overflow-hidden shadow-2xl">
                                 <img src={read.imageUrl} alt={`Cover for ${read.title}`} className="absolute h-full w-full object-cover rounded-md"/>
                                 <Button variant="outline" size="icon" className="absolute size-8 top-2 left-2 bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:cursor-pointer">
                                     <Settings2 />
