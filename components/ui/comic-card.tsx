@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Settings2 } from 'lucide-react';
 import { formatDistanceToNow } from '@/lib/utils';
-import { ReadItem } from '@/app/user/home/components/types';
+import { ReadItem } from '@/lib/types';
 
 interface ComicCardProps {
   read: ReadItem;

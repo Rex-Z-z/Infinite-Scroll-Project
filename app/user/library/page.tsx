@@ -9,9 +9,6 @@ import Completed from './components/completed';
 import Hold from './components/hold';
 import Dropped from './components/dropped';
 import SearchBar from './components/search-bar';
-import { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu';
-
-type Checked = DropdownMenuCheckboxItemProps["checked"]
 
 const Page = () => {
   return (

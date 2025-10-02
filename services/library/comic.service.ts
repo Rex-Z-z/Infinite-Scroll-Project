@@ -1,5 +1,5 @@
 import { mockReads } from '@/lib/mock-data';
-import { ReadItem } from '@/app/user/home/components/types';
+import { ReadItem } from '@/lib/types';
 
 export const fetchOngoingComicByType = (): Promise<ReadItem[]> => {
   return new Promise((resolve) => {

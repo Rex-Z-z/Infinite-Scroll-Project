@@ -1,4 +1,4 @@
-import { ReadItem } from '../app/user/home/components/types';
+import { ReadItem } from './types';
 
 export const mockReads: ReadItem[] = [
   { 

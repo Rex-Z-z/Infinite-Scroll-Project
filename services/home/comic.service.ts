@@ -1,5 +1,5 @@
 import { mockReads } from '@/lib/mock-data';
-import { ReadItem } from '@/app/user/home/components/types';
+import { ReadItem } from '@/lib/types';
 
 export const fetchAllReads = (): Promise<ReadItem[]> => {
   return new Promise((resolve) => {
