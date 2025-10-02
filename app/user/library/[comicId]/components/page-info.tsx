@@ -36,7 +36,6 @@ const PageInfo = ({ comicId }: { comicId: string }) => {
     return (
         <div className='flex-grow overflow-hidden'>
             <div className='flex flex-row gap-4 p-4 h-full'>
-
                 {/* Left Side */}
                 <div className="flex-none flex-col w-75 h-full">
                 {/* Cover */}
@@ -102,8 +101,8 @@ const PageInfo = ({ comicId }: { comicId: string }) => {
                     <div className='flex flex-col gap-2'>
                         {/* Title */}
                         <div>
-                            <h1 className='text-3xl font-semibold'>{read?.title}</h1>
-                            <h2 className='text-lg text-gray-500 font-semibold'>{read?.altTitle}</h2>
+                            <h1 className='text-3xl font-semibold line-clamp-2' title={read?.title}>{read?.title}</h1>
+                            <h2 className='text-lg text-gray-500 font-semibold  line-clamp-1' title={read?.altTitle}>{read?.altTitle}</h2>
                         </div>
                         
                         {/* Tags */}
