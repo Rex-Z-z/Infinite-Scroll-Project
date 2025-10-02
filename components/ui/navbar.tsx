@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import { Moon, Sun, Search, User } from "lucide-react"
+import { Moon, Sun, Search, User, CircleUserRound, Settings, LogOut } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -75,17 +75,17 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
                                     <AvatarFallback>CN</AvatarFallback>
                                 </Avatar>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
-                                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                            <DropdownMenuContent align="end" className="w-40">
+                                <DropdownMenuLabel className='text-[12px] text-blue-400 font-bold'>My Account</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem>
-                                    Profile
+                                    <CircleUserRound className='text-white'/> Profile
                                 </DropdownMenuItem>
                                 <DropdownMenuItem>
-                                    Setting
+                                    <Settings className='text-white'/> Setting
                                 </DropdownMenuItem>
                                 <DropdownMenuItem asChild>
-                                    <a href="/login">Logout</a>
+                                    <a href="/login"><LogOut className='text-white'/> Logout</a>
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
