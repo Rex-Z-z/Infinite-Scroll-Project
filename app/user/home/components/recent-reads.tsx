@@ -8,13 +8,13 @@ import { Button } from '@/components/ui/button';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import { fetchRecentReads } from '@/services/home/comic.service';
 import ComicCard from '@/components/ui/comic-card';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
 const fetcher = () => fetchRecentReads();
 
 const RecentReads = () => {
-    const [isDateFilterOpen, setIsDateFilterOpen] = useState(false);
+    const [date, setDate] = useState("Recent");
     const recentReadsContainerRef = useRef<HTMLDivElement>(null);
-
     const { data: recentReads, isLoading, error } = useSWR(['recent-reads'], fetcher);
 
     useEffect(() => {
@@ -43,15 +43,21 @@ const RecentReads = () => {
 
                 {/* Date Sort */}
                 <div className='flex flex-row gap-1.5'>
-                    <div className={`flex items-center gap-1.5 transition-all duration-300 ease-in-out ${isDateFilterOpen ? 'w-fit opacity-100' : 'w-0 opacity-0'} overflow-hidden`}>
-                        <Button variant="outline" onClick={() => setIsDateFilterOpen(!isDateFilterOpen)} className="text-xs size-8 focus:border-1 focus:border-blue-500 hover:cursor-pointer">7d</Button>
-                        <Button variant="outline" onClick={() => setIsDateFilterOpen(!isDateFilterOpen)} className="text-xs size-8 focus:border-1 focus:border-blue-500 hover:cursor-pointer">1m</Button>
-                        <Button variant="outline" onClick={() => setIsDateFilterOpen(!isDateFilterOpen)} className="text-xs size-8 focus:border-1 focus:border-blue-500 hover:cursor-pointer">6m</Button>
-                    </div>
-
-                    <Button variant="outline" size="icon" onClick={() => setIsDateFilterOpen(!isDateFilterOpen)} className="size-8 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:ring-1 hover:ring-blue-400 hover:cursor-pointer">
-                        <CalendarCog />
-                    </Button>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="outline" size="icon" className="size-8 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:ring-1 hover:ring-blue-400 hover:cursor-pointer">
+                                <CalendarCog />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            <DropdownMenuRadioGroup value={date} onValueChange={setDate}>
+                                <DropdownMenuRadioItem value="Recent">Recent</DropdownMenuRadioItem>
+                                <DropdownMenuRadioItem value="7 Days">7 Days</DropdownMenuRadioItem>
+                                <DropdownMenuRadioItem value="1 Month">1 Month</DropdownMenuRadioItem>
+                                <DropdownMenuRadioItem value="6 Months">6 Months</DropdownMenuRadioItem>
+                            </DropdownMenuRadioGroup>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                 </div>
             </div>
             {isLoading && <SectionSkeleton />}
