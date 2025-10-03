@@ -64,7 +64,7 @@ const SearchBar = () => {
                         <DropdownMenuTrigger asChild>
                             <Button variant="outline" className='h-7 text-[12px] ml-1'>Genres</Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-46 h-50" align="end">
+                        <DropdownMenuContent className="w-46 h-50 custom-scrollbar" align="end">
                             <DropdownMenuLabel className='text-[12px] text-blue-400 font-bold'>Select Genres</DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuCheckboxItem checked={showAction} onCheckedChange={setShowAction} >Action</DropdownMenuCheckboxItem>

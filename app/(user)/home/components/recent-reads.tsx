@@ -3,17 +3,26 @@
 import React, { useEffect, useRef, useState } from 'react'
 import useSWR from 'swr';
 import { CalendarCog } from 'lucide-react';
-import AddNewCard from './add-new-card';
+import AddNewCard from './ui/add-new-card';
 import { Button } from '@/components/ui/button';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import { fetchRecentReads } from '@/services/home/comic.service';
 import ComicCard from '@/components/ui/comic-card';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Dialog } from '@/components/ui/dialog';
+import AddNewModal from './ui/add-new-modal';
+import { 
+    DropdownMenu, 
+    DropdownMenuContent, 
+    DropdownMenuRadioGroup, 
+    DropdownMenuRadioItem, 
+    DropdownMenuTrigger 
+} from '@/components/ui/dropdown-menu';
 
 const fetcher = () => fetchRecentReads();
 
 const RecentReads = () => {
     const [date, setDate] = useState("Recent");
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const recentReadsContainerRef = useRef<HTMLDivElement>(null);
     const { data: recentReads, isLoading, error } = useSWR(['recent-reads'], fetcher);
 
@@ -66,7 +75,12 @@ const RecentReads = () => {
             {/* Card Sections */}
             <div ref={recentReadsContainerRef} className='flex flex-row gap-2 overflow-x-auto flex-nowrap pr-1 [&::-webkit-scrollbar]:hidden'>
                 { !isLoading && !error &&
-                    <AddNewCard />
+                    <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                        {!isLoading && !error && (
+                            <AddNewCard />
+                        )}
+                        <AddNewModal />
+                    </Dialog>
                 }
                 
                 {!isLoading && !error && recentReads && recentReads.map((read) => (

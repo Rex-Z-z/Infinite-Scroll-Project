@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import useSWR from 'swr';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import { fetchRecommendedReads } from '@/services/home/comic.service';
