@@ -2,19 +2,14 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import useSWR from 'swr';
-import { CalendarCog } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import { fetchRecommendedReads } from '@/services/home/comic.service';
 import ComicCard from '@/components/ui/comic-card';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import DropdownRecom from './ui/dropdown-recom';
 
 const fetcher = () => fetchRecommendedReads();
 
 const Recommendations = () => {
-    const [date, setDate] = useState("Recent");
-    const [year, setYear] = useState("2025");
-    const [year2, setYear2] = useState("2025");
     const recommendedContainerRef = useRef<HTMLDivElement>(null);
     const { data: recommendedReads, isLoading, error } = useSWR(['recommended-reads'], fetcher);
 
@@ -44,52 +39,7 @@ const Recommendations = () => {
 
                 {/* Date Sort */}
                 <div className='flex flex-row gap-1.5'>
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="outline" size="icon" className="size-8 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:ring-1 hover:ring-blue-400 hover:cursor-pointer">
-                                <CalendarCog />
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            <DropdownMenuRadioGroup value={date} onValueChange={setDate}>
-                                <DropdownMenuRadioItem value="Recent">Recent</DropdownMenuRadioItem>
-                                <DropdownMenuRadioItem value="7 Days">7 Days</DropdownMenuRadioItem>
-                                <DropdownMenuRadioItem value="1 Month">1 Month</DropdownMenuRadioItem>
-                                <DropdownMenuRadioItem value="6 Months">6 Months</DropdownMenuRadioItem>
-                            </DropdownMenuRadioGroup>
-                            <div className='mt-1 mb-1.5 flex items-center justify-center gap-2'>
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger asChild>
-                                        <Button variant="outline" className='h-7 text-[12px] ml-1'>{year}</Button>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent className="w-10">
-                                        <DropdownMenuLabel>Year</DropdownMenuLabel>
-                                        <DropdownMenuSeparator />
-                                        <DropdownMenuRadioGroup value={year} onValueChange={setYear}>
-                                            <DropdownMenuRadioItem value="2025">2025</DropdownMenuRadioItem>
-                                            <DropdownMenuRadioItem value="2024">2024</DropdownMenuRadioItem>
-                                            <DropdownMenuRadioItem value="2023">2023</DropdownMenuRadioItem>
-                                        </DropdownMenuRadioGroup>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
-                                <p className='text-sm text-center'>To</p>
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger asChild>
-                                        <Button variant="outline" className='h-7 text-[12px] ml-1'>{year2}</Button>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent className="w-10">
-                                        <DropdownMenuLabel>Year</DropdownMenuLabel>
-                                        <DropdownMenuSeparator />
-                                        <DropdownMenuRadioGroup value={year2} onValueChange={setYear2}>
-                                            <DropdownMenuRadioItem value="2025">2025</DropdownMenuRadioItem>
-                                            <DropdownMenuRadioItem value="2024">2024</DropdownMenuRadioItem>
-                                            <DropdownMenuRadioItem value="2023">2023</DropdownMenuRadioItem>
-                                        </DropdownMenuRadioGroup>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
-                            </div>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                    <DropdownRecom />
                 </div>
             </div>
             {isLoading && <SectionSkeleton />}
