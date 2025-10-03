@@ -39,7 +39,7 @@ const LoginForm = () => {
                             </Button>
                         </div>
                         <Button variant="default" className="w-full text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-800 dark:hover:bg-blue-500 hover:ring-2 hover:ring-blue-500 focus:ring-2 focus:ring-blue-300 hover:cursor-pointer" asChild>
-                            <a href="/user/home">Sign in</a>
+                            <a href="/home">Sign in</a>
                         </Button>
                     </div>
                 </CardContent>

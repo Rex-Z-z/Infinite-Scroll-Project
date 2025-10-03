@@ -17,7 +17,7 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
     return (
     <nav className={`sticky top-0 z-50 ${page === 'user' ? 'bg-white dark:bg-gray-900 border-b-2 border-gray-200 dark:border-gray-700' : ''}`}>
             <div className="flex flex-wrap items-center justify-between mx-auto p-3">
-                <a href={page === 'user' ? "/user/home" : "/"} className="flex items-center space-x-3 rtl:space-x-reverse">
+                <a href={page === 'user' ? "/home" : "/"} className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
                     <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
                 </a>
