@@ -2,19 +2,9 @@
 
 import React from 'react'
 import useSWR from 'swr';
-import { Settings2 } from 'lucide-react';
 import SectionSkeleton from '@/components/ui/section-skeleton';
-import { Button } from '@/components/ui/button';
-import { fetchOngoingComicByType } from '@/services/library/comic.service';
-import Link from 'next/link';
-import { formatDistanceToNow } from '@/lib/utils';
 import ComicCard from '@/components/ui/comic-card';
-
-const statusColorMap: { [key: string]: string } = {
-  "Good": "text-yellow-400 size-3 mt-0.5",
-  "Mid": "text-orange-400 size-3 mt-0.5",
-  "Bad": "text-red-500 size-3 mt-0.5",
-};
+import { fetchOngoingComicByType } from '@/services/library/comic.service';
 
 const fetcher = () => fetchOngoingComicByType();
 

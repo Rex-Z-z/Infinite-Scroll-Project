@@ -4,12 +4,12 @@ import React from 'react'
 import useSWR from 'swr';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import ComicCard from '@/components/ui/comic-card';
-import { fetchDroppedComicByType } from '@/services/library/comic.service';
+import { fetchPlanToReadComicByType } from '@/services/library/comic.service';
 
-const fetcher = () => fetchDroppedComicByType();
+const fetcher = () => fetchPlanToReadComicByType();
 
-const Dropped = () => {
-    const { data: libraryReads, error, isLoading } = useSWR(['dropped'], fetcher);
+const Plan = () => {
+    const { data: libraryReads, error, isLoading } = useSWR(['plan'], fetcher);
 
     return (
         <div>
@@ -25,4 +25,4 @@ const Dropped = () => {
     )
 }
 
-export default Dropped
+export default Plan

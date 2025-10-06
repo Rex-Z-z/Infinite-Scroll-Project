@@ -3,8 +3,8 @@
 import React from 'react'
 import useSWR from 'swr';
 import SectionSkeleton from '@/components/ui/section-skeleton';
-import { fetchCompletedComicByType } from '@/services/library/comic.service';
 import ComicCard from '@/components/ui/comic-card';
+import { fetchCompletedComicByType } from '@/services/library/comic.service';
 
 const fetcher = () => fetchCompletedComicByType();
 

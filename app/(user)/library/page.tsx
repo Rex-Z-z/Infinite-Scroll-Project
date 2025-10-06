@@ -1,14 +1,13 @@
-'use client'
-
-import React, { useState } from 'react'
+import React from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Book, BookOpen, BookOpenCheck, BookX, Search } from 'lucide-react';
+import { Book, BookMarked, BookOpen, BookOpenCheck, BookX, Search } from 'lucide-react';
 import NavBar from '@/components/ui/navbar'
 import OnGoing from './components/ongoing';
 import Completed from './components/completed';
 import Hold from './components/hold';
 import Dropped from './components/dropped';
 import SearchBar from './components/search-bar';
+import Plan from './components/plan';
 
 const Page = () => {
   return (
@@ -33,6 +32,9 @@ const Page = () => {
                 <TabsTrigger value="dropped" className='px-5 py-[18px] border-0 data-[state=active]:bg-blue-500 dark:data-[state=active]:bg-blue-600 data-[state=active]:hover:bg-blue-600 dark:data-[state=active]:hover:bg-blue-700 hover:bg-gray-800 hover:ring-2 hover:ring-gray-800 dark:data-[state=active]:hover:ring-2 dark:data-[state=active]:hover:ring-blue-700 hover:cursor-pointer'>
                   <BookX /> Dropped
                 </TabsTrigger>
+                <TabsTrigger value="plan" className='px-5 py-[18px] border-0 data-[state=active]:bg-blue-500 dark:data-[state=active]:bg-blue-600 data-[state=active]:hover:bg-blue-600 dark:data-[state=active]:hover:bg-blue-700 hover:bg-gray-800 hover:ring-2 hover:ring-gray-800 dark:data-[state=active]:hover:ring-2 dark:data-[state=active]:hover:ring-blue-700 hover:cursor-pointer'>
+                  <BookMarked /> Plan to Read
+                </TabsTrigger>
               </TabsList>
               <SearchBar />
             </div>
@@ -51,6 +53,10 @@ const Page = () => {
 
             <TabsContent value="dropped">
               <Dropped />
+            </TabsContent>
+
+            <TabsContent value="plan">
+              <Plan />
             </TabsContent>
           </Tabs>
         </section>
