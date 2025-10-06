@@ -26,6 +26,7 @@ const AddNewModal = () => {
     const [title, setTitle] = useState("");
     const [chapters, setChapters] = useState("");
     const [rating, setRating] = useState("");
+    const [type , setType] = useState("");
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -85,15 +86,38 @@ const AddNewModal = () => {
             <div className="flex flex-col gap-2.5">
                 <Label className={cn('text-xs flex items-center gap-2', title ? 'text-white' : 'text-gray-400')}>
                     <Book className={'size-4'}/>
-                    Comic Title
+                    Title
                 </Label>
-                <Input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)}/>
+                <Input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required/>
 
-                <Label className={cn('text-xs flex items-center gap-2', chapters ? 'text-white' : 'text-gray-400')}>
-                    <BookOpen className='size-4'/>
-                    Chapters
-                </Label>
-                <Input type="number" placeholder="Chapters" value={chapters} onChange={(e) => setChapters(e.target.value)}/>
+                <div className="flex flex-row gap-2.5">
+                    <div className="flex flex-col gap-2.5 w-full">
+                        <Label className={cn('text-xs flex items-center gap-2', type ? 'text-white' : 'text-gray-400')}>
+                            <BookOpen className='size-4'/>
+                            Type
+                        </Label>
+                        <Select onValueChange={setType} value={type}>
+                            <SelectTrigger className="w-full">
+                                <SelectValue placeholder="Select a type" />
+                            </SelectTrigger>
+                            <SelectContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
+                                <SelectGroup>
+                                    <SelectItem value="Manga">Manga</SelectItem>
+                                    <SelectItem value="Manhwa">Manhwa</SelectItem>
+                                    <SelectItem value="Manhua">Manhua</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </div>
+                    
+                    <div className="flex flex-col gap-2.5 w-full">
+                        <Label className={cn('text-xs flex items-center gap-2', chapters ? 'text-white' : 'text-gray-400')}>
+                            <BookOpen className='size-4'/>
+                            Chapters
+                        </Label>
+                        <Input type="number" placeholder="Chapters" value={chapters} onChange={(e) => setChapters(e.target.value)}/>
+                    </div>
+                </div>
 
                 <Label className={cn('text-xs flex items-center gap-2', rating ? 'text-white' : 'text-gray-400')}>
                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={cn('size-4 mb-0.5', ratingColorMap[rating])}>

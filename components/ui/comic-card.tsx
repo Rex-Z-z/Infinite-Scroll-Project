@@ -22,7 +22,7 @@ const ComicCard = ({ read, page = 'home'}: ComicCardProps) => {
     const isHome = page === 'home';
 
     return (
-        <Link href={`/user/library/${read.id}`} key={read.id}>
+        <Link href={`/library/${read.id}`} key={read.id}>
 
             { isHome ? (
                 // Home

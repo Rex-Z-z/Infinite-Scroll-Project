@@ -9,7 +9,6 @@ import ComicCard from '@/components/ui/comic-card';
 const fetcher = () => fetchAllReads();
 
 const LibraryRead = () => {
-    const [isDateFilterOpen, setIsDateFilterOpen] = useState(false);
     const libraryContainerRef = useRef<HTMLDivElement>(null);
     
     const { data: allReads, isLoading, error } = useSWR(['all-reads'], fetcher);
