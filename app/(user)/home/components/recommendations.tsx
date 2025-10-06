@@ -39,7 +39,7 @@ const Recommendations = () => {
 
                 {/* Date Sort */}
                 <div className='flex flex-row gap-1.5'>
-                    <DropdownRecom />
+                    <DropdownRecom section='recommendations'/>
                 </div>
             </div>
             {isLoading && <SectionSkeleton />}

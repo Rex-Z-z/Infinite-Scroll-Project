@@ -2,26 +2,17 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import useSWR from 'swr';
-import { CalendarCog } from 'lucide-react';
 import AddNewCard from './ui/add-new-card';
-import { Button } from '@/components/ui/button';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import { fetchRecentReads } from '@/services/home/comic.service';
 import ComicCard from '@/components/ui/comic-card';
 import { Dialog } from '@/components/ui/dialog';
 import AddNewModal from './ui/add-new-modal';
-import { 
-    DropdownMenu, 
-    DropdownMenuContent, 
-    DropdownMenuRadioGroup, 
-    DropdownMenuRadioItem, 
-    DropdownMenuTrigger 
-} from '@/components/ui/dropdown-menu';
+import DropdownRecom from './ui/dropdown-recom';
 
 const fetcher = () => fetchRecentReads();
 
 const RecentReads = () => {
-    const [date, setDate] = useState("Recent");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const recentReadsContainerRef = useRef<HTMLDivElement>(null);
     const { data: recentReads, isLoading, error } = useSWR(['recent-reads'], fetcher);
@@ -52,21 +43,7 @@ const RecentReads = () => {
 
                 {/* Date Sort */}
                 <div className='flex flex-row gap-1.5'>
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="outline" size="icon" className="size-8 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:ring-1 hover:ring-blue-400 hover:cursor-pointer">
-                                <CalendarCog />
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            <DropdownMenuRadioGroup value={date} onValueChange={setDate}>
-                                <DropdownMenuRadioItem value="Recent">Recent</DropdownMenuRadioItem>
-                                <DropdownMenuRadioItem value="7 Days">7 Days</DropdownMenuRadioItem>
-                                <DropdownMenuRadioItem value="1 Month">1 Month</DropdownMenuRadioItem>
-                                <DropdownMenuRadioItem value="6 Months">6 Months</DropdownMenuRadioItem>
-                            </DropdownMenuRadioGroup>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                    <DropdownRecom section='recent-reads'/>
                 </div>
             </div>
             {isLoading && <SectionSkeleton />}

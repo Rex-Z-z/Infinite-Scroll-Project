@@ -41,7 +41,7 @@ const AddNewModal = () => {
     const statusColorMap: { [key: string]: string } = {
         "Ongoing": "text-blue-600",
         "Completed": "text-green-600",
-        "OnHold": "text-yellow-600",
+        "On Hold": "text-yellow-600",
         "Dropped": "text-red-600",
         "Plan to Read": "text-purple-600",
     };
@@ -119,7 +119,7 @@ const AddNewModal = () => {
                 </Label>
                 <Input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required/>
 
-                <div className="flex flex-row gap-2.5">
+                <div className="flex flex-row gap-1.5">
                     <div className="flex flex-col gap-2.5 w-full">
                         <Label className={cn('text-xs flex items-center gap-2', type ? 'text-white' : 'text-gray-400')}>
                             <BookOpen className='size-4'/>
@@ -201,19 +201,19 @@ const AddNewModal = () => {
                         On Hold
                     </Label>
 
-                    <Label htmlFor="r4" className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer bg-[#1a2231] border-gray-300 dark:border-gray-700 transition-colors">
-                        <div className='rounded-full has-[[data-state=checked]]:bg-red-600'>
-                            <RadioGroupItem value="Dropped" id="r4" />
-                        </div>
-                        Dropped
-                    </Label>
-
                     <Label htmlFor="r5" className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer bg-[#1a2231] border-gray-300 dark:border-gray-700 transition-colors">
                         <div className='rounded-full has-[[data-state=checked]]:bg-purple-600'>
                             <RadioGroupItem value="Plan to Read" id="r5" />
                         </div>
                         Plan to Read
                     </Label>
+
+                    <Label htmlFor="r4" className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer bg-[#1a2231] border-gray-300 dark:border-gray-700 transition-colors">
+                        <div className='rounded-full has-[[data-state=checked]]:bg-red-600'>
+                            <RadioGroupItem value="Dropped" id="r4" />
+                        </div>
+                        Dropped
+                    </Label> 
                 </RadioGroup>
             </div>
 
