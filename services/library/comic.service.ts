@@ -46,6 +46,6 @@ export const fetchComickById = (id: number): Promise<ReadItem | undefined> => {
     setTimeout(() => {
       const comic = mockReads.find((item) => item.id === id);
       resolve(comic);
-    }, 3000);
+    }, 1000);
   });
 };

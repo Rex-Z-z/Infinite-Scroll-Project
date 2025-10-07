@@ -23,7 +23,6 @@ const ComicCard = ({ read, page = 'home'}: ComicCardProps) => {
 
     return (
         <Link href={`/library/${read.id}`} key={read.id}>
-
             { isHome ? (
                 // Home
                 <div key={read.id} className="max-w-60">
@@ -61,7 +60,7 @@ const ComicCard = ({ read, page = 'home'}: ComicCardProps) => {
                             {read.chapter ? (
                                 <p>{read.chapter}</p>
                             ) : (
-                                <p className='font-semibold text-gray-700'>No Chapter</p>
+                                <p className='text-gray-700'>No Chapter</p>
                             )}
                         </div>
                     </div>

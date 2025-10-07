@@ -32,8 +32,8 @@ const typeColorMap: { [key: string]: string } = {
 
 const DropdownRecom = ({section = 'recent-reads' }: NavBarProps) => {
     const [date, setDate] = useState("Recent");
-    const [type, setType] = useState("Manga");
-    const [rating, setRating] = useState("Good");
+    const [type, setType] = useState("");
+    const [rating, setRating] = useState("");
     const [year, setYear] = useState("2025");
     const [year2, setYear2] = useState("2025");
     const [isYearRangeActive, setIsYearRangeActive] = useState(false);

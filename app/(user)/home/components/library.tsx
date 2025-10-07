@@ -1,10 +1,10 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
-import SectionSkeleton from '@/components/ui/section-skeleton';
-import { fetchAllReads } from '@/services/home/comic.service';
+import React, { useEffect, useRef } from 'react'
 import useSWR from 'swr';
+import SectionSkeleton from '@/components/ui/section-skeleton';
 import ComicCard from '@/components/ui/comic-card';
+import { fetchAllReads } from '@/services/home/comic.service';
 
 const fetcher = () => fetchAllReads();
 

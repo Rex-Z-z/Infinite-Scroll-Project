@@ -2,10 +2,10 @@
 
 import React, { useEffect, useRef } from 'react'
 import useSWR from 'swr';
-import SectionSkeleton from '@/components/ui/section-skeleton';
-import { fetchRecommendedReads } from '@/services/home/comic.service';
-import ComicCard from '@/components/ui/comic-card';
 import DropdownRecom from './ui/dropdown-recom';
+import SectionSkeleton from '@/components/ui/section-skeleton';
+import ComicCard from '@/components/ui/comic-card';
+import { fetchRecommendedReads } from '@/services/home/comic.service';
 
 const fetcher = () => fetchRecommendedReads();
 

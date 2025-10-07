@@ -3,12 +3,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import useSWR from 'swr';
 import AddNewCard from './ui/add-new-card';
-import SectionSkeleton from '@/components/ui/section-skeleton';
-import { fetchRecentReads } from '@/services/home/comic.service';
-import ComicCard from '@/components/ui/comic-card';
-import { Dialog } from '@/components/ui/dialog';
 import AddNewModal from './ui/add-new-modal';
 import DropdownRecom from './ui/dropdown-recom';
+import SectionSkeleton from '@/components/ui/section-skeleton';
+import ComicCard from '@/components/ui/comic-card';
+import { Dialog } from '@/components/ui/dialog';
+import { fetchRecentReads } from '@/services/home/comic.service';
 
 const fetcher = () => fetchRecentReads();
 
