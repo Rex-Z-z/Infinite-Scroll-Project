@@ -4,7 +4,7 @@ import { ReadItem } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Book, BookOpen, Star, Upload, Clipboard } from 'lucide-react';
+import { Book, BookOpen, Star, Upload, Clipboard, ClipboardCopy, ClipboardCheck } from 'lucide-react';
 import {
     DialogClose,
     DialogContent,
@@ -30,19 +30,19 @@ const AddNewModal = ({ comicData }: { comicData: ReadItem | null }) => {
     const [rating, setRating] = useState("");
     const [type , setType] = useState("");
     const [status, setStatus] = useState("");
+    const [isCopied, setIsCopied] = useState(false);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         if (comicData) {
             setTitle(comicData.title);
-            setChapter(comicData.chapter);
+            setChapter(String(comicData.chapter));
             setRating(comicData.rating);
             setType(comicData.type);
             setStatus(comicData.status);
             setImagePreview(comicData.imageUrl);
         } else {
-            // Reset fields when there is no comicData (for "Add New")
             setTitle('');
             setChapter('');
             setRating('');
@@ -77,7 +77,7 @@ const AddNewModal = ({ comicData }: { comicData: ReadItem | null }) => {
         fileInputRef.current?.click();
     };
 
-    const handlePaste = async () => {
+    const handlePasteImage = async () => {
         try {
             const clipboardItems = await navigator.clipboard.read();
             for (const item of clipboardItems) {
@@ -90,6 +90,25 @@ const AddNewModal = ({ comicData }: { comicData: ReadItem | null }) => {
         } catch (error) {
             console.error('Failed to read clipboard contents: ', error);
         }
+    };
+
+    const handlePasteName = async () => {
+        try {
+            const textFromClipboard = await navigator.clipboard.readText();
+            setTitle(textFromClipboard);
+        } catch (error) {
+            console.error('Failed to read clipboard contents: ', error);
+
+        }
+    };
+
+    const handleCopyName = () => {
+        navigator.clipboard.writeText(title);
+        setIsCopied(true);
+
+        setTimeout(() => {
+            setIsCopied(false);
+        }, 2000);
     };
 
     return (
@@ -123,7 +142,7 @@ const AddNewModal = ({ comicData }: { comicData: ReadItem | null }) => {
                         <DialogTitle>Add New Comic</DialogTitle>
                         <DialogDescription className='font-semibold'>
                             {comicData ? "Edit the details of your comic." : "Add a new comic to your collection."}
-                            <Button variant="outline" onClick={handlePaste} className="flex items-center gap-2 mt-2 text-xs p-1">
+                            <Button variant="outline" onClick={handlePasteImage} className="flex items-center gap-2 mt-2 text-xs p-1">
                                 <Clipboard className="size-3.5" />
                                 Paste
                             </Button>
@@ -137,7 +156,19 @@ const AddNewModal = ({ comicData }: { comicData: ReadItem | null }) => {
                     <Book className={'size-4'}/>
                     Title
                 </Label>
-                <Input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required/>
+                <div className="flex flex-row gap-1.5">
+                    <Input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required/>
+                    {title ? (
+                        <Button onClick={handleCopyName} variant="outline" size="icon" className='transition-all duration-300 ease-in-out hover:cursor-pointer'>
+                            { isCopied ? <ClipboardCheck /> : <ClipboardCopy /> }
+                        </Button>
+                    ) : (
+                        <Button onClick={handlePasteName} variant="outline" size="icon">
+                            <Clipboard />
+                        </Button>
+                    )}
+                    
+                </div>
 
                 <div className="flex flex-row gap-1.5">
                     <div className="flex flex-col gap-2.5 w-full">
