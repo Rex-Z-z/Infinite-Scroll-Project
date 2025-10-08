@@ -35,7 +35,7 @@ const ComicCard = ({ read, page = 'home', onEdit}: ComicCardProps) => {
                 <div key={read.id} className="max-w-60">
                     <div className="relative block w-full h-75 aspect-[2/3] overflow-hidden rounded-md shadow-2xl">
                         {read.imageUrl? (
-                            <img src={read.imageUrl} alt={`Cover for ${read.title}`} className="absolute h-full w-full object-cover hover:scale-110 transition-all duration-300 ease-in-out"/>
+                            <img src={read.imageUrl} alt={`Cover for ${read.title}`} className="absolute h-full w-full object-cover hover:scale-110 transition-all duration-500 ease-in-out"/>
                         ) : (
                             <div className="relative flex w-full h-75 aspect-[2/2.51] items-center justify-center bg-gray-700 hover:bg-gray-800 rounded-md cursor-pointer shadow-lg group">
                                 <div className="group-hover:scale-130 transition-all duration-300 ease-in-out">
@@ -75,7 +75,7 @@ const ComicCard = ({ read, page = 'home', onEdit}: ComicCardProps) => {
                 // Library
                 <div key={read.id} className="flex flex-col overflow-hidden">
                     <div className="relative block w-full aspect-[2/3] overflow-hidden rounded-md shadow-2xl">
-                        <img  src={read.imageUrl}  alt={`Cover for ${read.title}`} className="absolute h-full w-full object-cover hover:scale-110 transition-all duration-300 ease-in-out"/>
+                        <img  src={read.imageUrl}  alt={`Cover for ${read.title}`} className="absolute h-full w-full object-cover hover:scale-110 transition-all duration-500 ease-in-out"/>
 
                         <Button onClick={handleEditClick} variant="outline" size="icon" className="absolute size-8 top-2 left-2 bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:cursor-pointer">
                             <Settings2 />

@@ -4,8 +4,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import useSWR from 'swr';
 import { ReadItem } from '@/lib/types';
 import AddNewCard from './ui/add-new-card';
-import AddNewModal from '../../../../components/ui/add-new-modal';
-import DropdownRecom from './ui/dropdown-recom';
+import AddNewModal from '@/components/ui/add-new-modal';
+import DropdownHome from './ui/dropdown-home';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import ComicCard from '@/components/ui/comic-card';
 import { Dialog } from '@/components/ui/dialog';
@@ -57,7 +57,7 @@ const RecentReads = () => {
 
                 {/* Date Sort */}
                 <div className='flex flex-row gap-1.5'>
-                    <DropdownRecom section='recent-reads'/>
+                    <DropdownHome section='recent-reads'/>
                 </div>
             </div>
             {isLoading && <SectionSkeleton />}
@@ -66,7 +66,7 @@ const RecentReads = () => {
             {/* Card Sections */}
             <div ref={recentReadsContainerRef} className='flex flex-row gap-2 overflow-x-auto flex-nowrap pr-1 [&::-webkit-scrollbar]:hidden'>
                 { !isLoading && !error &&
-                    <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                    <Dialog open={isModalOpen} onOpenChange={handleModalOpenChange}>
                         {!isLoading && !error && (
                             <AddNewCard />
                         )}

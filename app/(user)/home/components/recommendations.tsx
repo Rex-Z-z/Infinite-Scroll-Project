@@ -3,12 +3,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import useSWR from 'swr';
 import { ReadItem } from '@/lib/types';
-import DropdownRecom from './ui/dropdown-recom';
+import DropdownHome from './ui/dropdown-home';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import ComicCard from '@/components/ui/comic-card';
 import { fetchRecommendedReads } from '@/services/home/comic.service';
 import { Dialog } from '@/components/ui/dialog';
-import AddNewModal from '../../../../components/ui/add-new-modal';
+import AddNewModal from '@/components/ui/add-new-modal';
 
 const fetcher = () => fetchRecommendedReads();
 
@@ -50,7 +50,7 @@ const Recommendations = () => {
 
                 {/* Date Sort */}
                 <div className='flex flex-row gap-1.5'>
-                    <DropdownRecom section='recommendations'/>
+                    <DropdownHome section='recommendations'/>
                 </div>
             </div>
             {isLoading && <SectionSkeleton />}

@@ -1,10 +1,12 @@
 'use client'
 
 import React, { useState } from 'react'
+import { cn } from '@/lib/utils';
 import { BookOpen, CalendarCog, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { 
     DropdownMenu, 
+    DropdownMenuCheckboxItem, 
     DropdownMenuContent, 
     DropdownMenuLabel, 
     DropdownMenuRadioGroup, 
@@ -12,31 +14,31 @@ import {
     DropdownMenuSeparator, 
     DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu';
-import { cn } from '@/lib/utils';
+import { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu';
 
 interface NavBarProps {
     section?: 'recent-reads' | 'recommendations';
 }
 
-const rateColorMap: { [key: string]: string } = {
-    "Good": "text-yellow-500",
-    "Mid": "text-orange-500",
-    "Bad": "text-red-500"
-}
+type Checked = DropdownMenuCheckboxItemProps["checked"]
 
-const typeColorMap: { [key: string]: string } = {
-    "Manga": "text-blue-500",
-    "Manhwa": "text-green-500",
-    "Manhua": "text-red-500"
-}
-
-const DropdownRecom = ({section = 'recent-reads' }: NavBarProps) => {
+const DropdownHome = ({section = 'recent-reads' }: NavBarProps) => {
     const [date, setDate] = useState("Recent");
     const [type, setType] = useState("");
     const [rating, setRating] = useState("");
     const [year, setYear] = useState("2025");
     const [year2, setYear2] = useState("2025");
     const [isYearRangeActive, setIsYearRangeActive] = useState(false);
+    
+    // Type
+    const [showManga, setShowManga] = useState<Checked>(true)
+    const [showManhwa, setShowManhwa] = useState<Checked>(true)
+    const [showManhua, setShowManhua] = useState<Checked>(true)
+
+    // Rating
+    const [showRatingGood, setShowRatingGood] = useState<Checked>(true)
+    const [showRatingMid, setShowRatingMid] = useState<Checked>(false)
+    const [showRatingBad, setShowRatingBad] = useState<Checked>(false)
 
     return (
         <div className='flex flex-row gap-1.5 items-center'>
@@ -48,6 +50,8 @@ const DropdownRecom = ({section = 'recent-reads' }: NavBarProps) => {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
+                    <DropdownMenuLabel className='text-[12px] text-blue-400 font-bold'>Select Date</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
                     <DropdownMenuRadioGroup value={date} onValueChange={(value) => {setDate(value); setIsYearRangeActive(false);}}>
                         <DropdownMenuRadioItem value="Recent">Recent</DropdownMenuRadioItem>
                         <DropdownMenuRadioItem value="7 Days">7 Days</DropdownMenuRadioItem>
@@ -99,47 +103,37 @@ const DropdownRecom = ({section = 'recent-reads' }: NavBarProps) => {
                 <>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="outline" size="icon" className={cn(`size-8 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:ring-1 hover:ring-blue-400 hover:cursor-pointer`, rateColorMap[rating])}>
+                            <Button variant="outline" size="icon" className="size-8 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:ring-1 hover:ring-blue-400 hover:cursor-pointer">
                                 <Star />
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                            <DropdownMenuRadioGroup value={rating} onValueChange={setRating}>
-                                <DropdownMenuRadioItem value="Good" className='data-[state=checked]:text-yellow-400 data-[state=unchecked]:text-yellow-200'>
-                                    <Star /> Good
-                                </DropdownMenuRadioItem>
-                                <DropdownMenuRadioItem value="Mid" className='data-[state=checked]:text-orange-400 data-[state=unchecked]:text-orange-200'>
-                                    <Star /> Mid
-                                </DropdownMenuRadioItem>
-                                <DropdownMenuRadioItem value="Bad" className='data-[state=checked]:text-red-500 data-[state=unchecked]:text-red-300'>
-                                    <Star className="text-red-500"/>Bad
-                                </DropdownMenuRadioItem>
-                            </DropdownMenuRadioGroup>
+                            <DropdownMenuLabel className='text-[12px] text-blue-400 font-bold'>Select Rating</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuCheckboxItem checked={showRatingGood} onCheckedChange={setShowRatingGood} >Good</DropdownMenuCheckboxItem>
+                            <DropdownMenuCheckboxItem checked={showRatingMid} onCheckedChange={setShowRatingMid} >Mid</DropdownMenuCheckboxItem>
+                            <DropdownMenuCheckboxItem checked={showRatingBad} onCheckedChange={setShowRatingBad} >Bad</DropdownMenuCheckboxItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
 
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="outline" size="icon" className={cn(`size-8 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:ring-1 hover:ring-blue-400 hover:cursor-pointer`, typeColorMap[type])}>
+                            <Button variant="outline" size="icon" className="size-8 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:ring-1 hover:ring-blue-400 hover:cursor-pointer">
                                 <BookOpen />
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            <DropdownMenuRadioGroup value={type} onValueChange={setType}>
-                                <DropdownMenuRadioItem value="Manga" className='has-[[data-state=checked]]:text-blue-500'>Manga</DropdownMenuRadioItem>
-                                <DropdownMenuRadioItem value="Manhwa" className='has-[[data-state=checked]]:text-green-500'>Manhwa</DropdownMenuRadioItem>
-                                <DropdownMenuRadioItem value="Manhua" className='has-[[data-state=checked]]:text-red-500'>Manhua</DropdownMenuRadioItem>
-                            </DropdownMenuRadioGroup>
+                        <DropdownMenuContent className="w-46" align="end">
+                            <DropdownMenuLabel className='text-[12px] text-blue-400 font-bold'>Select Type</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuCheckboxItem checked={showManga} onCheckedChange={setShowManga} >Manga</DropdownMenuCheckboxItem>
+                            <DropdownMenuCheckboxItem checked={showManhwa} onCheckedChange={setShowManhwa} >Manhwa</DropdownMenuCheckboxItem>
+                            <DropdownMenuCheckboxItem checked={showManhua} onCheckedChange={setShowManhua} >Manhua</DropdownMenuCheckboxItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </>
             )}
-
-            
-            
-            
         </div>
     )
 }
 
-export default DropdownRecom
+export default DropdownHome

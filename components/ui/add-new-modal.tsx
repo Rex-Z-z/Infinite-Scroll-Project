@@ -160,7 +160,11 @@ const AddNewModal = ({ comicData }: { comicData: ReadItem | null }) => {
                     <Input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required/>
                     {title ? (
                         <Button onClick={handleCopyName} variant="outline" size="icon" className='transition-all duration-300 ease-in-out hover:cursor-pointer'>
-                            { isCopied ? <ClipboardCheck /> : <ClipboardCopy /> }
+                            { isCopied ? 
+                                <ClipboardCheck /> 
+                                : 
+                                <ClipboardCopy /> 
+                            }
                         </Button>
                     ) : (
                         <Button onClick={handlePasteName} variant="outline" size="icon">
