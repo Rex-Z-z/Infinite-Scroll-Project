@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import useSWR from 'swr';
+import { ReadItem } from '@/lib/types';
 import AddNewCard from './ui/add-new-card';
 import AddNewModal from './ui/add-new-modal';
 import DropdownRecom from './ui/dropdown-recom';
@@ -14,6 +15,7 @@ const fetcher = () => fetchRecentReads();
 
 const RecentReads = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [editingComic, setEditingComic] = useState<ReadItem | null>(null);
     const recentReadsContainerRef = useRef<HTMLDivElement>(null);
     const { data: recentReads, isLoading, error } = useSWR(['recent-reads'], fetcher);
 
@@ -28,6 +30,18 @@ const RecentReads = () => {
         return () => container.removeEventListener('wheel', handleWheel);
         }
     }, []);
+
+    const handleEdit = (read: ReadItem) => {
+        setEditingComic(read);
+        setIsModalOpen(true);
+    };
+
+    const handleModalOpenChange = (open: boolean) => {
+        setIsModalOpen(open);
+        if (!open) {
+            setEditingComic(null);
+        }
+    }
 
     return (
         <section className='flex flex-col w-full p-4 gap-2'>
@@ -56,12 +70,12 @@ const RecentReads = () => {
                         {!isLoading && !error && (
                             <AddNewCard />
                         )}
-                        <AddNewModal />
+                        <AddNewModal comicData={editingComic} />
                     </Dialog>
                 }
                 
                 {!isLoading && !error && recentReads && recentReads.map((read) => (
-                    <ComicCard key={read.id} read={read} />
+                    <ComicCard key={read.id} read={read} onEdit={handleEdit} />
                 ))}
             </div>
         </section>

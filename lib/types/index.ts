@@ -8,7 +8,7 @@ export interface ReadItem {
   lastRead: string;
   status: string;
   rating: string;
-  chapter: string;
+  chapter: number;
   tags: string[];
   source: string[];
 }

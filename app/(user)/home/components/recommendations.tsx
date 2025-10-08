@@ -1,16 +1,21 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import useSWR from 'swr';
+import { ReadItem } from '@/lib/types';
 import DropdownRecom from './ui/dropdown-recom';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import ComicCard from '@/components/ui/comic-card';
 import { fetchRecommendedReads } from '@/services/home/comic.service';
+import { Dialog } from '@/components/ui/dialog';
+import AddNewModal from './ui/add-new-modal';
 
 const fetcher = () => fetchRecommendedReads();
 
 const Recommendations = () => {
     const recommendedContainerRef = useRef<HTMLDivElement>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [editingComic, setEditingComic] = useState<ReadItem | null>(null);
     const { data: recommendedReads, isLoading, error } = useSWR(['recommended-reads'], fetcher);
 
     useEffect(() => {
@@ -24,6 +29,12 @@ const Recommendations = () => {
             return () => container.removeEventListener('wheel', handleWheel);
         }
     }, []);
+
+    const handleEdit = (read: ReadItem) => {
+        setEditingComic(read);
+        setIsModalOpen(true);
+    };
+    
 
     return (
         <section className='flex flex-col w-full p-4 gap-2'>
@@ -47,8 +58,12 @@ const Recommendations = () => {
 
             {/* Card Sections */}
             <div ref={recommendedContainerRef} className='flex flex-row gap-2 overflow-x-auto flex-nowrap pr-1 [&::-webkit-scrollbar]:hidden'>
+                <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                    <AddNewModal comicData={editingComic} />
+                </Dialog>
+                
                 {!isLoading && !error && recommendedReads  && recommendedReads.map((read) => (
-                    <ComicCard key={read.id} read={read} />
+                    <ComicCard key={read.id} read={read} onEdit={handleEdit} />
                 ))}
             </div>
         </section>

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { ReadItem } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -23,14 +24,33 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 
-const AddNewModal = () => {
+const AddNewModal = ({ comicData }: { comicData: ReadItem | null }) => {
     const [title, setTitle] = useState("");
-    const [chapters, setChapters] = useState("");
+    const [chapter, setChapter] = useState("");
     const [rating, setRating] = useState("");
     const [type , setType] = useState("");
     const [status, setStatus] = useState("");
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (comicData) {
+            setTitle(comicData.title);
+            setChapter(comicData.chapter);
+            setRating(comicData.rating);
+            setType(comicData.type);
+            setStatus(comicData.status);
+            setImagePreview(comicData.imageUrl);
+        } else {
+            // Reset fields when there is no comicData (for "Add New")
+            setTitle('');
+            setChapter('');
+            setRating('');
+            setType('');
+            setStatus('');
+            setImagePreview(null);
+        }
+    }, [comicData]);
 
     const ratingColorMap: { [key: string]: string } = {
         "Good": "text-yellow-400",
@@ -102,7 +122,7 @@ const AddNewModal = () => {
                     <DialogHeader>
                         <DialogTitle>Add New Comic</DialogTitle>
                         <DialogDescription className='font-semibold'>
-                            Add a new comic to your collection.
+                            {comicData ? "Edit the details of your comic." : "Add a new comic to your collection."}
                             <Button variant="outline" onClick={handlePaste} className="flex items-center gap-2 mt-2 text-xs p-1">
                                 <Clipboard className="size-3.5" />
                                 Paste
@@ -140,11 +160,11 @@ const AddNewModal = () => {
                     </div>
                     
                     <div className="flex flex-col gap-2.5 w-full">
-                        <Label className={cn('text-xs flex items-center gap-2', chapters ? 'text-white' : 'text-gray-400')}>
+                        <Label className={cn('text-xs flex items-center gap-2', chapter ? 'text-white' : 'text-gray-400')}>
                             <BookOpen className='size-4'/>
-                            Chapters
+                            Chapter
                         </Label>
-                        <Input type="number" placeholder="Chapters" value={chapters} onChange={(e) => setChapters(e.target.value)}/>
+                        <Input type="number" placeholder="Chapter" value={chapter} onChange={(e) => setChapter(e.target.value)}/>
                     </div>
                 </div>
 
@@ -219,10 +239,10 @@ const AddNewModal = () => {
 
             <DialogFooter className='mt-4'>
                 <DialogClose asChild>
-                    <Button variant="outline" className='w-1/2'>Cancel</Button>
+                    <Button variant="outline" className='w-1/2 hover:cursor-pointer'>Cancel</Button>
                 </DialogClose>
                 <DialogClose asChild>
-                    <Button className='w-1/2 text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700'>Submit</Button>
+                    <Button className='w-1/2 text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 hover:cursor-pointer'>Submit</Button>
                 </DialogClose>
             </DialogFooter>
         </DialogContent>

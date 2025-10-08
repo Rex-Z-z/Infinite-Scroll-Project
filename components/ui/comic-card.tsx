@@ -10,6 +10,7 @@ import { ReadItem } from '@/lib/types';
 interface ComicCardProps {
   read: ReadItem;
   page?: 'home' | 'library';
+  onEdit: (read: ReadItem) => void;
 }
 
 const statusColorMap: { [key: string]: string } = {
@@ -18,8 +19,14 @@ const statusColorMap: { [key: string]: string } = {
   "Bad": "text-red-500 size-4 mt-0.5",
 };
 
-const ComicCard = ({ read, page = 'home'}: ComicCardProps) => {
+const ComicCard = ({ read, page = 'home', onEdit}: ComicCardProps) => {
     const isHome = page === 'home';
+
+    const handleEditClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onEdit(read);
+    }
 
     return (
         <Link href={`/library/${read.id}`} key={read.id}>
@@ -27,7 +34,6 @@ const ComicCard = ({ read, page = 'home'}: ComicCardProps) => {
                 // Home
                 <div key={read.id} className="max-w-60">
                     <div className="relative block w-full h-75 aspect-[2/3] overflow-hidden rounded-md shadow-2xl">
-
                         {read.imageUrl? (
                             <img src={read.imageUrl} alt={`Cover for ${read.title}`} className="absolute h-full w-full object-cover hover:scale-110 transition-all duration-300 ease-in-out"/>
                         ) : (
@@ -38,7 +44,7 @@ const ComicCard = ({ read, page = 'home'}: ComicCardProps) => {
                             </div>
                         )}
                         
-                        <Button variant="outline" size="icon" className="absolute size-8 top-2 left-2 bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:cursor-pointer">
+                        <Button onClick={handleEditClick} variant="outline" size="icon" className="absolute size-8 top-2 left-2 bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:cursor-pointer">
                             <Settings2 />
                         </Button>
                     </div>
@@ -58,7 +64,7 @@ const ComicCard = ({ read, page = 'home'}: ComicCardProps) => {
                             )}
 
                             {read.chapter ? (
-                                <p>{read.chapter}</p>
+                                <p>Chapter {read.chapter}</p>
                             ) : (
                                 <p className='text-gray-700'>No Chapter</p>
                             )}
@@ -70,7 +76,8 @@ const ComicCard = ({ read, page = 'home'}: ComicCardProps) => {
                 <div key={read.id} className="flex flex-col overflow-hidden">
                     <div className="relative block w-full aspect-[2/3] overflow-hidden rounded-md shadow-2xl">
                         <img  src={read.imageUrl}  alt={`Cover for ${read.title}`} className="absolute h-full w-full object-cover hover:scale-110 transition-all duration-300 ease-in-out"/>
-                        <Button variant="outline" size="icon" className="absolute size-8 top-2 left-2 bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:cursor-pointer">
+
+                        <Button onClick={handleEditClick} variant="outline" size="icon" className="absolute size-8 top-2 left-2 bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:cursor-pointer">
                             <Settings2 />
                         </Button>
                     </div>
@@ -85,7 +92,7 @@ const ComicCard = ({ read, page = 'home'}: ComicCardProps) => {
                                 </svg>
                                 <p>{read.rating}</p>
                             </div>
-                            <p>{read.chapter}</p>
+                            <p>Chapter {read.chapter}</p>
                         </div>
                     </div>
                 </div>
