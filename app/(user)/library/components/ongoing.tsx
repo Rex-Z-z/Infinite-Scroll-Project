@@ -7,7 +7,7 @@ import ComicCard from '@/components/ui/comic-card';
 import { fetchOngoingComicByType } from '@/services/library/comic.service';
 import { ReadItem } from '@/lib/types';
 import { Dialog } from '@/components/ui/dialog';
-import AddNewModal from '../../home/components/ui/add-new-modal';
+import AddNewModal from '../../../../components/ui/add-new-modal';
 
 const fetcher = () => fetchOngoingComicByType();
 

@@ -7,7 +7,7 @@ import SectionSkeleton from '@/components/ui/section-skeleton';
 import ComicCard from '@/components/ui/comic-card';
 import { fetchAllReads } from '@/services/home/comic.service';
 import { Dialog } from '@/components/ui/dialog';
-import AddNewModal from './ui/add-new-modal';
+import AddNewModal from '../../../../components/ui/add-new-modal';
 
 const fetcher = () => fetchAllReads();
 

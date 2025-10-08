@@ -7,7 +7,7 @@ import ComicCard from '@/components/ui/comic-card';
 import { fetchCompletedComicByType } from '@/services/library/comic.service';
 import { ReadItem } from '@/lib/types';
 import { Dialog } from '@radix-ui/react-dialog';
-import AddNewModal from '../../home/components/ui/add-new-modal';
+import AddNewModal from '../../../../components/ui/add-new-modal';
 
 const fetcher = () => fetchCompletedComicByType();
 

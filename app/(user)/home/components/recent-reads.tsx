@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import useSWR from 'swr';
 import { ReadItem } from '@/lib/types';
 import AddNewCard from './ui/add-new-card';
-import AddNewModal from './ui/add-new-modal';
+import AddNewModal from '../../../../components/ui/add-new-modal';
 import DropdownRecom from './ui/dropdown-recom';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import ComicCard from '@/components/ui/comic-card';
