@@ -14,6 +14,8 @@ import {
     SelectTrigger, 
     SelectValue 
 } from '@/components/ui/select';
+import { Tooltip, TooltipContent, TooltipTrigger } from '../tooltip';
+import Tooltip2 from '../tooltip-v2';
 
 interface ComicFormProps {
   comicData: ReadItem | null;
@@ -66,7 +68,8 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
     };
 
     const handleSearch = () => {
-        window.open(`https://www.google.com/search?q=${title} + chapter ${chapter}`, '_blank');
+        const query = encodeURIComponent(`${title} chapter ${chapter}`);
+        window.open(`https://www.google.com/search?q=${query}`, '_blank');
     };
 
     return (
@@ -79,9 +82,14 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
                 <Input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required/>
                 {title ? (
                     <>
-                        <Button onClick={handleCopyName} variant="outline" size="icon" className='transition-all duration-300 ease-in-out hover:cursor-pointer'>
-                            { isCopied ? <ClipboardCheck /> : <ClipboardCopy /> }
-                        </Button>
+                        <div className="relative">
+                            <Button onClick={handleCopyName} variant="outline" size="icon" className='transition-all duration-300 ease-in-out hover:cursor-pointer'>
+                                { isCopied ? <ClipboardCheck /> : <ClipboardCopy /> }
+                            </Button>
+                            {isCopied && (
+                                <Tooltip2>Copied</Tooltip2>
+                            )}
+                        </div>
                         <Button onClick={handleSearch} variant="outline" size="icon" className='transition-all duration-300 ease-in-out hover:cursor-pointer'>
                             <Search />
                         </Button>
