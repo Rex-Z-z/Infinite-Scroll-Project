@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Upload, Clipboard } from 'lucide-react';
 import { DialogDescription, DialogHeader, DialogTitle } from '../dialog';
 import { ReadItem } from '@/lib/types';
+import Tooltip2 from '../tooltip-v2';
 
 interface ImageUploaderProps {
   initialImageUrl: string | null;
@@ -13,6 +14,7 @@ interface ImageUploaderProps {
 
 export const ImageUploader = React.memo(({ initialImageUrl, comicData }: ImageUploaderProps) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [showNoImageTooltip, setShowNoImageTooltip] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -33,15 +35,23 @@ export const ImageUploader = React.memo(({ initialImageUrl, comicData }: ImageUp
   const handlePasteImage = async () => {
     try {
       const clipboardItems = await navigator.clipboard.read();
+      let imageFound = false;
       for (const item of clipboardItems) {
         if (item.types.some(type => type.startsWith('image/'))) {
           const blob = await item.getType(item.types.find(type => type.startsWith('image/'))!);
           setImagePreview(URL.createObjectURL(blob));
+          imageFound = true;
           break;
         }
       }
+      if (!imageFound) {
+        setShowNoImageTooltip(true);
+        setTimeout(() => setShowNoImageTooltip(false), 2000);
+      }
     } catch (error) {
       console.error('Failed to read clipboard contents: ', error);
+      setShowNoImageTooltip(true);
+      setTimeout(() => setShowNoImageTooltip(false), 2000);
     }
   };
 
@@ -73,10 +83,13 @@ export const ImageUploader = React.memo(({ initialImageUrl, comicData }: ImageUp
                 <DialogTitle>Add New Comic</DialogTitle>
                 <DialogDescription className='font-semibold'>
                     {imagePreview ? "Edit the details of your comic." : "Add a new comic to your collection."}
-                    <Button variant="outline" onClick={handlePasteImage} className="flex items-center gap-2 mt-2 text-xs p-1">
-                        <Clipboard className="size-3.5" />
-                        Paste
-                    </Button>
+                    <div className='relative inline-block'>
+                      <Button variant="outline" onClick={handlePasteImage} className="flex items-center gap-2 mt-2 text-xs p-1">
+                          <Clipboard className="size-3.5" />
+                          Paste
+                      </Button>
+                      {showNoImageTooltip && <Tooltip2>No image on clipboard</Tooltip2>}
+                    </div>
                 </DialogDescription>
             </DialogHeader>
         </div>

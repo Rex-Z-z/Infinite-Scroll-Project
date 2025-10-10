@@ -78,14 +78,14 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
                             <DropdownMenuContent align="end" className="w-40">
                                 <DropdownMenuLabel className='text-[12px] text-blue-400 font-bold'>My Account</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem>
-                                    <CircleUserRound className='text-white'/> Profile
+                                <DropdownMenuItem className='hover:cursor-pointer' asChild>
+                                    <a href="/profile"> <CircleUserRound className='text-white'/> Profile </a>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem>
                                     <Settings className='text-white'/> Setting
                                 </DropdownMenuItem>
-                                <DropdownMenuItem asChild>
-                                    <a href="/login"><LogOut className='text-white'/> Logout</a>
+                                <DropdownMenuItem className='hover:cursor-pointer' asChild>
+                                    <a href="/login"> <LogOut className='text-white'/> Logout </a>
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
