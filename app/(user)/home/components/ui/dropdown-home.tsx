@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState } from 'react'
-import { cn } from '@/lib/utils';
 import { BookOpen, CalendarCog, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { 
@@ -24,8 +23,6 @@ type Checked = DropdownMenuCheckboxItemProps["checked"]
 
 const DropdownHome = ({section = 'recent-reads' }: NavBarProps) => {
     const [date, setDate] = useState("Recent");
-    const [type, setType] = useState("");
-    const [rating, setRating] = useState("");
     const [year, setYear] = useState("2025");
     const [year2, setYear2] = useState("2025");
     const [isYearRangeActive, setIsYearRangeActive] = useState(false);

@@ -3,11 +3,31 @@
 import React, { useState } from 'react'
 import useSWR from 'swr';
 import { cn, formatDistanceToNow } from '@/lib/utils';
-import { Book } from 'lucide-react';
+import { Book, BookOpen, Calendar, Star } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { fetchComickById } from '@/services/library/comic.service';
 import SkeletonDetails from './skeleton';
+
+const ratingColorMap: { [key: string]: string } = {
+  "Good": "bg-yellow-500 hover:bg-yellow-600",
+  "Mid": "bg-orange-500 hover:bg-orange-600",
+  "Bad": "bg-red-600 hover:bg-red-700",
+};
+
+const statusColorMap: { [key: string]: string } = {
+    "Ongoing": "bg-blue-600 hover:bg-blue-700",
+    "Completed": "bg-green-600 hover:bg-green-700",
+    "On Hold": "bg-yellow-600 hover:bg-yellow-700",
+    "Dropped": "bg-red-600 hover:bg-red-700",
+    "Plan to Read": "bg-purple-600 hover:bg-purple-700",
+};
+
+const typeColorMap: { [key: string]: string } = {
+    "Manga": "bg-purple-600 hover:bg-purple-700",
+    "Manhwa": "bg-green-600 hover:bg-green-700",
+    "Manhua": "bg-orange-600 hover:bg-orange-700",
+};
 
 const PageInfo = ({ comicId }: { comicId: string }) => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -44,7 +64,7 @@ const PageInfo = ({ comicId }: { comicId: string }) => {
                     {/* Info */}
                     <div className='flex flex-col gap-3'>
                         <div className='flex flex-row gap-1.5'>
-                            <div className='p-2 dark:bg-blue-600 dark:hover:bg-blue-700 rounded-md'>
+                            <div className={`p-2 rounded-md ${typeColorMap[read.type] || 'dark:bg-blue-600 dark:hover:bg-blue-700'}`}>
                                 <Book className='size-5'/>
                             </div>
                             <div>
@@ -54,8 +74,8 @@ const PageInfo = ({ comicId }: { comicId: string }) => {
                         </div>
 
                         <div className='flex flex-row gap-1.5'>
-                            <div className='p-2 dark:bg-blue-600 dark:hover:bg-blue-700 rounded-md'>
-                                <Book className='size-5'/>
+                            <div className={`p-2 rounded-md ${ratingColorMap[read.rating] || 'dark:bg-blue-600 dark:hover:bg-blue-700'}`}>
+                                <Star className='size-5'/>
                             </div>
                             <div>
                                 <h2 className='text-[11px] text-gray-400 font-semibold'>Rating</h2>
@@ -64,8 +84,8 @@ const PageInfo = ({ comicId }: { comicId: string }) => {
                         </div>
 
                         <div className='flex flex-row gap-1.5'>
-                            <div className='p-2 dark:bg-blue-600 dark:hover:bg-blue-700 rounded-md'>
-                                <Book className='size-5'/>
+                            <div className={`p-2 rounded-md ${statusColorMap[read.status] || 'dark:bg-blue-600 dark:hover:bg-blue-700'}`}>
+                                <Calendar className='size-5'/>
                             </div>
                             <div>
                                 <h2 className='text-[11px] text-gray-400 font-semibold'>Status</h2>
@@ -74,8 +94,8 @@ const PageInfo = ({ comicId }: { comicId: string }) => {
                         </div>
 
                         <div className='flex flex-row gap-1.5'>
-                            <div className='p-2 dark:bg-blue-600 dark:hover:bg-blue-700 rounded-md'>
-                                <Book className='size-5'/>
+                            <div className='p-2 dark:bg-violet-600 dark:hover:bg-violet-700 rounded-md'>
+                                <BookOpen className='size-5'/>
                             </div>
                             <div>
                                 <h2 className='text-[11px] text-gray-400 font-semibold'>Last Read</h2>
@@ -84,7 +104,7 @@ const PageInfo = ({ comicId }: { comicId: string }) => {
                         </div>
 
                         <div className='flex flex-row gap-1.5'>
-                            <div className='p-2 dark:bg-blue-600 dark:hover:bg-blue-700 rounded-md'>
+                            <div className='p-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 rounded-md'>
                                 <Book className='size-5'/>
                             </div>
                             <div>
@@ -136,7 +156,7 @@ const PageInfo = ({ comicId }: { comicId: string }) => {
                             <div className='flex flex-row gap-1.5'>
                             {read?.source?.map((source) => (
                                 <Badge key={source} variant="secondary" className="px-2.5 py-1.5 rounded-2xl">
-                                    {source === 'Asura Scans' && <img src="/icons/logo.webp" alt="Asura Scans logo" className='size-4'/>}
+                                    <img src="/icons/logo.webp" alt="Asura Scans logo" className='size-4'/>
                                     {source}
                                 </Badge>
                             ))}
@@ -145,7 +165,7 @@ const PageInfo = ({ comicId }: { comicId: string }) => {
 
                         {/* Other content */}
                         <div className='flex flex-col gap-2'>
-                            {[...Array(5)].map((_, index) => (
+                            {[...Array(8)].map((_, index) => (
                                 <div key={index} className='h-16 rounded-md bg-gray-800'></div>
                             ))}
                         </div>

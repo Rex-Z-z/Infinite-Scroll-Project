@@ -11,4 +11,5 @@ export interface ReadItem {
   chapter: number;
   tags: string[];
   source: string[];
+  sourceIcon: string[];
 }

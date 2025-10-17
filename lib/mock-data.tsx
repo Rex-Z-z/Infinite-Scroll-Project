@@ -13,7 +13,8 @@ export const mockReads: ReadItem[] = [
     rating: "Good", 
     chapter: 12,
     tags: ["Action", "Fantasy", "Adventure", "Martial Arts"],
-    source: ["Asura Scans"]
+    source: ["Asura Scans"],
+    sourceIcon: ["/pictures/asura-icon.png"]
   },
   { 
     id: 2, 
@@ -27,7 +28,8 @@ export const mockReads: ReadItem[] = [
     rating: "Good", 
     chapter: 4,
     tags: ["Action", "Fantasy", "Adventure"],
-    source: ["Webtoon", "Asura Scans"]
+    source: ["Webtoon", "Asura Scans"],
+    sourceIcon: ["/pictures/asura-icon.png"]
   },
   { 
     id: 3, 
@@ -41,7 +43,8 @@ export const mockReads: ReadItem[] = [
     rating: "Bad", 
     chapter: 8,
     tags: ["Action", "Fantasy", "Adventure"],
-    source: ["Webtoon", "Asura Scans"]
+    source: ["Webtoon", "Asura Scans"],
+    sourceIcon: ["/pictures/asura-icon.png"]
   },
   { 
     id: 4, 
@@ -55,7 +58,8 @@ export const mockReads: ReadItem[] = [
     rating: "Good", 
     chapter: 12,
     tags: ["Action", "Fantasy", "Adventure", "Martial Arts"],
-    source: ["Asura Scans"]
+    source: ["Asura Scans"],
+    sourceIcon: ["/pictures/asura-icon.png"]
   },
   { 
     id: 5, 
@@ -69,7 +73,8 @@ export const mockReads: ReadItem[] = [
     rating: "Mid", 
     chapter: 4,
     tags: ["Action", "Fantasy", "Adventure"],
-    source: ["Webtoon", "Asura Scans"]
+    source: ["Webtoon", "Asura Scans"],
+    sourceIcon: ["/pictures/asura-icon.png"]
   },
   { 
     id: 6, 
@@ -83,7 +88,8 @@ export const mockReads: ReadItem[] = [
     rating: "Mid", 
     chapter: 8,
     tags: ["Action", "Fantasy", "Adventure"],
-    source: ["Webtoon", "Asura Scans"]
+    source: ["Webtoon", "Asura Scans"],
+    sourceIcon: ["/pictures/asura-icon.png"]
   },
   { 
     id: 7, 
@@ -97,7 +103,8 @@ export const mockReads: ReadItem[] = [
     rating: "Good", 
     chapter: 12,
     tags: ["Action", "Fantasy", "Adventure", "Martial Arts"],
-    source: ["Asura Scans"]
+    source: ["Asura Scans"],
+    sourceIcon: ["/pictures/asura-icon.png"]
   },
   { 
     id: 8, 
@@ -111,7 +118,8 @@ export const mockReads: ReadItem[] = [
     rating: "Mid", 
     chapter: 4,
     tags: ["Action", "Fantasy", "Adventure"],
-    source: ["Webtoon", "Asura Scans"]
+    source: ["Webtoon", "Asura Scans"],
+    sourceIcon: ["/pictures/asura-icon.png"]
   },
   { 
     id: 9, 
@@ -125,7 +133,8 @@ export const mockReads: ReadItem[] = [
     rating: "Mid", 
     chapter: 8,
     tags: ["Action", "Fantasy", "Adventure"],
-    source: ["Webtoon", "Asura Scans"]
+    source: ["Webtoon", "Asura Scans"],
+    sourceIcon: ["/pictures/asura-icon.png"]
   },
   { 
     id: 10, 
@@ -139,7 +148,8 @@ export const mockReads: ReadItem[] = [
     rating: "Good", 
     chapter: 4,
     tags: ["Action", "Fantasy", "Adventure"],
-    source: ["Webtoon", "Asura Scans"]
+    source: ["Webtoon", "Asura Scans"],
+    sourceIcon: ["/pictures/asura-icon.png"]
   },
   { 
     id: 11, 
@@ -153,7 +163,8 @@ export const mockReads: ReadItem[] = [
     rating: "Bad", 
     chapter: 8,
     tags: ["Action", "Fantasy", "Adventure"],
-    source: ["Webtoon", "Asura Scans"]
+    source: ["Webtoon", "Asura Scans"],
+    sourceIcon: ["/pictures/asura-icon.png"]
   },
   { 
     id: 12, 
@@ -167,7 +178,8 @@ export const mockReads: ReadItem[] = [
     rating: "Good", 
     chapter: 12,
     tags: ["Action", "Fantasy", "Adventure", "Martial Arts"],
-    source: ["Asura Scans"]
+    source: ["Asura Scans"],
+    sourceIcon: ["/pictures/asura-icon.png"]
   },
   { 
     id: 13, 
@@ -181,6 +193,7 @@ export const mockReads: ReadItem[] = [
     rating: "Mid", 
     chapter: 4,
     tags: ["Action", "Fantasy", "Adventure"],
-    source: ["Webtoon", "Asura Scans"]
+    source: ["Webtoon", "Asura Scans"],
+    sourceIcon: ["/pictures/asura-icon.png"]
   },
 ];
