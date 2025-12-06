@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Infinite Scroll Project 📚
 
-## Getting Started
+A modern, responsive web application for tracking and managing your comic, manga, and book reading progress. Built with Next.js 15 and styled with Tailwind CSS 4.
 
-First, run the development server:
+## 🚀 Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/) & [DaisyUI](https://daisyui.com/)
+- **UI Primitives:** [Radix UI](https://www.radix-ui.com/) (Dialog, Tabs, Dropdowns, etc.)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Form Management:** [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/)
+- **Data Fetching:** [SWR](https://swr.vercel.app/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🏠 Home Dashboard
+- **Recent Reads:** Quickly access the comics you interacted with most recently.
+- **Recommendations:** Curated suggestions for your next read.
+- **Library Preview:** A glimpse into your collection.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 📖 Comprehensive Library Management
+- **Status Tracking:** Organize your reading list with dedicated tabs:
+  - **Ongoing:** Keep track of active reads.
+  - **Completed:** Archive finished series.
+  - **On Hold:** Pause series to pick up later.
+  - **Dropped:** Manage series you've stopped reading.
+  - **Plan to Read:** Build your backlog.
+- **Search & Filter:** Easily find specific titles within your library.
 
-## Learn More
+### 🛠️ Interactive UI
+- **Add & Edit Comics:** Modal-based forms to add new entries with cover images, titles, and reading stats.
+- **Visual Cards:** Rich card displays showing cover art, reading progress (chapters), user ratings, and "Last Read" timestamps.
+- **Dark Mode Support:** Built-in theming for comfortable reading at night.
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Getting Started
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Prerequisites
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Ensure you have [Node.js](https://nodejs.org/) installed on your machine.
 
-## Deploy on Vercel
+### Installation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/your-username/infinite-scroll-project.git](https://github.com/your-username/infinite-scroll-project.git)
+   cd infinite-scroll-project
