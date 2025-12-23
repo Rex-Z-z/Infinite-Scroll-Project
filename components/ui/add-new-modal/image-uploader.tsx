@@ -80,8 +80,10 @@ export const ImageUploader = React.memo(({ initialImageUrl, comicData }: ImageUp
         
         <div className='flex flex-col gap-4 w-full'>
             <DialogHeader>
-                <DialogTitle>Add New Comic</DialogTitle>
-                <DialogDescription className='font-semibold'>
+                <DialogTitle>
+                  {imagePreview ? "Edit Comic" : "Add New Comic"}
+                </DialogTitle>
+                <DialogDescription className='flex flex-col mt-2 font-semibold'>
                     {imagePreview ? "Edit the details of your comic." : "Add a new comic to your collection."}
                     <div className='relative inline-block'>
                       <Button variant="outline" onClick={handlePasteImage} className="flex items-center gap-2 mt-2 text-xs p-1">
