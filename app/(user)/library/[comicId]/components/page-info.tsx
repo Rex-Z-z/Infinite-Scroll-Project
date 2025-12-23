@@ -154,9 +154,13 @@ const PageInfo = ({ comicId }: { comicId: string }) => {
                         <div className='mt-2'>
                             <h1 className='text-md font-semibold mb-1'>Source</h1>
                             <div className='flex flex-row gap-1.5'>
-                            {read?.source?.map((source) => (
+                            {read?.source?.map((source, index) => (
                                 <Badge key={source} variant="secondary" className="px-2.5 py-1.5 rounded-2xl">
-                                    <img src="/icons/logo.webp" alt="Asura Scans logo" className='size-4'/>
+                                    <img 
+                                        src={read.sourceIcon[index]} 
+                                        alt={`${source} logo`} 
+                                        className='size-4'
+                                    />
                                     {source}
                                 </Badge>
                             ))}

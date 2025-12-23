@@ -7,7 +7,6 @@ import LibraryRead from './components/library';
 const page = () => {
   return (
     <div>
-      <NavBar />
       <RecentReads />
       <Recommendations />
       <LibraryRead />

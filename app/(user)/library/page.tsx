@@ -12,7 +12,6 @@ import Plan from './components/plan';
 const Page = () => {
   return (
     <div>
-      <NavBar />
       <div className="flex flex-col p-4">
         <h1 className="text-4xl font-semibold tracking-tight text-balance text-white mb-3 ml-1">Library</h1>
         
