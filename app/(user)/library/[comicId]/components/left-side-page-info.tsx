@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { ReadItem } from '@/lib/types';
-import SkeletonDetails from './skeleton';
-import { fetchComickById } from '@/services/library/comic.service';
 import { formatDistanceToNow } from '@/lib/utils';
 import { Book, BookOpen, Calendar, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -33,6 +31,11 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
     const [type , setType] = useState("");
     const [rating, setRating] = useState("");
     const [status, setStatus] = useState("");
+    const [chapter, setChapter] = useState("");
+
+    const handleEdit = () => {
+        setEdit(!isEdit);
+    }
 
     const getLastReadDate = () => {
         if (data?.lastRead) {
@@ -53,21 +56,25 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                         <Book className='size-5'/>
                     </div>
                     <div className='w-full'>
-                        <h2 className='text-[11px] text-gray-400 font-semibold'>Type</h2>
-                        <h1 className='text-sm font-semibold'>{data?.type}</h1>
-                        
-                        {/* <Select onValueChange={setType} value={data?.type}>
-                            <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select a type" />
-                            </SelectTrigger>
-                            <SelectContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
-                                <SelectGroup>
-                                    <SelectItem value="Manga">Manga</SelectItem>
-                                    <SelectItem value="Manhwa">Manhwa</SelectItem>
-                                    <SelectItem value="Manhua">Manhua</SelectItem>
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select> */}
+                        {isEdit ? (
+                            <Select onValueChange={setType} value={data?.type}>
+                                <SelectTrigger className="w-full">
+                                    <SelectValue placeholder="Select a type" />
+                                </SelectTrigger>
+                                <SelectContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
+                                    <SelectGroup>
+                                        <SelectItem value="Manga">Manga</SelectItem>
+                                        <SelectItem value="Manhwa">Manhwa</SelectItem>
+                                        <SelectItem value="Manhua">Manhua</SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        ) : (
+                            <>
+                                <h2 className='text-[10px] text-gray-400 font-semibold'>Type</h2>
+                                <h1 className='text-sm font-semibold'>{data?.type}</h1>
+                            </>
+                        )}
                     </div>
                 </div>
 
@@ -76,27 +83,25 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                         <Star className='size-5'/>
                     </div>
                     <div className='w-full'>
-                        <h2 className='text-[11px] text-gray-400 font-semibold'>Rating</h2>
-                        <h1 className='text-sm font-semibold'>{data?.rating}</h1>
-
-                        {/* <Select onValueChange={setRating} value={data?.rating}>
-                            <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select a rating" />
-                            </SelectTrigger>
-                            <SelectContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
-                                <SelectGroup>
-                                    <SelectItem value="Good">
-                                        <Star className="size-4 mr-2 text-yellow-400" /> Good
-                                    </SelectItem>
-                                    <SelectItem value="Mid">
-                                        <Star className="size-4 mr-2 text-orange-400" /> Mid
-                                    </SelectItem>
-                                    <SelectItem value="Bad">
-                                        <Star className="size-4 mr-2 text-red-500" /> Bad
-                                    </SelectItem>
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select> */}
+                        {isEdit ? (
+                            <Select onValueChange={setRating} value={data?.rating}>
+                                <SelectTrigger className="w-full">
+                                    <SelectValue placeholder="Select a rating" />
+                                </SelectTrigger>
+                                <SelectContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
+                                    <SelectGroup>
+                                        <SelectItem value="Good"> Good </SelectItem>
+                                        <SelectItem value="Mid"> Mid </SelectItem>
+                                        <SelectItem value="Bad"> Bad </SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        ) : (
+                            <>
+                                <h2 className='text-[10px] text-gray-400 font-semibold'>Rating</h2>
+                                <h1 className='text-sm font-semibold'>{data?.rating}</h1>
+                            </>
+                        )}
                     </div>
                 </div>
 
@@ -105,33 +110,43 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                         <Calendar className='size-5'/>
                     </div>
                     <div className='w-full'>
-                        {/* <h2 className='text-[11px] text-gray-400 font-semibold'>Status</h2>
-                        <h1 className='text-sm font-semibold'>{data?.status}</h1> */}
+                        {isEdit ? (
+                            <Select onValueChange={setStatus} value={data?.status}>
+                                <SelectTrigger className="w-full">
+                                    <SelectValue placeholder="Select a rating" />
+                                </SelectTrigger>
+                                <SelectContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
+                                    <SelectGroup>
+                                        <SelectItem value="Ongoing"> Ongoing </SelectItem>
+                                        <SelectItem value="Completed"> Completed </SelectItem>
+                                        <SelectItem value="On Hold"> On Hold </SelectItem>
+                                        <SelectItem value="Plan to data"> Plan to data </SelectItem>
+                                        <SelectItem value="Dropped"> Dropped </SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        ) : (
+                            <>
+                                <h2 className='text-[10px] text-gray-400 font-semibold'>Status</h2>
+                                <h1 className='text-sm font-semibold'>{data?.status}</h1>
+                            </>
+                        )}
+                    </div>
+                </div>
 
-                        <Select onValueChange={setStatus} value={data?.status}>
-                            <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select a rating" />
-                            </SelectTrigger>
-                            <SelectContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
-                                <SelectGroup>
-                                    <SelectItem value="Ongoing">
-                                        Ongoing
-                                    </SelectItem>
-                                    <SelectItem value="Completed">
-                                        Completed
-                                    </SelectItem>
-                                    <SelectItem value="On Hold">
-                                        On Hold
-                                    </SelectItem>
-                                    <SelectItem value="Plan to data">
-                                        Plan to data
-                                    </SelectItem>
-                                    <SelectItem value="Dropped">
-                                        Dropped
-                                    </SelectItem>
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
+                <div className='flex flex-row gap-1.5'>
+                    <div className='p-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 rounded-md'>
+                        <Book className='size-5'/>
+                    </div>
+                    <div className='w-full'>
+                        {isEdit ? (
+                            <Input type='number' placeholder='Chapter' value={data?.chapter} onChange={(e) => setChapter(e.target.value)}/>
+                        ) : (
+                            <>
+                                <h2 className='text-[10px] text-gray-400 font-semibold'>Chapter</h2>
+                                <h1 className='text-sm font-semibold'>{data?.chapter}</h1>
+                            </>
+                        )}
                     </div>
                 </div>
 
@@ -140,25 +155,19 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                         <BookOpen className='size-5'/>
                     </div>
                     <div>
-                        <h2 className='text-[11px] text-gray-400 font-semibold'>Last data</h2>
+                        <h2 className='text-[10px] text-gray-400 font-semibold'>Last data</h2>
                         <h1 className='text-sm font-semibold'>{getLastReadDate()}</h1>
                     </div>
                 </div>
 
-                <div className='flex flex-row gap-1.5'>
-                    <div className='p-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 rounded-md'>
-                        <Book className='size-5'/>
+                {isEdit ? (
+                    <div className='w-full grid grid-cols-2 gap-1.5'>
+                        <Button onClick={handleEdit} className='w-full text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 hover:cursor-pointer'>Save</Button>
+                        <Button onClick={handleEdit} variant="outline" className='w-full hover:cursor-pointer'>Cancel</Button>
                     </div>
-                    <div>
-                        <h2 className='text-[11px] text-gray-400 font-semibold'>Chapter</h2>
-                        <h1 className='text-sm font-semibold'>{data?.chapter}</h1>
-                    </div>
-                </div>
-
-                <div className='flex flex-row gap-1.5'>
-                    {/* <Button variant="outline" className='w-1/2 hover:cursor-pointer'>Cancel</Button> */}
-                    <Button className='w-full text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 hover:cursor-pointer'>Edit</Button>
-                </div>
+                ) : (
+                    <Button onClick={handleEdit} className='w-full text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 hover:cursor-pointer'>Edit</Button>
+                )}
             </div>
         </div>
     )

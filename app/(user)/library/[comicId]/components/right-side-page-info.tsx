@@ -13,7 +13,7 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
     const needsTruncation = data?.desc && data.desc.length > TRUNCATE_LENGTH;
     
     return (
-        <div className='flex flex-col w-full overflow-y-auto custom-scrollbar pr-4'>
+        <div className='flex flex-col w-full h-full overflow-y-auto custom-scrollbar pr-4'>
             {/* Top Section */}
             <div className='flex flex-col gap-2'>
                 {/* Title */}
@@ -39,7 +39,7 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                     </p>
                     {needsTruncation && (
                     <Button variant="link" onClick={() => setIsExpanded(!isExpanded)} className="text-blue-500 hover:underline text-sm font-semibold p-0 hover:cursor-pointer" >
-                        {isExpanded ? 'data Less' : 'data More'}
+                        {isExpanded ? 'Show Less' : 'Show More'}
                     </Button>
                     )}
                 </div>
