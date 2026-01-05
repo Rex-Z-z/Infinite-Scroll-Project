@@ -46,6 +46,7 @@ const SkeletonDetails = () => {
                                 <Skeleton className="h-[16px] w-16" />
                             </div>
                         </div>
+                        <Skeleton className="h-9 w-full" />
                     </div>
                 </div>
 

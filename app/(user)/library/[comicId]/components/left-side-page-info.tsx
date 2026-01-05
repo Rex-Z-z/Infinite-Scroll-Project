@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ReadItem } from '@/lib/types';
 import { formatDistanceToNow } from '@/lib/utils';
 import { Book, BookOpen, Calendar, Star } from 'lucide-react';
@@ -28,10 +28,17 @@ const typeColorMap: { [key: string]: string } = {
 
 const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) => {
     const [isEdit, setEdit] = useState(false);
-    const [type , setType] = useState("");
-    const [rating, setRating] = useState("");
-    const [status, setStatus] = useState("");
     const [chapter, setChapter] = useState("");
+    const [rating, setRating] = useState("");
+    const [type , setType] = useState("");
+    const [status, setStatus] = useState("");
+
+    useEffect(() => {
+        setChapter(String(data?.chapter || ""));
+        setRating(data?.rating || "");
+        setType(data?.type || "");
+        setStatus(data?.status || "");
+    }, [data]);
 
     const handleEdit = () => {
         setEdit(!isEdit);
@@ -52,12 +59,12 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
             {/* Info */}
             <div className='flex flex-col gap-3 w-full'>
                 <div className='flex flex-row gap-1.5'>
-                    <div className={`p-2 rounded-md ${typeColorMap[data.type] || 'dark:bg-blue-600 dark:hover:bg-blue-700'}`}>
+                    <div className={`p-2 rounded-md ${typeColorMap[type] || 'dark:bg-blue-600 dark:hover:bg-blue-700'}`}>
                         <Book className='size-5'/>
                     </div>
                     <div className='w-full'>
                         {isEdit ? (
-                            <Select onValueChange={setType} value={data?.type}>
+                            <Select onValueChange={setType} value={type}>
                                 <SelectTrigger className="w-full">
                                     <SelectValue placeholder="Select a type" />
                                 </SelectTrigger>
@@ -72,19 +79,19 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                         ) : (
                             <>
                                 <h2 className='text-[10px] text-gray-400 font-semibold'>Type</h2>
-                                <h1 className='text-sm font-semibold'>{data?.type}</h1>
+                                <h1 className='text-sm font-semibold'>{type}</h1>
                             </>
                         )}
                     </div>
                 </div>
 
                 <div className='flex flex-row gap-1.5'>
-                    <div className={`p-2 rounded-md ${ratingColorMap[data.rating] || 'dark:bg-blue-600 dark:hover:bg-blue-700'}`}>
+                    <div className={`p-2 rounded-md ${ratingColorMap[rating] || 'dark:bg-blue-600 dark:hover:bg-blue-700'}`}>
                         <Star className='size-5'/>
                     </div>
                     <div className='w-full'>
                         {isEdit ? (
-                            <Select onValueChange={setRating} value={data?.rating}>
+                            <Select onValueChange={setRating} value={rating}>
                                 <SelectTrigger className="w-full">
                                     <SelectValue placeholder="Select a rating" />
                                 </SelectTrigger>
@@ -99,19 +106,19 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                         ) : (
                             <>
                                 <h2 className='text-[10px] text-gray-400 font-semibold'>Rating</h2>
-                                <h1 className='text-sm font-semibold'>{data?.rating}</h1>
+                                <h1 className='text-sm font-semibold'>{rating}</h1>
                             </>
                         )}
                     </div>
                 </div>
 
                 <div className='flex flex-row gap-1.5'>
-                    <div className={`p-2 rounded-md ${statusColorMap[data.status] || 'dark:bg-blue-600 dark:hover:bg-blue-700'}`}>
+                    <div className={`p-2 rounded-md ${statusColorMap[status] || 'dark:bg-blue-600 dark:hover:bg-blue-700'}`}>
                         <Calendar className='size-5'/>
                     </div>
                     <div className='w-full'>
                         {isEdit ? (
-                            <Select onValueChange={setStatus} value={data?.status}>
+                            <Select onValueChange={setStatus} value={status}>
                                 <SelectTrigger className="w-full">
                                     <SelectValue placeholder="Select a rating" />
                                 </SelectTrigger>
@@ -128,7 +135,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                         ) : (
                             <>
                                 <h2 className='text-[10px] text-gray-400 font-semibold'>Status</h2>
-                                <h1 className='text-sm font-semibold'>{data?.status}</h1>
+                                <h1 className='text-sm font-semibold'>{status}</h1>
                             </>
                         )}
                     </div>
@@ -140,11 +147,11 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                     </div>
                     <div className='w-full'>
                         {isEdit ? (
-                            <Input type='number' placeholder='Chapter' value={data?.chapter} onChange={(e) => setChapter(e.target.value)}/>
+                            <Input type='number' placeholder='Chapter' value={chapter} onChange={(e) => setChapter(e.target.value)}/>
                         ) : (
                             <>
                                 <h2 className='text-[10px] text-gray-400 font-semibold'>Chapter</h2>
-                                <h1 className='text-sm font-semibold'>{data?.chapter}</h1>
+                                <h1 className='text-sm font-semibold'>{chapter}</h1>
                             </>
                         )}
                     </div>
