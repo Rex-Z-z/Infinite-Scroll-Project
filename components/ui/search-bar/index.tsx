@@ -5,9 +5,10 @@ import { Search } from 'lucide-react';
 import SearchPreview from './search-preview';
 import { mockReads } from '@/lib/mock-data';
 import { ReadItem } from '@/lib/types';
-import router from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const SearchBar = () => {
+    const router = useRouter();
     const [query, setQuery] = useState('');
     const [isFocused, setIsFocused] = useState(false);
     const [filteredResults, setFilteredResults] = useState<ReadItem[]>([]);
