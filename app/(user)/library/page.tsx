@@ -1,7 +1,6 @@
 import React from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Book, BookMarked, BookOpen, BookOpenCheck, BookX } from 'lucide-react';
-import NavBar from '@/components/ui/navbar'
 import OnGoing from './components/ongoing';
 import Completed from './components/completed';
 import Hold from './components/hold';

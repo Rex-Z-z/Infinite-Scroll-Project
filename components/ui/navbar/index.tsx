@@ -1,7 +1,8 @@
 "use client"
 
 import React from 'react'
-import { Moon, Sun, Search, User, CircleUserRound, Settings, LogOut } from "lucide-react"
+import { Moon, Sun, Search, User, CircleUserRound, Settings, LogOut, Book, BookOpen } from "lucide-react"
+import { usePathname } from 'next/navigation'
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -9,11 +10,14 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import SearchBar from '../search-bar'
 
 interface NavBarProps {
-    page?: 'user' | 'landing';
+    page?: 'user' | 'landing' | 'library';
 }
 
 const NavBar = ({ page = 'user' }: NavBarProps) => {
     const { setTheme } = useTheme();
+    const pathname = usePathname();
+    
+    const isLibraryPage = pathname === '/library';
     
     return (
     <nav className={`sticky top-0 z-50 ${page === 'user' ? 'bg-white dark:bg-gray-900 border-b-2 border-gray-200 dark:border-gray-700' : ''}`}>
@@ -40,6 +44,10 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
                     )}
                 </div>
                 <div className="flex gap-2">
+                    <Button variant="outline" size="icon" className={isLibraryPage ? "opacity-50 pointer-events-none" : 'focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:ring-1 hover:ring-blue-400 hover:cursor-pointer'} asChild>
+                        <a href="/library"> <BookOpen />  </a>
+                    </Button>
+
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="outline" size="icon" className='focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:ring-1 hover:ring-blue-400 hover:cursor-pointer'>
