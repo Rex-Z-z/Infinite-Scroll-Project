@@ -1,4 +1,3 @@
-// app/(user)/library/components/search-bar/index.tsx
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
@@ -6,6 +5,7 @@ import { Search } from 'lucide-react';
 import SearchPreview from './search-preview';
 import { mockReads } from '@/lib/mock-data';
 import { ReadItem } from '@/lib/types';
+import router from 'next/router';
 
 const SearchBar = () => {
     const [query, setQuery] = useState('');
@@ -38,18 +38,19 @@ const SearchBar = () => {
             item.title.toLowerCase().includes(lowerQuery) || 
             item.altTitle.toLowerCase().includes(lowerQuery)
         );
-        setFilteredResults(results.slice(0, 5)); // Limit to top 5 results
+        setFilteredResults(results.slice(0, 5));
     }, [query]);
 
     const handleSelectResult = (item: ReadItem) => {
         console.log('Navigate to:', item.title);
+        
         // Add to history if not exists
         if (!history.includes(item.title)) {
              setHistory(prev => [item.title, ...prev].slice(0, 5));
         }
         setIsFocused(false);
         setQuery(item.title);
-        // Implement navigation here, e.g., router.push(`/library/${item.id}`)
+        router.push(`/library/${item.id}`);
     };
 
     const handleSelectHistory = (historyItem: string) => {

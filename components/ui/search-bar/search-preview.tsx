@@ -71,31 +71,31 @@ const SearchPreview = ({
                                         onClick={() => onSelectResult(item)}
                                         className="flex items-center gap-3 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer rounded-md"
                                     >
-                                    {/* Image Thumbnail */}
-                                    <div className="relative w-24 h-28 shrink-0 overflow-hidden rounded">
-                                        <Image 
-                                        src={item.imageUrl} 
-                                        alt={item.title} 
-                                        fill 
-                                        className="object-cover" 
-                                        />
-                                    </div>
-                                    
-                                    {/* Text Info */}
-                                    <div className="flex flex-col gap-A overflow-hidden">
-                                        <span className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
-                                            {item.title}
-                                        </span>
-                                        <span className="text-xs text-gray-500 truncate">
-                                            {item.altTitle}
-                                        </span>
-                                        <span className="text-sm font-medium text-gray-400 mt-0.5">
-                                            Chapter {item.chapter}
-                                        </span>
-                                        <span className="text-xs text-blue-500 mt-0.5">
-                                            {item.type} • {item.rating}
-                                        </span>
-                                    </div>
+                                        {/* Image Thumbnail */}
+                                        <div className="relative w-24 h-28 shrink-0 overflow-hidden rounded">
+                                            <Image 
+                                            src={item.imageUrl} 
+                                            alt={item.title} 
+                                            fill 
+                                            className="object-cover" 
+                                            />
+                                        </div>
+                                        
+                                        {/* Text Info */}
+                                        <div className="flex flex-col gap-A overflow-hidden">
+                                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
+                                                {item.title}
+                                            </span>
+                                            <span className="text-xs text-gray-500 truncate">
+                                                {item.altTitle}
+                                            </span>
+                                            <span className="text-sm font-medium text-gray-400 mt-0.5">
+                                                Chapter {item.chapter}
+                                            </span>
+                                            <span className="text-xs text-blue-500 mt-0.5">
+                                                {item.type} • {item.rating}
+                                            </span>
+                                        </div>
                                     </li>
                                 ))}
                             </ul>
