@@ -6,6 +6,7 @@ import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
+import SearchBar from './search-bar'
 
 interface NavBarProps {
     page?: 'user' | 'landing';
@@ -23,12 +24,7 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
                 </a>
                 <div className="flex">
                     {page === 'user' ? (
-                        <>
-                            <div className="relative hidden md:block w-lg">
-                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
-                                <input type="text" placeholder="Search" className="w-full rounded-md border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-10 py-2 text-sm text-gray-900 dark:text-gray-100 transition focus:outline-none focus:ring-3 focus:ring-gray-200 focus:dark:ring-gray-700 focus:border-blue-600 focus:dark:border-blue-500 hover:border-gray-400 hover:dark:border-gray-600"/>
-                            </div>
-                        </>
+                        <SearchBar />
                     ) : (
                         <div className='flex flex-row'>
                             <Button variant="link" className='font-bold' asChild>
@@ -44,9 +40,6 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
                     )}
                 </div>
                 <div className="flex gap-2">
-                    <Button variant="outline" size="icon" className="md:hidden border-2 dark:focus:border-blue-500 hover:cursor-pointer">
-                        <Search />
-                    </Button>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="outline" size="icon" className='focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:ring-1 hover:ring-blue-400 hover:cursor-pointer'>
@@ -67,6 +60,7 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
+                    
                     {page === 'user' ? (
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
