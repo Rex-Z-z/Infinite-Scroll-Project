@@ -16,10 +16,14 @@ type Checked = DropdownMenuCheckboxItemProps["checked"]
 
 const DropdownRelevance = () => {
     // Rating
+    const [showRatingAbsoluteCinema, setShowRatingAbsoluteCinema] = useState<Checked>(false)
+    const [showRatingAwesome, setShowRatingAwesome] = useState<Checked>(false)
+    const [showRatingGreat, setShowRatingGreat] = useState<Checked>(false)
     const [showRatingGood, setShowRatingGood] = useState<Checked>(false)
-    const [showRatingMid, setShowRatingMid] = useState<Checked>(false)
+    const [showRatingRegular, setShowRatingRegular] = useState<Checked>(false)
     const [showRatingBad, setShowRatingBad] = useState<Checked>(false)
-    const isRatingSelected = showRatingGood || showRatingMid || showRatingBad;
+    const [showRatingGarbage, setShowRatingGarbage] = useState<Checked>(false)
+    const isRatingSelected = showRatingAbsoluteCinema || showRatingAwesome || showRatingGreat || showRatingGood || showRatingRegular || showRatingBad || showRatingGarbage
 
     // Time
     const [time, setTime] = useState("Recent")
@@ -87,9 +91,13 @@ const DropdownRelevance = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuLabel className='text-[12px] text-blue-400 font-bold'>Rating</DropdownMenuLabel>
                 <DropdownMenuSeparator />
+                <DropdownMenuCheckboxItem checked={showRatingAbsoluteCinema} onCheckedChange={setShowRatingAbsoluteCinema} >Absolute Cinema</DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem checked={showRatingAwesome} onCheckedChange={setShowRatingAwesome} >Awesome</DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem checked={showRatingGreat} onCheckedChange={setShowRatingGreat} >Great</DropdownMenuCheckboxItem>
                 <DropdownMenuCheckboxItem checked={showRatingGood} onCheckedChange={setShowRatingGood} >Good</DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem checked={showRatingMid} onCheckedChange={setShowRatingMid} >Mid</DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem checked={showRatingRegular} onCheckedChange={setShowRatingRegular} >Regular</DropdownMenuCheckboxItem>
                 <DropdownMenuCheckboxItem checked={showRatingBad} onCheckedChange={setShowRatingBad} >Bad</DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem checked={showRatingGarbage} onCheckedChange={setShowRatingGarbage} >Garbage</DropdownMenuCheckboxItem>
             </DropdownMenuContent>
         </DropdownMenu>
     )

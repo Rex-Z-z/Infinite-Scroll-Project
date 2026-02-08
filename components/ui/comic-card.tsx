@@ -8,15 +8,19 @@ import { formatDistanceToNow } from '@/lib/utils';
 import { ReadItem } from '@/lib/types';
 
 interface ComicCardProps {
-  read: ReadItem;
-  page?: 'home' | 'library';
-  onEdit: (read: ReadItem) => void;
+    read: ReadItem;
+    page?: 'home' | 'library';
+    onEdit: (read: ReadItem) => void;
 }
 
 const statusColorMap: { [key: string]: string } = {
-  "Good": "text-yellow-400 size-4 mt-0.5",
-  "Mid": "text-orange-400 size-4 mt-0.5",
-  "Bad": "text-red-500 size-4 mt-0.5",
+    "Absolute Cinema": "text-blue-400 size-4 mt-0.5",
+    "Awesome": "text-green-700 size-4 mt-0.5",
+    "Great": "text-green-600 size-4 mt-0.5",
+    "Good": "text-yellow-400 size-4 mt-0.5",
+    "Regular": "text-orange-400 size-4 mt-0.5",
+    "Bad": "text-red-500 size-4 mt-0.5",
+    "Garbage": "text-purple-400 size-4 mt-0.5",
 };
 
 const ComicCard = ({ read, page = 'home', onEdit}: ComicCardProps) => {

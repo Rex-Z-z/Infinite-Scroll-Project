@@ -143,14 +143,26 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
                 </SelectTrigger>
                 <SelectContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
                     <SelectGroup>
+                        <SelectItem value="Absolute Cinema">
+                            <Star className="size-4 mr-2 text-blue-400" /> Absolute Cinema
+                        </SelectItem>
+                        <SelectItem value="Awesome">
+                            <Star className="size-4 mr-2 text-green-700" /> Awesome
+                        </SelectItem>
+                        <SelectItem value="Great">
+                            <Star className="size-4 mr-2 text-green-500" /> Great
+                        </SelectItem>
                         <SelectItem value="Good">
                             <Star className="size-4 mr-2 text-yellow-400" /> Good
                         </SelectItem>
-                        <SelectItem value="Mid">
-                            <Star className="size-4 mr-2 text-orange-400" /> Mid
+                        <SelectItem value="Regular">
+                            <Star className="size-4 mr-2 text-orange-400" /> Regular
                         </SelectItem>
                         <SelectItem value="Bad">
                             <Star className="size-4 mr-2 text-red-500" /> Bad
+                        </SelectItem>
+                        <SelectItem value="Garbage">
+                            <Star className="size-4 mr-2 text-purple-400" /> Garbage
                         </SelectItem>
                     </SelectGroup>
                 </SelectContent>
