@@ -89,7 +89,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                         ) : (
                             <>
                                 <h2 className='text-[10px] text-gray-400 font-semibold'>Type</h2>
-                                <h1 className='text-sm font-semibold'>{type}</h1>
+                                <h1 className='text-sm font-semibold'>{data?.type || 'N/A'}</h1>
                             </>
                         )}
                     </div>
@@ -120,7 +120,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                         ) : (
                             <>
                                 <h2 className='text-[10px] text-gray-400 font-semibold'>Rating</h2>
-                                <h1 className='text-sm font-semibold'>{rating}</h1>
+                                <h1 className='text-sm font-semibold'>{data?.rating || 'N/A'}</h1>
                             </>
                         )}
                     </div>
@@ -149,7 +149,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                         ) : (
                             <>
                                 <h2 className='text-[10px] text-gray-400 font-semibold'>Status</h2>
-                                <h1 className='text-sm font-semibold'>{status}</h1>
+                                <h1 className='text-sm font-semibold'>{data?.status || 'N/A'}</h1>
                             </>
                         )}
                     </div>
@@ -165,7 +165,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                         ) : (
                             <>
                                 <h2 className='text-[10px] text-gray-400 font-semibold'>Chapter</h2>
-                                <h1 className='text-sm font-semibold'>{chapter}</h1>
+                                <h1 className='text-sm font-semibold'>{data?.chapter || 'N/A'}</h1>
                             </>
                         )}
                     </div>
@@ -177,7 +177,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                     </div>
                     <div>
                         <h2 className='text-[10px] text-gray-400 font-semibold'>Last read</h2>
-                        <h1 className='text-sm font-semibold'>{getLastReadDate()}</h1>
+                        <h1 className='text-sm font-semibold'>{data?.lastRead || 'N/A'}</h1>
                     </div>
                 </div>
 
