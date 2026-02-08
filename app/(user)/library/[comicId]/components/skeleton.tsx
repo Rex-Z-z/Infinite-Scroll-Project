@@ -91,12 +91,6 @@ const SkeletonDetails = () => {
                                 <Skeleton className="w-16 h-8 rounded-3xl" />
                             </div>
                         </div>
-                        {/* Chapters */}
-                        <div className='flex flex-col gap-2'>
-                            {[...Array(5    )].map((_, index) => (
-                                <Skeleton key={index} className="w-full h-16" />
-                            ))}
-                        </div>
                     </div>
                 </div>
             </div>

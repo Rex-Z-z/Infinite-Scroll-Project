@@ -63,13 +63,6 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                     ))}
                     </div>
                 </div>
-
-                {/* Other content */}
-                <div className='flex flex-col gap-2'>
-                    {[...Array(8)].map((_, index) => (
-                        <div key={index} className='h-16 rounded-md bg-gray-800'></div>
-                    ))}
-                </div>
             </div>
         </div>
     )

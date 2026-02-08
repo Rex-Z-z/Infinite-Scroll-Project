@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { ReadItem } from '@/lib/types';
 import { formatDistanceToNow } from '@/lib/utils';
-import { Book, BookOpen, Calendar, ImagePlus, Star } from 'lucide-react';
+import { Book, BookOpen, Calendar, ImagePlus, Star, Trash2, Upload } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -36,6 +36,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
     const [rating, setRating] = useState("");
     const [type , setType] = useState("");
     const [status, setStatus] = useState("");
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         setChapter(String(data?.chapter || ""));
@@ -43,6 +44,10 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
         setType(data?.type || "");
         setStatus(data?.status || "");
     }, [data]);
+    
+    const handleUploadClick = () => {
+        fileInputRef.current?.click();
+    };
 
     const handleEdit = () => {
         setEdit(!isEdit);
@@ -50,7 +55,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
 
     const getLastReadDate = () => {
         if (data?.lastRead) {
-        return `${formatDistanceToNow(data.lastRead)} (${data.lastRead})`;
+            return `${formatDistanceToNow(data.lastRead)} (${data.lastRead})`;
         }
         return 'N/A';
     }
@@ -59,11 +64,16 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
         <div className="flex-none flex-col w-75 h-full">
             {/* Cover */}
             {data.imageUrl? (
-                <img src={data?.imageUrl} alt={`Cover for ${data?.title}`} className='overflow-hidden rounded-lg mb-3'/>
+                <div className='relative block w-full h-99 aspect-[2/3] overflow-hidden rounded-lg mb-3'>
+                    <img src={data?.imageUrl} alt={`Cover for ${data?.title}`} className='absolute h-full w-full object-cover hover:scale-110 transition-all duration-500 ease-in-out'/>
+                </div>
             ) : (
-                <Button variant="outline" className='relative flex w-full h-100 aspect-[2/3] items-center justify-center group mb-3'>
-                    <ImagePlus className='size-18 text-gray-600 group-hover:scale-130 transition-all duration-300 ease-in-out' />
-                </Button>
+                <>
+                    <input type="file" ref={fileInputRef} className="hidden" />
+                    <Button onClick={handleUploadClick} variant="outline" className='relative flex w-full h-100 aspect-[2/3] items-center justify-center group mb-3 hover:text-gray-400'>
+                        <ImagePlus className='size-18 text-gray-600 group-hover:scale-130 transition-all duration-300 ease-in-out' />
+                    </Button>
+                </>
             )}
             
             {/* Info */}
@@ -165,7 +175,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                         ) : (
                             <>
                                 <h2 className='text-[10px] text-gray-400 font-semibold'>Chapter</h2>
-                                <h1 className='text-sm font-semibold'>{data?.chapter || 'N/A'}</h1>
+                                <h1 className='text-sm font-semibold'>{getLastReadDate()}</h1>
                             </>
                         )}
                     </div>
