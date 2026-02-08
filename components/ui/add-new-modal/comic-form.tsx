@@ -14,7 +14,6 @@ import {
     SelectTrigger, 
     SelectValue 
 } from '@/components/ui/select';
-import { Tooltip, TooltipContent, TooltipTrigger } from '../tooltip';
 import Tooltip2 from '../tooltip-v2';
 
 interface ComicFormProps {
@@ -22,9 +21,13 @@ interface ComicFormProps {
 }
 
 const ratingColorMap: { [key: string]: string } = {
+    "Absolute Cinema": "text-blue-400",
+    "Awesome": "text-green-700",
+    "Great": "text-green-600",
     "Good": "text-yellow-400",
-    "Mid": "text-orange-400",
+    "Regular": "text-orange-400",
     "Bad": "text-red-500",
+    "Garbage": "text-purple-400",
 };
 
 const statusColorMap: { [key: string]: string } = {

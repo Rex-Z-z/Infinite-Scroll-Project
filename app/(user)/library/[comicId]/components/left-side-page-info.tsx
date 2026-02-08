@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { ReadItem } from '@/lib/types';
 import { formatDistanceToNow } from '@/lib/utils';
-import { Book, BookOpen, Calendar, Star } from 'lucide-react';
+import { Book, BookOpen, Calendar, ImagePlus, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const ratingColorMap: { [key: string]: string } = {
-  "Good": "bg-yellow-500 hover:bg-yellow-600",
-  "Mid": "bg-orange-500 hover:bg-orange-600",
-  "Bad": "bg-red-600 hover:bg-red-700",
+    "Absolute Cinema": "bg-blue-400 hover:bg-blue-500",
+    "Awesome": "bg-green-700 hover:bg-green-800",
+    "Great": "bg-green-600 hover:bg-green-700",
+    "Good": "bg-yellow-400 hover:bg-yellow-500",
+    "Regular": "bg-orange-400 hover:bg-orange-500",
+    "Bad": "bg-red-500 hover:bg-red-600",
+    "Garbage": "bg-purple-400 hover:bg-purple-500",
 };
 
 const statusColorMap: { [key: string]: string } = {
@@ -54,7 +58,13 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
     return (
         <div className="flex-none flex-col w-75 h-full">
             {/* Cover */}
-            <img src={data?.imageUrl} alt={`Cover for ${data?.title}`} className='overflow-hidden rounded-lg mb-3'/>
+            {data.imageUrl? (
+                <img src={data?.imageUrl} alt={`Cover for ${data?.title}`} className='overflow-hidden rounded-lg mb-3'/>
+            ) : (
+                <Button variant="outline" className='relative flex w-full h-100 aspect-[2/3] items-center justify-center group mb-3'>
+                    <ImagePlus className='size-18 text-gray-600 group-hover:scale-130 transition-all duration-300 ease-in-out' />
+                </Button>
+            )}
             
             {/* Info */}
             <div className='flex flex-col gap-3 w-full'>
@@ -97,9 +107,13 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                                 </SelectTrigger>
                                 <SelectContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
                                     <SelectGroup>
+                                        <SelectItem value="Absolute Cinema"> Absolute Cinema </SelectItem>
+                                        <SelectItem value="Awesome"> Awesome </SelectItem>
+                                        <SelectItem value="Great"> Great </SelectItem>
                                         <SelectItem value="Good"> Good </SelectItem>
-                                        <SelectItem value="Mid"> Mid </SelectItem>
+                                        <SelectItem value="Regular"> Regular </SelectItem>
                                         <SelectItem value="Bad"> Bad </SelectItem>
+                                        <SelectItem value="Garbage"> Garbage </SelectItem>
                                     </SelectGroup>
                                 </SelectContent>
                             </Select>
@@ -162,7 +176,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                         <BookOpen className='size-5'/>
                     </div>
                     <div>
-                        <h2 className='text-[10px] text-gray-400 font-semibold'>Last data</h2>
+                        <h2 className='text-[10px] text-gray-400 font-semibold'>Last read</h2>
                         <h1 className='text-sm font-semibold'>{getLastReadDate()}</h1>
                     </div>
                 </div>
