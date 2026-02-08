@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Upload, Clipboard } from 'lucide-react';
+import { Upload, Clipboard, Trash2 } from 'lucide-react';
 import { DialogDescription, DialogHeader, DialogTitle } from '../dialog';
 import { ReadItem } from '@/lib/types';
 import Tooltip2 from '../tooltip-v2';
@@ -30,6 +30,10 @@ export const ImageUploader = React.memo(({ initialImageUrl, comicData }: ImageUp
 
   const handleUploadClick = () => {
     fileInputRef.current?.click();
+  };
+
+  const handleClearImage = () => {
+    setImagePreview(null);
   };
 
   const handlePasteImage = async () => {
@@ -63,17 +67,23 @@ export const ImageUploader = React.memo(({ initialImageUrl, comicData }: ImageUp
                 <>
                     <img src={imagePreview} alt="Cover Preview" className="h-full w-full object-cover rounded-md" />
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <Button  variant="default" onClick={handleUploadClick} className="opacity-0 group-hover:opacity-100 flex items-center gap-2 transition-all duration-300 ease-in-out text-xs px-2 py-1 dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700">
-                            <Upload className="size-3.5" /> Update
-                        </Button>
+                        <div className="flex flex-row gap-2">
+                          <Button  variant="default" onClick={handleUploadClick} className="opacity-0 group-hover:opacity-100 flex items-center gap-2 transition-all duration-300 ease-in-out text-xs px-2 py-1 dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700">
+                              <Upload className="size-3.5" />
+                          </Button>
+                          <Button  variant="default" onClick={handleClearImage} className="opacity-0 group-hover:opacity-100 flex items-center gap-2 transition-all duration-300 ease-in-out text-xs px-2 py-1 dark:text-white bg-red-500 dark:bg-red-600 hover:bg-red-600 dark:hover:bg-red-700">
+                              <Trash2 className="size-3.5" />
+                          </Button>
+                        </div>
                     </div>
                 </>
             ) : (
                 <div className="h-full w-full bg-[#1a2231] border border-gray-700 rounded-md flex flex-col gap-2 items-center justify-center">
-                    <Button variant="outline" onClick={handleUploadClick} className="flex items-center gap-2">
-                        <Upload className="size-4" />
-                        Upload
-                    </Button>
+                    <div className='flex flex-row gap-2'>
+                      <Button variant="default" onClick={handleUploadClick} className="dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700">
+                          <Upload className="size-4" />
+                      </Button>
+                    </div>
                 </div>
             )}
         </div>
@@ -81,10 +91,10 @@ export const ImageUploader = React.memo(({ initialImageUrl, comicData }: ImageUp
         <div className='flex flex-col gap-4 w-full'>
             <DialogHeader>
                 <DialogTitle>
-                  {imagePreview ? "Edit Comic" : "Add New Comic"}
+                  {comicData ? "Edit Comic" : "Add New Comic"}
                 </DialogTitle>
                 <DialogDescription className='flex flex-col mt-2 font-semibold'>
-                    {imagePreview ? "Edit the details of your comic." : "Add a new comic to your collection."}
+                    {comicData ? "Edit the details of your comic." : "Add a new comic to your collection."}
                     <div className='relative inline-block'>
                       <Button variant="outline" onClick={handlePasteImage} className="flex items-center gap-2 mt-2 text-xs p-1">
                           <Clipboard className="size-3.5" />

@@ -4,7 +4,8 @@ import React, { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Book, BookOpen, Star, Clipboard, ClipboardCopy, ClipboardCheck, Search } from 'lucide-react';
+import { Book, BookOpen, Star, Clipboard, Copy, Check, Search } from 'lucide-react';
+import { AnimatedSwapIcon } from "@/components/ui/animated-swap-icon"
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { 
     Select, 
@@ -14,7 +15,6 @@ import {
     SelectTrigger, 
     SelectValue 
 } from '@/components/ui/select';
-import Tooltip2 from '../tooltip-v2';
 
 interface ComicFormProps {
   comicData: ReadItem | null;
@@ -87,12 +87,17 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
                 {title ? (
                     <>
                         <div className="relative">
-                            <Button onClick={handleCopyName} variant="outline" size="icon" className='transition-all duration-300 ease-in-out hover:cursor-pointer'>
-                                { isCopied ? <ClipboardCheck /> : <ClipboardCopy /> }
+                            <Button 
+                                variant="outline" 
+                                size="icon" 
+                                onClick={handleCopyName}
+                            >
+                                <AnimatedSwapIcon 
+                                    icon={Copy} 
+                                    altIcon={Check} 
+                                    crossfade={isCopied} 
+                                />
                             </Button>
-                            {isCopied && (
-                                <Tooltip2>Copied</Tooltip2>
-                            )}
                         </div>
                         <Button onClick={handleSearch} variant="outline" size="icon" className='transition-all duration-300 ease-in-out hover:cursor-pointer'>
                             <Search />
