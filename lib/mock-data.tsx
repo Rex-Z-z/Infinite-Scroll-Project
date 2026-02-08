@@ -17,7 +17,7 @@ export const mockReads: ReadItem[] = [
     chapter: 12, // User is on ch 12
     comicChapter: 150, // Latest is ch 150
     tags: ["Action", "Fantasy", "Adventure", "Martial Arts"],
-    category: "Shonen",
+    category: ["Shonen"],
     source: ["Asura Scans"],
     sourceIcon: ["/icons/asura-icon.webp"],
     relations: [4, 7, 12] // References other IDs of the same series/sequels
@@ -38,7 +38,7 @@ export const mockReads: ReadItem[] = [
     chapter: 4,
     comicChapter: 60,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: "Seinen",
+    category: ["Seinen"],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [5, 8, 10, 13]
@@ -59,7 +59,7 @@ export const mockReads: ReadItem[] = [
     chapter: 8,
     comicChapter: 45,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: "Shonen",
+    category: ["Shonen"],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [6, 9, 11]
@@ -80,7 +80,7 @@ export const mockReads: ReadItem[] = [
     chapter: 12,
     comicChapter: 12, // Completed, so read count matches total
     tags: ["Action", "Fantasy", "Adventure", "Martial Arts"],
-    category: "Seinen",
+    category: ["Seinen"],
     source: ["Asura Scans"],
     sourceIcon: ["/icons/asura-icon.webp"],
     relations: [1, 7, 12]
@@ -101,7 +101,7 @@ export const mockReads: ReadItem[] = [
     chapter: 4,
     comicChapter: 88,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: "Shonen",
+    category: ["Shonen"],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [2, 8, 10, 13]
@@ -122,7 +122,7 @@ export const mockReads: ReadItem[] = [
     chapter: 8,
     comicChapter: 100,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: "Shonen",
+    category: ["Shonen"],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [3, 9, 11]
@@ -143,7 +143,7 @@ export const mockReads: ReadItem[] = [
     chapter: 12,
     comicChapter: 200,
     tags: ["Action", "Fantasy", "Adventure", "Martial Arts"],
-    category: "Seinen",
+    category: ["Seinen"],
     source: ["Asura Scans"],
     sourceIcon: ["/icons/asura-icon.webp"],
     relations: [1, 4, 12]
@@ -164,7 +164,7 @@ export const mockReads: ReadItem[] = [
     chapter: 4,
     comicChapter: 110,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: "Shonen",
+    category: ["Shonen"],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [2, 5, 10, 13]
@@ -185,7 +185,7 @@ export const mockReads: ReadItem[] = [
     chapter: 8,
     comicChapter: 8,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: "Shonen",
+    category: ["Shonen"],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [3, 6, 11]
@@ -206,7 +206,7 @@ export const mockReads: ReadItem[] = [
     chapter: 4,
     comicChapter: 125,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: "Shonen",
+    category: ["Shonen"],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [2, 5, 8, 13]
@@ -227,7 +227,7 @@ export const mockReads: ReadItem[] = [
     chapter: 8,
     comicChapter: 115,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: "Shonen",
+    category: ["Shonen"],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [3, 6, 9]
@@ -248,7 +248,7 @@ export const mockReads: ReadItem[] = [
     chapter: 12,
     comicChapter: 215,
     tags: ["Action", "Fantasy", "Adventure", "Martial Arts"],
-    category: "Seinen",
+    category: ["Seinen"],
     source: ["Asura Scans"],
     sourceIcon: ["/icons/asura-icon.webp"],
     relations: [1, 4, 7]
@@ -269,7 +269,7 @@ export const mockReads: ReadItem[] = [
     chapter: 4,
     comicChapter: 130,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: "Shonen",
+    category: ["Shonen"],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [2, 5, 8, 10]

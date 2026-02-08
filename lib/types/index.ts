@@ -14,7 +14,7 @@ export interface ReadItem {
   chapter: number;
   comicChapter: number;
   tags: string[];
-  category: string;
+  category: string[];
   source: string[];
   sourceIcon: string[];
   relations: number[];
