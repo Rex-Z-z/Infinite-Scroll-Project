@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { ReadItem } from '@/lib/types';
 import { formatDistanceToNow } from '@/lib/utils';
-import { Book, BookOpen, Calendar as CalendarIcon, ImagePlus, Star, Trash2, Upload } from 'lucide-react';
+import { Book, BookOpen, Calendar as CalendarIcon, ImagePlus, ArrowLeftRight , Star, Image } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import LastReadDatePicker from './lastread-datepicker';
+import { Label } from '@/components/ui/label';
 
 const ratingColorMap: { [key: string]: string } = {
     "Absolute Cinema": "bg-blue-400 hover:bg-blue-500",
@@ -37,6 +39,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
     const [rating, setRating] = useState("");
     const [type , setType] = useState("");
     const [status, setStatus] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [date, setDate] = useState<Date | undefined>(data?.lastRead ? new Date(data.lastRead) : undefined);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -63,6 +66,10 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
         setEdit(!isEdit);
     }
 
+    const handleSwitch = () => {
+        setIsModalOpen(true);
+    };
+
     const getLastReadDate = () => {
         if (data?.lastRead) {
             return `${formatDistanceToNow(data.lastRead)} (${data.lastRead})`;
@@ -72,32 +79,46 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
 
     return (
         <div className="flex-none flex-col w-75 h-full">
-            {/* Cover */}
-            {data.imageUrl? (
-                <div className='relative block w-full h-99 aspect-[2/3] overflow-hidden rounded-lg mb-3 group'>
-                    <img src={data?.imageUrl} alt={`Cover for ${data?.title}`} className='absolute h-full w-full object-cover hover:scale-110 transition-all duration-500 ease-in-out'/>
-                    
-                    {isEdit && (
-                        <div className="absolute inset-0 flex items-end justify-center p-2">
-                            <div className="flex flex-row gap-2 justify-center">
-                                <Button  variant="default" onClick={handleUploadClick} className="w-35 text-xs dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700">
-                                    <Upload className="size-3.5" /> Upload
-                                </Button>
-                                <Button  variant="default" className="w-35 ease-in-out text-xs dark:text-white bg-red-500 dark:bg-red-600 hover:bg-red-600 dark:hover:bg-red-700">
-                                    <Trash2 className="size-3.5" /> Delete
-                                </Button>
+            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                <DialogContent className="sm:max-w-xl">
+                    <DialogHeader>
+                        <DialogTitle>Comic Cover</DialogTitle>
+                        <DialogDescription>
+                            Select a cover image for your comic
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="grid grid-cols-3 gap-1">
+                        {[...Array(5)].map((_, index) => (
+                            <div key={index} className='flex h-60 items-center justify-center bg-gray-700 hover:bg-gray-800 rounded-md shadow-lg'>
+                                <Image size={25} className='text-gray-500' />
                             </div>
-                        </div>
-                    )}
-                </div>
-            ) : (
-                <>
-                    <input type="file" ref={fileInputRef} className="hidden" />
-                    <Button onClick={handleUploadClick} variant="outline" className='relative flex w-full h-100 aspect-[2/3] items-center justify-center group mb-3 hover:text-gray-400'>
-                        <ImagePlus className='size-18 text-gray-600 group-hover:scale-130 transition-all duration-300 ease-in-out' />
-                    </Button>
-                </>
-            )}
+                        ))}
+                    </div>
+                    <DialogFooter className="sm:justify-start">
+                        <DialogClose asChild>
+                            <Button type="button">Close</Button>
+                        </DialogClose>
+                        <Button variant="default" className='text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 hover:cursor-pointer'>Upload</Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+            
+            {/* Cover */}
+            <div className='relative block w-full h-99 aspect-[2/3] rounded-md overflow-hidden mb-3 group'>
+                {data.imageUrl? (
+                    <img src={data?.imageUrl} alt={`Cover for ${data?.title}`} className='absolute h-full w-full object-cover hover:scale-110 transition-all duration-500 ease-in-out'/>
+                ) : (
+                    <>
+                        <input type="file" ref={fileInputRef} className="hidden" />
+                        <Button onClick={handleUploadClick} variant="outline" className='relative flex w-full h-99 aspect-[2/3] items-center justify-center group mb-3 hover:text-gray-400'>
+                            <ImagePlus className='size-18 text-gray-600 group-hover:scale-130 transition-all duration-300 ease-in-out' />
+                        </Button>
+                    </>
+                )}
+                <Button onClick={handleSwitch} variant="outline" size="icon" className="absolute size-8 top-2 left-2 bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:cursor-pointer">
+                    <ArrowLeftRight  />
+                </Button>
+            </div>
             
             {/* Info */}
             <div className='flex flex-col gap-3 w-full'>

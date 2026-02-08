@@ -86,7 +86,7 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
                                 <DropdownMenuItem>
                                     <Settings className='text-white'/> Setting
                                 </DropdownMenuItem>
-                                <DropdownMenuItem className='hover:cursor-pointer' asChild>
+                                <DropdownMenuItem className='hover:cursor-pointer' variant='destructive' asChild>
                                     <a href="/login"> <LogOut className='text-white'/> Logout </a>
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
