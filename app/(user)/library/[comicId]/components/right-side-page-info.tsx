@@ -3,7 +3,7 @@ import { ReadItem } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Check, Copy } from 'lucide-react';
+import { Check, Copy, Image } from 'lucide-react';
 import { AnimatedSwapIcon } from '@/components/ui/animated-swap-icon';
 
 const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) => {
@@ -52,11 +52,19 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                     </Badge>
                     ))}
                 </div>
+
+                <div className='mt-2'>
+                    <h1 className='text-lg font-semibold mb-1'>More Info</h1>
+                    <p className='text-sm text-gray-500 font-semibold'>Published: <span className='text-gray-300'>{data?.published || 'N/A'}</span> </p>
+                    <p className='text-sm text-gray-500 font-semibold'>Updated: <span className='text-gray-300'>{data?.updated || 'N/A'}</span></p>
+                    <p className='text-sm text-gray-500 font-semibold'>Status: <span className='text-gray-300'>{data?.status || 'N/A'}</span></p>
+                    <p className='text-sm text-gray-500 font-semibold'>Chapter: <span className='text-gray-300'>{data?.comicChapter || 'N/A'}</span></p>
+                </div>
                 
                 {/* Description */}
                 <div className='mt-2'>
                     <h1 className='text-md font-semibold'>Description</h1>
-                    <p className={cn('text-sm text-gray-500 font-semibold', needsTruncation && !isExpanded && 'line-clamp-5' )}>
+                    <p className={cn('text-sm text-gray-500 font-semibold', needsTruncation && !isExpanded && 'line-clamp-3' )}>
                     {data?.desc}
                     </p>
                     {needsTruncation && (
@@ -83,6 +91,17 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                             {source}
                         </Badge>
                     ))}
+                    </div>
+                </div>
+
+                <div>
+                    <h1 className='text-md font-semibold mb-1'>Relation</h1>
+                    <div className='flex gap-2'>
+                        {[...Array(4)].map((_, index) => (
+                            <div key={index} className='flex w-45 h-60 items-center justify-center bg-gray-700 hover:bg-gray-800 rounded-md shadow-lg'>
+                                <Image size={50} className='text-gray-500' />
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
