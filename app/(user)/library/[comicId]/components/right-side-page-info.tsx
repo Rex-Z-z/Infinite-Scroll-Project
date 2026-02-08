@@ -1,13 +1,20 @@
 import React, { useState } from 'react'
 import { ReadItem } from '@/lib/types';
-import SkeletonDetails from './skeleton';
-import { fetchComickById } from '@/services/library/comic.service';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Check, Copy } from 'lucide-react';
+import { AnimatedSwapIcon } from '@/components/ui/animated-swap-icon';
 
 const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) => {
     const [isExpanded, setIsExpanded] = useState(false);
+    const [isCopied, setIsCopied] = useState(false);
+
+    const handleCopyName = () => {
+        navigator.clipboard.writeText(data?.title);
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000);
+    };
 
     const TRUNCATE_LENGTH = 350; 
     const needsTruncation = data?.desc && data.desc.length > TRUNCATE_LENGTH;
@@ -18,7 +25,22 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
             <div className='flex flex-col gap-2'>
                 {/* Title */}
                 <div>
-                    <h1 className='text-3xl font-semibold line-clamp-2' title={data?.title}>{data?.title}</h1>
+                    <div className='flex flex-row gap-2'>
+                        <h1 className='text-3xl font-semibold line-clamp-2' title={data?.title}>{data?.title}</h1>
+                        <div className="relative">
+                            <Button 
+                                variant="ghost" 
+                                size="icon" 
+                                onClick={handleCopyName}
+                            >
+                                <AnimatedSwapIcon 
+                                    icon={Copy} 
+                                    altIcon={Check} 
+                                    crossfade={isCopied} 
+                                />
+                            </Button>
+                        </div>
+                    </div>
                     <h2 className='text-lg text-gray-500 font-semibold  line-clamp-1' title={data?.altTitle}>{data?.altTitle}</h2>
                 </div>
                 

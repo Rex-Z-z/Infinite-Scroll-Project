@@ -64,8 +64,21 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
         <div className="flex-none flex-col w-75 h-full">
             {/* Cover */}
             {data.imageUrl? (
-                <div className='relative block w-full h-99 aspect-[2/3] overflow-hidden rounded-lg mb-3'>
+                <div className='relative block w-full h-99 aspect-[2/3] overflow-hidden rounded-lg mb-3 group'>
                     <img src={data?.imageUrl} alt={`Cover for ${data?.title}`} className='absolute h-full w-full object-cover hover:scale-110 transition-all duration-500 ease-in-out'/>
+                    
+                    {isEdit && (
+                        <div className="absolute inset-0 flex items-end justify-center p-2">
+                            <div className="flex flex-row gap-2 justify-center">
+                                <Button  variant="default" onClick={handleUploadClick} className="w-35 text-xs dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700">
+                                    <Upload className="size-3.5" /> Upload
+                                </Button>
+                                <Button  variant="default" className="w-35 ease-in-out text-xs dark:text-white bg-red-500 dark:bg-red-600 hover:bg-red-600 dark:hover:bg-red-700">
+                                    <Trash2 className="size-3.5" /> Delete
+                                </Button>
+                            </div>
+                        </div>
+                    )}
                 </div>
             ) : (
                 <>
@@ -175,7 +188,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                         ) : (
                             <>
                                 <h2 className='text-[10px] text-gray-400 font-semibold'>Chapter</h2>
-                                <h1 className='text-sm font-semibold'>{getLastReadDate()}</h1>
+                                <h1 className='text-sm font-semibold'>{data?.chapter || 'N/A'}</h1>
                             </>
                         )}
                     </div>
@@ -187,7 +200,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                     </div>
                     <div>
                         <h2 className='text-[10px] text-gray-400 font-semibold'>Last read</h2>
-                        <h1 className='text-sm font-semibold'>{data?.lastRead || 'N/A'}</h1>
+                        <h1 className='text-sm font-semibold'>{getLastReadDate()}</h1>
                     </div>
                 </div>
 
