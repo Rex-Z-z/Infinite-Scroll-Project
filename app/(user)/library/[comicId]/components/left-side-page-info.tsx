@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { ReadItem } from '@/lib/types';
 import { formatDistanceToNow } from '@/lib/utils';
-import { Book, BookOpen, Calendar, ImagePlus, Star, Trash2, Upload } from 'lucide-react';
+import { Book, BookOpen, Calendar as CalendarIcon, ImagePlus, Star, Trash2, Upload } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import LastReadDatePicker from './lastread-datepicker';
 
 const ratingColorMap: { [key: string]: string } = {
     "Absolute Cinema": "bg-blue-400 hover:bg-blue-500",
@@ -36,6 +37,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
     const [rating, setRating] = useState("");
     const [type , setType] = useState("");
     const [status, setStatus] = useState("");
+    const [date, setDate] = useState<Date | undefined>(data?.lastRead ? new Date(data.lastRead) : undefined);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -43,6 +45,14 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
         setRating(data?.rating || "");
         setType(data?.type || "");
         setStatus(data?.status || "");
+        
+        if (data?.lastRead) {
+            setDate(new Date(data.lastRead));
+        }
+    }, [data]);
+
+    useEffect(() => {
+        setDate(data?.lastRead ? new Date(data.lastRead) : undefined);
     }, [data]);
     
     const handleUploadClick = () => {
@@ -151,7 +161,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
 
                 <div className='flex flex-row gap-1.5'>
                     <div className={`p-2 rounded-md ${statusColorMap[status] || 'dark:bg-blue-600 dark:hover:bg-blue-700'}`}>
-                        <Calendar className='size-5'/>
+                        <CalendarIcon className='size-5'/>
                     </div>
                     <div className='w-full'>
                         {isEdit ? (
@@ -198,9 +208,15 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                     <div className='p-2 dark:bg-violet-600 dark:hover:bg-violet-700 rounded-md'>
                         <BookOpen className='size-5'/>
                     </div>
-                    <div>
-                        <h2 className='text-[10px] text-gray-400 font-semibold'>Last read</h2>
-                        <h1 className='text-sm font-semibold'>{getLastReadDate()}</h1>
+                    <div className='w-full'>
+                        {isEdit ? (
+                            <LastReadDatePicker date={date} setDate={setDate} />
+                        ) : (
+                            <>
+                                <h2 className='text-[10px] text-gray-400 font-semibold'>Last read</h2>
+                                <h1 className='text-sm font-semibold'>{getLastReadDate()}</h1>
+                            </>
+                        )}
                     </div>
                 </div>
 
