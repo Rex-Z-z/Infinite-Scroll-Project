@@ -128,6 +128,17 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                         </div>
                     </div>
                 )}
+
+                <div>
+                    <h1 className='text-md font-semibold mb-2.5'>Tags</h1>
+                    <div className='flex flex-row gap-1.5'>
+                        {data?.category?.map((category) => (
+                            <Badge key={category} variant="secondary" className="bg-gray-500 text-white dark:bg-gray-600 dark:hover:bg-gray-700 px-2.5 py-1.5 rounded-md">
+                                {category}
+                            </Badge>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     )

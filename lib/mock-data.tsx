@@ -14,13 +14,23 @@ export const mockReads: ReadItem[] = [
     status: "Ongoing", 
     comicStatus: "Publishing",
     rating: "Great", 
-    chapter: 12, // User is on ch 12
-    comicChapter: 150, // Latest is ch 150
+    chapter: 12, 
+    comicChapter: 150, 
     tags: ["Action", "Fantasy", "Adventure", "Martial Arts"],
-    category: ["Shonen"],
+    category: [
+      "Full Color", 
+      "Webtoon", 
+      "Based on a Novel", 
+      "Magic", 
+      "Strong Male Lead", 
+      "Male Protagonist", 
+      "Misunderstanding/s", 
+      "Nobility/Aristocracy", 
+      "Based on a Web Novel"
+    ],
     source: ["Asura Scans"],
     sourceIcon: ["/icons/asura-icon.webp"],
-    relations: [4, 7, 12] // References other IDs of the same series/sequels
+    relations: [4, 7, 12] 
   },
   { 
     id: 2, 
@@ -38,7 +48,17 @@ export const mockReads: ReadItem[] = [
     chapter: 4,
     comicChapter: 60,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: ["Seinen"],
+    category: [
+      "Webtoon", 
+      "Full Color", 
+      "21st Century", 
+      "Strong Male Lead", 
+      "Handsome Male Lead", 
+      "Male Protagonist", 
+      "Based on a Web Novel", 
+      "Age Gap", 
+      "Revenge"
+    ],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [5, 8, 10, 13]
@@ -59,7 +79,17 @@ export const mockReads: ReadItem[] = [
     chapter: 8,
     comicChapter: 45,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: ["Shonen"],
+    category: [
+      "European Ambience", 
+      "Nobility/Aristocracy", 
+      "Magic", 
+      "Strong Male Lead", 
+      "Male Protagonist", 
+      "Full Color", 
+      "Webtoon", 
+      "Based on a Novel", 
+      "Unrequited Love"
+    ],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [6, 9, 11]
@@ -68,7 +98,7 @@ export const mockReads: ReadItem[] = [
     id: 4, 
     type: "Manga", 
     imageUrl: "/pictures/image4.png", 
-    title: "A Regressor's Tale of Cultivation: The Beginning", // Modified title to imply relation
+    title: "A Regressor's Tale of Cultivation: The Beginning", 
     altTitle: "회귀수선전",
     desc: "A Korean take on the Chinese Xianxia genre. MC survives through repeated regressions to find a path to immortality.", 
     published: "2023-01-01",
@@ -78,9 +108,19 @@ export const mockReads: ReadItem[] = [
     comicStatus: "Finished",
     rating: "Good", 
     chapter: 12,
-    comicChapter: 12, // Completed, so read count matches total
+    comicChapter: 12, 
     tags: ["Action", "Fantasy", "Adventure", "Martial Arts"],
-    category: ["Seinen"],
+    category: [
+      "Full Color", 
+      "Webtoon", 
+      "Based on a Novel", 
+      "Magic", 
+      "Strong Male Lead", 
+      "Male Protagonist", 
+      "Misunderstanding/s", 
+      "Nobility/Aristocracy", 
+      "Collection of Stories"
+    ],
     source: ["Asura Scans"],
     sourceIcon: ["/icons/asura-icon.webp"],
     relations: [1, 7, 12]
@@ -101,7 +141,17 @@ export const mockReads: ReadItem[] = [
     chapter: 4,
     comicChapter: 88,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: ["Shonen"],
+    category: [
+      "Webtoon", 
+      "Full Color", 
+      "21st Century", 
+      "Strong Male Lead", 
+      "Handsome Male Lead", 
+      "Male Protagonist", 
+      "Based on a Web Novel", 
+      "High School Student/s", 
+      "Love Triangle/s"
+    ],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [2, 8, 10, 13]
@@ -122,7 +172,17 @@ export const mockReads: ReadItem[] = [
     chapter: 8,
     comicChapter: 100,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: ["Shonen"],
+    category: [
+      "European Ambience", 
+      "Nobility/Aristocracy", 
+      "Magic", 
+      "Strong Male Lead", 
+      "Male Protagonist", 
+      "Full Color", 
+      "Webtoon", 
+      "Based on a Novel", 
+      "Childhood Friend/s"
+    ],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [3, 9, 11]
@@ -143,7 +203,17 @@ export const mockReads: ReadItem[] = [
     chapter: 12,
     comicChapter: 200,
     tags: ["Action", "Fantasy", "Adventure", "Martial Arts"],
-    category: ["Seinen"],
+    category: [
+      "Full Color", 
+      "Webtoon", 
+      "Based on a Novel", 
+      "Magic", 
+      "Strong Male Lead", 
+      "Male Protagonist", 
+      "Misunderstanding/s", 
+      "Nobility/Aristocracy", 
+      "University/Post-Secondary Student/s"
+    ],
     source: ["Asura Scans"],
     sourceIcon: ["/icons/asura-icon.webp"],
     relations: [1, 4, 12]
@@ -164,7 +234,17 @@ export const mockReads: ReadItem[] = [
     chapter: 4,
     comicChapter: 110,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: ["Shonen"],
+    category: [
+      "Webtoon", 
+      "Full Color", 
+      "21st Century", 
+      "Strong Male Lead", 
+      "Handsome Male Lead", 
+      "Male Protagonist", 
+      "Based on a Web Novel", 
+      "Childhood Friend/s", 
+      "High School"
+    ],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [2, 5, 10, 13]
@@ -185,7 +265,17 @@ export const mockReads: ReadItem[] = [
     chapter: 8,
     comicChapter: 8,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: ["Shonen"],
+    category: [
+      "European Ambience", 
+      "Nobility/Aristocracy", 
+      "Magic", 
+      "Strong Male Lead", 
+      "Male Protagonist", 
+      "Full Color", 
+      "Webtoon", 
+      "Based on a Novel", 
+      "Unrequited Love"
+    ],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [3, 6, 11]
@@ -206,7 +296,17 @@ export const mockReads: ReadItem[] = [
     chapter: 4,
     comicChapter: 125,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: ["Shonen"],
+    category: [
+      "Webtoon", 
+      "Full Color", 
+      "21st Century", 
+      "Strong Male Lead", 
+      "Handsome Male Lead", 
+      "Male Protagonist", 
+      "Based on a Web Novel", 
+      "Age Gap", 
+      "Glasses-Wearing Male Lead"
+    ],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [2, 5, 8, 13]
@@ -227,7 +327,17 @@ export const mockReads: ReadItem[] = [
     chapter: 8,
     comicChapter: 115,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: ["Shonen"],
+    category: [
+      "European Ambience", 
+      "Nobility/Aristocracy", 
+      "Magic", 
+      "Strong Male Lead", 
+      "Male Protagonist", 
+      "Full Color", 
+      "Webtoon", 
+      "Based on a Novel", 
+      "Older Male Younger Female"
+    ],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [3, 6, 9]
@@ -248,7 +358,17 @@ export const mockReads: ReadItem[] = [
     chapter: 12,
     comicChapter: 215,
     tags: ["Action", "Fantasy", "Adventure", "Martial Arts"],
-    category: ["Seinen"],
+    category: [
+      "Full Color", 
+      "Webtoon", 
+      "Based on a Novel", 
+      "Magic", 
+      "Strong Male Lead", 
+      "Male Protagonist", 
+      "Misunderstanding/s", 
+      "Nobility/Aristocracy", 
+      "Web Comic"
+    ],
     source: ["Asura Scans"],
     sourceIcon: ["/icons/asura-icon.webp"],
     relations: [1, 4, 7]
@@ -269,7 +389,17 @@ export const mockReads: ReadItem[] = [
     chapter: 4,
     comicChapter: 130,
     tags: ["Action", "Fantasy", "Adventure"],
-    category: ["Shonen"],
+    category: [
+      "Webtoon", 
+      "Full Color", 
+      "21st Century", 
+      "Strong Male Lead", 
+      "Handsome Male Lead", 
+      "Male Protagonist", 
+      "Based on a Web Novel", 
+      "Older Female Younger Male", 
+      "Strong Female Lead"
+    ],
     source: ["Webtoon", "Asura Scans"],
     sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
     relations: [2, 5, 8, 10]
