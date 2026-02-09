@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
+import Link from 'next/link';
 import { ReadItem } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Check, Copy, Image } from 'lucide-react';
 import { AnimatedSwapIcon } from '@/components/ui/animated-swap-icon';
+import { mockReads } from '@/lib/mock-data';
 
 const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -18,6 +20,8 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
 
     const TRUNCATE_LENGTH = 350; 
     const needsTruncation = data?.desc && data.desc.length > TRUNCATE_LENGTH;
+
+    const relatedComics = mockReads.filter(comic => data?.relations?.includes(comic.id));
     
     return (
         <div className='flex flex-col w-full h-full overflow-y-auto custom-scrollbar pr-4'>
@@ -94,16 +98,36 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                     </div>
                 </div>
 
-                <div>
-                    <h1 className='text-md font-semibold mb-1'>Relation</h1>
-                    <div className='flex gap-2'>
-                        {[...Array(4)].map((_, index) => (
-                            <div key={index} className='flex w-45 h-60 items-center justify-center bg-gray-700 hover:bg-gray-800 rounded-md shadow-lg'>
-                                <Image size={50} className='text-gray-500' />
-                            </div>
-                        ))}
+                {/* Relation */}
+                {relatedComics.length > 0 && (
+                    <div>
+                        <h1 className='text-md font-semibold mb-1'>Relation</h1>
+                        <div className='flex flex-row gap-3 overflow-x-auto pb-2 scrollbar-hide'>
+                            {relatedComics.map((comic) => (
+                                <Link key={comic.id} href={`/library/${comic.id}`}>
+                                    <div key={comic.id} className='flex-none w-32 flex flex-col gap-2 group cursor-pointer'>
+                                        <div className='relative w-full aspect-[2/3] rounded-md overflow-hidden bg-gray-800 shadow-md'>
+                                            {comic.imageUrl ? (
+                                                <img
+                                                    src={comic.imageUrl}
+                                                    alt={comic.title}
+                                                    className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-110'
+                                                />
+                                            ) : (
+                                                <div className='flex h-full items-center justify-center'>
+                                                    <Image className='text-gray-500' />
+                                                </div>
+                                            )}
+                                        </div>
+                                        <span className='text-xs font-medium text-gray-400 group-hover:text-blue-500 line-clamp-2 transition-colors'>
+                                            {comic.title}
+                                        </span>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     )

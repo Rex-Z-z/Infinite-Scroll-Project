@@ -1,9 +1,17 @@
 import React from 'react'
-import { Image } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { X } from 'lucide-react';
 
 const SwitchComicImage = () => {
+    const images = [
+        "/pictures/image.png",
+        "/pictures/image2.png",
+        "/pictures/image3.png",
+        "/pictures/image4.png",
+        "/pictures/image5.png",
+    ];
+
     return (
         <DialogContent className="sm:max-w-xl">
             <DialogHeader>
@@ -13,9 +21,16 @@ const SwitchComicImage = () => {
                 </DialogDescription>
             </DialogHeader>
             <div className="grid grid-cols-3 gap-1">
-                {[...Array(5)].map((_, index) => (
-                    <div key={index} className='flex h-60 items-center justify-center bg-gray-700 hover:bg-gray-800 rounded-md shadow-lg'>
-                        <Image size={25} className='text-gray-500' />
+                {images.map((src, index) => (
+                    <div key={index} className='relative flex h-60 items-center justify-center bg-gray-700 hover:bg-gray-800 rounded-md shadow-lg overflow-hidden group cursor-pointer'>
+                        <img 
+                            src={src} 
+                            alt={`Cover option ${index + 1}`} 
+                            className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-110' 
+                        />
+                        <Button variant="outline" size="icon" className="absolute size-8 top-2 right-2 bg-gray-500 dark:bg-gray-500/60 hover:bg-gray-600 dark:hover:bg-gray-500/80 focus:ring-gray-400 dark:focus:ring-gray-500 hover:cursor-pointer rounded-full">
+                            <X />
+                        </Button>
                     </div>
                 ))}
             </div>
