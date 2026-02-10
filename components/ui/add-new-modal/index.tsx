@@ -10,7 +10,7 @@ const AddNewModal = ({ comicData }: { comicData: ReadItem | null }) => {
     return (
         <DialogContent>
             <div className='flex flex-row gap-3'>
-                <ImageUploader initialImageUrl={comicData?.imageUrl || null} comicData={comicData} />
+                <ImageUploader initialImageUrl={comicData?.coverImage || null} comicData={comicData} />
             </div>
             
             <ComicForm comicData={comicData} />

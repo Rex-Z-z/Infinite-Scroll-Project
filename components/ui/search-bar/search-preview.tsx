@@ -74,7 +74,7 @@ const SearchPreview = ({
                                         {/* Image Thumbnail */}
                                         <div className="relative w-24 h-28 shrink-0 overflow-hidden rounded">
                                             <Image 
-                                            src={item.imageUrl} 
+                                            src={item.coverImage} 
                                             alt={item.title} 
                                             fill 
                                             className="object-cover" 

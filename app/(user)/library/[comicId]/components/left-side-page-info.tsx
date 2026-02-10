@@ -80,13 +80,15 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
     return (
         <div className="flex-none flex-col w-75 h-full overflow-y-auto custom-scrollbar pr-1">
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-                <SwitchComicImage />
+                <SwitchComicImage currentCover={data?.coverImage} availableImages={data?.availableImages} onCoverUpdate={function (newCover: string): void {
+                    throw new Error('Function not implemented.');
+                } } />
             </Dialog>
             
             {/* Cover */}
             <div className='relative block w-full h-99 aspect-[2/3] rounded-md overflow-hidden mb-3 group'>
-                {data.imageUrl? (
-                    <img src={data?.imageUrl} alt={`Cover for ${data?.title}`} className='absolute h-full w-full object-cover hover:scale-110 transition-all duration-500 ease-in-out'/>
+                {data.coverImage? (
+                    <img src={data?.coverImage} alt={`Cover for ${data?.title}`} className='absolute h-full w-full object-cover hover:scale-110 transition-all duration-500 ease-in-out'/>
                 ) : (
                     <>
                         <input type="file" ref={fileInputRef} className="hidden" />

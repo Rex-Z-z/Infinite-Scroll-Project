@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from '@/components/ui/button';
 import { DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { X } from 'lucide-react';
+import { X, Check } from 'lucide-react'; // Added Check icon for selection state
 
-const SwitchComicImage = () => {
-    const images = [
-        "/pictures/image.png",
-        "/pictures/image2.png",
-        "/pictures/image3.png",
-        "/pictures/image4.png",
-        "/pictures/image5.png",
-    ];
+interface SwitchComicImageProps {
+    currentCover: string;
+    availableImages: string[];
+    onCoverUpdate: (newCover: string) => void;
+}
+
+const SwitchComicImage = ({ currentCover, availableImages, onCoverUpdate }: SwitchComicImageProps) => {
+    const [selectedImage, setSelectedImage] = useState(currentCover);
+
+    const handleSave = () => {
+        onCoverUpdate(selectedImage);
+    };
 
     return (
         <DialogContent className="sm:max-w-xl">
@@ -20,25 +24,35 @@ const SwitchComicImage = () => {
                     Select a cover image for your comic
                 </DialogDescription>
             </DialogHeader>
-            <div className="grid grid-cols-3 gap-1">
-                {images.map((src, index) => (
-                    <div key={index} className='relative flex h-60 items-center justify-center bg-gray-700 hover:bg-gray-800 rounded-md shadow-lg overflow-hidden group cursor-pointer'>
+            <div className="grid grid-cols-3 gap-2">
+                {availableImages.map((src, index) => (
+                    <div 
+                        key={index} 
+                        onClick={() => setSelectedImage(src)}
+                        className={`relative flex h-60 items-center justify-center rounded-md shadow-lg overflow-hidden group cursor-pointer border-4 ${selectedImage === src ? 'border-blue-500' : 'border-transparent'}`}
+                    >
                         <img 
                             src={src} 
                             alt={`Cover option ${index + 1}`} 
                             className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-110' 
                         />
-                        <Button variant="outline" size="icon" className="absolute size-8 top-2 right-2 bg-gray-500 dark:bg-gray-500/60 hover:bg-gray-600 dark:hover:bg-gray-500/80 focus:ring-gray-400 dark:focus:ring-gray-500 hover:cursor-pointer rounded-full">
-                            <X />
-                        </Button>
+                        {selectedImage === src && (
+                            <div className="absolute top-2 right-2 bg-blue-500 rounded-full p-1">
+                                <Check className="text-white size-4" />
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>
             <DialogFooter className="sm:justify-start">
                 <DialogClose asChild>
-                    <Button type="button">Close</Button>
+                    <Button type="button" variant="outline">Close</Button>
                 </DialogClose>
-                <Button variant="default" className='text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 hover:cursor-pointer'>Upload</Button>
+                <DialogClose asChild>
+                    <Button type="button" onClick={handleSave} className='bg-blue-500 hover:bg-blue-600 text-white'>
+                        Save Changes
+                    </Button>
+                </DialogClose>
             </DialogFooter>
         </DialogContent>
     )

@@ -107,9 +107,9 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                                 <Link key={comic.id} href={`/library/${comic.id}`}>
                                     <div key={comic.id} className='flex-none w-32 flex flex-col gap-2 group cursor-pointer'>
                                         <div className='relative w-full aspect-[2/3] rounded-md overflow-hidden bg-gray-800 shadow-md'>
-                                            {comic.imageUrl ? (
+                                            {comic.coverImage ? (
                                                 <img
-                                                    src={comic.imageUrl}
+                                                    src={comic.coverImage}
                                                     alt={comic.title}
                                                     className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-110'
                                                 />
