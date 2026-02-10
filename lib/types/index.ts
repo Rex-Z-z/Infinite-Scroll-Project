@@ -1,7 +1,7 @@
 export interface ReadItem {
   id: number;
   type: string;
-  imageUrl: string;
+  imageUrl: string[];
   title: string;
   altTitle: string;
   desc: string;

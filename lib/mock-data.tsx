@@ -4,7 +4,7 @@ export const mockReads: ReadItem[] = [
   { 
     id: 1, 
     type: "Manga", 
-    imageUrl: "", 
+    imageUrl: ["/pictures/image.png", "/pictures/image2.png"], 
     title: "A Regressor's Tale of Cultivation", 
     altTitle: "회귀수선전",
     desc: "It's a Korean take on the Chinese Xianxia genre. MC and his work colleagues suddenly get dropped into a world of Immortal Cultivation.", 
@@ -35,7 +35,7 @@ export const mockReads: ReadItem[] = [
   { 
     id: 2, 
     type: "Manhua", 
-    imageUrl: "/pictures/image2.png", 
+    imageUrl: ["/pictures/image2.png", "/pictures/image3.png"], 
     title: "The Regressed Mercenary Has a Plan", 
     altTitle: "The Regressed Mercenary's Machinations",
     desc: "Cecil Perdium, the Mercenary King, was killed in battle before he could avenge his family. Suddenly waking up as his teenage self.", 
@@ -66,7 +66,7 @@ export const mockReads: ReadItem[] = [
   { 
     id: 3, 
     type: "Manhwa",  
-    imageUrl: "/pictures/image3.png", 
+    imageUrl: ["/pictures/image3.png", "/pictures/image4.png"], 
     title: "The Knight Who Only Lives Today", 
     altTitle: "Eternally Regressing Knight",
     desc: "Is dying repeatedly a blessing? Enkrid's life-long dream of becoming a knight looked to be forever out of reach.", 
@@ -97,7 +97,7 @@ export const mockReads: ReadItem[] = [
   { 
     id: 4, 
     type: "Manga", 
-    imageUrl: "/pictures/image4.png", 
+    imageUrl: ["/pictures/image4.png", "/pictures/image5.png"], 
     title: "A Regressor's Tale of Cultivation: The Beginning", 
     altTitle: "회귀수선전",
     desc: "A Korean take on the Chinese Xianxia genre. MC survives through repeated regressions to find a path to immortality.", 
@@ -128,7 +128,7 @@ export const mockReads: ReadItem[] = [
   { 
     id: 5, 
     type: "Manhua", 
-    imageUrl: "/pictures/image2.png", 
+    imageUrl: ["/pictures/image2.png", "/pictures/image.png"], 
     title: "The Regressed Mercenary Has a Plan (Season 2)", 
     altTitle: "The Regressed Mercenary's Machinations",
     desc: "Cecil Perdium, the Mercenary King, uses his future knowledge to rebuild his family's legacy.", 
@@ -159,7 +159,7 @@ export const mockReads: ReadItem[] = [
   { 
     id: 6, 
     type: "Manhwa", 
-    imageUrl: "/pictures/image.png", 
+    imageUrl: ["/pictures/image.png", "/pictures/image3.png"], 
     title: "The Knight Who Only Lives Today: Reborn", 
     altTitle: "Eternally Regressing Knight",
     desc: "Enkrid finds himself in a time loop, dying every day and waking up at the start to try again.", 
@@ -190,7 +190,7 @@ export const mockReads: ReadItem[] = [
   { 
     id: 7, 
     type: "Manga", 
-    imageUrl: "/pictures/image3.png", 
+    imageUrl: ["/pictures/image3.png", "/pictures/image2.png"], 
     title: "A Regressor's Tale of Cultivation (Side Story)", 
     altTitle: "회귀수선전",
     desc: "Struggling through the harsh world of cultivation without innate talent.", 
@@ -221,7 +221,7 @@ export const mockReads: ReadItem[] = [
   { 
     id: 8, 
     type: "Manhua", 
-    imageUrl: "/pictures/image.png", 
+    imageUrl: ["/pictures/image.png", "/pictures/image4.png"], 
     title: "The Regressed Mercenary: Origins", 
     altTitle: "The Regressed Mercenary's Machinations",
     desc: "Cecil's journey to becoming the strongest mercenary through regression.", 
@@ -252,7 +252,7 @@ export const mockReads: ReadItem[] = [
   { 
     id: 9, 
     type: "Manhwa", 
-    imageUrl: "/pictures/image4.png", 
+    imageUrl: ["/pictures/image4.png", "/pictures/image5.png"], 
     title: "The Knight Who Only Lives Today (Finale)", 
     altTitle: "Eternally Regressing Knight",
     desc: "Final stand of the knight Enkrid as he reaches the end of his cycle.", 
@@ -283,7 +283,7 @@ export const mockReads: ReadItem[] = [
   { 
     id: 10, 
     type: "Manhua", 
-    imageUrl: "/pictures/image2.png", 
+    imageUrl: ["/pictures/image2.png", "/pictures/image3.png"], 
     title: "The Regressed Mercenary: Final War", 
     altTitle: "The Regressed Mercenary's Machinations",
     desc: "High stakes action as Cecil's plan enters the final phase.", 
@@ -314,7 +314,7 @@ export const mockReads: ReadItem[] = [
   { 
     id: 11, 
     type: "Manhwa", 
-    imageUrl: "/pictures/image3.png", 
+    imageUrl: ["/pictures/image3.png", "/pictures/image.png"], 
     title: "The Knight Who Only Lives Today: Gaiden", 
     altTitle: "Eternally Regressing Knight",
     desc: "Enkrid faces a new challenger in the latest loop.", 
@@ -345,7 +345,7 @@ export const mockReads: ReadItem[] = [
   { 
     id: 12, 
     type: "Manga", 
-    imageUrl: "/pictures/image4.png", 
+    imageUrl: ["/pictures/image4.png", "/pictures/image2.png"], 
     title: "A Regressor's Tale: New Arc", 
     altTitle: "회귀수선전",
     desc: "New arc begins for the regressor.", 
@@ -376,7 +376,7 @@ export const mockReads: ReadItem[] = [
   { 
     id: 13, 
     type: "Manhua", 
-    imageUrl: "/pictures/image2.png", 
+    imageUrl: ["/pictures/image2.png", "/pictures/image3.png"], 
     title: "The Regressed Mercenary: Epilogue", 
     altTitle: "The Regressed Mercenary's Machinations",
     desc: "Cecil's power growth continues to shock the world.", 
