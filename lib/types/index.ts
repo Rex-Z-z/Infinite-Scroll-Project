@@ -18,5 +18,6 @@ export interface ReadItem {
   category: string[];
   source: string[];
   sourceIcon: string[];
+  sourceUrl: string[];
   relations: number[];
 }

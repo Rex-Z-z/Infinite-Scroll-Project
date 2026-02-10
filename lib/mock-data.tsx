@@ -19,18 +19,13 @@ export const mockReads: ReadItem[] = [
     comicChapter: 150, 
     tags: ["Action", "Fantasy", "Adventure", "Martial Arts"],
     category: [
-      "Full Color", 
-      "Webtoon", 
-      "Based on a Novel", 
-      "Magic", 
-      "Strong Male Lead", 
-      "Male Protagonist", 
-      "Misunderstanding/s", 
-      "Nobility/Aristocracy", 
-      "Based on a Web Novel"
+      "Full Color", "Webtoon", "Based on a Novel", "Magic", 
+      "Strong Male Lead", "Male Protagonist", "Misunderstanding/s", 
+      "Nobility/Aristocracy", "Based on a Web Novel"
     ],
     source: ["Asura Scans"],
-    sourceIcon: ["/icons/asura-icon.webp"],
+    sourceIcon: ["/icons/asura-icon.png"],
+    sourceUrl: ["https://asuratoon.com"],
     relations: [4, 7, 12] 
   },
   { 
@@ -51,18 +46,16 @@ export const mockReads: ReadItem[] = [
     comicChapter: 60,
     tags: ["Action", "Fantasy", "Adventure"],
     category: [
-      "Webtoon", 
-      "Full Color", 
-      "21st Century", 
-      "Strong Male Lead", 
-      "Handsome Male Lead", 
-      "Male Protagonist", 
-      "Based on a Web Novel", 
-      "Age Gap", 
-      "Revenge"
+      "Webtoon", "Full Color", "21st Century", "Strong Male Lead", 
+      "Handsome Male Lead", "Male Protagonist", "Based on a Web Novel", 
+      "Age Gap", "Revenge"
     ],
     source: ["Webtoon", "Asura Scans"],
-    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
+    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.png"],
+    sourceUrl: [
+      "https://webtoons.com",
+      "https://asuratoon.com"
+    ],
     relations: [5, 8, 10, 13]
   },
   { 
@@ -83,18 +76,16 @@ export const mockReads: ReadItem[] = [
     comicChapter: 45,
     tags: ["Action", "Fantasy", "Adventure"],
     category: [
-      "European Ambience", 
-      "Nobility/Aristocracy", 
-      "Magic", 
-      "Strong Male Lead", 
-      "Male Protagonist", 
-      "Full Color", 
-      "Webtoon", 
-      "Based on a Novel", 
-      "Unrequited Love"
+      "European Ambience", "Nobility/Aristocracy", "Magic", 
+      "Strong Male Lead", "Male Protagonist", "Full Color", 
+      "Webtoon", "Based on a Novel", "Unrequited Love"
     ],
     source: ["Webtoon", "Asura Scans"],
-    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
+    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.png"],
+    sourceUrl: [
+      "https://webtoons.com",
+      "https://asuratoon.com"
+    ],
     relations: [6, 9, 11]
   },
   { 
@@ -115,18 +106,13 @@ export const mockReads: ReadItem[] = [
     comicChapter: 12, 
     tags: ["Action", "Fantasy", "Adventure", "Martial Arts"],
     category: [
-      "Full Color", 
-      "Webtoon", 
-      "Based on a Novel", 
-      "Magic", 
-      "Strong Male Lead", 
-      "Male Protagonist", 
-      "Misunderstanding/s", 
-      "Nobility/Aristocracy", 
-      "Collection of Stories"
+      "Full Color", "Webtoon", "Based on a Novel", "Magic", 
+      "Strong Male Lead", "Male Protagonist", "Misunderstanding/s", 
+      "Nobility/Aristocracy", "Collection of Stories"
     ],
     source: ["Asura Scans"],
-    sourceIcon: ["/icons/asura-icon.webp"],
+    sourceIcon: ["/icons/asura-icon.png"],
+    sourceUrl: ["https://asuratoon.com"],
     relations: [1, 7, 12]
   },
   { 
@@ -147,18 +133,16 @@ export const mockReads: ReadItem[] = [
     comicChapter: 88,
     tags: ["Action", "Fantasy", "Adventure"],
     category: [
-      "Webtoon", 
-      "Full Color", 
-      "21st Century", 
-      "Strong Male Lead", 
-      "Handsome Male Lead", 
-      "Male Protagonist", 
-      "Based on a Web Novel", 
-      "High School Student/s", 
-      "Love Triangle/s"
+      "Webtoon", "Full Color", "21st Century", "Strong Male Lead", 
+      "Handsome Male Lead", "Male Protagonist", "Based on a Web Novel", 
+      "High School Student/s", "Love Triangle/s"
     ],
     source: ["Webtoon", "Asura Scans"],
-    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
+    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.png"],
+    sourceUrl: [
+      "https://webtoons.com",
+      "https://asuratoon.com"
+    ],
     relations: [2, 8, 10, 13]
   },
   { 
@@ -179,18 +163,16 @@ export const mockReads: ReadItem[] = [
     comicChapter: 100,
     tags: ["Action", "Fantasy", "Adventure"],
     category: [
-      "European Ambience", 
-      "Nobility/Aristocracy", 
-      "Magic", 
-      "Strong Male Lead", 
-      "Male Protagonist", 
-      "Full Color", 
-      "Webtoon", 
-      "Based on a Novel", 
-      "Childhood Friend/s"
+      "European Ambience", "Nobility/Aristocracy", "Magic", 
+      "Strong Male Lead", "Male Protagonist", "Full Color", 
+      "Webtoon", "Based on a Novel", "Childhood Friend/s"
     ],
     source: ["Webtoon", "Asura Scans"],
-    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
+    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.png"],
+    sourceUrl: [
+      "https://webtoons.com",
+      "https://asuratoon.com"
+    ],
     relations: [3, 9, 11]
   },
   { 
@@ -211,18 +193,13 @@ export const mockReads: ReadItem[] = [
     comicChapter: 200,
     tags: ["Action", "Fantasy", "Adventure", "Martial Arts"],
     category: [
-      "Full Color", 
-      "Webtoon", 
-      "Based on a Novel", 
-      "Magic", 
-      "Strong Male Lead", 
-      "Male Protagonist", 
-      "Misunderstanding/s", 
-      "Nobility/Aristocracy", 
-      "University/Post-Secondary Student/s"
+      "Full Color", "Webtoon", "Based on a Novel", "Magic", 
+      "Strong Male Lead", "Male Protagonist", "Misunderstanding/s", 
+      "Nobility/Aristocracy", "University/Post-Secondary Student/s"
     ],
     source: ["Asura Scans"],
-    sourceIcon: ["/icons/asura-icon.webp"],
+    sourceIcon: ["/icons/asura-icon.png"],
+    sourceUrl: ["https://asuratoon.com"],
     relations: [1, 4, 12]
   },
   { 
@@ -243,18 +220,16 @@ export const mockReads: ReadItem[] = [
     comicChapter: 110,
     tags: ["Action", "Fantasy", "Adventure"],
     category: [
-      "Webtoon", 
-      "Full Color", 
-      "21st Century", 
-      "Strong Male Lead", 
-      "Handsome Male Lead", 
-      "Male Protagonist", 
-      "Based on a Web Novel", 
-      "Childhood Friend/s", 
-      "High School"
+      "Webtoon", "Full Color", "21st Century", "Strong Male Lead", 
+      "Handsome Male Lead", "Male Protagonist", "Based on a Web Novel", 
+      "Childhood Friend/s", "High School"
     ],
     source: ["Webtoon", "Asura Scans"],
-    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
+    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.png"],
+    sourceUrl: [
+      "https://webtoons.com",
+      "https://asuratoon.com"
+    ],
     relations: [2, 5, 10, 13]
   },
   { 
@@ -275,18 +250,16 @@ export const mockReads: ReadItem[] = [
     comicChapter: 8,
     tags: ["Action", "Fantasy", "Adventure"],
     category: [
-      "European Ambience", 
-      "Nobility/Aristocracy", 
-      "Magic", 
-      "Strong Male Lead", 
-      "Male Protagonist", 
-      "Full Color", 
-      "Webtoon", 
-      "Based on a Novel", 
-      "Unrequited Love"
+      "European Ambience", "Nobility/Aristocracy", "Magic", 
+      "Strong Male Lead", "Male Protagonist", "Full Color", 
+      "Webtoon", "Based on a Novel", "Unrequited Love"
     ],
     source: ["Webtoon", "Asura Scans"],
-    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
+    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.png"],
+    sourceUrl: [
+      "https://webtoons.com",
+      "https://asuratoon.com"
+    ],
     relations: [3, 6, 11]
   },
   { 
@@ -307,18 +280,16 @@ export const mockReads: ReadItem[] = [
     comicChapter: 125,
     tags: ["Action", "Fantasy", "Adventure"],
     category: [
-      "Webtoon", 
-      "Full Color", 
-      "21st Century", 
-      "Strong Male Lead", 
-      "Handsome Male Lead", 
-      "Male Protagonist", 
-      "Based on a Web Novel", 
-      "Age Gap", 
-      "Glasses-Wearing Male Lead"
+      "Webtoon", "Full Color", "21st Century", "Strong Male Lead", 
+      "Handsome Male Lead", "Male Protagonist", "Based on a Web Novel", 
+      "Age Gap", "Glasses-Wearing Male Lead"
     ],
     source: ["Webtoon", "Asura Scans"],
-    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
+    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.png"],
+    sourceUrl: [
+      "https://webtoons.com",
+      "https://asuratoon.com"
+    ],
     relations: [2, 5, 8, 13]
   },
   { 
@@ -339,18 +310,16 @@ export const mockReads: ReadItem[] = [
     comicChapter: 115,
     tags: ["Action", "Fantasy", "Adventure"],
     category: [
-      "European Ambience", 
-      "Nobility/Aristocracy", 
-      "Magic", 
-      "Strong Male Lead", 
-      "Male Protagonist", 
-      "Full Color", 
-      "Webtoon", 
-      "Based on a Novel", 
-      "Older Male Younger Female"
+      "European Ambience", "Nobility/Aristocracy", "Magic", 
+      "Strong Male Lead", "Male Protagonist", "Full Color", 
+      "Webtoon", "Based on a Novel", "Older Male Younger Female"
     ],
     source: ["Webtoon", "Asura Scans"],
-    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
+    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.png"],
+    sourceUrl: [
+      "https://webtoons.com",
+      "https://asuratoon.com"
+    ],
     relations: [3, 6, 9]
   },
   { 
@@ -371,18 +340,13 @@ export const mockReads: ReadItem[] = [
     comicChapter: 215,
     tags: ["Action", "Fantasy", "Adventure", "Martial Arts"],
     category: [
-      "Full Color", 
-      "Webtoon", 
-      "Based on a Novel", 
-      "Magic", 
-      "Strong Male Lead", 
-      "Male Protagonist", 
-      "Misunderstanding/s", 
-      "Nobility/Aristocracy", 
-      "Web Comic"
+      "Full Color", "Webtoon", "Based on a Novel", "Magic", 
+      "Strong Male Lead", "Male Protagonist", "Misunderstanding/s", 
+      "Nobility/Aristocracy", "Web Comic"
     ],
     source: ["Asura Scans"],
-    sourceIcon: ["/icons/asura-icon.webp"],
+    sourceIcon: ["/icons/asura-icon.png"],
+    sourceUrl: ["https://asuratoon.com"],
     relations: [1, 4, 7]
   },
   { 
@@ -403,18 +367,16 @@ export const mockReads: ReadItem[] = [
     comicChapter: 130,
     tags: ["Action", "Fantasy", "Adventure"],
     category: [
-      "Webtoon", 
-      "Full Color", 
-      "21st Century", 
-      "Strong Male Lead", 
-      "Handsome Male Lead", 
-      "Male Protagonist", 
-      "Based on a Web Novel", 
-      "Older Female Younger Male", 
-      "Strong Female Lead"
+      "Webtoon", "Full Color", "21st Century", "Strong Male Lead", 
+      "Handsome Male Lead", "Male Protagonist", "Based on a Web Novel", 
+      "Older Female Younger Male", "Strong Female Lead"
     ],
     source: ["Webtoon", "Asura Scans"],
-    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.webp"],
+    sourceIcon: ["/icons/webtoon-icon.png", "/icons/asura-icon.png"],
+    sourceUrl: [
+      "https://webtoons.com",
+      "https://asuratoon.com"
+    ],
     relations: [2, 5, 8, 10]
   },
 ];

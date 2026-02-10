@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button';
 import { DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { X, Check } from 'lucide-react'; // Added Check icon for selection state
+import { Check } from 'lucide-react';
 
 interface SwitchComicImageProps {
     currentCover: string;

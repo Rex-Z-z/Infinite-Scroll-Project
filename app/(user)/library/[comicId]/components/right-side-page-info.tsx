@@ -4,18 +4,25 @@ import { ReadItem } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Check, Copy, Image } from 'lucide-react';
+import { Check, Copy, Image, Plus } from 'lucide-react';
 import { AnimatedSwapIcon } from '@/components/ui/animated-swap-icon';
 import { mockReads } from '@/lib/mock-data';
+import { Dialog } from '@/components/ui/dialog';
+import SourceEdit from './source-edit';
 
 const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [isCopied, setIsCopied] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleCopyName = () => {
         navigator.clipboard.writeText(data?.title);
         setIsCopied(true);
         setTimeout(() => setIsCopied(false), 2000);
+    };
+
+    const handleSourceEdit = () => {
+        setIsModalOpen(true);
     };
 
     const TRUNCATE_LENGTH = 350; 
@@ -25,6 +32,10 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
     
     return (
         <div className='flex flex-col w-full h-full overflow-y-auto custom-scrollbar pr-4'>
+            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                <SourceEdit source={data?.source} sourceIcon={data?.sourceIcon} sourceUrl={data?.sourceUrl} />
+            </Dialog>
+
             {/* Top Section */}
             <div className='flex flex-col gap-2'>
                 {/* Title */}
@@ -84,17 +95,25 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                 {/* Source */}
                 <div className='mt-2'>
                     <h1 className='text-md font-semibold mb-1'>Source</h1>
-                    <div className='flex flex-row gap-1.5'>
-                    {data?.source?.map((source, index) => (
-                        <Badge key={source} variant="secondary" className="px-2.5 py-1.5 rounded-2xl">
-                            <img 
-                                src={data.sourceIcon[index]} 
-                                alt={`${source} logo`} 
-                                className='size-4'
-                            />
-                            {source}
-                        </Badge>
-                    ))}
+                    <div className='flex gap-2'>
+                        <div className='flex flex-row gap-1.5'>
+                            {data?.source?.map((source, index) => (
+                                <Link target='_blank' href={data.sourceUrl[index]} key={source}>
+                                    <Badge key={source} variant="secondary" className="px-2.5 py-1.5 hover:bg-gray-700 rounded-2xl">
+                                        <img
+                                            src={data.sourceIcon[index]}
+                                            alt={`${source} logo`}
+                                            className='size-4 rounded-full'
+                                        />
+                                        {source}
+                                    </Badge>
+                                </Link>
+                            ))}
+                        </div>
+                        
+                        <Button onClick={handleSourceEdit} size="icon" variant="secondary" className='rounded-full'>
+                            <Plus />
+                        </Button>
                     </div>
                 </div>
 
@@ -129,6 +148,7 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                     </div>
                 )}
 
+                {/* Tags */}
                 <div>
                     <h1 className='text-md font-semibold mb-2.5'>Tags</h1>
                     <div className='flex flex-row gap-1.5'>

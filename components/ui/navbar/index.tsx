@@ -83,8 +83,8 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
                                 <DropdownMenuItem className='hover:cursor-pointer' asChild>
                                     <a href="/profile"> <CircleUserRound className='text-white'/> Profile </a>
                                 </DropdownMenuItem>
-                                <DropdownMenuItem>
-                                    <Settings className='text-white'/> Setting
+                                <DropdownMenuItem asChild>
+                                    <a href="/setting"> <Settings className='text-white'/> Setting </a>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem className='hover:cursor-pointer' variant='destructive' asChild>
                                     <a href="/login"> <LogOut className='text-white'/> Logout </a>
