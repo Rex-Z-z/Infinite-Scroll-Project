@@ -1,8 +1,8 @@
 import React from 'react'
 import PageInfo from './components/page-info'
 
-const page = ({ params }: { params: { comicId: string } }) => {
-  const { comicId } = params;
+const page = async ({ params }: { params: Promise<{ comicId: string }> }) => {
+  const { comicId } = await params;
   
   return (
     <PageInfo comicId={comicId} />

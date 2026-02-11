@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import "../globals.css";
 import NavBar from "@/components/ui/navbar";
-import { ThemeProvider } from "@/components/theme-provider"; //
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "",
