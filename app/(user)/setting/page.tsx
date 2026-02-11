@@ -3,7 +3,8 @@ import React from 'react'
 const page = () => {
     return (
         <div className='flex flex-col w-full gap-4'>
-            <div className='flex flex-col gap-3'>
+            {/* Account Section */}
+            <div id="account" className='flex flex-col gap-3 scroll-mt-24'>
                 <h1 className='text-2xl font-semibold'>Account</h1>
                 <div className="flex flex-1 flex-col gap-4">
                     {Array.from({ length: 6 }).map((_, index) => (
@@ -12,7 +13,6 @@ const page = () => {
                             <div className='bg-muted/50 h-8 w-full rounded-2xl'/>
                         </div>
                     ))}
-
                     <div className='flex gap-2'>
                         <div className='bg-muted/50 h-10 w-1/9 rounded-lg'/>
                         <div className='bg-muted/50 h-10 w-1/9 rounded-lg'/>
@@ -20,7 +20,8 @@ const page = () => {
                 </div>
             </div>
 
-            <div className='flex flex-col gap-3'>
+            {/* Password Section */}
+            <div id="password" className='flex flex-col gap-3 scroll-mt-24'>
                 <h1 className='text-2xl font-semibold'>Password</h1>
                 <div className="flex flex-1 flex-col gap-4">
                     {Array.from({ length: 6 }).map((_, index) => (
@@ -29,7 +30,6 @@ const page = () => {
                             <div className='bg-muted/50 h-8 w-full rounded-2xl'/>
                         </div>
                     ))}
-
                     <div className='flex gap-2'>
                         <div className='bg-muted/50 h-10 w-1/9 rounded-lg'/>
                         <div className='bg-muted/50 h-10 w-1/9 rounded-lg'/>
@@ -37,7 +37,8 @@ const page = () => {
                 </div>
             </div>
 
-            <div className='flex flex-col gap-3'>
+            {/* Sources Section */}
+            <div id="sources" className='flex flex-col gap-3 scroll-mt-24'>
                 <h1 className='text-2xl font-semibold'>Comic Source</h1>
                 <div className="flex flex-1 flex-col gap-4">
                     {Array.from({ length: 6 }).map((_, index) => (
@@ -46,7 +47,6 @@ const page = () => {
                             <div className='bg-muted/50 h-8 w-full rounded-2xl'/>
                         </div>
                     ))}
-
                     <div className='flex gap-2'>
                         <div className='bg-muted/50 h-10 w-1/9 rounded-lg'/>
                         <div className='bg-muted/50 h-10 w-1/9 rounded-lg'/>
@@ -54,7 +54,8 @@ const page = () => {
                 </div>
             </div>
 
-            <div className='flex flex-col gap-3'>
+            {/* Preference Section */}
+            <div id="preferences" className='flex flex-col gap-3 scroll-mt-24 pb-70'>
                 <h1 className='text-2xl font-semibold'>Preference</h1>
                 <div className="flex flex-1 flex-col gap-4">
                     {Array.from({ length: 6 }).map((_, index) => (
@@ -63,7 +64,6 @@ const page = () => {
                             <div className='bg-muted/50 h-8 w-full rounded-2xl'/>
                         </div>
                     ))}
-
                     <div className='flex gap-2'>
                         <div className='bg-muted/50 h-10 w-1/9 rounded-lg'/>
                         <div className='bg-muted/50 h-10 w-1/9 rounded-lg'/>

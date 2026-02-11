@@ -1,4 +1,6 @@
-import { User2, KeyRound, NotebookText, MonitorCog } from "lucide-react"
+'use client'
+
+import { useEffect, useState } from "react"
 import { UserIcon, KeyIcon, Storage, AdjustmentsHorizontal } from "@/components/icons/custom-icons"
 import {
   Sidebar,
@@ -14,55 +16,91 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 
-const data = {
-    navMain: [
-        {
-            title: "Settings",
-            url: "#",
-            items: [
-                {   
-                    icons: UserIcon,
-                    title: "Account",
-                    url: "#",
-                    isActive: false
-                },
-                {
-                    icons:  KeyIcon,
-                    title: "Password",
-                    url: "#",
-                    isActive: false
-                },
-                {
-                    icons: Storage,
-                    title: "Sources",
-                    url: "#",
-                    isActive: true
-                },
-                {
-                    icons: AdjustmentsHorizontal,
-                    title: "Preferences",
-                    url: "#",
-                    isActive: false
-                },
-            ],
-        }
-    ],
-}
+const navItems = [
+    {
+        title: "Settings",
+        items: [
+            {   
+                icons: UserIcon,
+                title: "Account",
+                url: "#account",
+                id: "account"
+            },
+            {
+                icons: KeyIcon,
+                title: "Password",
+                url: "#password",
+                id: "password"
+            },
+            {
+                icons: Storage,
+                title: "Sources",
+                url: "#sources",
+                id: "sources"
+            },
+            {
+                icons: AdjustmentsHorizontal,
+                title: "Preferences",
+                url: "#preferences",
+                id: "preferences"
+            },
+        ],
+    }
+]
 
 export function SettingSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+    const [activeId, setActiveId] = useState("account")
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setActiveId(entry.target.id)
+                    }
+                })
+            },
+            {
+                // Root margin controls "when" the intersection triggers. 
+                // "-20% 0px -80% 0px" means: Trigger when the element is in the top 20% of the viewport
+                rootMargin: "-20% 0px -80% 0px",
+                threshold: 0
+            }
+        )
+
+        // Observe all sections defined in our navItems
+        navItems.forEach((group) => {
+            group.items.forEach((item) => {
+                const element = document.getElementById(item.id)
+                if (element) observer.observe(element)
+            })
+        })
+
+        return () => observer.disconnect()
+    }, [])
+
+    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+        e.preventDefault();
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+            setActiveId(id); 
+        }
+    };
+
     return (
         <Sidebar {...props} className="top-[65px] h-[calc(100vh-58px)]">
             <SidebarContent>
-                {data.navMain.map((item) => (
+                {navItems.map((item) => (
                     <SidebarGroup key={item.title}>
                         <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
                         <SidebarGroupContent>
                             <SidebarMenu>
                                 {item.items.map((item) => (
                                     <SidebarMenuItem key={item.title}>
-                                        <SidebarMenuButton size="md" isActive={item.isActive} asChild className="data-[active=true]:text-blue-500 data-[active=true]:bg-blue-900/50">
-                                            <a href={item.url} >
-                                                <item.icons isFill={item.isActive} className="mr-2 h-5 w-5" />
+                                        <SidebarMenuButton size="md" isActive={activeId === item.id} asChild className="data-[active=true]:text-blue-500 data-[active=true]:bg-blue-900/50">
+                                            <a href={item.url} onClick={(e) => handleScroll(e, item.id)}>
+                                                <item.icons isFill={activeId === item.id} className="mr-2 h-5 w-5" />
                                                 {item.title}
                                             </a>
                                         </SidebarMenuButton>
