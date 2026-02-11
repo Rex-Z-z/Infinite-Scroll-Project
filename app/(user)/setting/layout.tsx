@@ -1,5 +1,5 @@
 import React from 'react'
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { SidebarProvider, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar" //
 import { SettingSidebar } from "./components/setting-sidebar"
 
 export default function SettingsLayout({
@@ -11,12 +11,12 @@ export default function SettingsLayout({
         <div> 
             <SidebarProvider>
                 <SettingSidebar />
-                <main>
-                    <SidebarTrigger />
+                <SidebarInset> 
+                    <SidebarTrigger className='mt-2 ml-2'/>
                     <div className="p-4">
                         {children}
                     </div>
-                </main>
+                </SidebarInset>
             </SidebarProvider>
         </div>
     )
