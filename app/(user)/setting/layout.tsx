@@ -11,7 +11,7 @@ export default function SettingsLayout({
         <div> 
             <SidebarProvider>
                 <SettingSidebar />
-                <main className="h-[calc(100vh-58px)]">
+                <main>
                     <SidebarTrigger />
                     <div className="p-4">
                         {children}
