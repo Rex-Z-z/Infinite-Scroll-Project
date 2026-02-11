@@ -8,10 +8,10 @@ export default function SettingsLayout({
   children: React.ReactNode
 }) {
     return (
-        <div className='h-[calc(95vh-2rem)]'>
+        <div> 
             <SidebarProvider>
                 <SettingSidebar />
-                <main>
+                <main className="h-[calc(100vh-58px)]">
                     <SidebarTrigger />
                     <div className="p-4">
                         {children}
