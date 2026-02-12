@@ -1,12 +1,13 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
-import { CirclePlus, Globe, Pen, Pencil, Search, Trash2, Upload } from 'lucide-react'
+import { CirclePlus, Globe, Pencil, Search, Trash2, Upload, Check, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Label } from '@/components/ui/label'
+import { cn } from '@/lib/utils' // Ensure you have this utility or use a standard conditional class approach
 
 const MOCK_SOURCES: Source[] = [
     { id: '1', name: 'Asura Scans', url: 'https://asuratoon.com/', icon: '/icons/asura-icon.png' },
@@ -25,81 +26,280 @@ interface Source {
 
 const SourcesSection = () => {
     const [sources, setSources] = useState<Source[]>(MOCK_SOURCES)
+    const [searchQuery, setSearchQuery] = useState('')
     
+    // State to track editing and errors
+    const [editingId, setEditingId] = useState<string | null>(null)
+    const [hasError, setHasError] = useState(false)
+
+    // State for image upload
+    const [uploadingId, setUploadingId] = useState<string | null>(null)
+    const fileInputRef = useRef<HTMLInputElement>(null)
+
+    const filteredSources = sources.filter(source => 
+        source.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        source.url.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+
+    // Helper to validate a source
+    const validateSource = (id: string): boolean => {
+        const sourceToCheck = sources.find(s => s.id === id)
+        if (!sourceToCheck) return true
+        
+        const isValid = sourceToCheck.name.trim().length > 0 && sourceToCheck.url.trim().length > 0
+        
+        if (!isValid) {
+            setHasError(true)
+        } else {
+            setHasError(false)
+        }
+        
+        return isValid
+    }
+
+    const handleAddSource = () => {
+        // If we are currently editing, validate before adding a new one
+        if (editingId) {
+            if (!validateSource(editingId)) {
+                return // Stop if current source is invalid
+            }
+        }
+
+        const newId = Date.now().toString()
+        const newSource: Source = {
+            id: newId,
+            name: '',
+            url: '',
+            icon: ''
+        }
+        
+        // Reset error state for the new item
+        setHasError(false)
+        setSources([newSource, ...sources])
+        setEditingId(newId)
+    }
+
+    const handleRemoveSource = (id: string) => {
+        setSources(sources.filter(s => s.id !== id))
+        if (editingId === id) {
+            setEditingId(null)
+            setHasError(false)
+        }
+    }
+
+    const handleUpdateSource = (id: string, field: keyof Source, value: string) => {
+        setSources(sources.map(s => 
+            s.id === id ? { ...s, [field]: value } : s
+        ))
+        
+        // Clear error as user types if it becomes valid (optional UX preference, 
+        // strictly clearing 'hasError' on change might hide the red border too early, 
+        // but here we just leave the error state until next save attempt or keep it persistent if fields are empty)
+        // For smoother UX: we can check validity here or just leave the red border until they fix it.
+        // Let's leave the validation check to the Save/Add action to be consistent with the request.
+    }
+
+    const handleSave = (id: string) => {
+        if (validateSource(id)) {
+            setEditingId(null)
+        }
+    }
+
+    const handleEdit = (id: string) => {
+        // If editing another row, validate it first
+        if (editingId && editingId !== id) {
+            if (!validateSource(editingId)) return
+        }
+        
+        setHasError(false)
+        setEditingId(id)
+    }
+
+    const handleCancel = () => {
+        setEditingId(null)
+        setHasError(false)
+    }
+
+    const triggerImageUpload = (id: string) => {
+        setUploadingId(id)
+        fileInputRef.current?.click()
+    }
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (file && uploadingId) {
+            const reader = new FileReader()
+            reader.onloadend = () => {
+                handleUpdateSource(uploadingId, 'icon', reader.result as string)
+                setUploadingId(null) 
+            }
+            reader.readAsDataURL(file)
+        }
+        e.target.value = '' 
+    }
+
     return (
         <div id="sources" className='flex flex-col gap-4'>
             <h1 className='text-2xl font-semibold'>Comic Sources</h1>
 
-            {/* Toolbar: Search & Add */}
+            <input 
+                type="file" 
+                ref={fileInputRef} 
+                className="hidden" 
+                accept="image/*"
+                onChange={handleImageChange}
+            />
+
+            {/* Toolbar */}
             <div className='flex gap-2 items-center'>
                 <InputGroup className='py-4.5 has-[[data-slot=input-group-control]:focus-visible]:border-2 has-[[data-slot=input-group-control]:focus-visible]:border-blue-500'>
                     <InputGroupAddon>
                         <Search className='text-muted-foreground' />
                     </InputGroupAddon>
-                    <InputGroupInput placeholder="Search"/>
+                    <InputGroupInput 
+                        placeholder="Search"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
                 </InputGroup>
 
-                <Button variant="default" className='text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 hover:cursor-pointer'>
+                <Button 
+                    variant="default" 
+                    className='text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 hover:cursor-pointer'
+                    onClick={handleAddSource}
+                >
                     <CirclePlus />
                     Add Source
                 </Button>
             </div>
 
-            <div className='flex flex-col gap-2 border rounded-lg p-3'>
-                { sources.map((sources) => (
-                    <div className="flex flex-row gap-2 p-3 items-center bg-muted/50 rounded-lg shadow-lg">
-                        {/* Icon */}
-                        <Avatar className='relative block w-14 h-14 rounded-md fill group'>
-                            <AvatarImage src={sources.icon} />
-                            <AvatarFallback className="bg-gray-700 rounded-none">
-                                <Globe className='w-8 h-8'/>
-                            </AvatarFallback>
+            {/* List */}
+            <div className='flex flex-col gap-2 border rounded-lg p-3 max-h-[400px] min-h-[400px] overflow-y-auto custom-scrollbar'>
+                {filteredSources.length === 0 ? (
+                     <div className="text-center text-muted-foreground py-4">No sources found</div>
+                ) : (
+                    filteredSources.map((source) => {
+                        const isEditing = editingId === source.id;
 
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <Button variant="ghost" className="w-14 h-14 opacity-0 group-hover:opacity-100 flex items-center gap-2 transition-all duration-300 ease-in-out text-xs px-2 py-1 !hover:bg-none">
-                                    <Upload className="size-6" />
-                                </Button>
+                        return (
+                            <div key={source.id} className="flex flex-row gap-2 p-3 items-center bg-muted/50 rounded-lg shadow-lg">
+                                {/* Icon */}
+                                <div className="relative group">
+                                    <Avatar className='block w-14 h-14 rounded-md'>
+                                        <AvatarImage src={source.icon} className="object-cover"/>
+                                        <AvatarFallback className="bg-gray-700 rounded-none">
+                                            <Globe className='w-8 h-8'/>
+                                        </AvatarFallback>
+                                    </Avatar>
+
+                                    {isEditing && (
+                                        <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-md cursor-pointer" onClick={() => triggerImageUpload(source.id)}>
+                                            <Upload className="w-6 h-6 text-white opacity-80 hover:opacity-100" />
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* URL */}
+                                <div className='w-full flex flex-col'>
+                                    <Label className={cn('text-xs', isEditing && hasError && !source.url.trim() && "text-red-500", isEditing ? "mb-1" : "ml-2.5")}>
+                                        URL
+                                    </Label>
+                                    {isEditing ? (
+                                        <Input
+                                            placeholder='https://example.com'
+                                            value={source.url}
+                                            onChange={(e) => handleUpdateSource(source.id, 'url', e.target.value)}
+                                            className={cn(
+                                                "bg-gray-50/50 dark:bg-gray-900/50 transition-colors duration-200",
+                                                hasError && !source.url.trim() ? "border-red-500 focus-visible:ring-red-500/50" : ""
+                                            )}
+                                        />
+                                    ) : (
+                                        <div className="flex items-center h-9 px-3 text-md truncate">
+                                            <a 
+                                                href={source.url} 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="text-blue-500 hover:underline hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 truncate"
+                                            >
+                                                {source.url || 'No URL'}
+                                            </a>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Name */}
+                                <div className='w-full flex flex-col'>
+                                    <Label className={cn('text-xs', isEditing && hasError && !source.name.trim() && "text-red-500", isEditing ? "mb-1" : "ml-2")}>
+                                        Name
+                                    </Label>
+                                    {isEditing ? (
+                                        <Input
+                                            placeholder='Source Name'
+                                            value={source.name}
+                                            onChange={(e) => handleUpdateSource(source.id, 'name', e.target.value)}
+                                            className={cn(
+                                                "bg-gray-50/50 dark:bg-gray-900/50 transition-colors duration-200",
+                                                hasError && !source.name.trim() ? "border-red-500 focus-visible:ring-red-500/50" : ""
+                                            )}
+                                        />
+                                    ) : (
+                                        <div className="flex items-center h-9 px-3 text-md font-medium truncate">
+                                            {source.name || 'Unnamed Source'}
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Actions */}
+                                <div className='flex gap-2 mt-5'>
+                                    {isEditing ? (
+                                        <Button
+                                            variant="outline"
+                                            size='icon'
+                                            className="text-green-600 hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-950/50 border-green-200 dark:border-green-900"
+                                            onClick={() => handleSave(source.id)}
+                                            title="Save"
+                                        >
+                                            <Check className="w-4 h-4" />
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            variant="outline"
+                                            size='icon'
+                                            onClick={() => handleEdit(source.id)}
+                                            title="Edit"
+                                        >
+                                            <Pencil className="w-4 h-4" />
+                                        </Button>
+                                    )}
+                                    
+
+                                    {isEditing ? (
+                                        <Button
+                                            variant="outline"
+                                            size='icon'
+                                            className="text-red-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/50 border-red-200 dark:border-red-900"
+                                            onClick={() => handleCancel()}
+                                            title="Remove"
+                                        >
+                                            <X className="w-4 h-4" />
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            variant="outline"
+                                            size='icon'
+                                            className="text-red-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/50 border-red-200 dark:border-red-900"
+                                            onClick={() => handleRemoveSource(source.id)}
+                                            title="Remove"
+                                        >
+                                            <Trash2 className="w-4 h-4" />
+                                        </Button>
+                                    )}
+                                </div>
                             </div>
-                        </Avatar>
-
-                        {/* URL */}
-                        <div className='w-full flex flex-col gap-1.5'>
-                            <Label className='text-xs'>URL</Label>
-                            <Input
-                                placeholder='URL'
-                                defaultValue={sources.url}
-                                className="bg-gray-50/50 dark:bg-gray-900/50"
-                            />
-                        </div>
-
-                        {/* Name */}
-                        <div className='w-full flex flex-col gap-1.5'>
-                            <Label className='text-xs'>Name</Label>
-                            <Input
-                                placeholder='URL'
-                                defaultValue={sources.name}
-                                className="bg-gray-50/50 dark:bg-gray-900/50"
-                            />
-                        </div>
-
-                        {/* Remove Button */}
-                        <div className='flex gap-2 mt-5'>
-                            <Button
-                                variant="outline"
-                                size='icon'
-                            >
-                                <Pencil className="w-4 h-4" />
-                            </Button>
-                            <Button
-                                variant="outline"
-                                size='icon'
-                                className="text-red-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/50 border-red-200 dark:border-red-900"
-                            >
-                                <Trash2 className="w-4 h-4" />
-                            </Button>
-                        </div>
-                    </div>
-                ))}
+                        )
+                    })
+                )}
             </div>
         </div>
     )
