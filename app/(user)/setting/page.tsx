@@ -55,7 +55,7 @@ const page = () => {
             </div>
 
             {/* Preference Section */}
-            <div id="preferences" className='flex flex-col gap-3 scroll-mt-24 pb-70'>
+            <div id="preferences" className='flex flex-col gap-3 scroll-mt-24 pb-110'>
                 <h1 className='text-2xl font-semibold'>Preference</h1>
                 <div className="flex flex-1 flex-col gap-4">
                     {Array.from({ length: 6 }).map((_, index) => (

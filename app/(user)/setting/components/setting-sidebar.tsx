@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { UserIcon, KeyIcon, Storage, AdjustmentsHorizontal } from "@/components/icons/custom-icons"
 import {
   Sidebar,
@@ -50,11 +50,13 @@ const navItems = [
 
 export function SettingSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const [activeId, setActiveId] = useState("account")
+    const isManualScrolling = useRef(false)
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
+                    if (isManualScrolling.current) return
                     if (entry.isIntersecting) {
                         setActiveId(entry.target.id)
                     }
@@ -81,10 +83,14 @@ export function SettingSidebar({ ...props }: React.ComponentProps<typeof Sidebar
 
     const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
         e.preventDefault();
+        isManualScrolling.current = true;
+        setActiveId(id); 
         const element = document.getElementById(id);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
-            setActiveId(id); 
+            setTimeout(() => {
+                isManualScrolling.current = false;
+            }, 1000)
         }
     };
 
