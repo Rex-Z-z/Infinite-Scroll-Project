@@ -7,7 +7,7 @@ const AccountSection = () => {
     return (
         <div id="account" className='flex flex-col gap-3 scroll-mt-24'>
             <h1 className='text-2xl font-semibold'>Account</h1>
-            <div className='flex flex-col gap-3'>
+            <div className='flex flex-col gap-4'>
                 <div className='w-full flex flex-col gap-2'>
                     <Label>Username</Label>
                     <Input type="text" placeholder="Username"  className='focus:border-2 focus:border-blue-600 focus:dark:border-blue-500'/>

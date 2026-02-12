@@ -7,7 +7,7 @@ const PasswordSection = () => {
     return (
         <div id="password" className='flex flex-col gap-3 scroll-mt-24'>
             <h1 className='text-2xl font-semibold'>Password Information</h1>
-            <div className='flex flex-col gap-2'>
+            <div className='flex flex-col gap-4'>
                 <div className='w-full flex gap-3'>
                     <div className='w-full flex flex-col gap-2'>
                         <Label>Old Password</Label>

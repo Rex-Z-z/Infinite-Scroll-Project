@@ -1,6 +1,7 @@
 import React from 'react'
 import AccountSection from './components/account-section'
 import PasswordSection from './components/password-section'
+import SourcesSection from './components/sources-section'
 
 const page = () => {
     return (
@@ -12,21 +13,7 @@ const page = () => {
             <PasswordSection />
 
             {/* Sources Section */}
-            <div id="sources" className='flex flex-col gap-3 scroll-mt-24'>
-                <h1 className='text-2xl font-semibold'>Comic Source</h1>
-                <div className="flex flex-1 flex-col gap-4">
-                    {Array.from({ length: 6 }).map((_, index) => (
-                        <div key={index} className='flex gap-2'>
-                            <div className='bg-muted/50 h-8 w-1/8 rounded-2xl'/>
-                            <div className='bg-muted/50 h-8 w-full rounded-2xl'/>
-                        </div>
-                    ))}
-                    <div className='flex gap-2'>
-                        <div className='bg-muted/50 h-10 w-1/9 rounded-lg'/>
-                        <div className='bg-muted/50 h-10 w-1/9 rounded-lg'/>
-                    </div>
-                </div>
-            </div>
+            <SourcesSection />
 
             {/* Preference Section */}
             <div id="preferences" className='flex flex-col gap-3 scroll-mt-24 pb-110'>
