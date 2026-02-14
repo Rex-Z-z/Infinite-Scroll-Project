@@ -104,7 +104,7 @@ export function SettingSidebar({ ...props }: React.ComponentProps<typeof Sidebar
                             <SidebarMenu>
                                 {item.items.map((item) => (
                                     <SidebarMenuItem key={item.title}>
-                                        <SidebarMenuButton size="md" isActive={activeId === item.id} asChild className="data-[active=true]:text-blue-500 data-[active=true]:bg-blue-900/50">
+                                        <SidebarMenuButton size="md" isActive={activeId === item.id} className="data-[active=true]:text-primary" asChild>
                                             <a href={item.url} onClick={(e) => handleScroll(e, item.id)}>
                                                 <item.icons isFill={activeId === item.id} className="mr-2 h-5 w-5" />
                                                 {item.title}

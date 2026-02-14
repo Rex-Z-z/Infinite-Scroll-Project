@@ -18,23 +18,23 @@ const Page = () => {
         <section>
           <Tabs defaultValue="ongoing" className="w-full">
             <div className="gap-1.5 mb-1 bg-transparent flex flex-row justify-between">
-              <TabsList className="gap-1.5 bg-transparent p-0 m-0">
-                <TabsTrigger value="ongoing" className='px-5 py-[18px] border-0 data-[state=active]:bg-blue-500 dark:data-[state=active]:bg-blue-600 data-[state=active]:hover:bg-blue-600 dark:data-[state=active]:hover:bg-blue-700 hover:bg-gray-800 hover:ring-2 hover:ring-gray-800 dark:data-[state=active]:hover:ring-2 dark:data-[state=active]:hover:ring-blue-700 hover:cursor-pointer'>
+              <TabsList className="bg-transparent p-0 m-0">
+                <TabsTrigger value="ongoing" className='px-5 py-[18px] dark:data-[state=active]:text-primary hover:cursor-pointer'>
                   <BookOpen /> Ongoing
                 </TabsTrigger>
-                <TabsTrigger value="completed" className='px-5 py-[18px] border-0 data-[state=active]:bg-blue-500 dark:data-[state=active]:bg-blue-600 data-[state=active]:hover:bg-blue-600 dark:data-[state=active]:hover:bg-blue-700 hover:bg-gray-800 hover:ring-2 hover:ring-gray-800 dark:data-[state=active]:hover:ring-2 dark:data-[state=active]:hover:ring-blue-700 hover:cursor-pointer'>
+                <TabsTrigger value="completed" className='px-5 py-[18px] dark:data-[state=active]:text-primary hover:cursor-pointer'>
                   <BookOpenCheck /> Completed
                 </TabsTrigger>
-                <TabsTrigger value="hold" className='px-5 py-[18px] border-0 data-[state=active]:bg-blue-500 dark:data-[state=active]:bg-blue-600 data-[state=active]:hover:bg-blue-600 dark:data-[state=active]:hover:bg-blue-700 hover:bg-gray-800 hover:ring-2 hover:ring-gray-800 dark:data-[state=active]:hover:ring-2 dark:data-[state=active]:hover:ring-blue-700 hover:cursor-pointer'>
+                <TabsTrigger value="hold" className='px-5 py-[18px] dark:data-[state=active]:text-primary hover:cursor-pointer'>
                   <Book /> On Hold
                 </TabsTrigger>
-                <TabsTrigger value="plan" className='px-5 py-[18px] border-0 data-[state=active]:bg-blue-500 dark:data-[state=active]:bg-blue-600 data-[state=active]:hover:bg-blue-600 dark:data-[state=active]:hover:bg-blue-700 hover:bg-gray-800 hover:ring-2 hover:ring-gray-800 dark:data-[state=active]:hover:ring-2 dark:data-[state=active]:hover:ring-blue-700 hover:cursor-pointer'>
+                <TabsTrigger value="plan" className='px-5 py-[18px] dark:data-[state=active]:text-primary hover:cursor-pointer'>
                   <BookMarked /> Plan to Read
                 </TabsTrigger>
-                <TabsTrigger value="dropped" className='px-5 py-[18px] border-0 data-[state=active]:bg-blue-500 dark:data-[state=active]:bg-blue-600 data-[state=active]:hover:bg-blue-600 dark:data-[state=active]:hover:bg-blue-700 hover:bg-gray-800 hover:ring-2 hover:ring-gray-800 dark:data-[state=active]:hover:ring-2 dark:data-[state=active]:hover:ring-blue-700 hover:cursor-pointer'>
+                <TabsTrigger value="dropped" className='px-5 py-[18px] dark:data-[state=active]:text-primary hover:cursor-pointer'>
                   <BookAlert /> Dropped
                 </TabsTrigger>
-                <TabsTrigger value="cancelled" className='px-5 py-[18px] border-0 data-[state=active]:bg-blue-500 dark:data-[state=active]:bg-blue-600 data-[state=active]:hover:bg-blue-600 dark:data-[state=active]:hover:bg-blue-700 hover:bg-gray-800 hover:ring-2 hover:ring-gray-800 dark:data-[state=active]:hover:ring-2 dark:data-[state=active]:hover:ring-blue-700 hover:cursor-pointer'>
+                <TabsTrigger value="cancelled" className='px-5 py-[18px] dark:data-[state=active]:text-primary hover:cursor-pointer'>
                   <BookX /> Cancelled
                 </TabsTrigger>
               </TabsList>

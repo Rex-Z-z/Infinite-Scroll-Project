@@ -46,12 +46,12 @@ const DropdownHome = ({section = 'recent-reads' }: NavBarProps) => {
             {/* Date */}
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="icon" className="size-8 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:ring-1 hover:ring-blue-400 hover:cursor-pointer">
+                    <Button variant="outline" size="icon" className="size-8 hover:cursor-pointer">
                         <CalendarCog />
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                    <DropdownMenuLabel className='text-[12px] text-blue-400 font-bold'>Select Date</DropdownMenuLabel>
+                    <DropdownMenuLabel className='text-primary font-bold'>Select Date</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuRadioGroup value={date} onValueChange={(value) => {setDate(value); setIsYearRangeActive(false);}}>
                         <DropdownMenuRadioItem value="Recent">Recent</DropdownMenuRadioItem>
@@ -66,7 +66,7 @@ const DropdownHome = ({section = 'recent-reads' }: NavBarProps) => {
                         <div className='mt-1 mb-1.5 flex items-center justify-center gap-2'>
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
-                                    <Button variant="outline" className={`h-7 text-[12px] ml-1 ${ isYearRangeActive ? "border-2 dark:border-blue-500 dark:ring-blue-500 text-white" : "" }`}>{year}</Button>
+                                    <Button variant="outline" className={`h-7 text-[12px] ml-1 ${ isYearRangeActive ? "border-2 dark:border-primary dark:ring-primary text-foreground" : "" } ${ date === "Custom" ? "border-primary ring-primary" : "" }`}>{year}</Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent className="w-10">
                                     <DropdownMenuLabel>Year</DropdownMenuLabel>
@@ -81,7 +81,7 @@ const DropdownHome = ({section = 'recent-reads' }: NavBarProps) => {
                             <p className='text-sm text-center'>To</p>
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
-                                    <Button variant="outline" className={`h-7 text-[12px] ml-1 ${ isYearRangeActive ? "border-2 dark:border-blue-500 dark:ring-blue-500 text-white" : "" }`}>{year2}</Button>
+                                    <Button variant="outline" className={`h-7 text-[12px] ml-1 ${ isYearRangeActive ? "border-2 dark:border-primary dark:ring-primary text-foreground" : "" }`}>{year2}</Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent className="w-10">
                                     <DropdownMenuLabel>Year</DropdownMenuLabel>

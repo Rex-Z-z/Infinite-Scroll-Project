@@ -20,7 +20,7 @@ const AddNewModal = ({ comicData }: { comicData: ReadItem | null }) => {
                     <Button variant="outline" className='w-1/2 hover:cursor-pointer'>Cancel</Button>
                 </DialogClose>
                 <DialogClose asChild>
-                    <Button className='w-1/2 text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 hover:cursor-pointer'>Submit</Button>
+                    <Button className='w-1/2 hover:cursor-pointer'>Submit</Button>
                 </DialogClose>
             </DialogFooter>
         </DialogContent>

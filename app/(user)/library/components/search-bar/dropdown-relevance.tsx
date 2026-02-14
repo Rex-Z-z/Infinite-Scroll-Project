@@ -27,17 +27,17 @@ const DropdownRelevance = () => {
 
     // Time
     const [time, setTime] = useState("Recent")
-
-    // Year
-    const [year, setYear] = useState("2025")
-    const [year2, setYear2] = useState("2025")
+    const [date, setDate] = useState("Recent");
+    const [year, setYear] = useState("2025");
+    const [year2, setYear2] = useState("2025");
+    const [isYearRangeActive, setIsYearRangeActive] = useState(false);
 
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm" className='h-7 text-[12px] focus-visible:ring-[1.5px] ml-1 transition-all duration-300 ease-in-out'>
                     {isRatingSelected ? (
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5 text-blue-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5 text-primary">
                             <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clipRule="evenodd" />
                         </svg>
                     ) : (
@@ -49,23 +49,23 @@ const DropdownRelevance = () => {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-46" align="end">
-                <DropdownMenuLabel className='text-[12px] text-blue-400 font-bold'>Time</DropdownMenuLabel>
+                <DropdownMenuLabel className='text-primary font-bold'>Time</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuRadioGroup value={time} onValueChange={setTime}>
+                <DropdownMenuRadioGroup value={date} onValueChange={(value) => {setDate(value); setIsYearRangeActive(false);}}>
                     <DropdownMenuRadioItem value="Recent">Recent</DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="Last Week">Last Week</DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="Last Month">Last Month</DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="Last Year">Last Year</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="7 Days">7 Days</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="1 Month">1 Month</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="6 Months">6 Months</DropdownMenuRadioItem>
                 </DropdownMenuRadioGroup>
                 <div className='mt-1 mb-1.5 flex items-center justify-center gap-2'>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="outline" className='h-7 text-[12px] ml-1'>{year}</Button>
+                            <Button variant="outline" className={`h-7 text-[12px] ml-1 ${ isYearRangeActive ? "border-2 dark:border-primary dark:ring-primary text-foreground" : "" } ${ date === "Custom" ? "border-primary ring-primary" : "" }`}>{year}</Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-10">
                             <DropdownMenuLabel>Year</DropdownMenuLabel>
                             <DropdownMenuSeparator />
-                            <DropdownMenuRadioGroup value={year} onValueChange={setYear}>
+                            <DropdownMenuRadioGroup value={year} onValueChange={(value) => {setYear(value); setDate("Custom"); setIsYearRangeActive(true);}}>
                                 <DropdownMenuRadioItem value="2025">2025</DropdownMenuRadioItem>
                                 <DropdownMenuRadioItem value="2024">2024</DropdownMenuRadioItem>
                                 <DropdownMenuRadioItem value="2023">2023</DropdownMenuRadioItem>
@@ -75,12 +75,12 @@ const DropdownRelevance = () => {
                     <p className='text-sm text-center'>To</p>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="outline" className='h-7 text-[12px] ml-1'>{year2}</Button>
+                            <Button variant="outline" className={`h-7 text-[12px] ml-1 ${ isYearRangeActive ? "border-2 dark:border-primary dark:ring-primary text-foreground" : "" }`}>{year2}</Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-10">
                             <DropdownMenuLabel>Year</DropdownMenuLabel>
                             <DropdownMenuSeparator />
-                            <DropdownMenuRadioGroup value={year2} onValueChange={setYear2}>
+                            <DropdownMenuRadioGroup value={year2} onValueChange={(value) => {setYear2(value); setDate("Custom"); setIsYearRangeActive(true);}}>
                                 <DropdownMenuRadioItem value="2025">2025</DropdownMenuRadioItem>
                                 <DropdownMenuRadioItem value="2024">2024</DropdownMenuRadioItem>
                                 <DropdownMenuRadioItem value="2023">2023</DropdownMenuRadioItem>
@@ -88,9 +88,11 @@ const DropdownRelevance = () => {
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </div>
+                
                 <DropdownMenuSeparator />
-                <DropdownMenuLabel className='text-[12px] text-blue-400 font-bold'>Rating</DropdownMenuLabel>
+                <DropdownMenuLabel className='text-primary font-bold'>Rating</DropdownMenuLabel>
                 <DropdownMenuSeparator />
+                
                 <DropdownMenuCheckboxItem checked={showRatingAbsoluteCinema} onCheckedChange={setShowRatingAbsoluteCinema} >Absolute Cinema</DropdownMenuCheckboxItem>
                 <DropdownMenuCheckboxItem checked={showRatingAwesome} onCheckedChange={setShowRatingAwesome} >Awesome</DropdownMenuCheckboxItem>
                 <DropdownMenuCheckboxItem checked={showRatingGreat} onCheckedChange={setShowRatingGreat} >Great</DropdownMenuCheckboxItem>

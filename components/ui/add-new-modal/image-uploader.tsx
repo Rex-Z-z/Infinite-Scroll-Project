@@ -67,20 +67,20 @@ export const ImageUploader = React.memo(({ initialImageUrl, comicData }: ImageUp
                 <>
                     <img src={imagePreview} alt="Cover Preview" className="h-full w-full object-cover rounded-md" />
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="flex flex-row gap-2">
-                          <Button  variant="default" onClick={handleUploadClick} className="opacity-0 group-hover:opacity-100 flex items-center gap-2 transition-all duration-300 ease-in-out text-xs px-2 py-1 dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700">
+                        <div className="flex flex-row gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
+                          <Button  variant="default" onClick={handleUploadClick} className="text-xs px-2 py-1">
                               <Upload className="size-3.5" />
                           </Button>
-                          <Button  variant="default" onClick={handleClearImage} className="opacity-0 group-hover:opacity-100 flex items-center gap-2 transition-all duration-300 ease-in-out text-xs px-2 py-1 dark:text-white bg-red-500 dark:bg-red-600 hover:bg-red-600 dark:hover:bg-red-700">
+                          <Button  variant="default" onClick={handleClearImage} className="text-xs px-2 py-1">
                               <Trash2 className="size-3.5" />
                           </Button>
                         </div>
                     </div>
                 </>
             ) : (
-                <div className="h-full w-full bg-[#1a2231] border border-gray-700 rounded-md flex flex-col gap-2 items-center justify-center">
+                <div className="h-full w-full bg-card border rounded-md flex flex-col gap-2 items-center justify-center">
                     <div className='flex flex-row gap-2'>
-                      <Button variant="default" onClick={handleUploadClick} className="dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700">
+                      <Button variant="default" onClick={handleUploadClick}>
                           <Upload className="size-4" />
                       </Button>
                     </div>

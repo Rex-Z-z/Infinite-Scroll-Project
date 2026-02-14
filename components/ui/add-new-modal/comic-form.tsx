@@ -78,7 +78,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
 
     return (
         <div className="flex flex-col gap-2.5">
-            <Label className={cn('text-xs flex items-center gap-2', title ? 'text-white' : 'text-gray-400')}>
+            <Label className={cn('text-xs flex items-center gap-2', title ? 'text-foreground' : 'text-muted-foreground')}>
                 <Book className={'size-4'}/>
                 Title
             </Label>
@@ -113,7 +113,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
 
             <div className="flex flex-row gap-1.5">
                 <div className="flex flex-col gap-2.5 w-full">
-                    <Label className={cn('text-xs flex items-center gap-2', type ? 'text-white' : 'text-gray-400')}>
+                    <Label className={cn('text-xs flex items-center gap-2', type ? 'text-foreground' : 'text-muted-foreground')}>
                         <BookOpen className='size-4'/>
                         Type
                     </Label>
@@ -132,7 +132,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
                 </div>
                 
                 <div className="flex flex-col gap-2.5 w-full">
-                    <Label className={cn('text-xs flex items-center gap-2', chapter ? 'text-white' : 'text-gray-400')}>
+                    <Label className={cn('text-xs flex items-center gap-2', chapter ? 'text-foreground' : 'text-muted-foreground')}>
                         <BookOpen className='size-4'/>
                         Chapter
                     </Label>
@@ -140,7 +140,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
                 </div>
             </div>
 
-            <Label className={cn('text-xs flex items-center gap-2', rating ? 'text-white' : 'text-gray-400')}>
+            <Label className={cn('text-xs flex items-center gap-2', rating ? 'text-foreground' : 'text-muted-foreground')}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={cn('size-4 mb-0.5', ratingColorMap[rating])}>
                     <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clipRule="evenodd" />
                 </svg>
@@ -177,52 +177,40 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
                 </SelectContent>
             </Select>
 
-            <Label className={cn('text-xs flex items-center gap-2', status ? 'text-white' : 'text-gray-400')}>
+            <Label className={cn('text-xs flex items-center gap-2', status ? 'text-foreground' : 'text-muted-foreground')}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className={cn(`bi bi-circle-fill`, statusColorMap[status])} viewBox="0 0 16 16">
                     <circle cx="8" cy="8" r="8"/>
                 </svg>
                 Status
             </Label>
             <RadioGroup defaultValue="Ongoing" onValueChange={setStatus} value={status} className="grid grid-cols-2 gap-1.5">
-                <Label htmlFor="r1" className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer bg-[#1a2231] border-gray-300 dark:border-gray-700 transition-colors">
-                    <div className='rounded-full has-[[data-state=checked]]:bg-blue-600'>
-                        <RadioGroupItem value="Ongoing" id="r1" />
-                    </div>
+                <Label htmlFor="r1" className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer not-last:transition-colors">
+                    <RadioGroupItem value="Ongoing" id="r1" className='text-blue-600'/>
                     Ongoing
                 </Label>
                 
-                <Label htmlFor="r2" className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer bg-[#1a2231] border-gray-300 dark:border-gray-700 transition-colors">
-                    <div className='rounded-full has-[[data-state=checked]]:bg-green-600'>
-                        <RadioGroupItem value="Completed" id="r2" />
-                    </div>
+                <Label htmlFor="r2" className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer transition-colors">
+                    <RadioGroupItem value="Completed" id="r2" className='text-green-600'/>
                     Completed
                 </Label>
                 
-                <Label htmlFor="r3" className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer bg-[#1a2231] border-gray-300 dark:border-gray-700 transition-colors">
-                    <div className='rounded-full has-[[data-state=checked]]:bg-yellow-600'>
-                        <RadioGroupItem value="On Hold" id="r3" />
-                    </div>
+                <Label htmlFor="r3" className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer transition-colors">
+                    <RadioGroupItem value="On Hold" id="r3" className='text-yellow-600'/>
                     On Hold
                 </Label>
 
-                <Label htmlFor="r4" className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer bg-[#1a2231] border-gray-300 dark:border-gray-700 transition-colors">
-                    <div className='rounded-full has-[[data-state=checked]]:bg-purple-600'>
-                        <RadioGroupItem value="Plan to Read" id="r4" />
-                    </div>
+                <Label htmlFor="r4" className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer transition-colors">
+                    <RadioGroupItem value="Plan to Read" id="r4" className='text-purple-600'/>
                     Plan to Read
                 </Label>
 
-                <Label htmlFor="r5" className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer bg-[#1a2231] border-gray-300 dark:border-gray-700 transition-colors">
-                    <div className='rounded-full has-[[data-state=checked]]:bg-red-600'>
-                        <RadioGroupItem value="Dropped" id="r5" />
-                    </div>
+                <Label htmlFor="r5" className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer transition-colors">
+                    <RadioGroupItem value="Dropped" id="r5" className='text-red-600'/>
                     Dropped
                 </Label> 
                 
-                <Label htmlFor="r6" className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer bg-[#1a2231] border-gray-300 dark:border-gray-700 transition-colors">
-                    <div className='rounded-full has-[[data-state=checked]]:bg-red-600'>
-                        <RadioGroupItem value="Cancelled" id="r6" />
-                    </div>
+                <Label htmlFor="r6" className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer transition-colors">
+                    <RadioGroupItem value="Cancelled" id="r6" className='text-red-600'/>
                     Cancelled
                 </Label>
             </RadioGroup>

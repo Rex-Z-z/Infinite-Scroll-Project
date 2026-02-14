@@ -4,14 +4,14 @@ import { DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHead
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from '@/components/ui/input-group';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Info, Plus, Trash2 } from 'lucide-react';
+import { ImageOff, Info, Plus, Trash2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 // --- Mock "Backend" Data: Global List of Available Sources ---
 // In a real app, you would fetch this from your API or pass it as a prop.
 const AVAILABLE_SOURCES = [
-    { name: "Asura Scans", icon: "/icons/asura-icon.png", url: "https://asuratoon.com" },
+    { name: "Asura Scans", icon: "", url: "https://asuratoon.com" },
     { name: "Webtoon", icon: "/icons/webtoon-icon.png", url: "https://webtoons.com" },
     { name: "Flame Scans", icon: "/icons/flame-icon.png", url: "https://flamecomics.com" },
 ];
@@ -100,9 +100,11 @@ const SourceEdit = ({ source = [], sourceIcon = [], sourceUrl = [], onSave }: So
                 {linkedSources.map((item, index) => (
                     <div key={index} className="flex flex-row gap-2 items-center animate-in fade-in slide-in-from-top-1">
                         {/* Icon (Read-only) */}
-                        <Avatar className='relative block bg-gray-600 w-10 h-10'>
+                        <Avatar className='relative block bg-accent w-10 h-10'>
                             <AvatarImage src={item.icon} />
-                            <AvatarFallback className='!rounded-sm text-xs'>IMG</AvatarFallback>
+                            <AvatarFallback>
+                                <ImageOff className='size-5'/>
+                            </AvatarFallback>
                         </Avatar>
 
                         {/* URL (Read-only) */}
@@ -159,13 +161,18 @@ const SourceEdit = ({ source = [], sourceIcon = [], sourceUrl = [], onSave }: So
                                     availableOptions.map((source) => (
                                         <SelectItem key={source.name} value={source.name}>
                                             <div className="flex items-center gap-2">
-                                                <img src={source.icon} alt="" className="w-4 h-4 rounded-full" />
+                                                <Avatar className='relative block bg-accent w-7 h-7'>
+                                                    <AvatarImage src={source.icon} />
+                                                    <AvatarFallback>
+                                                        <ImageOff className='size-4'/>
+                                                    </AvatarFallback>
+                                                </Avatar>
                                                 <span>{source.name}</span>
                                             </div>
                                         </SelectItem>
                                     ))
                                 ) : (
-                                    <div className="p-2 text-sm text-center text-gray-500">No more sources available</div>
+                                    <div className="p-2 text-sm text-center text-muted-foreground">No more sources available</div>
                                 )}
                             </SelectGroup>
                         </SelectContent>
@@ -187,7 +194,7 @@ const SourceEdit = ({ source = [], sourceIcon = [], sourceUrl = [], onSave }: So
                     <Button type="button" variant="outline">Close</Button>
                 </DialogClose>
                 <DialogClose asChild>
-                    <Button type="button" className='bg-blue-500 hover:bg-blue-600 text-white' onClick={handleSave}>
+                    <Button type="button" className='hover:cursor-pointer' onClick={handleSave}>
                         Save Changes
                     </Button>
                 </DialogClose>

@@ -48,7 +48,7 @@ const LibraryRead = () => {
                 </div>
             </div>
             {isLoading && <SectionSkeleton />}
-            {error && <p className="text-red-500">{error}</p>}
+            {error && <p className="text-destructive">{error}</p>}
 
             {/* Card Sections */}
             <div ref={libraryContainerRef} className='flex flex-row gap-2 overflow-x-auto flex-nowrap pr-1 [&::-webkit-scrollbar]:hidden'>

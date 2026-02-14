@@ -10,16 +10,16 @@ const AccountSection = () => {
             <div className='flex flex-col gap-4'>
                 <div className='w-full flex flex-col gap-2'>
                     <Label>Username</Label>
-                    <Input type="text" placeholder="Username"  className='focus:border-2 focus:border-blue-600 focus:dark:border-blue-500'/>
+                    <Input type="text" placeholder="Username"/>
                 </div>
                 
                 <div className='w-full flex flex-col gap-2'>
                     <Label>Email</Label>
-                    <Input type="email" placeholder="Email"  className='focus:border-2 focus:border-blue-600 focus:dark:border-blue-500'/>
+                    <Input type="email" placeholder="Email"/>
                 </div>
                 
                 <div className='flex justify-end gap-2'>
-                    <Button variant="default" className='w-1/12 text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 hover:cursor-pointer'>Edit</Button>
+                    <Button variant="default" className='w-1/12 hover:cursor-pointer'>Edit</Button>
                 </div>
             </div>
         </div>

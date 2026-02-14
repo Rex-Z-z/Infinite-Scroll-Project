@@ -6,6 +6,8 @@ import SearchPreview from './search-preview';
 import { mockReads } from '@/lib/mock-data';
 import { ReadItem } from '@/lib/types';
 import { useRouter } from 'next/navigation';
+// Import your new Input Group components
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
 
 const SearchBar = () => {
     const router = useRouter();
@@ -16,7 +18,6 @@ const SearchBar = () => {
     
     const containerRef = useRef<HTMLDivElement>(null);
 
-    // Handle clicks outside to close the preview
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
@@ -27,13 +28,11 @@ const SearchBar = () => {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
-    // Filter results as user types
     useEffect(() => {
         if (!query) {
             setFilteredResults([]);
             return;
         }
-
         const lowerQuery = query.toLowerCase();
         const results = mockReads.filter(item => 
             item.title.toLowerCase().includes(lowerQuery) || 
@@ -43,9 +42,6 @@ const SearchBar = () => {
     }, [query]);
 
     const handleSelectResult = (item: ReadItem) => {
-        console.log('Navigate to:', item.title);
-        
-        // Add to history if not exists
         if (!history.includes(item.title)) {
              setHistory(prev => [item.title, ...prev].slice(0, 5));
         }
@@ -54,32 +50,29 @@ const SearchBar = () => {
         router.push(`/library/${item.id}`);
     };
 
-    const handleSelectHistory = (historyItem: string) => {
-        setQuery(historyItem);
-    };
-
     return (
-        // Add ref here to detect outside clicks
         <div className="relative w-xl" ref={containerRef}>
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5 z-10" />
-            
-            <input 
-                type="text" 
-                placeholder="Search" 
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onFocus={() => setIsFocused(true)}
-                className="w-full rounded-md border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 pl-10 pr-74 py-[7.6px] text-sm text-gray-900 dark:text-gray-100 transition focus:outline-none focus:ring-3 focus:ring-gray-200 focus:dark:ring-gray-700 focus:border-blue-600 focus:dark:border-blue-500 hover:border-gray-400 hover:dark:border-gray-600"
-            />
+            <InputGroup className="h-10">
+                <InputGroupAddon align="inline-start">
+                    <Search className="text-muted-foreground" />
+                </InputGroupAddon>
+                
+                <InputGroupInput 
+                    placeholder="Search" 
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    onFocus={() => setIsFocused(true)}
+                    className="text-sm"
+                />
+            </InputGroup>
 
-            {/* Render Preview if focused */}
             {isFocused && (
                 <SearchPreview 
                     results={filteredResults}
                     history={history}
                     isSearching={query.length > 0}
                     onSelectResult={handleSelectResult}
-                    onSelectHistory={handleSelectHistory}
+                    onSelectHistory={(term) => setQuery(term)}
                     onClearHistory={() => setHistory([])}
                 />
             )}

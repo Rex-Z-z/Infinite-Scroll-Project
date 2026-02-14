@@ -92,12 +92,12 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                 ) : (
                     <>
                         <input type="file" ref={fileInputRef} className="hidden" />
-                        <Button onClick={handleUploadClick} variant="outline" className='relative flex w-full h-99 aspect-[2/3] items-center justify-center group mb-3 hover:text-gray-400'>
+                        <Button onClick={handleUploadClick} variant="outline" className='relative flex w-full h-99 aspect-[2/3] items-center justify-center group mb-3 hover:text-muted-foreground'>
                             <ImagePlus className='size-18 text-gray-600 group-hover:scale-130 transition-all duration-300 ease-in-out' />
                         </Button>
                     </>
                 )}
-                <Button onClick={handleSwitch} variant="outline" size="icon" className="absolute size-8 top-2 left-2 bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 hover:cursor-pointer">
+                <Button onClick={handleSwitch} variant="secondary" size="icon" className="absolute size-8 top-2 left-2 hover:bg-accent hover:cursor-pointer">
                     <ArrowLeftRight  />
                 </Button>
             </div>
@@ -124,7 +124,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                             </Select>
                         ) : (
                             <>
-                                <h2 className='text-[10px] text-gray-400 font-semibold'>Type</h2>
+                                <h2 className='text-[10px] text-muted-foreground font-semibold'>Type</h2>
                                 <h1 className='text-sm font-semibold'>{data?.type || 'N/A'}</h1>
                             </>
                         )}
@@ -155,7 +155,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                             </Select>
                         ) : (
                             <>
-                                <h2 className='text-[10px] text-gray-400 font-semibold'>Rating</h2>
+                                <h2 className='text-[10px] text-muted-foreground font-semibold'>Rating</h2>
                                 <h1 className='text-sm font-semibold'>{data?.rating || 'N/A'}</h1>
                             </>
                         )}
@@ -184,7 +184,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                             </Select>
                         ) : (
                             <>
-                                <h2 className='text-[10px] text-gray-400 font-semibold'>Status</h2>
+                                <h2 className='text-[10px] text-muted-foreground font-semibold'>Status</h2>
                                 <h1 className='text-sm font-semibold'>{data?.status || 'N/A'}</h1>
                             </>
                         )}
@@ -200,7 +200,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                             <Input type='number' placeholder='Chapter' value={chapter} onChange={(e) => setChapter(e.target.value)}/>
                         ) : (
                             <>
-                                <h2 className='text-[10px] text-gray-400 font-semibold'>Chapter</h2>
+                                <h2 className='text-[10px] text-muted-foreground font-semibold'>Chapter</h2>
                                 <h1 className='text-sm font-semibold'>{data?.chapter || 'N/A'}</h1>
                             </>
                         )}
@@ -216,7 +216,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                             <LastReadDatePicker date={date} setDate={setDate} />
                         ) : (
                             <>
-                                <h2 className='text-[10px] text-gray-400 font-semibold'>Last read</h2>
+                                <h2 className='text-[10px] text-muted-foreground font-semibold'>Last read</h2>
                                 <h1 className='text-sm font-semibold'>{getLastReadDate()}</h1>
                             </>
                         )}
@@ -225,11 +225,11 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
 
                 {isEdit ? (
                     <div className='w-full grid grid-cols-2 gap-1.5'>
-                        <Button onClick={handleEdit} className='w-full text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 hover:cursor-pointer'>Save</Button>
+                        <Button onClick={handleEdit} className='w-full hover:cursor-pointer'>Save</Button>
                         <Button onClick={handleEdit} variant="outline" className='w-full hover:cursor-pointer'>Cancel</Button>
                     </div>
                 ) : (
-                    <Button onClick={handleEdit} className='w-full text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 hover:cursor-pointer'>Edit</Button>
+                    <Button onClick={handleEdit} className='w-full hover:cursor-pointer'>Edit</Button>
                 )}
             </div>
         </div>

@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
-import { CirclePlus, Globe, Pencil, Search, Trash2, Upload, Check, X } from 'lucide-react'
+import { CirclePlus, Globe, Pencil, Search, Trash2, Upload, Check, X, SearchX } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -91,12 +91,6 @@ const SourcesSection = () => {
         setSources(sources.map(s => 
             s.id === id ? { ...s, [field]: value } : s
         ))
-        
-        // Clear error as user types if it becomes valid (optional UX preference, 
-        // strictly clearing 'hasError' on change might hide the red border too early, 
-        // but here we just leave the error state until next save attempt or keep it persistent if fields are empty)
-        // For smoother UX: we can check validity here or just leave the red border until they fix it.
-        // Let's leave the validation check to the Save/Add action to be consistent with the request.
     }
 
     const handleSave = (id: string) => {
@@ -106,7 +100,6 @@ const SourcesSection = () => {
     }
 
     const handleEdit = (id: string) => {
-        // If editing another row, validate it first
         if (editingId && editingId !== id) {
             if (!validateSource(editingId)) return
         }
@@ -115,7 +108,7 @@ const SourcesSection = () => {
         setEditingId(id)
     }
 
-    const handleCancel = () => {
+    const handleCancel = (id: string) => {
         setEditingId(null)
         setHasError(false)
     }
@@ -152,7 +145,7 @@ const SourcesSection = () => {
 
             {/* Toolbar */}
             <div className='flex gap-2 items-center'>
-                <InputGroup className='py-4.5 has-[[data-slot=input-group-control]:focus-visible]:border-2 has-[[data-slot=input-group-control]:focus-visible]:border-blue-500'>
+                <InputGroup className='py-4.5'>
                     <InputGroupAddon>
                         <Search className='text-muted-foreground' />
                     </InputGroupAddon>
@@ -165,7 +158,7 @@ const SourcesSection = () => {
 
                 <Button 
                     variant="default" 
-                    className='text-black dark:text-white bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 hover:cursor-pointer'
+                    className='hover:cursor-pointer'
                     onClick={handleAddSource}
                 >
                     <CirclePlus />
@@ -174,9 +167,12 @@ const SourcesSection = () => {
             </div>
 
             {/* List */}
-            <div className='flex flex-col gap-2 border rounded-lg p-3 max-h-[400px] min-h-[400px] overflow-y-auto custom-scrollbar'>
+            <div className={cn('flex flex-col gap-2 border rounded-lg p-3 max-h-[400px] min-h-[400px] overflow-y-auto custom-scrollbar', filteredSources.length === 0 && 'items-center justify-center border-dashed')}>
                 {filteredSources.length === 0 ? (
-                     <div className="text-center text-muted-foreground py-4">No sources found</div>
+                     <div className='flex flex-col gap-2 justify-center text-muted-foreground items-center'>
+                        <SearchX className='size-10'/>
+                        <div className="text-center justify-center item-center text-muted-foreground">No sources found</div>
+                     </div>
                 ) : (
                     filteredSources.map((source) => {
                         const isEditing = editingId === source.id;
@@ -199,38 +195,9 @@ const SourcesSection = () => {
                                     )}
                                 </div>
 
-                                {/* URL */}
-                                <div className='w-full flex flex-col'>
-                                    <Label className={cn('text-xs', isEditing && hasError && !source.url.trim() && "text-red-500", isEditing ? "mb-1" : "ml-2.5")}>
-                                        URL
-                                    </Label>
-                                    {isEditing ? (
-                                        <Input
-                                            placeholder='https://example.com'
-                                            value={source.url}
-                                            onChange={(e) => handleUpdateSource(source.id, 'url', e.target.value)}
-                                            className={cn(
-                                                "bg-gray-50/50 dark:bg-gray-900/50 transition-colors duration-200",
-                                                hasError && !source.url.trim() ? "border-red-500 focus-visible:ring-red-500/50" : ""
-                                            )}
-                                        />
-                                    ) : (
-                                        <div className="flex items-center h-9 px-3 text-md truncate">
-                                            <a 
-                                                href={source.url} 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="text-blue-500 hover:underline hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 truncate"
-                                            >
-                                                {source.url || 'No URL'}
-                                            </a>
-                                        </div>
-                                    )}
-                                </div>
-
                                 {/* Name */}
                                 <div className='w-full flex flex-col'>
-                                    <Label className={cn('text-xs', isEditing && hasError && !source.name.trim() && "text-red-500", isEditing ? "mb-1" : "ml-2")}>
+                                    <Label className={cn('text-xs', isEditing && hasError && !source.name.trim() && "text-destructive", isEditing ? "mb-1" : "ml-2")}>
                                         Name
                                     </Label>
                                     {isEditing ? (
@@ -240,7 +207,7 @@ const SourcesSection = () => {
                                             onChange={(e) => handleUpdateSource(source.id, 'name', e.target.value)}
                                             className={cn(
                                                 "bg-gray-50/50 dark:bg-gray-900/50 transition-colors duration-200",
-                                                hasError && !source.name.trim() ? "border-red-500 focus-visible:ring-red-500/50" : ""
+                                                hasError && !source.name.trim() ? "border-destructive focus-visible:ring-destructive/50" : ""
                                             )}
                                         />
                                     ) : (
@@ -250,13 +217,42 @@ const SourcesSection = () => {
                                     )}
                                 </div>
 
+                                {/* URL */}
+                                <div className='w-full flex flex-col'>
+                                    <Label className={cn('text-xs', isEditing && hasError && !source.url.trim() && "text-destructive", isEditing ? "mb-1" : "ml-2.5")}>
+                                        URL
+                                    </Label>
+                                    {isEditing ? (
+                                        <Input
+                                            placeholder='https://example.com'
+                                            value={source.url}
+                                            onChange={(e) => handleUpdateSource(source.id, 'url', e.target.value)}
+                                            className={cn(
+                                                "bg-gray-50/50 dark:bg-gray-900/50 transition-colors duration-200",
+                                                hasError && !source.url.trim() ? "border-destructive focus-visible:ring-destructive/50" : ""
+                                            )}
+                                        />
+                                    ) : (
+                                        <div className="flex items-center h-9 px-3 text-md truncate">
+                                            <a 
+                                                href={source.url} 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="text-primary hover:underline hover:text-primary/80 truncate"
+                                            >
+                                                {source.url || 'No URL'}
+                                            </a>
+                                        </div>
+                                    )}
+                                </div>
+
                                 {/* Actions */}
                                 <div className='flex gap-2 mt-5'>
                                     {isEditing ? (
                                         <Button
-                                            variant="outline"
+                                            variant="default"
                                             size='icon'
-                                            className="text-green-600 hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-950/50 border-green-200 dark:border-green-900"
+                                            className="hover:cursor-pointer"
                                             onClick={() => handleSave(source.id)}
                                             title="Save"
                                         >
@@ -272,23 +268,22 @@ const SourcesSection = () => {
                                             <Pencil className="w-4 h-4" />
                                         </Button>
                                     )}
-                                    
 
                                     {isEditing ? (
                                         <Button
-                                            variant="outline"
+                                            variant="destructive"
                                             size='icon'
-                                            className="text-red-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/50 border-red-200 dark:border-red-900"
-                                            onClick={() => handleCancel()}
-                                            title="Remove"
+                                            className="hover:cursor-pointer"
+                                            onClick={() => handleCancel(source.id)}
+                                            title="Cancel"
                                         >
                                             <X className="w-4 h-4" />
                                         </Button>
                                     ) : (
                                         <Button
-                                            variant="outline"
+                                            variant="destructive"
                                             size='icon'
-                                            className="text-red-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/50 border-red-200 dark:border-red-900"
+                                            className="hover:cursor-pointer"
                                             onClick={() => handleRemoveSource(source.id)}
                                             title="Remove"
                                         >

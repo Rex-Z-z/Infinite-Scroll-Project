@@ -57,7 +57,7 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                             <TooltipTrigger asChild>
                                 <h1 
                                     onClick={() => handleCopy(data?.title, 'title')}
-                                    className='text-3xl font-semibold line-clamp-2 hover:text-gray-600 dark:hover:text-gray-300 cursor-pointer transition-colors w-fit' 
+                                    className='text-3xl font-semibold line-clamp-2 cursor-pointer transition-colors w-fit' 
                                     title={data?.title}
                                 >
                                     {data?.title}
@@ -77,7 +77,7 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                                 <TooltipTrigger asChild>
                                     <h2 
                                         onClick={() => handleCopy(data?.altTitle, 'alt')}
-                                        className='text-lg text-gray-500 font-semibold line-clamp-1 hover:text-gray-400 dark:hover:text-gray-400 cursor-pointer transition-colors w-fit' 
+                                        className='text-lg text-muted-foreground font-semibold line-clamp-1 cursor-pointer transition-colors w-fit' 
                                         title={data?.altTitle}
                                     >
                                         {data?.altTitle}
@@ -93,7 +93,7 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                     {/* Tags */}
                     <div className='flex flex-row gap-1.5'>
                         {data?.tags?.map((tag) => (
-                        <Badge key={tag} variant="secondary" className="bg-blue-500 text-white dark:bg-blue-600 dark:hover:bg-blue-700 px-2.5 py-1.5 rounded-2xl">
+                        <Badge key={tag} variant="default" className="px-2.5 py-1.5 hover:bg-primary/80 rounded-2xl">
                             {tag}
                         </Badge>
                         ))}
@@ -101,22 +101,24 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
 
                     <div className='mt-2'>
                         <h1 className='text-lg font-semibold mb-1'>More Info</h1>
-                        <p className='text-sm text-gray-500 font-semibold'>Published: <span className='text-gray-300'>{data?.published || 'N/A'}</span> </p>
-                        <p className='text-sm text-gray-500 font-semibold'>Updated: <span className='text-gray-300'>{data?.updated || 'N/A'}</span></p>
-                        <p className='text-sm text-gray-500 font-semibold'>Status: <span className='text-gray-300'>{data?.status || 'N/A'}</span></p>
-                        <p className='text-sm text-gray-500 font-semibold'>Chapter: <span className='text-gray-300'>{data?.comicChapter || 'N/A'}</span></p>
+                        <div className='flex flex-col gap-1'>
+                            <p className='text-sm text-muted-foreground font-semibold'>Published: <span className='text-foreground'>{data?.published || 'N/A'}</span> </p>
+                            <p className='text-sm text-muted-foreground font-semibold'>Updated: <span className='text-foreground'>{data?.updated || 'N/A'}</span></p>
+                            <p className='text-sm text-muted-foreground font-semibold'>Status: <span className='text-foreground'>{data?.status || 'N/A'}</span></p>
+                            <p className='text-sm text-muted-foreground font-semibold'>Chapter: <span className='text-foreground'>{data?.comicChapter || 'N/A'}</span></p>
+                        </div>
                     </div>
                     
                     {/* Description */}
                     <div className='mt-2'>
                         <h1 className='text-md font-semibold'>Description</h1>
-                        <p className={cn('text-sm text-gray-500 font-semibold', needsTruncation && !isExpanded && 'line-clamp-3' )}>
-                        {data?.desc}
+                        <p className={cn('text-sm text-muted-foreground font-semibold', needsTruncation && !isExpanded && 'line-clamp-3' )}>
+                            {data?.desc}
                         </p>
                         {needsTruncation && (
-                        <Button variant="link" onClick={() => setIsExpanded(!isExpanded)} className="text-blue-500 hover:underline text-sm font-semibold p-0 hover:cursor-pointer" >
-                            {isExpanded ? 'Show Less' : 'Show More'}
-                        </Button>
+                            <Button variant="link" onClick={() => setIsExpanded(!isExpanded)} className="text-primary hover:underline text-sm font-semibold p-0 hover:cursor-pointer" >
+                                {isExpanded ? 'Show Less' : 'Show More'}
+                            </Button>
                         )}
                     </div>
                 </div>
@@ -130,7 +132,7 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                             <div className='flex flex-row gap-1.5'>
                                 {data?.source?.map((source, index) => (
                                     <Link target='_blank' href={data.sourceUrl[index]} key={source}>
-                                        <Badge key={source} variant="secondary" className="px-2.5 py-1.5 hover:bg-gray-700 rounded-2xl">
+                                        <Badge key={source} variant="secondary" className="px-2.5 py-1.5 hover:bg-accent rounded-2xl">
                                             <img
                                                 src={data.sourceIcon[index]}
                                                 alt={`${source} logo`}
@@ -156,7 +158,7 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                                 {relatedComics.map((comic) => (
                                     <Link key={comic.id} href={`/library/${comic.id}`}>
                                         <div key={comic.id} className='flex-none w-32 flex flex-col gap-2 group cursor-pointer'>
-                                            <div className='relative w-full aspect-[2/3] rounded-md overflow-hidden bg-gray-800 shadow-md'>
+                                            <div className='relative w-full aspect-[2/3] rounded-md overflow-hidden shadow-md'>
                                                 {comic.coverImage ? (
                                                     <img
                                                         src={comic.coverImage}
@@ -165,11 +167,11 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                                                     />
                                                 ) : (
                                                     <div className='flex h-full items-center justify-center'>
-                                                        <Image className='text-gray-500' />
+                                                        <Image className='text-muted-foreground' />
                                                     </div>
                                                 )}
                                             </div>
-                                            <span className='text-xs font-medium text-gray-400 group-hover:text-blue-500 line-clamp-2 transition-colors'>
+                                            <span className='text-xs font-medium text-muted-foreground group-hover:text-primary line-clamp-2 transition-colors'>
                                                 {comic.title}
                                             </span>
                                         </div>
@@ -184,7 +186,7 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                         <h1 className='text-md font-semibold mb-2.5'>Tags</h1>
                         <div className='flex flex-row gap-1.5'>
                             {data?.category?.map((category) => (
-                                <Badge key={category} variant="secondary" className="bg-gray-500 text-white dark:bg-gray-600 dark:hover:bg-gray-700 px-2.5 py-1.5 rounded-md">
+                                <Badge key={category} variant="secondary" className="px-2.5 py-1.5 hover:bg-accent rounded-md">
                                     {category}
                                 </Badge>
                             ))}

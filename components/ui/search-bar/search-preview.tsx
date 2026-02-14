@@ -21,12 +21,12 @@ const SearchPreview = ({
   onClearHistory,
 }: SearchPreviewProps) => {
     return (
-            <div className="absolute top-full left-0 w-full mt-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-md shadow-lg z-50 overflow-hidden">
+            <div className="absolute top-full left-0 w-full mt-2 bg-card border rounded-md shadow-lg z-50 overflow-hidden">
             
                 {/* Show History when not searching (query is empty) */}
                 {!isSearching && (
                     <div className="p-2">
-                        <div className="flex items-center justify-between px-3 py-2 text-xs font-semibold text-gray-500 uppercase">
+                        <div className="flex items-center justify-between px-3 py-2 text-xs font-semibold text-muted-foreground uppercase">
                             <span>Recent Searches</span>
                             {history.length > 0 && (
                             <button onClick={onClearHistory} className="hover:text-red-500 transition-colors">
@@ -35,16 +35,16 @@ const SearchPreview = ({
                             )}
                         </div>
                         {history.length === 0 ? (
-                            <div className="px-3 py-4 text-center text-sm text-gray-500">No recent searches</div>
+                            <div className="px-3 py-4 text-center text-sm text-muted-foreground">No recent searches</div>
                         ) : (
                             <ul>
                                 {history.map((term, index) => (
                                     <li
                                         key={index}
                                         onClick={() => onSelectHistory(term)}
-                                        className="flex items-center gap-3 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer rounded-md"
+                                        className="flex items-center gap-3 px-3 py-2 text-sm hover:bg-accent cursor-pointer rounded-md"
                                     >
-                                        <Clock className="w-4 h-4 text-gray-400" />
+                                        <Clock className="w-4 h-4 text-muted-foreground" />
                                         <span>{term}</span>
                                     </li>
                                 ))}
@@ -56,11 +56,11 @@ const SearchPreview = ({
                 {/* Show Search Results when searching */}
                 {isSearching && (
                     <div className="p-2">
-                        <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase">
+                        <div className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase">
                             Results
                         </div>
                         {results.length === 0 ? (
-                            <div className="px-3 py-4 text-center text-sm text-gray-500">
+                            <div className="px-3 py-4 text-center text-sm text-muted-foreground">
                                 No results found.
                             </div>
                         ) : (
@@ -69,7 +69,7 @@ const SearchPreview = ({
                                     <li
                                         key={item.id}
                                         onClick={() => onSelectResult(item)}
-                                        className="flex items-center gap-3 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer rounded-md"
+                                        className="flex items-center gap-3 px-3 py-2 hover:bg-accent cursor-pointer rounded-md"
                                     >
                                         {/* Image Thumbnail */}
                                         <div className="relative w-24 h-28 shrink-0 overflow-hidden rounded">
@@ -83,16 +83,16 @@ const SearchPreview = ({
                                         
                                         {/* Text Info */}
                                         <div className="flex flex-col gap-A overflow-hidden">
-                                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
+                                            <span className="text-sm font-medium truncate">
                                                 {item.title}
                                             </span>
-                                            <span className="text-xs text-gray-500 truncate">
+                                            <span className="text-xs text-muted-foreground/60 truncate">
                                                 {item.altTitle}
                                             </span>
-                                            <span className="text-sm font-medium text-gray-400 mt-0.5">
+                                            <span className="text-sm font-medium text-muted-foreground mt-0.5">
                                                 Chapter {item.chapter}
                                             </span>
-                                            <span className="text-xs text-blue-500 mt-0.5">
+                                            <span className="text-xs text-primary mt-0.5">
                                                 {item.type} • {item.rating}
                                             </span>
                                         </div>
