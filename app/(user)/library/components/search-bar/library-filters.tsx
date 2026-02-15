@@ -40,9 +40,9 @@ export function LibraryFilters() {
 
     // Type
     const [types, setTypes] = useState({
-        manga: false,
-        manhwa: false,
-        manhua: false,
+        manga: true,
+        manhwa: true,
+        manhua: true,
     });
 
     // Genres (Stored as a Set for easier toggling, or just an array)
@@ -74,13 +74,13 @@ export function LibraryFilters() {
 
     const handleReset = () => {
         setTimePreset("Recent");
-        setTypes({ manga: false, manhwa: false, manhua: false });
+        setTypes({ manga: true, manhwa: true, manhua: true });
         setSelectedGenres([]);
         setSelectedRatings([]);
     };
 
     return (
-        <Popover>
+        <Popover modal={true}>
             <PopoverTrigger asChild>
                 <Button 
                     variant="ghost" 

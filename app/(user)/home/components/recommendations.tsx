@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import useSWR from 'swr';
 import { ReadItem } from '@/lib/types';
-import DropdownHome from './ui/dropdown-home';
+import DropdownHome from './ui/home-filters';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import ComicCard from '@/components/ui/comic-card';
 import { fetchRecommendedReads } from '@/services/home/comic.service';
