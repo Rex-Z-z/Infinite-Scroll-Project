@@ -70,22 +70,19 @@ const DropdownHome = ({ section = 'recent-reads' }: NavBarProps) => {
     };
 
     return (
-        <Popover>
+        <Popover modal={true}>
             <PopoverTrigger asChild>
                 <Button 
                     variant="outline" 
-                    className="h-9 border-dashed flex items-center gap-2 px-3"
+                    className="h-9 flex items-center gap-2 px-3"
                 >
                     <Filter className="size-4" />
                     <span className="text-sm font-medium">Filters</span>
                     {activeFilterCount > 0 && (
                         <>
                             <Separator orientation="vertical" className="mx-1 h-4" />
-                            <Badge variant="secondary" className="rounded-sm px-1 font-normal lg:hidden">
+                            <Badge className="rounded-sm px-1 font-normal">
                                 {activeFilterCount}
-                            </Badge>
-                            <Badge variant="secondary" className="hidden rounded-sm px-1 font-normal lg:inline-flex">
-                                {activeFilterCount} selected
                             </Badge>
                         </>
                     )}
@@ -201,7 +198,7 @@ const DropdownHome = ({ section = 'recent-reads' }: NavBarProps) => {
 
                                 {/* --- Rating Section --- */}
                                 <div className="space-y-3">
-                                    <Label className="font-semibold text-blue-500">Rating</Label>
+                                    <Label className="font-semibold">Rating</Label>
                                     <div className="grid grid-cols-1 gap-2">
                                         {[
                                             { id: 'absoluteCinema', label: 'Absolute Cinema' },

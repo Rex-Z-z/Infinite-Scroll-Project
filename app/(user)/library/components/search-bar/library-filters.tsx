@@ -92,7 +92,7 @@ export function LibraryFilters() {
                     {activeCount > 0 && (
                         <>
                             <Separator orientation="vertical" className="mx-1 h-4" />
-                            <Badge variant="default" className="rounded-sm px-1 font-normal">
+                            <Badge className="rounded-sm px-1 font-normal">
                                 {activeCount}
                             </Badge>
                         </>
@@ -222,7 +222,7 @@ export function LibraryFilters() {
 
                         {/* --- Rating Section --- */}
                         <div className="space-y-3">
-                             <div className="flex items-center gap-2 text-sm font-semibold text-blue-500">
+                             <div className="flex items-center gap-2 text-sm font-semibold">
                                 <Star className="size-4" />
                                 Rating
                             </div>
