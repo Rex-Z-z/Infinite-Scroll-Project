@@ -10,27 +10,27 @@ import LastReadDatePicker from './lastread-datepicker';
 import SwitchComicImage from './switch-comic-image';
 
 const ratingColorMap: { [key: string]: string } = {
-    "Absolute Cinema": "bg-blue-400 hover:bg-blue-500",
-    "Awesome": "bg-green-700 hover:bg-green-800",
-    "Great": "bg-green-600 hover:bg-green-700",
-    "Good": "bg-yellow-400 hover:bg-yellow-500",
-    "Regular": "bg-orange-400 hover:bg-orange-500",
-    "Bad": "bg-red-500 hover:bg-red-600",
-    "Garbage": "bg-purple-400 hover:bg-purple-500",
+    "Absolute Cinema": "bg-blue-400/30 text-blue-400 border border-blue-400",
+    "Awesome": "bg-emerald-300/30 text-emerald-300 border border-emerald-300",
+    "Great": "bg-green-600/30 text-green-600 border border-green-600",
+    "Good": "bg-yellow-400/30 text-yellow-400 border border-yellow-400",
+    "Regular": "bg-orange-400/30 text-orange-400 border border-orange-400",
+    "Bad": "bg-red-400/30 text-red-400 border border-red-400",
+    "Garbage": "bg-stone-500/30 text-stone-400 border border-stone-500",
 };
 
 const statusColorMap: { [key: string]: string } = {
-    "Ongoing": "bg-blue-600 hover:bg-blue-700",
-    "Completed": "bg-green-600 hover:bg-green-700",
-    "On Hold": "bg-yellow-600 hover:bg-yellow-700",
-    "Dropped": "bg-red-600 hover:bg-red-700",
-    "Plan to data": "bg-purple-600 hover:bg-purple-700",
+    "Ongoing": "bg-sky-500/30 text-sky-400 border border-sky-500",
+    "Completed": "bg-green-500/30 text-green-400 border border-green-500",
+    "On Hold": "bg-amber-500/30 text-amber-400 border border-amber-500",
+    "Dropped": "bg-rose-500/30 text-rose-400 border border-rose-500",
+    "Plan to watch": "bg-purple-500/30 text-purple-400 border border-purple-500",
 };
 
 const typeColorMap: { [key: string]: string } = {
-    "Manga": "bg-purple-600 hover:bg-purple-700",
-    "Manhwa": "bg-green-600 hover:bg-green-700",
-    "Manhua": "bg-orange-600 hover:bg-orange-700",
+    "Manga": "bg-indigo-500/30 text-indigo-400 border border-indigo-500",
+    "Manhwa": "bg-cyan-500/30 text-cyan-400 border border-cyan-500",
+    "Manhua": "bg-orange-500/30 text-orange-400 border border-orange-500",
 };
 
 const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) => {
@@ -93,7 +93,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                     <>
                         <input type="file" ref={fileInputRef} className="hidden" />
                         <Button onClick={handleUploadClick} variant="outline" className='relative flex w-full h-99 aspect-[2/3] items-center justify-center group mb-3 hover:text-muted-foreground'>
-                            <ImagePlus className='size-18 text-gray-600 group-hover:scale-130 transition-all duration-300 ease-in-out' />
+                            <ImagePlus className='size-18 text-muted-foreground group-hover:scale-130 transition-all duration-300 ease-in-out' />
                         </Button>
                     </>
                 )}
@@ -192,7 +192,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                 </div>
 
                 <div className='flex flex-row gap-1.5'>
-                    <div className='p-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 rounded-md'>
+                    <div className='p-2 bg-indigo-600/30 text-indigo-500 border border-indigo-600 rounded-md'>
                         <Book className='size-5'/>
                     </div>
                     <div className='w-full'>
@@ -208,7 +208,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                 </div>
 
                 <div className='flex flex-row gap-1.5'>
-                    <div className='p-2 dark:bg-violet-600 dark:hover:bg-violet-700 rounded-md'>
+                    <div className='p-2 bg-violet-600/30 text-violet-500 border border-violet-600 rounded-md'>
                         <BookOpen className='size-5'/>
                     </div>
                     <div className='w-full'>
@@ -229,7 +229,10 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                         <Button onClick={handleEdit} variant="outline" className='w-full hover:cursor-pointer'>Cancel</Button>
                     </div>
                 ) : (
-                    <Button onClick={handleEdit} className='w-full hover:cursor-pointer'>Edit</Button>
+                    <div className='w-full grid grid-cols-2 gap-1.5'>
+                        <Button onClick={handleEdit} className='w-full hover:cursor-pointer'>Edit</Button>
+                        <Button variant="outline" className='w-full hover:cursor-pointer'>Delete</Button>
+                    </div>
                 )}
             </div>
         </div>

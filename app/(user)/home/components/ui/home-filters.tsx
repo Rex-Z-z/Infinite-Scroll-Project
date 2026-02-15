@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { CalendarCog, Filter, X } from 'lucide-react';
+import { CalendarCog, Filter, Star, Tag, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
     Popover,
@@ -26,6 +26,10 @@ interface NavBarProps {
     section?: 'recent-reads' | 'recommendations';
 }
 
+const RATINGS = [
+    "Absolute Cinema", "Awesome", "Great", "Good", "Regular", "Bad", "Garbage"
+];
+
 const DropdownHome = ({ section = 'recent-reads' }: NavBarProps) => {
     // --- State ---
     const [dateRange, setDateRange] = useState("Recent");
@@ -37,27 +41,26 @@ const DropdownHome = ({ section = 'recent-reads' }: NavBarProps) => {
 
     // Type
     const [types, setTypes] = useState({
-        manga: true,
-        manhwa: true,
-        manhua: true,
+        manga: false,
+        manhwa: false,
+        manhua: false,
     });
 
     // Rating
-    const [ratings, setRatings] = useState({
-        absoluteCinema: true,
-        awesome: true,
-        great: false,
-        good: false,
-        regular: false,
-        bad: false,
-        garbage: false,
-    });
+    const [selectedRatings, setSelectedRatings] = useState<string[]>([]);
+
+    const toggleRating = (rating: string) => {
+        setSelectedRatings(prev => 
+            prev.includes(rating) ? prev.filter(r => r !== rating) : [...prev, rating]
+        );
+    };
 
     // Helper to count active filters for a badge notification
     const activeFilterCount = [
         dateRange === "Custom",
-        !types.manga || !types.manhwa || !types.manhua, // If any type is unchecked
-        Object.values(ratings).some(r => r === true) // If any rating is checked (adjust logic as needed)
+        preset !== "Recent",
+        Object.values(types).some((t) => t),
+        selectedRatings.length > 0
     ].filter(Boolean).length;
 
     const handlePresetChange = (val: string) => {
@@ -67,6 +70,13 @@ const DropdownHome = ({ section = 'recent-reads' }: NavBarProps) => {
         } else {
             setDateRange("Custom");
         }
+    };
+
+    const handleReset = () => {
+        setPreset("Recent");
+        setDateRange("Recent");
+        setTypes({ manga: false, manhwa: false, manhua: false });
+        setSelectedRatings([]);
     };
 
     return (
@@ -96,12 +106,7 @@ const DropdownHome = ({ section = 'recent-reads' }: NavBarProps) => {
                         variant="ghost" 
                         size="sm" 
                         className="h-auto p-0 text-xs text-muted-foreground hover:text-primary"
-                        onClick={() => {
-                            // Reset logic here
-                            setPreset("Recent");
-                            setDateRange("Recent");
-                            setTypes({ manga: true, manhwa: true, manhua: true });
-                        }}
+                        onClick={handleReset}
                     >
                         Reset
                     </Button>
@@ -177,7 +182,10 @@ const DropdownHome = ({ section = 'recent-reads' }: NavBarProps) => {
                             <>
                                 {/* --- Type Section --- */}
                                 <div className="space-y-3">
-                                    <Label className="font-semibold">Type</Label>
+                                    <Label className="font-semibold">
+                                        <Tag className="size-4 text-muted-foreground" />
+                                        Type
+                                    </Label>
                                     <div className="flex flex-wrap gap-2">
                                         {Object.entries(types).map(([key, value]) => (
                                             <div 
@@ -198,27 +206,20 @@ const DropdownHome = ({ section = 'recent-reads' }: NavBarProps) => {
 
                                 {/* --- Rating Section --- */}
                                 <div className="space-y-3">
-                                    <Label className="font-semibold">Rating</Label>
-                                    <div className="grid grid-cols-1 gap-2">
-                                        {[
-                                            { id: 'absoluteCinema', label: 'Absolute Cinema' },
-                                            { id: 'awesome', label: 'Awesome' },
-                                            { id: 'great', label: 'Great' },
-                                            { id: 'good', label: 'Good' },
-                                            { id: 'regular', label: 'Regular' },
-                                            { id: 'bad', label: 'Bad' },
-                                            { id: 'garbage', label: 'Garbage' },
-                                        ].map((rate) => (
-                                            <div key={rate.id} className="flex items-center space-x-2">
+                                    <div className="flex items-center gap-2 text-sm font-semibold">
+                                        <Star className="size-4" />
+                                        Rating
+                                    </div>
+                                    <div className="space-y-2">
+                                        {RATINGS.map((rating) => (
+                                            <div key={rating} className="flex items-center space-x-2">
                                                 <Checkbox 
-                                                    id={rate.id} 
-                                                    checked={ratings[rate.id as keyof typeof ratings]}
-                                                    onCheckedChange={(checked) => 
-                                                        setRatings(prev => ({...prev, [rate.id]: checked as boolean}))
-                                                    }
+                                                    id={`rating-${rating}`} 
+                                                    checked={selectedRatings.includes(rating)}
+                                                    onCheckedChange={() => toggleRating(rating)}
                                                 />
-                                                <Label htmlFor={rate.id} className="text-sm font-normal cursor-pointer">
-                                                    {rate.label}
+                                                <Label htmlFor={`rating-${rating}`} className="text-sm font-normal cursor-pointer">
+                                                    {rating}
                                                 </Label>
                                             </div>
                                         ))}

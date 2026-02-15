@@ -40,9 +40,9 @@ export function LibraryFilters() {
 
     // Type
     const [types, setTypes] = useState({
-        manga: true,
-        manhwa: true,
-        manhua: true,
+        manga: false,
+        manhwa: false,
+        manhua: false,
     });
 
     // Genres (Stored as a Set for easier toggling, or just an array)
@@ -67,14 +67,14 @@ export function LibraryFilters() {
     // Calculate active filters count
     const activeCount = [
         timePreset !== "Recent",
-        Object.values(types).some(Boolean),
+        Object.values(types).some((t) => t),
         selectedGenres.length > 0,
         selectedRatings.length > 0
     ].filter(Boolean).length;
 
     const handleReset = () => {
         setTimePreset("Recent");
-        setTypes({ manga: true, manhwa: true, manhua: true });
+        setTypes({ manga: false, manhwa: false, manhua: false });
         setSelectedGenres([]);
         setSelectedRatings([]);
     };
