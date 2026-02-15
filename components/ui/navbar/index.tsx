@@ -20,7 +20,7 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
     const isLibraryPage = pathname === '/library';
     
     return (
-    <nav className={`sticky top-0 z-50 ${page === 'user' ? 'bg-card shadow-2xl' : ''}`}>
+    <nav className={`sticky top-0 z-50 ${page === 'user' ? 'bg-card shadow-sm' : ''}`}>
             <div className="flex flex-wrap items-center justify-between mx-auto p-3">
                 <a href="/home" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
