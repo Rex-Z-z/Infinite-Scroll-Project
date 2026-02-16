@@ -1,5 +1,6 @@
 'use client'
 
+import './globals.css'
 import React from 'react'
 import {
   Empty,
@@ -15,7 +16,7 @@ const NotFound = () => {
         <Empty className="py-12">
             <EmptyHeader>
                 <EmptyTitle className='text-[100px] font-bold'>404</EmptyTitle>
-                <EmptyDescription className='text-lg'>
+                <EmptyDescription className='text-md'>
                     The page you looking for might have been removed had its name changed or is temporarily unavailable
                 </EmptyDescription>
             </EmptyHeader>
