@@ -93,17 +93,17 @@ export const ImageUploader = React.memo(({ initialImageUrl, comicData }: ImageUp
                 <DialogTitle>
                   {comicData ? "Edit Comic" : "Add New Comic"}
                 </DialogTitle>
-                <DialogDescription className='flex flex-col mt-2 font-semibold'>
+                <DialogDescription>
                     {comicData ? "Edit the details of your comic." : "Add a new comic to your collection."}
-                    <div className='relative inline-block'>
-                      <Button variant="outline" onClick={handlePasteImage} className="flex items-center gap-2 mt-2 text-xs p-1">
-                          <Clipboard className="size-3.5" />
-                          Paste
-                      </Button>
-                      {showNoImageTooltip && <Tooltip2>No image on clipboard</Tooltip2>}
-                    </div>
                 </DialogDescription>
             </DialogHeader>
+            <div className='relative inline-block'>
+              <Button variant="outline" onClick={handlePasteImage} className="flex items-center gap-2 text-xs p-1">
+                  <Clipboard className="size-3.5" />
+                  Paste
+              </Button>
+              {showNoImageTooltip && <Tooltip2>No image on clipboard</Tooltip2>}
+            </div>
         </div>
     </div>
   );
