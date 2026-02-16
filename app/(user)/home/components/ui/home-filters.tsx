@@ -127,7 +127,6 @@ const DropdownHome = ({ section = 'recent-reads' }: NavBarProps) => {
                                     <Button
                                         key={period}
                                         variant={preset === period ? "default" : "outline"}
-                                        size="sm"
                                         className="justify-start text-xs"
                                         onClick={() => handlePresetChange(period)}
                                     >

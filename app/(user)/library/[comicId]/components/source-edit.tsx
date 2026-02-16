@@ -113,7 +113,6 @@ const SourceEdit = ({ source = [], sourceIcon = [], sourceUrl = [], onSave }: So
                                 placeholder='URL' 
                                 defaultValue={item.url} 
                                 disabled 
-                                className="text-gray-500 bg-gray-50/50 dark:bg-gray-900/50"
                             />
                             <Popover>
                                 <PopoverTrigger asChild>
@@ -134,15 +133,14 @@ const SourceEdit = ({ source = [], sourceIcon = [], sourceUrl = [], onSave }: So
                             placeholder='Name' 
                             defaultValue={item.name} 
                             disabled
-                            className="w-1/4 text-gray-500 bg-gray-50/50 dark:bg-gray-900/50"
+                            className="w-1/4 bg-transparent text-muted-foreground/30 border-0 disabled:opacity-100"
                         />
 
                         {/* Remove Button */}
                         <Button 
-                            variant="outline" 
-                            size='icon' 
-                            onClick={() => handleRemoveSource(index)} 
-                            className="shrink-0 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/50 border-red-200 dark:border-red-900"
+                            variant="destructive" 
+                            size='icon-lg' 
+                            onClick={() => handleRemoveSource(index)}
                         >
                             <Trash2 className="w-4 h-4" />
                         </Button>
@@ -179,12 +177,12 @@ const SourceEdit = ({ source = [], sourceIcon = [], sourceUrl = [], onSave }: So
                     </Select>
                     
                     <Button 
-                        variant="outline" 
+                        variant="default"
+                        size='icon-lg'
                         onClick={handleAddSource} 
                         disabled={!selectedSourceToAdd}
-                        className="shrink-0"
                     >
-                        <Plus className="mr-2 w-4 h-4" /> Add Source
+                        <Plus />
                     </Button>
                 </div>
             </div>

@@ -26,7 +26,7 @@ const LastReadDatePicker = ({ date, setDate }: LastReadDatePickerProps) => {
                 <Button
                     variant={"outline"}
                     className={cn(
-                        "w-full justify-start text-left font-normal h-9 px-3",
+                        "w-full justify-start text-left font-normal h-9.5 px-3",
                         !date && "text-muted-foreground"
                     )}
                 >

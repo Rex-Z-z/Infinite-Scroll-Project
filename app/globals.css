@@ -10,11 +10,11 @@
   --card-foreground: #171717;
   --popover: #fcfcfc;
   --popover-foreground: #525252;
-  --primary: #72e3ad;
-  --primary-foreground: #1e2723;
+  --primary: #80d7ff;
+  --primary-foreground: #ffffff;
   --secondary: #fdfdfd;
   --secondary-foreground: #171717;
-  --muted: #ededed;
+  --muted: #f5f5f5;
   --muted-foreground: #202020;
   --accent: #ededed;
   --accent-foreground: #202020;
@@ -40,21 +40,21 @@
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: monospace;
   --radius: 0.5rem;
-  --shadow-x: 0px;
+  --shadow-x: 0;
   --shadow-y: 1px;
   --shadow-blur: 3px;
   --shadow-spread: 0px;
   --shadow-opacity: 0.17;
   --shadow-color: #000000;
-  --shadow-2xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.09);
-  --shadow-xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.09);
-  --shadow-sm: 0px 1px 3px 0px hsl(0 0% 0% / 0.17), 0px 1px 2px -1px hsl(0 0% 0% / 0.17);
-  --shadow: 0px 1px 3px 0px hsl(0 0% 0% / 0.17), 0px 1px 2px -1px hsl(0 0% 0% / 0.17);
-  --shadow-md: 0px 1px 3px 0px hsl(0 0% 0% / 0.17), 0px 2px 4px -1px hsl(0 0% 0% / 0.17);
-  --shadow-lg: 0px 1px 3px 0px hsl(0 0% 0% / 0.17), 0px 4px 6px -1px hsl(0 0% 0% / 0.17);
-  --shadow-xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.17), 0px 8px 10px -1px hsl(0 0% 0% / 0.17);
-  --shadow-2xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.43);
-  --tracking-normal: 0.025em;
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.09);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.09);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.17), 0 1px 2px -1px hsl(0 0% 0% / 0.17);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.17), 0 1px 2px -1px hsl(0 0% 0% / 0.17);
+  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.17), 0 2px 4px -1px hsl(0 0% 0% / 0.17);
+  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.17), 0 4px 6px -1px hsl(0 0% 0% / 0.17);
+  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.17), 0 8px 10px -1px hsl(0 0% 0% / 0.17);
+  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.43);
+  --tracking-normal: 0em;
   --spacing: 0.25rem;
 }
 
@@ -95,20 +95,20 @@
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: monospace;
   --radius: 0.5rem;
-  --shadow-x: 0px;
+  --shadow-x: 0;
   --shadow-y: 1px;
   --shadow-blur: 3px;
   --shadow-spread: 0px;
   --shadow-opacity: 0.17;
   --shadow-color: #000000;
-  --shadow-2xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.09);
-  --shadow-xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.09);
-  --shadow-sm: 0px 1px 3px 0px hsl(0 0% 0% / 0.17), 0px 1px 2px -1px hsl(0 0% 0% / 0.17);
-  --shadow: 0px 1px 3px 0px hsl(0 0% 0% / 0.17), 0px 1px 2px -1px hsl(0 0% 0% / 0.17);
-  --shadow-md: 0px 1px 3px 0px hsl(0 0% 0% / 0.17), 0px 2px 4px -1px hsl(0 0% 0% / 0.17);
-  --shadow-lg: 0px 1px 3px 0px hsl(0 0% 0% / 0.17), 0px 4px 6px -1px hsl(0 0% 0% / 0.17);
-  --shadow-xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.17), 0px 8px 10px -1px hsl(0 0% 0% / 0.17);
-  --shadow-2xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.43);
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.09);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.09);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.17), 0 1px 2px -1px hsl(0 0% 0% / 0.17);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.17), 0 1px 2px -1px hsl(0 0% 0% / 0.17);
+  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.17), 0 2px 4px -1px hsl(0 0% 0% / 0.17);
+  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.17), 0 4px 6px -1px hsl(0 0% 0% / 0.17);
+  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.17), 0 8px 10px -1px hsl(0 0% 0% / 0.17);
+  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.43);
 }
 
 @theme inline {
@@ -162,13 +162,6 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
-
-  --tracking-tighter: calc(var(--tracking-normal) - 0.05em);
-  --tracking-tight: calc(var(--tracking-normal) - 0.025em);
-  --tracking-normal: var(--tracking-normal);
-  --tracking-wide: calc(var(--tracking-normal) + 0.025em);
-  --tracking-wider: calc(var(--tracking-normal) + 0.05em);
-  --tracking-widest: calc(var(--tracking-normal) + 0.1em);
 }
 
 body {

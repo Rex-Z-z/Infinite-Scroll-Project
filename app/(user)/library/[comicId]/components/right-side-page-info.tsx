@@ -132,7 +132,7 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                             <div className='flex flex-row gap-1.5'>
                                 {data?.source?.map((source, index) => (
                                     <Link target='_blank' href={data.sourceUrl[index]} key={source}>
-                                        <Badge key={source} variant="secondary" className="px-2.5 py-1.5 hover:bg-accent rounded-2xl">
+                                        <Badge key={source} variant="secondary" className="px-2.5 py-[6.5px] hover:bg-accent rounded-2xl">
                                             <img
                                                 src={data.sourceIcon[index]}
                                                 alt={`${source} logo`}

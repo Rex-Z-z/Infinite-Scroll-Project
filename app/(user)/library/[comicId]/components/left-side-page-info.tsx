@@ -97,7 +97,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                         </Button>
                     </>
                 )}
-                <Button onClick={handleSwitch} variant="secondary" size="icon" className="absolute size-8 top-2 left-2 hover:bg-accent hover:cursor-pointer">
+                <Button onClick={handleSwitch} variant="secondary" size="icon-lg" className="absolute top-2 left-2 hover:bg-accent hover:cursor-pointer">
                     <ArrowLeftRight  />
                 </Button>
             </div>
@@ -225,13 +225,13 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
 
                 {isEdit ? (
                     <div className='w-full grid grid-cols-2 gap-1.5'>
-                        <Button onClick={handleEdit} className='w-full hover:cursor-pointer'>Save</Button>
-                        <Button onClick={handleEdit} variant="outline" className='w-full hover:cursor-pointer'>Cancel</Button>
+                        <Button onClick={handleEdit} size="lg" className='w-full hover:cursor-pointer'>Save</Button>
+                        <Button onClick={handleEdit} variant="outline" size="lg" className='w-full hover:cursor-pointer'>Cancel</Button>
                     </div>
                 ) : (
                     <div className='w-full grid grid-cols-2 gap-1.5'>
-                        <Button onClick={handleEdit} className='w-full hover:cursor-pointer'>Edit</Button>
-                        <Button variant="outline" className='w-full hover:cursor-pointer'>Delete</Button>
+                        <Button onClick={handleEdit} size="lg" className='w-full hover:cursor-pointer'>Edit</Button>
+                        <Button variant="destructive" size="lg" className='w-full hover:cursor-pointer'>Delete</Button>
                     </div>
                 )}
             </div>

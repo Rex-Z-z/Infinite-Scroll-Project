@@ -83,8 +83,7 @@ export function LibraryFilters() {
         <Popover modal={true}>
             <PopoverTrigger asChild>
                 <Button 
-                    variant="ghost" 
-                    size="sm"
+                    variant="ghost"
                     className="h-7 gap-2 text-muted-foreground hover:text-foreground px-2"
                 >
                     <Filter className="h-4 w-4" />
@@ -104,8 +103,7 @@ export function LibraryFilters() {
                 <div className="flex items-center justify-between px-4 py-3 bg-muted/30">
                     <h4 className="font-semibold text-sm">Library Filters</h4>
                     <Button 
-                        variant="ghost" 
-                        size="sm" 
+                        variant="ghost"
                         className="h-auto p-0 text-xs text-muted-foreground hover:text-primary"
                         onClick={handleReset}
                     >
@@ -176,7 +174,6 @@ export function LibraryFilters() {
                                     <Button
                                         key={period}
                                         variant={timePreset === period ? "default" : "outline"}
-                                        size="sm"
                                         className="justify-start text-xs h-8"
                                         onClick={() => setTimePreset(period)}
                                     >
@@ -187,9 +184,8 @@ export function LibraryFilters() {
                             
                             {/* Custom Range Toggle */}
                             <Button 
-                                variant={timePreset === "Custom" ? "default" : "outline"} 
-                                size="sm" 
-                                className="w-full text-xs h-8 mt-1"
+                                variant={timePreset === "Custom" ? "default" : "outline"}
+                                className="w-full text-xs h-8"
                                 onClick={() => setTimePreset("Custom")}
                             >
                                 Custom Year Range

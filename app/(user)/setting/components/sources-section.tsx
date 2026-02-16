@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
-import { CirclePlus, Globe, Pencil, Search, Trash2, Upload, Check, X, SearchX } from 'lucide-react'
+import { Plus, Globe, Pencil, Search, Trash2, Upload, Check, X, SearchX } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -145,7 +145,7 @@ const SourcesSection = () => {
 
             {/* Toolbar */}
             <div className='flex gap-2 items-center'>
-                <InputGroup className='py-4.5'>
+                <InputGroup className='py-[17px]'>
                     <InputGroupAddon>
                         <Search className='text-muted-foreground' />
                     </InputGroupAddon>
@@ -158,10 +158,11 @@ const SourcesSection = () => {
 
                 <Button 
                     variant="default" 
+                    size="lg"
                     className='hover:cursor-pointer'
                     onClick={handleAddSource}
                 >
-                    <CirclePlus />
+                    <Plus />
                     Add Source
                 </Button>
             </div>
@@ -271,7 +272,7 @@ const SourcesSection = () => {
 
                                     {isEditing ? (
                                         <Button
-                                            variant="destructive"
+                                            variant="outline"
                                             size='icon'
                                             className="hover:cursor-pointer"
                                             onClick={() => handleCancel(source.id)}
