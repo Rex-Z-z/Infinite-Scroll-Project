@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Book, BookAlert, BookMarked, BookOpen, BookOpenCheck, BookX } from 'lucide-react';
 import useSWR from 'swr';
 import LibraryHeader from './components/library-header';
@@ -11,6 +10,7 @@ import SortDropdown, { SortOption } from './components/sort-dropdown';
 import ViewOptions, { ViewSize, ViewLayout } from './components/view-options';
 import BulkActionsPanel from './components/bulk-actions-panel';
 import SearchBar from './components/search-bar';
+import TabCarousel from './components/tab-carousel';
 import { fetchOngoingComicByType, fetchCompletedComicByType, fetchHoldComicByType, fetchDroppedComicByType, fetchPlanToReadComicByType } from '@/services/library/comic.service';
 import { ReadItem } from '@/lib/types';
 import EnhancedLibraryCard from './components/enhanced-library-card';
@@ -214,113 +214,98 @@ const Page = () => {
             isVisible={selectedIds.size > 0}
           />
 
-          {/* Tabs */}
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            {/* Tab List with counts */}
-            <div className="mb-6 bg-transparent flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
-              <TabsList className="bg-transparent p-0 m-0 gap-1 overflow-x-auto flex-wrap lg:flex-nowrap">
-                {[
-                  { value: 'ongoing', label: 'Ongoing', icon: BookOpen, count: statusCounts.ongoing },
-                  { value: 'completed', label: 'Completed', icon: BookOpenCheck, count: statusCounts.completed },
-                  { value: 'hold', label: 'On Hold', icon: Book, count: statusCounts.hold },
-                  { value: 'plan', label: 'Plan to Read', icon: BookMarked, count: statusCounts.plan },
-                  { value: 'dropped', label: 'Dropped', icon: BookAlert, count: statusCounts.dropped },
-                  { value: 'cancelled', label: 'Cancelled', icon: BookX, count: statusCounts.cancelled },
-                ].map(({ value, label, icon: Icon, count }) => (
-                  <TabsTrigger
-                    key={value}
-                    value={value}
-                    className='px-4 py-2 gap-2 dark:data-[state=active]:text-primary hover:cursor-pointer text-sm'
-                  >
-                    <Icon className='size-4' />
-                    <span className='hidden sm:inline'>{label}</span>
-                    <span className='ml-1 inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold rounded-full bg-muted text-muted-foreground'>
-                      {count}
-                    </span>
-                  </TabsTrigger>
-                ))}
-              </TabsList>
+          {/* Tabs Carousel */}
+          <div className="mb-6 space-y-4">
+            <TabCarousel
+              tabs={[
+                { value: 'ongoing', label: 'Ongoing', icon: BookOpen, count: statusCounts.ongoing },
+                { value: 'completed', label: 'Completed', icon: BookOpenCheck, count: statusCounts.completed },
+                { value: 'hold', label: 'On Hold', icon: Book, count: statusCounts.hold },
+                { value: 'plan', label: 'Plan to Read', icon: BookMarked, count: statusCounts.plan },
+                { value: 'dropped', label: 'Dropped', icon: BookAlert, count: statusCounts.dropped },
+                { value: 'cancelled', label: 'Cancelled', icon: BookX, count: statusCounts.cancelled },
+              ]}
+              activeTab={activeTab}
+              onTabChange={setActiveTab}
+            />
 
-              {/* Controls */}
-              <div className='flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto'>
-                <div className='flex items-center gap-2 flex-1 sm:flex-none'>
-                  <SortDropdown
-                    value={sortBy}
-                    isAscending={isAscending}
-                    onChange={(option, asc) => {
-                      setSortBy(option);
-                      setIsAscending(asc);
-                    }}
-                  />
-                  <ViewOptions
-                    size={viewSize}
-                    layout={viewLayout}
-                    onSizeChange={setViewSize}
-                    onLayoutChange={setViewLayout}
-                  />
-                </div>
-                <div className='w-full sm:w-auto'>
-                  <SearchBar />
-                </div>
+            {/* Controls */}
+            <div className='flex flex-col sm:flex-row sm:items-center gap-2'>
+              <div className='flex items-center gap-2 flex-1 sm:flex-none'>
+                <SortDropdown
+                  value={sortBy}
+                  isAscending={isAscending}
+                  onChange={(option, asc) => {
+                    setSortBy(option);
+                    setIsAscending(asc);
+                  }}
+                />
+                <ViewOptions
+                  size={viewSize}
+                  layout={viewLayout}
+                  onSizeChange={setViewSize}
+                  onLayoutChange={setViewLayout}
+                />
+              </div>
+              <div className='w-full sm:w-auto'>
+                <SearchBar />
               </div>
             </div>
+          </div>
 
-            {/* Tab Contents */}
-            {['ongoing', 'completed', 'hold', 'plan', 'dropped', 'cancelled'].map(status => (
-              <TabsContent key={status} value={status} className='mt-6'>
-                {isLoading && <SectionSkeleton />}
+          {/* Content */}
+          <div className='mt-6'>
+            {isLoading && <SectionSkeleton />}
 
-                {!isLoading && sortedReads.length > 0 && (
-                  <>
-                    <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-                      <AddNewModal comicData={editingComic} />
-                    </Dialog>
+            {!isLoading && sortedReads.length > 0 && (
+              <>
+                <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                  <AddNewModal comicData={editingComic} />
+                </Dialog>
 
-                    {viewLayout === 'grid' ? (
-                      <div className={`grid ${getGridCols()} gap-3 md:gap-4 lg:gap-6`}>
-                        {sortedReads.map(read => (
-                          <div key={read.id} className='min-w-0'>
-                            <EnhancedLibraryCard
-                              read={read}
-                              onEdit={handleEditComic}
-                              onStatusChange={handleStatusChange}
-                              onFavoriteToggle={handleFavoriteToggle}
-                              onDelete={handleDelete}
-                              onSelectToggle={handleSelectToggle}
-                              selected={selectedIds.has(read.id)}
-                              size={viewSize}
-                              isFavorite={favorites.has(read.id)}
-                            />
-                          </div>
-                        ))}
+                {viewLayout === 'grid' ? (
+                  <div className={`grid ${getGridCols()} gap-3 md:gap-4 lg:gap-6`}>
+                    {sortedReads.map(read => (
+                      <div key={read.id} className='min-w-0'>
+                        <EnhancedLibraryCard
+                          read={read}
+                          onEdit={handleEditComic}
+                          onStatusChange={handleStatusChange}
+                          onFavoriteToggle={handleFavoriteToggle}
+                          onDelete={handleDelete}
+                          onSelectToggle={handleSelectToggle}
+                          selected={selectedIds.has(read.id)}
+                          size={viewSize}
+                          isFavorite={favorites.has(read.id)}
+                        />
                       </div>
-                    ) : (
-                      <div className='space-y-2 md:space-y-3'>
-                        {sortedReads.map(read => (
-                          <EnhancedLibraryCard
-                            key={read.id}
-                            read={read}
-                            onEdit={handleEditComic}
-                            onStatusChange={handleStatusChange}
-                            onFavoriteToggle={handleFavoriteToggle}
-                            onDelete={handleDelete}
-                            onSelectToggle={handleSelectToggle}
-                            selected={selectedIds.has(read.id)}
-                            size="large"
-                            isFavorite={favorites.has(read.id)}
-                          />
-                        ))}
-                      </div>
-                    )}
-                  </>
+                    ))}
+                  </div>
+                ) : (
+                  <div className='space-y-2 md:space-y-3'>
+                    {sortedReads.map(read => (
+                      <EnhancedLibraryCard
+                        key={read.id}
+                        read={read}
+                        onEdit={handleEditComic}
+                        onStatusChange={handleStatusChange}
+                        onFavoriteToggle={handleFavoriteToggle}
+                        onDelete={handleDelete}
+                        onSelectToggle={handleSelectToggle}
+                        selected={selectedIds.has(read.id)}
+                        size="large"
+                        isFavorite={favorites.has(read.id)}
+                      />
+                    ))}
+                  </div>
                 )}
+              </>
+            )}
 
-                {!isLoading && sortedReads.length === 0 && (
-                  <LibraryEmptyState status={status === 'plan' ? 'Plan to Read' : status.charAt(0).toUpperCase() + status.slice(1)} />
-                )}
-              </TabsContent>
-            ))}
-          </Tabs>
+            {!isLoading && sortedReads.length === 0 && (
+              <LibraryEmptyState status={activeTab === 'plan' ? 'Plan to Read' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} />
+            )}
+          </div>
         </div>
       </div>
     </main>
