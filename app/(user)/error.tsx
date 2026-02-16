@@ -7,13 +7,12 @@ import {
   EmptyContent,
   EmptyDescription,
   EmptyHeader,
-  EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty"
 
 const error = () => {
     return (
-        <div className="flex items-center justify-center p-4">
+        <div className="flex h-[calc(88vh-2rem)] w-full flex-col items-center justify-center">
           <Empty className="py-12">
               <EmptyHeader>
                   <EmptyTitle className='text-[100px] font-bold'>404</EmptyTitle>

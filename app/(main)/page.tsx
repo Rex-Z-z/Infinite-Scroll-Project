@@ -1,5 +1,4 @@
 import React from 'react'
-import NavBar from '@/components/ui/navbar'
 
 const page = () => {
   return (
