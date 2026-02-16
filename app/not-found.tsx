@@ -8,37 +8,20 @@ import {
   EmptyHeader,
   EmptyTitle,
 } from "@/components/ui/empty"
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from "@/components/ui/input-group"
-import { Kbd } from "@/components/ui/kbd"
-import { SearchIcon } from "lucide-react"
+import { Button } from '@/components/ui/button'
 
 const NotFound = () => {
     return (
-        <Empty>
+        <Empty className="py-12">
             <EmptyHeader>
-                <EmptyTitle>404 - Not Found</EmptyTitle>
-                <EmptyDescription>
-                    The page you&apos;re looking for doesn&apos;t exist. Try searching for
-                    what you need below.
+                <EmptyTitle className='text-[100px] font-bold'>404</EmptyTitle>
+                <EmptyDescription className='text-lg'>
+                    The page you looking for might have been removed had its name changed or is temporarily unavailable
                 </EmptyDescription>
             </EmptyHeader>
-            <EmptyContent>
-                <InputGroup className="sm:w-3/4">
-                    <InputGroupInput placeholder="Try searching for pages..." />
-                    <InputGroupAddon>
-                        <SearchIcon />
-                    </InputGroupAddon>
-                    <InputGroupAddon align="inline-end">
-                        <Kbd>/</Kbd>
-                    </InputGroupAddon>
-                </InputGroup>
-                <EmptyDescription>
-                    Need help? <a href="#">Contact support</a>
-                </EmptyDescription>
+            <EmptyContent className="flex-row justify-center">
+                <Button>Back to Home</Button>
+                <Button variant="outline">Try again</Button>
             </EmptyContent>
         </Empty>
     )
