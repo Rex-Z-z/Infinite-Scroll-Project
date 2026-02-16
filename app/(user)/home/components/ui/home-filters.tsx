@@ -58,24 +58,26 @@ const defaultFilters: FilterState = {
     selectedRatings: [],
 };
 
-const DropdownHome = ({ section = 'recent-reads', onFilterChange, initialFilters = {} }: NavBarProps) => {
+const DropdownHome = ({ section = 'recent-reads', onFilterChange, initialFilters }: NavBarProps) => {
+    const filterDefaults = initialFilters || defaultFilters;
+
     // --- State ---
-    const [dateRange, setDateRange] = useState(initialFilters.dateRange ?? "Recent");
-    const [preset, setPreset] = useState(initialFilters.preset ?? "Recent");
+    const [dateRange, setDateRange] = useState(filterDefaults.dateRange ?? "Recent");
+    const [preset, setPreset] = useState(filterDefaults.preset ?? "Recent");
 
     // Custom Years
-    const [startYear, setStartYear] = useState(initialFilters.startYear ?? "2025");
-    const [endYear, setEndYear] = useState(initialFilters.endYear ?? "2025");
+    const [startYear, setStartYear] = useState(filterDefaults.startYear ?? "2025");
+    const [endYear, setEndYear] = useState(filterDefaults.endYear ?? "2025");
 
     // Type
-    const [types, setTypes] = useState(initialFilters.types ?? {
+    const [types, setTypes] = useState(filterDefaults.types ?? {
         manga: false,
         manhwa: false,
         manhua: false,
     });
 
     // Rating
-    const [selectedRatings, setSelectedRatings] = useState<string[]>(initialFilters.selectedRatings ?? []);
+    const [selectedRatings, setSelectedRatings] = useState<string[]>(filterDefaults.selectedRatings ?? []);
 
     const toggleRating = (rating: string) => {
         setSelectedRatings(prev =>
