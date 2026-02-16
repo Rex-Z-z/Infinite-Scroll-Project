@@ -22,38 +22,80 @@ import { Label } from '@/components/ui/label';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 
+export interface FilterState {
+    dateRange: string;
+    preset: string;
+    startYear: string;
+    endYear: string;
+    types: {
+        manga: boolean;
+        manhwa: boolean;
+        manhua: boolean;
+    };
+    selectedRatings: string[];
+}
+
 interface NavBarProps {
     section?: 'recent-reads' | 'recommendations';
+    onFilterChange?: (filters: FilterState) => void;
+    initialFilters?: Partial<FilterState>;
 }
 
 const RATINGS = [
     "Absolute Cinema", "Awesome", "Great", "Good", "Regular", "Bad", "Garbage"
 ];
 
-const DropdownHome = ({ section = 'recent-reads' }: NavBarProps) => {
+const defaultFilters: FilterState = {
+    dateRange: "Recent",
+    preset: "Recent",
+    startYear: "2025",
+    endYear: "2025",
+    types: {
+        manga: false,
+        manhwa: false,
+        manhua: false,
+    },
+    selectedRatings: [],
+};
+
+const DropdownHome = ({ section = 'recent-reads', onFilterChange, initialFilters = {} }: NavBarProps) => {
     // --- State ---
-    const [dateRange, setDateRange] = useState("Recent");
-    const [preset, setPreset] = useState("Recent");
-    
+    const [dateRange, setDateRange] = useState(initialFilters.dateRange ?? "Recent");
+    const [preset, setPreset] = useState(initialFilters.preset ?? "Recent");
+
     // Custom Years
-    const [startYear, setStartYear] = useState("2025");
-    const [endYear, setEndYear] = useState("2025");
+    const [startYear, setStartYear] = useState(initialFilters.startYear ?? "2025");
+    const [endYear, setEndYear] = useState(initialFilters.endYear ?? "2025");
 
     // Type
-    const [types, setTypes] = useState({
+    const [types, setTypes] = useState(initialFilters.types ?? {
         manga: false,
         manhwa: false,
         manhua: false,
     });
 
     // Rating
-    const [selectedRatings, setSelectedRatings] = useState<string[]>([]);
+    const [selectedRatings, setSelectedRatings] = useState<string[]>(initialFilters.selectedRatings ?? []);
 
     const toggleRating = (rating: string) => {
-        setSelectedRatings(prev => 
+        setSelectedRatings(prev =>
             prev.includes(rating) ? prev.filter(r => r !== rating) : [...prev, rating]
         );
     };
+
+    // Notify parent of filter changes
+    React.useEffect(() => {
+        if (onFilterChange) {
+            onFilterChange({
+                dateRange,
+                preset,
+                startYear,
+                endYear,
+                types,
+                selectedRatings,
+            });
+        }
+    }, [dateRange, preset, startYear, endYear, types, selectedRatings, onFilterChange]);
 
     // Helper to count active filters for a badge notification
     const activeFilterCount = [
@@ -75,8 +117,14 @@ const DropdownHome = ({ section = 'recent-reads' }: NavBarProps) => {
     const handleReset = () => {
         setPreset("Recent");
         setDateRange("Recent");
+        setStartYear("2025");
+        setEndYear("2025");
         setTypes({ manga: false, manhwa: false, manhua: false });
         setSelectedRatings([]);
+
+        if (onFilterChange) {
+            onFilterChange(defaultFilters);
+        }
     };
 
     return (
