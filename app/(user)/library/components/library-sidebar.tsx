@@ -75,7 +75,7 @@ const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
 
   if (isLoading) {
     return (
-      <div className='hidden lg:block w-64 space-y-4'>
+      <div className='space-y-4'>
         {[1, 2, 3].map(i => (
           <div key={i} className='h-20 bg-muted rounded-lg animate-pulse'></div>
         ))}
@@ -84,7 +84,7 @@ const LibrarySidebar: React.FC<LibrarySidebarProps> = ({
   }
 
   return (
-    <div className='hidden lg:block w-64 space-y-4 flex-shrink-0'>
+    <div className='space-y-4'>
       {/* Status Breakdown */}
       <div className='p-4 rounded-lg border bg-card/50'>
         <h3 className='font-semibold text-sm mb-4'>Status Breakdown</h3>

@@ -170,20 +170,27 @@ const Page = () => {
 
   return (
     <main className='min-h-screen bg-background'>
-      {/* Header */}
-      <LibraryHeader allReads={allReads} isLoading={isLoading} />
+      {/* Header - Full Width */}
+      <div className='border-b'>
+        <div className='px-4 py-6'>
+          <LibraryHeader allReads={allReads} isLoading={isLoading} />
+        </div>
+      </div>
 
-      <div className='max-w-7xl mx-auto px-4 py-6 flex gap-6'>
+      {/* Body - Flex Layout */}
+      <div className='flex gap-6 max-w-7xl mx-auto'>
         {/* Sidebar */}
-        <LibrarySidebar
-          allReads={allReads}
-          isLoading={isLoading}
-          selectedStatus={activeTab}
-          onStatusSelect={(status) => setActiveTab(status.toLowerCase())}
-        />
+        <div className='hidden lg:block w-64 flex-shrink-0 py-6'>
+          <LibrarySidebar
+            allReads={allReads}
+            isLoading={isLoading}
+            selectedStatus={activeTab}
+            onStatusSelect={(status) => setActiveTab(status.toLowerCase())}
+          />
+        </div>
 
         {/* Main Content */}
-        <div className='flex-1'>
+        <div className='flex-1 px-4 lg:px-0 py-6'>
           {/* Quick Filters */}
           <QuickFilters
             active={quickFilter}
