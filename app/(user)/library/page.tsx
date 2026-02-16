@@ -178,9 +178,9 @@ const Page = () => {
       </div>
 
       {/* Body - Flex Layout */}
-      <div className='flex gap-6 max-w-7xl mx-auto'>
+      <div className='flex gap-4 md:gap-6 max-w-7xl mx-auto px-4 lg:px-0 overflow-hidden'>
         {/* Sidebar */}
-        <div className='hidden lg:block w-64 flex-shrink-0 py-6'>
+        <div className='hidden lg:block w-64 flex-shrink-0 py-6 pr-2'>
           <LibrarySidebar
             allReads={allReads}
             isLoading={isLoading}
@@ -190,7 +190,7 @@ const Page = () => {
         </div>
 
         {/* Main Content */}
-        <div className='flex-1 px-4 lg:px-0 py-6'>
+        <div className='flex-1 min-w-0 py-6'>
           {/* Quick Filters */}
           <QuickFilters
             active={quickFilter}
@@ -217,8 +217,8 @@ const Page = () => {
           {/* Tabs */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             {/* Tab List with counts */}
-            <div className="gap-1.5 mb-6 bg-transparent flex flex-row justify-between items-center">
-              <TabsList className="bg-transparent p-0 m-0 gap-2">
+            <div className="mb-6 bg-transparent flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
+              <TabsList className="bg-transparent p-0 m-0 gap-1 overflow-x-auto flex-wrap lg:flex-nowrap">
                 {[
                   { value: 'ongoing', label: 'Ongoing', icon: BookOpen, count: statusCounts.ongoing },
                   { value: 'completed', label: 'Completed', icon: BookOpenCheck, count: statusCounts.completed },
@@ -242,22 +242,26 @@ const Page = () => {
               </TabsList>
 
               {/* Controls */}
-              <div className='flex items-center gap-2'>
-                <SearchBar />
-                <SortDropdown
-                  value={sortBy}
-                  isAscending={isAscending}
-                  onChange={(option, asc) => {
-                    setSortBy(option);
-                    setIsAscending(asc);
-                  }}
-                />
-                <ViewOptions
-                  size={viewSize}
-                  layout={viewLayout}
-                  onSizeChange={setViewSize}
-                  onLayoutChange={setViewLayout}
-                />
+              <div className='flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto'>
+                <div className='flex items-center gap-2 flex-1 sm:flex-none'>
+                  <SortDropdown
+                    value={sortBy}
+                    isAscending={isAscending}
+                    onChange={(option, asc) => {
+                      setSortBy(option);
+                      setIsAscending(asc);
+                    }}
+                  />
+                  <ViewOptions
+                    size={viewSize}
+                    layout={viewLayout}
+                    onSizeChange={setViewSize}
+                    onLayoutChange={setViewLayout}
+                  />
+                </div>
+                <div className='w-full sm:w-auto'>
+                  <SearchBar />
+                </div>
               </div>
             </div>
 
@@ -273,24 +277,25 @@ const Page = () => {
                     </Dialog>
 
                     {viewLayout === 'grid' ? (
-                      <div className={`grid ${getGridCols()} gap-6 auto-rows-max`}>
+                      <div className={`grid ${getGridCols()} gap-3 md:gap-4 lg:gap-6`}>
                         {sortedReads.map(read => (
-                          <EnhancedLibraryCard
-                            key={read.id}
-                            read={read}
-                            onEdit={handleEditComic}
-                            onStatusChange={handleStatusChange}
-                            onFavoriteToggle={handleFavoriteToggle}
-                            onDelete={handleDelete}
-                            onSelectToggle={handleSelectToggle}
-                            selected={selectedIds.has(read.id)}
-                            size={viewSize}
-                            isFavorite={favorites.has(read.id)}
-                          />
+                          <div key={read.id} className='min-w-0'>
+                            <EnhancedLibraryCard
+                              read={read}
+                              onEdit={handleEditComic}
+                              onStatusChange={handleStatusChange}
+                              onFavoriteToggle={handleFavoriteToggle}
+                              onDelete={handleDelete}
+                              onSelectToggle={handleSelectToggle}
+                              selected={selectedIds.has(read.id)}
+                              size={viewSize}
+                              isFavorite={favorites.has(read.id)}
+                            />
+                          </div>
                         ))}
                       </div>
                     ) : (
-                      <div className='space-y-3'>
+                      <div className='space-y-2 md:space-y-3'>
                         {sortedReads.map(read => (
                           <EnhancedLibraryCard
                             key={read.id}

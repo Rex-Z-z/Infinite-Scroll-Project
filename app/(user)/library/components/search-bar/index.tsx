@@ -11,8 +11,8 @@ import { LibraryFilters } from './library-filters';
 
 const SearchBar = () => {
     return (
-        <div className="w-full max-w-3xl">
-            <InputGroup className="py-4.5">
+        <div className="w-full">
+            <InputGroup className="py-2">
                 <InputGroupAddon>
                     <Search className="text-muted-foreground" />
                 </InputGroupAddon>
