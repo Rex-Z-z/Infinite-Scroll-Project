@@ -2,38 +2,43 @@
 
 import './globals.css'
 import React from 'react'
-import {
-  Empty,
-  EmptyContent,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyTitle,
-} from "@/components/ui/empty"
-import { Button } from '@/components/ui/button'
 import { ThemeProvider } from 'next-themes'
+import { Button } from '@/components/ui/button'
 
 const GlobalError = () => {
     return (
         <html>
-            <body className='flex min-h-screen flex-col items-center justify-center"'>
+            <body className='flex h-[calc(90vh-2rem)] flex-col items-center justify-center"'>
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="system"
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <Empty className="py-12">
-                        <EmptyHeader>
-                            <EmptyTitle className='text-[100px] font-bold'>404</EmptyTitle>
-                            <EmptyDescription className='text-lg'>
-                                The page you looking for might have been removed had its name changed or is temporarily unavailable
-                            </EmptyDescription>
-                        </EmptyHeader>
-                        <EmptyContent className="flex-row justify-center">
-                            <Button size="xl">Back to Home</Button>
-                            <Button variant="outline" size="xl">Try again</Button>
-                        </EmptyContent>
-                    </Empty>
+                    <div className='flex flex-col justify-center items-center'>
+                        <div className='relative flex items-center justify-center'>
+                            <h1 className='text-[350px] text-muted/20 font-bold select-none'>
+                                505
+                            </h1>
+                            <img 
+                                src="/error.svg" 
+                                alt="Server Error Illustration"
+                                className="absolute bottom-10 h-94 w-94 object-contain" 
+                            />
+                        </div>
+                        <div className='flex flex-col gap-2.5 justify-center items-center'>
+                            <h1 className='text-2xl font-semibold'>Internal Server Error</h1>
+                            <p className='w-max-sm text-center text-muted-foreground'>The server encountered an internal error and was unable to complete your request.</p>
+                            <Button 
+                                variant="default" 
+                                size="xl"
+                                onClick={() => window.location.reload()} 
+                                className='hover:cursor-pointer'
+                            >
+                                Refresh
+                            </Button>
+                        </div>
+                    </div>
                 </ThemeProvider>
             </body>
         </html>
