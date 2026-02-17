@@ -10,8 +10,7 @@ import { FilterState } from './ui/home-filters';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription } from '@/components/ui/empty';
 import { BookOpen, Grid2X2, List } from 'lucide-react';
-import { Dialog } from '@/components/ui/dialog';
-import AddNewCard from './ui/add-new-card';
+import { Dialog, DialogTitle } from '@/components/ui/dialog';
 import AddNewModal from '@/components/ui/add-new-modal';
 
 interface ResponsiveGridSectionProps {
@@ -23,7 +22,6 @@ interface ResponsiveGridSectionProps {
   isLoading: boolean;
   error: any;
   section: 'recent-reads' | 'recommendations';
-  showAddButton?: boolean;
   filters?: FilterState;
   onFilterChange?: (filters: FilterState) => void;
 }
@@ -59,7 +57,6 @@ const ResponsiveGridSection: React.FC<ResponsiveGridSectionProps> = ({
   isLoading,
   error,
   section,
-  showAddButton = false,
   filters,
   onFilterChange,
 }) => {
@@ -131,7 +128,7 @@ const ResponsiveGridSection: React.FC<ResponsiveGridSectionProps> = ({
       {!isLoading && !error && (
         <div>
           <Dialog open={isModalOpen} onOpenChange={handleModalOpenChange}>
-            {showAddButton && <AddNewCard />}
+            <DialogTitle className='sr-only'>Edit comic details</DialogTitle>
             <AddNewModal comicData={editingComic} />
           </Dialog>
 

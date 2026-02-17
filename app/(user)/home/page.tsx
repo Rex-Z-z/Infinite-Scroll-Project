@@ -41,7 +41,6 @@ const HomePage = () => {
           isLoading={recentLoading}
           error={recentError}
           section="recent-reads"
-          showAddButton={true}
           filters={recentFilters}
           onFilterChange={setRecentFilters}
         />
@@ -58,7 +57,6 @@ const HomePage = () => {
           isLoading={recommendedLoading}
           error={recommendedError}
           section="recommendations"
-          showAddButton={false}
           filters={recommendationFilters}
           onFilterChange={setRecommendationFilters}
         />
@@ -75,7 +73,6 @@ const HomePage = () => {
           isLoading={allLoading}
           error={allError}
           section="recent-reads"
-          showAddButton={false}
           filters={null}
         />
       </div>
