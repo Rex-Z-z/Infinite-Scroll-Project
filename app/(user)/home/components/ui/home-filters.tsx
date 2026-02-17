@@ -23,7 +23,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 
 interface NavBarProps {
-    section?: 'recent-reads' | 'recommendations';
+    section?: string
 }
 
 const RATINGS = [
