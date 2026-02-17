@@ -10,8 +10,6 @@ import { FilterState } from './ui/home-filters';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription } from '@/components/ui/empty';
 import { BookOpen, Grid2X2, List } from 'lucide-react';
-import { Dialog, DialogTitle } from '@/components/ui/dialog';
-import AddNewModal from '@/components/ui/add-new-modal';
 
 interface ResponsiveGridSectionProps {
   title: string;
@@ -61,22 +59,8 @@ const ResponsiveGridSection: React.FC<ResponsiveGridSectionProps> = ({
   onFilterChange,
 }) => {
   const [view, setView] = useState<'grid' | 'list'>('grid');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingComic, setEditingComic] = useState<ReadItem | null>(null);
 
   const filteredData = filters ? applyFilters(data || [], filters) : data;
-
-  const handleEdit = (read: ReadItem) => {
-    setEditingComic(read);
-    setIsModalOpen(true);
-  };
-
-  const handleModalOpenChange = (open: boolean) => {
-    setIsModalOpen(open);
-    if (!open) {
-      setEditingComic(null);
-    }
-  };
 
   return (
     <section className='flex flex-col w-full p-4 md:p-6 gap-4'>
@@ -127,11 +111,6 @@ const ResponsiveGridSection: React.FC<ResponsiveGridSectionProps> = ({
       {/* Cards Grid/List */}
       {!isLoading && !error && (
         <div>
-          <Dialog open={isModalOpen} onOpenChange={handleModalOpenChange}>
-            <DialogTitle className='sr-only'>Edit comic details</DialogTitle>
-            <AddNewModal comicData={editingComic} />
-          </Dialog>
-
           {filteredData && filteredData.length > 0 ? (
             <div className={
               view === 'grid'
@@ -139,10 +118,9 @@ const ResponsiveGridSection: React.FC<ResponsiveGridSectionProps> = ({
                 : 'space-y-2'
             }>
               {filteredData.map((read) => (
-                <EnhancedComicCard 
-                  key={read.id} 
-                  read={read} 
-                  onEdit={handleEdit}
+                <EnhancedComicCard
+                  key={read.id}
+                  read={read}
                   view={view}
                 />
               ))}

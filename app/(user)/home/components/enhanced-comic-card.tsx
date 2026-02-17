@@ -15,7 +15,7 @@ import {
 
 interface EnhancedComicCardProps {
   read: ReadItem;
-  onEdit: (read: ReadItem) => void;
+  onEdit?: (read: ReadItem) => void;
   view?: 'grid' | 'list';
 }
 
@@ -46,7 +46,9 @@ const EnhancedComicCard: React.FC<EnhancedComicCardProps> = ({
   const handleEditClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    onEdit(read);
+    if (onEdit) {
+      onEdit(read);
+    }
   };
 
   // Calculate progress percentage
@@ -109,14 +111,16 @@ const EnhancedComicCard: React.FC<EnhancedComicCardProps> = ({
                 )}
                 <span className='text-xs text-muted-foreground'>{read.type}</span>
               </div>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="size-8"
-                onClick={handleEditClick}
-              >
-                <Settings2 className="size-4" />
-              </Button>
+              {onEdit && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="size-8"
+                  onClick={handleEditClick}
+                >
+                  <Settings2 className="size-4" />
+                </Button>
+              )}
             </div>
           </div>
         </div>
@@ -164,19 +168,21 @@ const EnhancedComicCard: React.FC<EnhancedComicCardProps> = ({
                 <TooltipContent>View Details</TooltipContent>
               </Tooltip>
               
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button 
-                    variant="secondary" 
-                    size="icon" 
-                    className="rounded-full"
-                    onClick={handleEditClick}
-                  >
-                    <Settings2 className="size-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Edit Comic</TooltipContent>
-              </Tooltip>
+              {onEdit && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="secondary"
+                      size="icon"
+                      className="rounded-full"
+                      onClick={handleEditClick}
+                    >
+                      <Settings2 className="size-4" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Edit Comic</TooltipContent>
+                </Tooltip>
+              )}
             </TooltipProvider>
           </div>
         </div>
