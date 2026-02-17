@@ -48,11 +48,9 @@ const SwitchComicImage = ({ currentCover, availableImages, onCoverUpdate }: Swit
                 <DialogClose asChild>
                     <Button type="button" variant="outline">Close</Button>
                 </DialogClose>
-                <DialogClose asChild>
-                    <Button type="button" onClick={handleSave} className='hover:cursor-pointer'>
-                        Save Changes
-                    </Button>
-                </DialogClose>
+                <Button type="button" onClick={handleSave} className='hover:cursor-pointer'>
+                    Save Changes
+                </Button>
             </DialogFooter>
         </DialogContent>
     )

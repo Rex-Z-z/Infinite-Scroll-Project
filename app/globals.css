@@ -2,6 +2,9 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+@variant data-open (&[data-state="open"]);
+@variant data-closed (&[data-state="closed"]);
+@variant data-horizontal (&[data-orientation="horizontal"]);
 
 :root {
   --background: #fcfcfc;

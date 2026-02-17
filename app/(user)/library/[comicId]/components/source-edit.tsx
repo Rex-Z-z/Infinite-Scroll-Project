@@ -150,7 +150,7 @@ const SourceEdit = ({ source = [], sourceIcon = [], sourceUrl = [], onSave }: So
                 {/* Add New Source Section */}
                 <div className="flex gap-2 items-center pt-4 border-t">
                     <Select value={selectedSourceToAdd} onValueChange={setSelectedSourceToAdd}>
-                        <SelectTrigger className="w-full">
+                        <SelectTrigger className="w-full py-[17px]">
                             <SelectValue placeholder="Select a source to add..." />
                         </SelectTrigger>
                         <SelectContent>
@@ -191,11 +191,9 @@ const SourceEdit = ({ source = [], sourceIcon = [], sourceUrl = [], onSave }: So
                 <DialogClose asChild>
                     <Button type="button" variant="outline">Close</Button>
                 </DialogClose>
-                <DialogClose asChild>
-                    <Button type="button" className='hover:cursor-pointer' onClick={handleSave}>
-                        Save Changes
-                    </Button>
-                </DialogClose>
+                <Button type="button" className='hover:cursor-pointer' onClick={handleSave}>
+                    Save Changes
+                </Button>
             </DialogFooter>
         </DialogContent>
     )

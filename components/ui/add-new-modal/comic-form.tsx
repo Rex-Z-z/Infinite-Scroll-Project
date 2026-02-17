@@ -118,7 +118,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
                         Type
                     </Label>
                     <Select onValueChange={setType} value={type}>
-                        <SelectTrigger className="w-full">
+                        <SelectTrigger className="w-full py-[17px]">
                             <SelectValue placeholder="Select a type" />
                         </SelectTrigger>
                         <SelectContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
@@ -147,7 +147,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
                 Rating
             </Label>
             <Select onValueChange={setRating} value={rating}>
-                <SelectTrigger className="w-full">
+                <SelectTrigger className="w-full py-[17px]">
                     <SelectValue placeholder="Select a rating" />
                 </SelectTrigger>
                 <SelectContent className="w-[var(--radix-dropdown-menu-trigger-width)]">

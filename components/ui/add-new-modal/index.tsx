@@ -8,20 +8,18 @@ import { DialogClose, DialogContent, DialogFooter } from "@/components/ui/dialog
 
 const AddNewModal = ({ comicData }: { comicData: ReadItem | null }) => {
     return (
-        <DialogContent>
+        <DialogContent className='w-full'>
             <div className='flex flex-row gap-3'>
                 <ImageUploader initialImageUrl={comicData?.coverImage || null} comicData={comicData} />
             </div>
             
             <ComicForm comicData={comicData} />
 
-            <DialogFooter className='mt-4'>
+            <DialogFooter className='grid grid-cols-1 gap-2 sm:grid-cols-2'>
                 <DialogClose asChild>
-                    <Button variant="outline" className='w-1/2 hover:cursor-pointer'>Cancel</Button>
+                    <Button variant="outline" size="xl" className='hover:cursor-pointer'>Cancel</Button>
                 </DialogClose>
-                <DialogClose asChild>
-                    <Button className='w-1/2 hover:cursor-pointer'>Submit</Button>
-                </DialogClose>
+                <Button type='submit' size="xl" className='hover:cursor-pointer'>Save Change</Button>
             </DialogFooter>
         </DialogContent>
     );
