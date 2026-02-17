@@ -16,8 +16,6 @@ import { ReadItem } from '@/lib/types';
 import EnhancedLibraryCard from './components/enhanced-library-card';
 import LibraryEmptyState from './components/library-empty-state';
 import SectionSkeleton from '@/components/ui/section-skeleton';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
-import AddNewModal from '@/components/ui/add-new-modal';
 
 const fetcher = async () => {
   const [ongoing, completed, hold, dropped, plan] = await Promise.all([

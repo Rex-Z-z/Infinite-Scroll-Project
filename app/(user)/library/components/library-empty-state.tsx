@@ -16,6 +16,7 @@ import {
   Dialog,
   DialogTrigger,
   DialogContent,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import AddNewModal from '@/components/ui/add-new-modal';
 
@@ -79,6 +80,7 @@ const LibraryEmptyState: React.FC<LibraryEmptyStateProps> = ({ status }) => {
           </Button>
         </DialogTrigger>
         <DialogContent>
+          <DialogTitle className='sr-only'>Add a new comic</DialogTitle>
           <AddNewModal comicData={null} />
         </DialogContent>
       </Dialog>

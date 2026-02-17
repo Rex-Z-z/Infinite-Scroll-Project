@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Plus, Command } from 'lucide-react';
-import { Dialog, DialogTrigger, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import AddNewModal from '@/components/ui/add-new-modal';
 
 const QuickActionPanel: React.FC = () => {
@@ -66,6 +66,7 @@ const QuickActionPanel: React.FC = () => {
           </Button>
         </DialogTrigger>
         <DialogContent>
+          <DialogTitle className='sr-only'>Add a new comic</DialogTitle>
           <AddNewModal comicData={null} />
         </DialogContent>
       </Dialog>
