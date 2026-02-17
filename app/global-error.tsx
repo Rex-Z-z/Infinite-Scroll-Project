@@ -17,7 +17,7 @@ const GlobalError = () => {
                 >
                     <div className='flex flex-col justify-center items-center'>
                         <div className='relative flex items-center justify-center'>
-                            <h1 className='text-[350px] text-muted/20 font-bold select-none'>
+                            <h1 className='text-[350px] text-muted/20 font-bold select-none tracking-widest'>
                                 505
                             </h1>
                             <img 
