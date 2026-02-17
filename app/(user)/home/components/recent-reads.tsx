@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import useSWR from 'swr';
 import { ReadItem } from '@/lib/types';
 import AddNewCard from './ui/add-new-card';
@@ -10,26 +10,42 @@ import SectionSkeleton from '@/components/ui/section-skeleton';
 import ComicCard from '@/components/ui/comic-card';
 import { Dialog } from '@/components/ui/dialog';
 import { fetchRecentReads } from '@/services/home/comic.service';
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi, } from "@/components/ui/carousel"
 
 const fetcher = () => fetchRecentReads();
 
 const RecentReads = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingComic, setEditingComic] = useState<ReadItem | null>(null);
-    const recentReadsContainerRef = useRef<HTMLDivElement>(null);
     const { data: recentReads, isLoading, error } = useSWR(['recent-reads'], fetcher);
+    
+    // Carousel API state
+    const [api, setApi] = useState<CarouselApi>()
+    const [canScrollPrev, setCanScrollPrev] = useState(false)
+    const [canScrollNext, setCanScrollNext] = useState(false)
 
+    // Monitor Carousel state to enable/disable buttons
     useEffect(() => {
-        const container = recentReadsContainerRef.current;
-        if (container) {
-        const handleWheel = (e: WheelEvent) => {
-            e.preventDefault();
-            container.scrollLeft += e.deltaY;
-        };
-        container.addEventListener('wheel', handleWheel);
-        return () => container.removeEventListener('wheel', handleWheel);
+        if (!api) {
+            return
         }
-    }, []);
+
+        const updateScrollState = () => {
+            setCanScrollPrev(api.canScrollPrev())
+            setCanScrollNext(api.canScrollNext())
+        }
+
+        updateScrollState()
+        api.on("select", updateScrollState)
+        api.on("reInit", updateScrollState)
+
+        return () => {
+            api.off("select", updateScrollState)
+            api.off("reInit", updateScrollState)
+        }
+    }, [api])
 
     const handleEdit = (read: ReadItem) => {
         setEditingComic(read);
@@ -45,8 +61,8 @@ const RecentReads = () => {
 
     return (
         <section className='flex flex-col w-full p-4 gap-2'>
-            <div className='flex flex-row justify-between'>
-                <div className='flex flex-row'>
+            <div className='flex flex-row justify-between items-center'>
+                <div className='flex flex-row items-center gap-1'>
                     <p className='text-2xl font-bold hover:underline hover:cursor-pointer'>
                         <a href="/library">Recent Read</a>
                     </p>
@@ -55,29 +71,66 @@ const RecentReads = () => {
                     </svg>
                 </div>
 
-                {/* Date Sort */}
-                <div className='flex flex-row gap-1.5'>
+                {/* Filter Menu & Carousel Controls */}
+                <div className='flex flex-row gap-1 items-center'>
+                    {/* Only show controls if data is loaded */}
+                    {!isLoading && !error && (
+                        <div className="flex items-center gap-1">
+                            <Button 
+                                variant="outline" 
+                                size="icon" 
+                                className="size-[36px]" 
+                                onClick={() => api?.scrollPrev()} 
+                                disabled={!canScrollPrev}
+                            >
+                                <ChevronLeft className="h-4 w-4" />
+                            </Button>
+                            <Button 
+                                variant="outline" 
+                                size="icon" 
+                                className="size-[36px]" 
+                                onClick={() => api?.scrollNext()} 
+                                disabled={!canScrollNext}
+                            >
+                                <ChevronRight className="h-4 w-4" />
+                            </Button>
+                        </div>
+                    )}
                     <DropdownHome section='recent-reads'/>
                 </div>
             </div>
+            
             {isLoading && <SectionSkeleton />}
             {error && <p className="text-destructive">{error}</p>}
             
-            {/* Card Sections */}
-            <div ref={recentReadsContainerRef} className='flex flex-row gap-2 overflow-x-auto flex-nowrap pr-1 [&::-webkit-scrollbar]:hidden'>
-                { !isLoading && !error &&
-                    <Dialog open={isModalOpen} onOpenChange={handleModalOpenChange}>
-                        {!isLoading && !error && (
-                            <AddNewCard />
-                        )}
-                        <AddNewModal comicData={editingComic} />
-                    </Dialog>
-                }
-                
-                {!isLoading && !error && recentReads && recentReads.map((read) => (
-                    <ComicCard key={read.id} read={read} onEdit={handleEdit} />
-                ))}
-            </div>
+            {/* Carousel Content */}
+            { !isLoading && !error &&
+                <Dialog open={isModalOpen} onOpenChange={handleModalOpenChange}>
+                    <Carousel
+                        setApi={setApi}
+                        opts={{
+                            align: "start",
+                        }}
+                        className="w-full"
+                    >
+                        <CarouselContent>
+                            {/* Add New Card */}
+                            <CarouselItem className="pl-2 basis-1/3 sm:basis-1/5 xl:basis-1/6 3xl:basis-1/8 4xl:basis-1/12 5xl:basis-1/19">
+                                <AddNewCard />
+                            </CarouselItem>
+                            
+                            {/* Recent Reads Items */}
+                            {recentReads && recentReads.map((read) => (
+                                <CarouselItem key={read.id} className="pl-2 basis-1/3 sm:basis-1/5 xl:basis-1/6 3xl:basis-1/8 4xl:basis-1/12 5xl:basis-1/19">
+                                    <ComicCard read={read} onEdit={handleEdit} />
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                    </Carousel>
+                    
+                    <AddNewModal comicData={editingComic} />
+                </Dialog>
+            }
         </section>
     )
 }
