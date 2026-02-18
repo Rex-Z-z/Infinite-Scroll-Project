@@ -50,7 +50,7 @@ const ComicCard = ({ read, page = 'home', onEdit}: ComicCardProps) => {
                             </div>
                         )}
                         
-                        <Button onClick={handleEditClick} variant="secondary" size="icon" className="absolute size-8 top-2 left-2 hover:bg-accent hover:text-accent-foreground hover:cursor-pointer">
+                        <Button onClick={handleEditClick} variant="secondary" size="icon-sm" className="absolute top-2 left-2 hover:bg-accent hover:text-accent-foreground hover:cursor-pointer">
                             <Settings2 />
                         </Button>
                     </div>
@@ -62,7 +62,7 @@ const ComicCard = ({ read, page = 'home', onEdit}: ComicCardProps) => {
                                 <div className='flex flex-row gap-1'>
                                     <Badge variant="outline" className='hover:bg-accent/70'>
                                         <Star isFill className={statusColorMap[read.rating] || 'text-gray-400'}/>
-                                        {read.rating}
+                                        <span className='max-w-[60px] truncate'>{read.rating}</span>
                                     </Badge>
                                 </div>
                             ) : (
@@ -94,7 +94,7 @@ const ComicCard = ({ read, page = 'home', onEdit}: ComicCardProps) => {
                             </div>
                         )}
 
-                        <Button onClick={handleEditClick} variant="secondary" size="icon" className="absolute size-8 top-2 left-2 hover:bg-accent hover:cursor-pointer">
+                        <Button onClick={handleEditClick} variant="secondary" size="icon-sm" className="absolute top-2 left-2 hover:bg-accent hover:cursor-pointer">
                             <Settings2 />
                         </Button>
                     </div>
@@ -105,22 +105,22 @@ const ComicCard = ({ read, page = 'home', onEdit}: ComicCardProps) => {
                         <div className='flex flex-row justify-between text-sm font-normal text-muted-foreground'>
                             {read.rating ? (
                                 <div className='flex flex-row gap-1'>
-                                    <Badge size="sm" variant="outline"  className='hover:bg-accent/70'>
+                                    <Badge variant="outline"  className='hover:bg-accent/70'>
                                         <Star isFill className={statusColorMap[read.rating] || 'text-gray-400'}/>
                                         <span className='max-w-[60px] truncate'>{read.rating}</span>
                                     </Badge>
                                 </div>
                             ) : (
-                                <Badge size="sm" variant="outline" className='hover:bg-accent/70'>
+                                <Badge variant="outline" className='hover:bg-accent/70'>
                                     <Star isFill className='text-gray-400'/>
                                     No Rating
                                 </Badge>
                             )}
 
                             {read.chapter ? (
-                                <Badge size="sm" variant="outline" className='hover:bg-accent/70'>Chapter {read.chapter}</Badge>
+                                <Badge variant="outline" className='hover:bg-accent/70'>Chapter {read.chapter}</Badge>
                             ) : (
-                                <Badge size="sm" variant="outline" className='hover:bg-accent/70'>No Chapter</Badge>
+                                <Badge variant="outline" className='hover:bg-accent/70'>No Chapter</Badge>
                             )}
                         </div>
                     </div>

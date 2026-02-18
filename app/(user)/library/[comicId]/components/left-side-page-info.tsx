@@ -97,7 +97,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
                         </Button>
                     </>
                 )}
-                <Button onClick={handleSwitch} variant="secondary" size="icon-lg" className="absolute top-2 left-2 hover:bg-accent hover:cursor-pointer">
+                <Button onClick={handleSwitch} variant="secondary" size="icon-sm" className="absolute top-2 left-2 hover:bg-accent hover:cursor-pointer">
                     <ArrowLeftRight  />
                 </Button>
             </div>

@@ -144,7 +144,7 @@ const RightSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =
                                 ))}
                             </div>
                             
-                            <Button onClick={handleSourceEdit} size="icon" variant="secondary" className='rounded-full'>
+                            <Button onClick={handleSourceEdit} size="icon-sm" variant="secondary" className='rounded-full'>
                                 <Plus />
                             </Button>
                         </div>

@@ -139,10 +139,11 @@ const SourceEdit = ({ source = [], sourceIcon = [], sourceUrl = [], onSave }: So
                         {/* Remove Button */}
                         <Button 
                             variant="destructive" 
-                            size='icon-lg' 
+                            size='icon-sm' 
+                            className='p-[17px]'
                             onClick={() => handleRemoveSource(index)}
                         >
-                            <Trash2 className="w-4 h-4" />
+                            <Trash2 className="w-4 h-4 " />
                         </Button>
                     </div>
                 ))}
@@ -150,7 +151,7 @@ const SourceEdit = ({ source = [], sourceIcon = [], sourceUrl = [], onSave }: So
                 {/* Add New Source Section */}
                 <div className="flex gap-2 items-center pt-4 border-t">
                     <Select value={selectedSourceToAdd} onValueChange={setSelectedSourceToAdd}>
-                        <SelectTrigger className="w-full py-[17px]">
+                        <SelectTrigger className="w-full">
                             <SelectValue placeholder="Select a source to add..." />
                         </SelectTrigger>
                         <SelectContent>
@@ -159,10 +160,10 @@ const SourceEdit = ({ source = [], sourceIcon = [], sourceUrl = [], onSave }: So
                                     availableOptions.map((source) => (
                                         <SelectItem key={source.name} value={source.name}>
                                             <div className="flex items-center gap-2">
-                                                <Avatar className='relative block bg-accent w-7 h-7'>
+                                                <Avatar className='relative block bg-accent w-6 h-6'>
                                                     <AvatarImage src={source.icon} />
                                                     <AvatarFallback>
-                                                        <ImageOff className='size-4'/>
+                                                        <ImageOff className='size-3.5'/>
                                                     </AvatarFallback>
                                                 </Avatar>
                                                 <span>{source.name}</span>
@@ -178,7 +179,7 @@ const SourceEdit = ({ source = [], sourceIcon = [], sourceUrl = [], onSave }: So
                     
                     <Button 
                         variant="default"
-                        size='icon-lg'
+                        size='icon-sm'
                         onClick={handleAddSource} 
                         disabled={!selectedSourceToAdd}
                     >
