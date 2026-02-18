@@ -24,7 +24,9 @@ export default async function UserLayout({
           >
             <main>
               <NavBar />
-              {children}
+              <div className="px-30">
+                {children}
+              </div>
             </main>
           </ThemeProvider>
         </body>

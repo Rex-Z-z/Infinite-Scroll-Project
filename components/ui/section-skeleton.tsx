@@ -12,9 +12,9 @@ const SectionSkeleton = ({ page = 'home' }: SectionSkeletonProps) => {
     return (
         <div className={`${page === 'home' ? homeGridClasses : libraryGridClasses}`}>
             {[...Array(16)].map((_, index) => (
-                <div key={index} className={`flex flex-col gap-3 ${page === 'home' ? 'w-60 flex-shrink-0' : ''}`}>
-                    <Skeleton className={`${page === 'home' ? 'w-full h-[312px]' : 'w-full aspect-[2/3]'}`} />
-                    <div className="flex flex-col gap-3">
+                <div key={index} className={`flex flex-col gap-3 ${page === 'home' ? 'w-50 flex-shrink-0' : ''}`}>
+                    <Skeleton className={`${page === 'home' ? 'w-full h-[300px]' : 'w-full aspect-[2/3]'}`} />
+                    <div className="flex flex-col gap-3.5">
                         <Skeleton className="h-4 w-full"/>
                         <Skeleton className="h-4 w-1/2"/>
                         <div className="flex flex-row justify-between">

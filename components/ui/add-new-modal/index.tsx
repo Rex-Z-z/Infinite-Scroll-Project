@@ -17,9 +17,9 @@ const AddNewModal = ({ comicData }: { comicData: ReadItem | null }) => {
 
             <DialogFooter className='grid grid-cols-1 gap-2 sm:grid-cols-2'>
                 <DialogClose asChild>
-                    <Button variant="outline" size="xl" className='hover:cursor-pointer'>Cancel</Button>
+                    <Button variant="outline" size="lg" className='hover:cursor-pointer'>Cancel</Button>
                 </DialogClose>
-                <Button type='submit' size="xl" className='hover:cursor-pointer'>Save Change</Button>
+                <Button type='submit' size="lg" className='hover:cursor-pointer'>Save Change</Button>
             </DialogFooter>
         </DialogContent>
     );
