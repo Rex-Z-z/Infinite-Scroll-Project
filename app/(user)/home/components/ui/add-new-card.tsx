@@ -11,7 +11,7 @@ const AddNewCard = () => {
                         <CircleFadingPlus size={50} className='text-foreground' />
                     </div>
                 </div>
-                <div className="flex flex-col gap-2 p-2 hover:bg-accent/70 rounded-md">
+                <div className="flex flex-col gap-2 p-1 rounded-md">
                     <div className="bg-card hover:bg-accent h-4 w-full rounded-2xl" />
                     <div className="bg-card hover:bg-accent  h-4 w-1/2 rounded-2xl" />
                     <div className="flex flex-row justify-between mt-2.5">

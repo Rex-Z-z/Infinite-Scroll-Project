@@ -75,7 +75,7 @@ const DropdownHome = ({ section = 'recent-reads' }: NavBarProps) => {
             <PopoverTrigger asChild>
                 <Button 
                     variant="outline" 
-                    className="h-9 flex items-center gap-2 px-2.5"
+                    className="h-9 flex items-center gap-2 px-[9.5px]"
                 >
                     {activeFilterCount ? (
                         <FilterIcon isFill className="text-primary size-4"/>

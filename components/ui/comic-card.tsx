@@ -54,9 +54,9 @@ const ComicCard = ({ read, page = 'home', onEdit}: ComicCardProps) => {
                             <Settings2 />
                         </Button>
                     </div>
-                    <div className='mt-2 p-2 rounded-md'>
-                        <h5 className="mb-1 text-md font-bold tracking-tight max-w-180 truncate" title={read.title}>{read.title}</h5>
-                        <p className="mb-3 text-sm font-normal text-muted-foreground">{formatDistanceToNow(read.lastRead)}</p>
+                    <div className='mt-2 p-1 rounded-md'>
+                        <h5 className="mb-1 text-md hover:text-foreground/80 font-bold tracking-tight max-w-180 truncate" title={read.title}>{read.title}</h5>
+                        <p className="mb-3 text-sm font-normal text-muted-foreground hover:text-muted-foreground/80">{formatDistanceToNow(read.lastRead)}</p>
                         <div className='flex flex-row justify-between text-sm font-normal text-muted-foreground'>
                             {read.rating ? (
                                 <div className='flex flex-row gap-1'>
@@ -99,9 +99,9 @@ const ComicCard = ({ read, page = 'home', onEdit}: ComicCardProps) => {
                         </Button>
                     </div>
                 
-                    <div className='mt-2 p-2 rounded-md'>
-                        <h5 className="mb-1 text-sm font-semibold tracking-tight max-w-180 truncate" title={read.title}>{read.title}</h5>
-                        <p className="mb-3 text-xs font-normal text-muted-foreground">{formatDistanceToNow(read.lastRead)}</p>
+                    <div className='mt-2 p-1 rounded-md'>
+                        <h5 className="mb-1 text-sm hover:text-foreground/80 font-semibold tracking-tight max-w-180 truncate" title={read.title}>{read.title}</h5>
+                        <p className="mb-3 text-xs font-normal text-muted-foreground hover:text-muted-foreground/80">{formatDistanceToNow(read.lastRead)}</p>
                         <div className='flex flex-row justify-between text-sm font-normal text-muted-foreground'>
                             {read.rating ? (
                                 <div className='flex flex-row gap-1'>

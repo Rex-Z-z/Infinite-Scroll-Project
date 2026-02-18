@@ -11,7 +11,7 @@ import SectionSkeleton from '@/components/ui/section-skeleton';
 import ComicCard from '@/components/ui/comic-card';
 import { Dialog } from '@/components/ui/dialog';
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import {
     Carousel,
     CarouselContent,
@@ -130,8 +130,18 @@ const ComicSection = ({
                             </Button>
                         </div>
                     )}
+                    
                     {filterSection && (
                         <DropdownHome section={filterSection} />
+                    )}
+                    
+                    {showAddCard && (
+                        <Button 
+                            size="icon" 
+                            className="size-[36px]" 
+                        >
+                            <Plus  className="h-4 w-4" />
+                        </Button>
                     )}
                 </div>
             </div>
@@ -151,13 +161,6 @@ const ComicSection = ({
                         className="w-full"
                     >
                         <CarouselContent>
-                            {/* Conditionally render AddNewCard */}
-                            {showAddCard && (
-                                <CarouselItem className="pl-2 basis-1/3 sm:basis-1/5 xl:basis-1/6 3xl:basis-1/8 4xl:basis-1/12 5xl:basis-1/19">
-                                    <AddNewCard />
-                                </CarouselItem>
-                            )}
-                            
                             {reads && reads.map((read) => (
                                 <CarouselItem key={read.id} className="pl-2 basis-1/3 sm:basis-1/5 xl:basis-1/6 3xl:basis-1/8 4xl:basis-1/12 5xl:basis-1/19">
                                     <ComicCard read={read} onEdit={handleEdit} />

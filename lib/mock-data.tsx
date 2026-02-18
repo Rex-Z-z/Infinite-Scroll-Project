@@ -3,7 +3,7 @@ import { ReadItem } from '../lib/types';
 export const mockReads: ReadItem[] = [
   { 
     id: 1, 
-    type: "Manga", 
+    type: "Anime", 
     coverImage: "/pictures/image.png",
     availableImages: ["/pictures/image.png", "/pictures/image2.png"], 
     title: "A Regressor's Tale of Cultivation", 

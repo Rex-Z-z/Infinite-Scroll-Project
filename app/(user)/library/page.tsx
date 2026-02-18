@@ -13,7 +13,7 @@ const Page = () => {
   return (
     <div>
       <div className="flex flex-col p-4">
-        <h1 className="text-4xl font-semibold tracking-tight text-balance text-white mb-3 ml-1">Library</h1>
+        <h1 className="text-4xl font-semibold tracking-tight mb-3 ml-1">Library</h1>
         
         <section>
           <Tabs defaultValue="ongoing" className="w-full">
