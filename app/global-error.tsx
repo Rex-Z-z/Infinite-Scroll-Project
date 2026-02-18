@@ -29,12 +29,7 @@ const GlobalError = () => {
                         <div className='flex flex-col gap-2.5 justify-center items-center'>
                             <h1 className='text-2xl font-semibold'>Internal Server Error</h1>
                             <p className='w-max-sm text-center text-muted-foreground'>The server encountered an internal error and was unable to complete your request.</p>
-                            <Button 
-                                variant="default" 
-                                size="xl"
-                                onClick={() => window.location.reload()} 
-                                className='hover:cursor-pointer'
-                            >
+                            <Button variant="default"onClick={() => window.location.reload()} className='hover:cursor-pointer'>
                                 Refresh
                             </Button>
                         </div>

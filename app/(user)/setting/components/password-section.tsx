@@ -25,7 +25,7 @@ const PasswordSection = () => {
                 </div>
 
                 <div className='flex justify-end gap-2'>
-                    <Button variant="default" size="lg" className='w-1/12 hover:cursor-pointer'>Edit</Button>
+                    <Button variant="default" className='w-1/12 hover:cursor-pointer'>Edit</Button>
                 </div>
             </div>
         </div>

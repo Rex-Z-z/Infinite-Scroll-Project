@@ -29,7 +29,7 @@ const NotFound = () => {
                         <div className='flex flex-col gap-2.5 justify-center items-center'>
                             <h1 className='text-2xl font-semibold'>You've Scrolled Too Far</h1>
                             <p className='w-max-sm text-center text-muted-foreground'>You've reached the end of the known universe. There are no more comics here.</p>
-                            <Button variant="default" size="xl" className='hover:cursor-pointer'>
+                            <Button variant="default" className='hover:cursor-pointer'>
                                 <a href="/home">Back to Home</a>
                             </Button>
                         </div>

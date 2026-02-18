@@ -9,7 +9,7 @@ import AddNewModal from '@/components/ui/add-new-modal';
 import DropdownHome from './ui/home-filters';
 import SectionSkeleton from '@/components/ui/section-skeleton';
 import ComicCard from '@/components/ui/comic-card';
-import { Dialog } from '@/components/ui/dialog';
+import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import {
@@ -136,12 +136,14 @@ const ComicSection = ({
                     )}
                     
                     {showAddCard && (
-                        <Button 
-                            size="icon" 
-                            className="size-[36px]" 
-                        >
-                            <Plus  className="h-4 w-4" />
-                        </Button>
+                        <Dialog open={isModalOpen} onOpenChange={handleModalOpenChange}>
+                            <DialogTrigger>
+                                <Button size="icon" className="size-[36px]">
+                                    <Plus  className="h-4 w-4" />
+                                </Button>
+                            </DialogTrigger>
+                            <AddNewModal comicData={editingComic} />
+                        </Dialog>
                     )}
                 </div>
             </div>
@@ -150,27 +152,23 @@ const ComicSection = ({
             {error && <p className="text-destructive">{error}</p>}
             
             {!isLoading && !error && (
-                <Dialog open={isModalOpen} onOpenChange={handleModalOpenChange}>
-                    <Carousel
-                        setApi={setApi}
-                        opts={{ 
-                            align: "start",
-                            loop: loop 
-                        }}
-                        plugins={plugins}
-                        className="w-full"
-                    >
-                        <CarouselContent>
-                            {reads && reads.map((read) => (
-                                <CarouselItem key={read.id} className="pl-2 basis-1/3 sm:basis-1/5 xl:basis-1/6 3xl:basis-1/8 4xl:basis-1/12 5xl:basis-1/19">
-                                    <ComicCard read={read} onEdit={handleEdit} />
-                                </CarouselItem>
-                            ))}
-                        </CarouselContent>
-                    </Carousel>
-                    
-                    <AddNewModal comicData={editingComic} />
-                </Dialog>
+                <Carousel
+                    setApi={setApi}
+                    opts={{ 
+                        align: "start",
+                        loop: loop 
+                    }}
+                    plugins={plugins}
+                    className="w-full"
+                >
+                    <CarouselContent className='-ml-2'>
+                        {reads && reads.map((read) => (
+                            <CarouselItem key={read.id} className="pl-2 basis-1/3 sm:basis-1/5 xl:basis-1/6 3xl:basis-1/8 4xl:basis-1/12 5xl:basis-1/19">
+                                <ComicCard read={read} onEdit={handleEdit} />
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                </Carousel>
             )}
         </section>
     )

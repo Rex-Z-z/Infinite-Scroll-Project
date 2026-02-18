@@ -68,11 +68,11 @@ export const ImageUploader = React.memo(({ initialImageUrl, comicData }: ImageUp
                     <img src={imagePreview} alt="Cover Preview" className="h-full w-full object-cover rounded-md" />
                     <div className="absolute inset-0 flex items-center justify-center">
                         <div className="flex flex-row gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
-                          <Button  variant="default" onClick={handleUploadClick} className="text-xs px-2 py-1">
+                          <Button  onClick={handleUploadClick} className="text-xs px-2 py-1">
                               <Upload className="size-3.5" />
                           </Button>
-                          <Button  variant="default" onClick={handleClearImage} className="text-xs px-2 py-1">
-                              <Trash2 className="size-3.5" />
+                          <Button variant="destructive" onClick={handleClearImage} className="text-xs px-2 py-1 !bg-destructive !hover:bg-destructive/80">
+                              <Trash2 className="size-3.5 text-foreground" />
                           </Button>
                         </div>
                     </div>

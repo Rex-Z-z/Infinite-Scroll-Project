@@ -4,17 +4,11 @@ import React, { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Book, BookOpen, Star, Clipboard, Copy, Check, Search } from 'lucide-react';
+import { Book, BookOpen, Clipboard, Copy, Check, Search } from 'lucide-react';
 import { AnimatedSwapIcon } from "@/components/ui/animated-swap-icon"
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { 
-    Select, 
-    SelectContent, 
-    SelectGroup, 
-    SelectItem, 
-    SelectTrigger, 
-    SelectValue 
-} from '@/components/ui/select';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Star } from '@/components/icons/custom-icons';
 
 interface ComicFormProps {
   comicData: ReadItem | null;
@@ -142,7 +136,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
 
             <Label className={cn('text-xs flex items-center gap-2', rating ? 'text-foreground' : 'text-muted-foreground')}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={cn('size-4 mb-0.5', ratingColorMap[rating])}>
-                    <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clipRule="evenodd" />
+                    <Star isFill className={cn('size-4 mb-0.5', ratingColorMap[rating])} />
                 </svg>
                 Rating
             </Label>
@@ -153,25 +147,25 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
                 <SelectContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
                     <SelectGroup>
                         <SelectItem value="Absolute Cinema">
-                            <Star className="size-4 mr-2 text-blue-400" /> Absolute Cinema
+                            <Star isFill className="size-4 mr-2 text-blue-400" /> Absolute Cinema
                         </SelectItem>
                         <SelectItem value="Awesome">
-                            <Star className="size-4 mr-2 text-green-700" /> Awesome
+                            <Star isFill className="size-4 mr-2 text-green-700" /> Awesome
                         </SelectItem>
                         <SelectItem value="Great">
-                            <Star className="size-4 mr-2 text-green-500" /> Great
+                            <Star isFill className="size-4 mr-2 text-green-500" /> Great
                         </SelectItem>
                         <SelectItem value="Good">
-                            <Star className="size-4 mr-2 text-yellow-400" /> Good
+                            <Star isFill className="size-4 mr-2 text-yellow-400" /> Good
                         </SelectItem>
                         <SelectItem value="Regular">
-                            <Star className="size-4 mr-2 text-orange-400" /> Regular
+                            <Star isFill className="size-4 mr-2 text-orange-400" /> Regular
                         </SelectItem>
                         <SelectItem value="Bad">
-                            <Star className="size-4 mr-2 text-red-500" /> Bad
+                            <Star isFill className="size-4 mr-2 text-red-500" /> Bad
                         </SelectItem>
                         <SelectItem value="Garbage">
-                            <Star className="size-4 mr-2 text-purple-400" /> Garbage
+                            <Star isFill className="size-4 mr-2 text-purple-400" /> Garbage
                         </SelectItem>
                     </SelectGroup>
                 </SelectContent>

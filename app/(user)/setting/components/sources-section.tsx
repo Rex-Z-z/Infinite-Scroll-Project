@@ -157,8 +157,7 @@ const SourcesSection = () => {
                 </InputGroup>
 
                 <Button 
-                    variant="default" 
-                    size="lg"
+                    variant="default"
                     className='hover:cursor-pointer'
                     onClick={handleAddSource}
                 >

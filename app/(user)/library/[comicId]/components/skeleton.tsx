@@ -10,7 +10,7 @@ const SkeletonDetails = () => {
                     {/* Cover */}
                     <Skeleton className="w-full h-98 rounded-lg mb-3" />
                     {/* Details */}
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-2">
                         {Array.from({ length: 5 }).map((_, index) => (
                             <div key={index} className="flex flex-row gap-2">
                                 <Skeleton className="h-9.5 w-9.5" />

@@ -103,7 +103,7 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
             </div>
             
             {/* Info */}
-            <div className='flex flex-col gap-3 w-full'>
+            <div className='flex flex-col gap-2 w-full'>
                 <div className='flex flex-row gap-1.5'>
                     <div className={`p-2 rounded-md ${typeColorMap[type] || 'bg-card hover:bg-card/80 border border-foreground/10 text-foreground/20'}`}>
                         <Book className='size-5'/>
@@ -225,13 +225,13 @@ const LeftSidePage = ({ comicId, data }: { comicId: string, data: ReadItem }) =>
 
                 {isEdit ? (
                     <div className='w-full grid grid-cols-2 gap-1.5'>
-                        <Button onClick={handleEdit} size="lg" className='w-full hover:cursor-pointer'>Save</Button>
-                        <Button onClick={handleEdit} variant="outline" size="lg" className='w-full hover:cursor-pointer'>Cancel</Button>
+                        <Button onClick={handleEdit} className='w-full hover:cursor-pointer'>Save</Button>
+                        <Button onClick={handleEdit} variant="outline" className='w-full hover:cursor-pointer'>Cancel</Button>
                     </div>
                 ) : (
                     <div className='w-full grid grid-cols-2 gap-1.5'>
-                        <Button onClick={handleEdit} size="lg" className='w-full hover:cursor-pointer'>Edit</Button>
-                        <Button variant="destructive" size="lg" className='w-full hover:cursor-pointer'>Delete</Button>
+                        <Button onClick={handleEdit} className='w-full hover:cursor-pointer'>Edit</Button>
+                        <Button variant="destructive" className='w-full hover:cursor-pointer'>Delete</Button>
                     </div>
                 )}
             </div>
