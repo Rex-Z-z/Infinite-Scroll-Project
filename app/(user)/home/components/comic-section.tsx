@@ -98,7 +98,7 @@ const ComicSection = ({
         <section className='flex flex-col w-full p-4 gap-2'>
             <div className='flex flex-row justify-between items-center'>
                 <div className='flex flex-row items-center gap-1'>
-                    <p className='text-2xl font-bold hover:underline hover:cursor-pointer'>
+                    <p className='text-2xl font-semibold hover:underline hover:cursor-pointer'>
                         <a href="/library">{title}</a>
                     </p>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-7 mt-[1.5px]">

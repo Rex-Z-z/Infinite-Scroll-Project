@@ -1,26 +1,17 @@
 'use client'
 
 import React, { useState } from 'react'
-import { CalendarCog, Filter, Star, Tag, X } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { CalendarCog, Filter, Star, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
+import { Popover, PopoverContent, PopoverTrigger,
 } from "@/components/ui/popover";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from "@/components/ui/select";
 import { Separator } from '@/components/ui/separator';
-import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { cn } from '@/lib/utils';
+import { FilterIcon } from '@/components/icons/custom-icons';
 
 interface NavBarProps {
     section?: string
@@ -84,17 +75,12 @@ const DropdownHome = ({ section = 'recent-reads' }: NavBarProps) => {
             <PopoverTrigger asChild>
                 <Button 
                     variant="outline" 
-                    className="h-9 flex items-center gap-2 px-3"
+                    className="h-9 flex items-center gap-2 px-2.5"
                 >
-                    <Filter className="size-4" />
-                    <span className="text-sm font-medium">Filters</span>
-                    {activeFilterCount > 0 && (
-                        <>
-                            <Separator orientation="vertical" className="mx-1 h-4" />
-                            <Badge className="rounded-sm px-1 font-normal">
-                                {activeFilterCount}
-                            </Badge>
-                        </>
+                    {activeFilterCount ? (
+                        <FilterIcon isFill className="text-primary size-4"/>
+                    ):(
+                        <FilterIcon strokeWidth={1.7} className="size-4" />
                     )}
                 </Button>
             </PopoverTrigger>

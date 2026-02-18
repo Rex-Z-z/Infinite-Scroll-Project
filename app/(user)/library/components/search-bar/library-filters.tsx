@@ -20,6 +20,7 @@ import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { FilterIcon } from '@/components/icons/custom-icons';
 
 const GENRES = [
     "Action", "Adventure", "Comedy", "Drama", "Fantasy", "Horror",
@@ -65,7 +66,7 @@ export function LibraryFilters() {
     };
 
     // Calculate active filters count
-    const activeCount = [
+    const activeFilterCount = [
         timePreset !== "Recent",
         Object.values(types).some((t) => t),
         selectedGenres.length > 0,
@@ -86,16 +87,12 @@ export function LibraryFilters() {
                     variant="ghost"
                     className="h-7 gap-2 text-muted-foreground hover:text-foreground px-2"
                 >
-                    <Filter className="h-4 w-4" />
-                    Filters
-                    {activeCount > 0 && (
-                        <>
-                            <Separator orientation="vertical" className="mx-1 h-4" />
-                            <Badge className="rounded-sm px-1 font-normal">
-                                {activeCount}
-                            </Badge>
-                        </>
+                    {activeFilterCount ? (
+                        <FilterIcon isFill className="text-primary size-4.5"/>
+                    ):(
+                        <FilterIcon strokeWidth={1.7} className="size-4.5" />
                     )}
+                    Filters
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="w-[360px] p-0 " align="end">
