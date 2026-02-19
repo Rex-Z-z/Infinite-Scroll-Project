@@ -1,41 +1,11 @@
 import { mockReads } from '@/lib/mock-data'
 import { ReadItem } from '@/lib/types'
 
-export const fetchOngoingComicByType = (): Promise<ReadItem[]> => {
+// Replaces fetchOngoing..., fetchCompleted..., etc.
+export const fetchComicsByFilters = (filters?: any): Promise<ReadItem[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(mockReads)
-    }, 1000)
-  })
-}
-
-export const fetchCompletedComicByType = (): Promise<ReadItem[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(mockReads)
-    }, 1000)
-  })
-}
-
-export const fetchHoldComicByType = (): Promise<ReadItem[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(mockReads)
-    }, 1000)
-  })
-}
-
-export const fetchDroppedComicByType = (): Promise<ReadItem[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(mockReads)
-    }, 1000)
-  })
-}
-
-export const fetchPlanToReadComicByType = (): Promise<ReadItem[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
+      // Here you will eventually filter mockReads based on the passed filters (like status)
       resolve(mockReads)
     }, 1000)
   })

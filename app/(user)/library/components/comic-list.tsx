@@ -8,14 +8,20 @@ import ComicCard from '@/components/ui/comic-card'
 import { Dialog } from '@/components/ui/dialog'
 import SectionSkeleton from '@/components/ui/section-skeleton'
 import { ReadItem } from '@/lib/types'
-import { fetchHoldComicByType } from '@/services/library/comic.service'
+import { fetchComicsByFilters } from '@/services/library/comic.service'
 
 import AddNewModal from '../../../../components/ui/add-new-modal'
 
-const fetcher = () => fetchHoldComicByType()
-
-const Hold = () => {
-  const { data: libraryReads, error, isLoading } = useSWR(['hold'], fetcher)
+// You can pass search parameters or filters as props here to trigger re-fetches
+const ComicList = ({ searchParams }: { searchParams?: any }) => {
+  // Use the search parameters as part of the SWR key so it refetches when filters change
+  const {
+    data: libraryReads,
+    error,
+    isLoading,
+  } = useSWR(['library-comics', searchParams], () =>
+    fetchComicsByFilters(searchParams)
+  )
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingComic, setEditingComic] = useState<ReadItem | null>(null)
 
@@ -25,7 +31,7 @@ const Hold = () => {
   }
 
   return (
-    <div>
+    <div className="mt-4">
       {isLoading && <SectionSkeleton page="library" />}
       {error && <p className="text-red-500">{error}</p>}
 
@@ -50,4 +56,4 @@ const Hold = () => {
   )
 }
 
-export default Hold
+export default ComicList

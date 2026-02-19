@@ -2,10 +2,9 @@
 
 import React, { useState } from 'react'
 
-import { Book, Calendar, Filter, Star, Tag } from 'lucide-react'
+import { Activity, Book, Calendar, Star, Tag } from 'lucide-react'
 
 import { FilterIcon } from '@/components/icons/custom-icons'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
@@ -49,6 +48,15 @@ const RATINGS = [
   'Garbage',
 ]
 
+const STATUSES = [
+  'Ongoing',
+  'Completed',
+  'On Hold',
+  'Plan to Read',
+  'Dropped',
+  'Cancelled',
+]
+
 export function LibraryFilters() {
   // --- State ---
   const [timePreset, setTimePreset] = useState('Recent') // "Recent" | "7 Days" | ... | "Custom"
@@ -70,6 +78,9 @@ export function LibraryFilters() {
   // Ratings
   const [selectedRatings, setSelectedRatings] = useState<string[]>([])
 
+  // Statuses
+  const [selectedStatuses, setSelectedStatuses] = useState<string[]>([])
+
   // --- Helpers ---
   const toggleGenre = (genre: string) => {
     setSelectedGenres((prev) =>
@@ -85,12 +96,21 @@ export function LibraryFilters() {
     )
   }
 
+  const toggleStatus = (status: string) => {
+    setSelectedStatuses((prev) =>
+      prev.includes(status)
+        ? prev.filter((s) => s !== status)
+        : [...prev, status]
+    )
+  }
+
   // Calculate active filters count
   const activeFilterCount = [
     timePreset !== 'Recent',
     Object.values(types).some((t) => t),
     selectedGenres.length > 0,
     selectedRatings.length > 0,
+    selectedStatuses.length > 0,
   ].filter(Boolean).length
 
   const handleReset = () => {
@@ -98,6 +118,7 @@ export function LibraryFilters() {
     setTypes({ manga: false, manhwa: false, manhua: false })
     setSelectedGenres([])
     setSelectedRatings([])
+    setSelectedStatuses([])
   }
 
   return (
@@ -150,6 +171,32 @@ export function LibraryFilters() {
                     }
                   >
                     {key.charAt(0).toUpperCase() + key.slice(1)}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <Separator />
+
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-sm font-semibold">
+                <Activity className="text-muted-foreground size-4" />
+                Reading Status
+              </div>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                {STATUSES.map((status) => (
+                  <div key={status} className="flex items-center space-x-2">
+                    <Checkbox
+                      id={`status-${status}`}
+                      checked={selectedStatuses.includes(status)}
+                      onCheckedChange={() => toggleStatus(status)}
+                    />
+                    <Label
+                      htmlFor={`status-${status}`}
+                      className="cursor-pointer text-xs font-normal"
+                    >
+                      {status}
+                    </Label>
                   </div>
                 ))}
               </div>
