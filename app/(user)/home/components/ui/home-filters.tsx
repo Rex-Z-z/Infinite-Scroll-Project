@@ -94,12 +94,13 @@ const DropdownHome = ({ section = 'recent-reads' }: NavBarProps) => {
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className="flex h-9 items-center gap-2 px-[9.5px]"
+          size="icon"
+          className="size-6 md:size-9 [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
         >
           {activeFilterCount ? (
-            <FilterIcon isFill className="text-primary size-4" />
+            <FilterIcon isFill className="text-primary size-2.5 md:size-4" />
           ) : (
-            <FilterIcon strokeWidth={1.7} className="size-4" />
+            <FilterIcon strokeWidth={1.7} className="size-2.5 md:size-4" />
           )}
         </Button>
       </PopoverTrigger>

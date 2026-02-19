@@ -4,7 +4,7 @@ export const mockReads: ReadItem[] = [
   {
     id: 1,
     type: 'Anime',
-    coverImage: '/pictures/image.png',
+    coverImage: '',
     availableImages: ['/pictures/image.png', '/pictures/image2.png'],
     title: "A Regressor's Tale of Cultivation",
     altTitle: '회귀수선전',

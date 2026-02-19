@@ -9,12 +9,13 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from '@/components/ui/input-group'
+import { cn } from '@/lib/utils'
 
 import { LibraryFilters } from './library-filters'
 
-const SearchBar = () => {
+const SearchBar = ({ className }: { className?: string }) => {
   return (
-    <div className="w-full max-w-xl">
+    <div className={cn('w-full lg:max-w-xl', className)}>
       <InputGroup className="py-4.5">
         <InputGroupAddon>
           <Search className="text-muted-foreground" />

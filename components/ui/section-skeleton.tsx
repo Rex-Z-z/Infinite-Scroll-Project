@@ -8,7 +8,7 @@ interface SectionSkeletonProps {
 
 const SectionSkeleton = ({ page = 'home' }: SectionSkeletonProps) => {
   const libraryGridClasses =
-    'grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-2'
+    'grid grid-cols-3 gap-1 md:grid-cols-4 md:gap-2 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8'
   const homeGridClasses = 'flex flex-row gap-2 overflow-hidden'
 
   return (
@@ -18,17 +18,17 @@ const SectionSkeleton = ({ page = 'home' }: SectionSkeletonProps) => {
       {[...Array(16)].map((_, index) => (
         <div
           key={index}
-          className={`flex flex-col gap-3 ${page === 'home' ? 'w-50 flex-shrink-0' : ''}`}
+          className={`flex flex-col gap-2.5 md:gap-3 ${page === 'home' ? 'w-20 flex-shrink-0 md:w-50' : ''}`}
         >
           <Skeleton
-            className={`${page === 'home' ? 'h-[300px] w-full' : 'aspect-[2/3] w-full'}`}
+            className={`${page === 'home' ? 'h-[120px] w-full md:h-[300px]' : 'aspect-[2/3] w-full'}`}
           />
-          <div className="flex flex-col gap-3.5">
-            <Skeleton className="h-4 w-full" />
-            <Skeleton className="h-4 w-1/2" />
+          <div className="flex flex-col gap-2.5 md:gap-3.5">
+            <Skeleton className="h-2 w-full sm:h-4" />
+            <Skeleton className="h-2 w-1/2 sm:h-4" />
             <div className="flex flex-row justify-between">
-              <Skeleton className="h-4 w-1/3" />
-              <Skeleton className="h-4 w-1/4" />
+              <Skeleton className="h-2 w-1/3 sm:h-4" />
+              <Skeleton className="h-2 w-1/4 sm:h-4" />
             </div>
           </div>
         </div>

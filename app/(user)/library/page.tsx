@@ -19,82 +19,73 @@ import OnGoing from './components/ongoing'
 import Plan from './components/plan'
 import SearchBar from './components/search-bar'
 
+const TabsTriggerStyle =
+  'dark:data-[state=active]:text-primary text-[10px] md:text-sm md:py-[18px] md:px-3'
+const TabsTriggerIconStyle = 'size-4'
+const TabsTextStyle = 'hidden md:block'
+
 const Page = () => {
   return (
-    <div>
-      <div className="flex flex-col p-4">
-        <h1 className="mb-3 ml-1 text-4xl font-semibold tracking-tight">
-          Library
-        </h1>
+    <div className="flex flex-col p-2 md:p-4">
+      <h1 className="text-md mb-1 ml-1 font-semibold tracking-tight md:mb-3 md:text-4xl">
+        Library
+      </h1>
 
-        <Tabs defaultValue="ongoing" className="w-full">
-          <div className="mb-1 flex flex-row justify-between gap-1.5 bg-transparent">
-            <TabsList className="m-0 bg-transparent p-0">
-              <TabsTrigger
-                value="ongoing"
-                className="dark:data-[state=active]:text-primary px-5 py-[18px] hover:cursor-pointer"
-              >
-                <BookOpen /> Ongoing
-              </TabsTrigger>
-              <TabsTrigger
-                value="completed"
-                className="dark:data-[state=active]:text-primary px-5 py-[18px] hover:cursor-pointer"
-              >
-                <BookOpenCheck /> Completed
-              </TabsTrigger>
-              <TabsTrigger
-                value="hold"
-                className="dark:data-[state=active]:text-primary px-5 py-[18px] hover:cursor-pointer"
-              >
-                <Book /> On Hold
-              </TabsTrigger>
-              <TabsTrigger
-                value="plan"
-                className="dark:data-[state=active]:text-primary px-5 py-[18px] hover:cursor-pointer"
-              >
-                <BookMarked /> Plan to Read
-              </TabsTrigger>
-              <TabsTrigger
-                value="dropped"
-                className="dark:data-[state=active]:text-primary px-5 py-[18px] hover:cursor-pointer"
-              >
-                <BookAlert /> Dropped
-              </TabsTrigger>
-              <TabsTrigger
-                value="cancelled"
-                className="dark:data-[state=active]:text-primary px-5 py-[18px] hover:cursor-pointer"
-              >
-                <BookX /> Cancelled
-              </TabsTrigger>
-            </TabsList>
-            <SearchBar />
-          </div>
+      <Tabs defaultValue="ongoing" className="w-full">
+        <div className="mb-1 flex flex-col justify-between gap-1.5 bg-transparent lg:flex-row">
+          <SearchBar />
+          <TabsList className="m-0 w-full bg-transparent p-0">
+            <TabsTrigger value="ongoing" className={TabsTriggerStyle}>
+              <BookOpen className={TabsTriggerIconStyle} />{' '}
+              <span className={TabsTextStyle}>Ongoing</span>
+            </TabsTrigger>
+            <TabsTrigger value="completed" className={TabsTriggerStyle}>
+              <BookOpenCheck className={TabsTriggerIconStyle} />{' '}
+              <span className={TabsTextStyle}>Completed</span>
+            </TabsTrigger>
+            <TabsTrigger value="hold" className={TabsTriggerStyle}>
+              <Book className={TabsTriggerIconStyle} />{' '}
+              <span className={TabsTextStyle}>On Hold</span>
+            </TabsTrigger>
+            <TabsTrigger value="plan" className={TabsTriggerStyle}>
+              <BookMarked className={TabsTriggerIconStyle} />{' '}
+              <span className={TabsTextStyle}>Plan to Read</span>
+            </TabsTrigger>
+            <TabsTrigger value="dropped" className={TabsTriggerStyle}>
+              <BookAlert className={TabsTriggerIconStyle} />{' '}
+              <span className={TabsTextStyle}>Dropped</span>
+            </TabsTrigger>
+            <TabsTrigger value="cancelled" className={TabsTriggerStyle}>
+              <BookX className={TabsTriggerIconStyle} />{' '}
+              <span className={TabsTextStyle}>Cancelled</span>
+            </TabsTrigger>
+          </TabsList>
+        </div>
 
-          <TabsContent value="ongoing">
-            <OnGoing />
-          </TabsContent>
+        <TabsContent value="ongoing">
+          <OnGoing />
+        </TabsContent>
 
-          <TabsContent value="completed">
-            <Completed />
-          </TabsContent>
+        <TabsContent value="completed">
+          <Completed />
+        </TabsContent>
 
-          <TabsContent value="hold">
-            <Hold />
-          </TabsContent>
+        <TabsContent value="hold">
+          <Hold />
+        </TabsContent>
 
-          <TabsContent value="plan">
-            <Plan />
-          </TabsContent>
+        <TabsContent value="plan">
+          <Plan />
+        </TabsContent>
 
-          <TabsContent value="dropped">
-            <Dropped />
-          </TabsContent>
+        <TabsContent value="dropped">
+          <Dropped />
+        </TabsContent>
 
-          <TabsContent value="cancelled">
-            <Cancelled />
-          </TabsContent>
-        </Tabs>
-      </div>
+        <TabsContent value="cancelled">
+          <Cancelled />
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }

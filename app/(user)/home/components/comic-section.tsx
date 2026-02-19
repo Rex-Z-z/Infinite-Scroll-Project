@@ -101,15 +101,15 @@ const ComicSection = ({
   return (
     <section className="flex w-full flex-col gap-2 p-4">
       <div className="flex flex-row items-center justify-between">
-        <div className="flex flex-row items-center gap-1">
-          <p className="text-2xl font-semibold hover:cursor-pointer hover:underline">
+        <div className="flex flex-row items-center gap-0.5 md:gap-1">
+          <p className="text-sm hover:cursor-pointer hover:underline md:text-2xl md:font-semibold">
             <Link href="/library">{title}</Link>
           </p>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            className="mt-[1.5px] size-7"
+            className="mt-[1.5px] size-5 md:size-7"
           >
             <path
               fillRule="evenodd"
@@ -126,20 +126,20 @@ const ComicSection = ({
               <Button
                 variant="outline"
                 size="icon"
-                className="size-[36px]"
+                className="size-6 md:size-[36px] [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
                 onClick={() => api?.scrollPrev()}
                 disabled={!canScrollPrev}
               >
-                <ChevronLeft className="h-4 w-4" />
+                <ChevronLeft />
               </Button>
               <Button
                 variant="outline"
                 size="icon"
-                className="size-[36px]"
+                className="size-6 md:size-[36px] [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
                 onClick={() => api?.scrollNext()}
                 disabled={!canScrollNext}
               >
-                <ChevronRight className="h-4 w-4" />
+                <ChevronRight />
               </Button>
             </div>
           )}
@@ -149,8 +149,11 @@ const ComicSection = ({
           {showAddCard && (
             <Dialog open={isModalOpen} onOpenChange={handleModalOpenChange}>
               <DialogTrigger>
-                <Button size="icon" className="size-[36px]">
-                  <Plus className="h-4 w-4" />
+                <Button
+                  size="icon"
+                  className="size-6 md:size-[36px] [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
+                >
+                  <Plus />
                 </Button>
               </DialogTrigger>
               <AddNewModal comicData={editingComic} />
@@ -177,7 +180,7 @@ const ComicSection = ({
               reads.map((read) => (
                 <CarouselItem
                   key={read.id}
-                  className="3xl:basis-1/8 4xl:basis-1/12 5xl:basis-1/19 basis-1/3 pl-2 md:basis-1/4 xl:basis-1/6"
+                  className="3xl:basis-1/8 4xl:basis-1/12 5xl:basis-1/19 basis-1/4 pl-2 md:basis-1/4 xl:basis-1/6"
                 >
                   <ComicCard read={read} onEdit={handleEdit} />
                 </CarouselItem>
