@@ -1,13 +1,15 @@
 import React from 'react'
-import { ReadItem } from '@/lib/types'
-import { ImageUploader } from './image-uploader'
-import ComicForm from './comic-form'
+
 import { Button } from '@/components/ui/button'
 import {
   DialogClose,
   DialogContent,
   DialogFooter,
 } from '@/components/ui/dialog'
+import { ReadItem } from '@/lib/types'
+
+import ComicForm from './comic-form'
+import { ImageUploader } from './image-uploader'
 
 const AddNewModal = ({ comicData }: { comicData: ReadItem | null }) => {
   return (

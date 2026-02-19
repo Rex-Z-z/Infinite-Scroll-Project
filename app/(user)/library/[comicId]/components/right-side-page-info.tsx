@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
+
 import Link from 'next/link'
-import { ReadItem } from '@/lib/types'
-import { cn } from '@/lib/utils'
+
+import { Image, Plus } from 'lucide-react'
+
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Image, Plus } from 'lucide-react'
-import { mockReads } from '@/lib/mock-data'
 import { Dialog } from '@/components/ui/dialog'
 import {
   Tooltip,
@@ -13,6 +13,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
+import { mockReads } from '@/lib/mock-data'
+import { ReadItem } from '@/lib/types'
+import { cn } from '@/lib/utils'
+
 import SourceEdit from './source-edit'
 
 const RightSidePage = ({

@@ -1,23 +1,27 @@
 'use client'
 
-import React, { useState, useEffect, useMemo } from 'react'
-import useSWR from 'swr'
+import React, { useEffect, useMemo, useState } from 'react'
+
+import Link from 'next/link'
+
 import Autoplay from 'embla-carousel-autoplay'
-import { ReadItem } from '@/lib/types'
-import AddNewModal from '@/components/ui/add-new-modal'
-import DropdownHome from './ui/home-filters'
-import SectionSkeleton from '@/components/ui/section-skeleton'
-import ComicCard from '@/components/ui/comic-card'
-import { Dialog, DialogTrigger } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight, Plus } from 'lucide-react'
+import useSWR from 'swr'
+
+import AddNewModal from '@/components/ui/add-new-modal'
+import { Button } from '@/components/ui/button'
 import {
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
-  type CarouselApi,
 } from '@/components/ui/carousel'
-import Link from 'next/link'
+import ComicCard from '@/components/ui/comic-card'
+import { Dialog, DialogTrigger } from '@/components/ui/dialog'
+import SectionSkeleton from '@/components/ui/section-skeleton'
+import { ReadItem } from '@/lib/types'
+
+import DropdownHome from './ui/home-filters'
 
 interface ComicSectionProps {
   title: string

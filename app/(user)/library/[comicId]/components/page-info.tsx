@@ -1,11 +1,14 @@
 'use client'
 
 import React from 'react'
+
 import useSWR from 'swr'
+
 import { fetchComickById } from '@/services/library/comic.service'
-import SkeletonDetails from './skeleton'
+
 import LeftSidePage from './left-side-page-info'
 import RightSidePage from './right-side-page-info'
+import SkeletonDetails from './skeleton'
 
 const PageInfo = ({ comicId }: { comicId: string }) => {
   const fetcher = () => fetchComickById(Number(comicId))

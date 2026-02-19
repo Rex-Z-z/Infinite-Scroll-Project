@@ -1,7 +1,8 @@
 import React from 'react'
+
+import LibraryRead from './components/library'
 import RecentReads from './components/recent-reads'
 import Recommendations from './components/recommendations'
-import LibraryRead from './components/library'
 
 const page = () => {
   return (

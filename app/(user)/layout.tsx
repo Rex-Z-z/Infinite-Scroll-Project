@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
-import "@/app/globals.css";
-import NavBar from '@/components/ui/navbar'
+
+import '@/app/globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
+import NavBar from '@/components/ui/navbar'
 
 export const metadata: Metadata = {
   title: '',

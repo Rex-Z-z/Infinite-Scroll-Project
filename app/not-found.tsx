@@ -1,10 +1,13 @@
 'use client'
 
-import './globals.css'
 import React from 'react'
+
 import { ThemeProvider } from 'next-themes'
-import { Button } from '@/components/ui/button'
 import Image from 'next/image'
+
+import { Button } from '@/components/ui/button'
+
+import './globals.css'
 
 const NotFound = () => {
   return (

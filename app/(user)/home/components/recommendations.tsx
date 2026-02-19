@@ -1,7 +1,9 @@
 'use client'
 
 import React from 'react'
+
 import { fetchRecommendedReads } from '@/services/home/comic.service'
+
 import ComicSection from './comic-section'
 
 const fetcher = () => fetchRecommendedReads()

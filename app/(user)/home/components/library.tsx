@@ -1,7 +1,9 @@
 'use client'
 
 import React from 'react'
+
 import { fetchAllReads } from '@/services/home/comic.service'
+
 import ComicSection from './comic-section'
 
 const fetcher = () => fetchAllReads()

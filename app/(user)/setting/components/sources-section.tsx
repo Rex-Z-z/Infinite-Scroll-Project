@@ -1,27 +1,31 @@
 'use client'
 
-import React, { useState, useRef } from 'react'
+import React, { useRef, useState } from 'react'
+
+import {
+  Check,
+  Globe,
+  Pencil,
+  Plus,
+  Search,
+  SearchX,
+  Trash2,
+  Upload,
+  X,
+} from 'lucide-react'
+
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
 } from '@/components/ui/input-group'
-import {
-  Plus,
-  Globe,
-  Pencil,
-  Search,
-  Trash2,
-  Upload,
-  Check,
-  X,
-  SearchX,
-} from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Label } from '@/components/ui/label'
-import { cn } from '@/lib/utils' // Ensure you have this utility or use a standard conditional class approach
+import { cn } from '@/lib/utils'
+
+// Ensure you have this utility or use a standard conditional class approach
 
 const MOCK_SOURCES: Source[] = [
   {

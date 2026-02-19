@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+
+import { Check } from 'lucide-react'
+
 import { Button } from '@/components/ui/button'
 import {
   DialogClose,
@@ -8,7 +11,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { Check } from 'lucide-react'
 
 interface SwitchComicImageProps {
   currentCover: string

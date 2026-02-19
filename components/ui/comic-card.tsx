@@ -1,14 +1,18 @@
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
+
 import Image from 'next/image'
-import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+
 import { Image as ImageIcon, Settings2 } from 'lucide-react'
-import { formatDistanceToNow } from '@/lib/utils'
+
+import { Button } from '@/components/ui/button'
 import { ReadItem } from '@/lib/types'
-import { Badge } from './badge'
+import { formatDistanceToNow } from '@/lib/utils'
+
 import { Star } from '../icons/custom-icons'
+import { Badge } from './badge'
 
 interface ComicCardProps {
   read: ReadItem

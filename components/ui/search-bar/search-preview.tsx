@@ -1,6 +1,9 @@
 import React from 'react'
+
 import Image from 'next/image'
-import { X, Clock, Search } from 'lucide-react'
+
+import { Clock, Search, X } from 'lucide-react'
+
 import { ReadItem } from '@/lib/types'
 
 interface SearchPreviewProps {

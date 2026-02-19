@@ -1,12 +1,15 @@
 'use client'
 
 import React, { useState } from 'react'
+
 import useSWR from 'swr'
-import SectionSkeleton from '@/components/ui/section-skeleton'
+
 import ComicCard from '@/components/ui/comic-card'
-import { fetchPlanToReadComicByType } from '@/services/library/comic.service'
-import { ReadItem } from '@/lib/types'
 import { Dialog } from '@/components/ui/dialog'
+import SectionSkeleton from '@/components/ui/section-skeleton'
+import { ReadItem } from '@/lib/types'
+import { fetchPlanToReadComicByType } from '@/services/library/comic.service'
+
 import AddNewModal from '../../../../components/ui/add-new-modal'
 
 const fetcher = () => fetchPlanToReadComicByType()

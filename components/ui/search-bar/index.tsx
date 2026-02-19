@@ -1,17 +1,21 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
-import { Search } from 'lucide-react'
-import SearchPreview from './search-preview'
-import { mockReads } from '@/lib/mock-data'
-import { ReadItem } from '@/lib/types'
+import React, { useEffect, useRef, useState } from 'react'
+
 import { useRouter } from 'next/navigation'
+
+import { Search } from 'lucide-react'
+
 // Import your new Input Group components
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
 } from '@/components/ui/input-group'
+import { mockReads } from '@/lib/mock-data'
+import { ReadItem } from '@/lib/types'
+
+import SearchPreview from './search-preview'
 
 const SearchBar = () => {
   const router = useRouter()

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+
 import {
   Book,
   BookAlert,
@@ -8,13 +8,16 @@ import {
   BookOpenCheck,
   BookX,
 } from 'lucide-react'
-import OnGoing from './components/ongoing'
-import Completed from './components/completed'
-import Hold from './components/hold'
-import Dropped from './components/dropped'
-import SearchBar from './components/search-bar'
-import Plan from './components/plan'
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+
 import Cancelled from './components/cancelled'
+import Completed from './components/completed'
+import Dropped from './components/dropped'
+import Hold from './components/hold'
+import OnGoing from './components/ongoing'
+import Plan from './components/plan'
+import SearchBar from './components/search-bar'
 
 const Page = () => {
   return (

@@ -1,11 +1,12 @@
-import { ReadItem } from '@/lib/types'
-import { cn } from '@/lib/utils'
 import React, { useEffect, useState } from 'react'
+
+import { Book, BookOpen, Check, Clipboard, Copy, Search } from 'lucide-react'
+
+import { Star } from '@/components/icons/custom-icons'
+import { AnimatedSwapIcon } from '@/components/ui/animated-swap-icon'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Book, BookOpen, Clipboard, Copy, Check, Search } from 'lucide-react'
-import { AnimatedSwapIcon } from '@/components/ui/animated-swap-icon'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import {
   Select,
@@ -15,7 +16,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Star } from '@/components/icons/custom-icons'
+import { ReadItem } from '@/lib/types'
+import { cn } from '@/lib/utils'
 
 interface ComicFormProps {
   comicData: ReadItem | null

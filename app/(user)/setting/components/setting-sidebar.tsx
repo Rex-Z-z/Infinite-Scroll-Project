@@ -1,11 +1,12 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+
 import {
-  UserIcon,
+  AdjustmentsHorizontal,
   KeyIcon,
   Storage,
-  AdjustmentsHorizontal,
+  UserIcon,
 } from '@/components/icons/custom-icons'
 import {
   Sidebar,

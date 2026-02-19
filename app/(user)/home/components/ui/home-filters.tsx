@@ -1,14 +1,19 @@
 'use client'
 
 import React, { useState } from 'react'
-import { cn } from '@/lib/utils'
+
 import { CalendarCog, Filter, Star, Tag } from 'lucide-react'
+
+import { FilterIcon } from '@/components/icons/custom-icons'
 import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import {
   Select,
   SelectContent,
@@ -17,10 +22,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Label } from '@/components/ui/label'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { FilterIcon } from '@/components/icons/custom-icons'
+import { cn } from '@/lib/utils'
 
 interface NavBarProps {
   section?: string

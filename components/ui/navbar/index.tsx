@@ -4,12 +4,10 @@ import React from 'react'
 import {
   Moon,
   Sun,
-  Search,
   User,
   CircleUserRound,
   Settings,
   LogOut,
-  Book,
   BookOpen,
 } from 'lucide-react'
 import { usePathname } from 'next/navigation'
@@ -50,7 +48,7 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
             className="h-8"
             alt="Flowbite Logo"
           />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+          <span className="hidden self-center text-2xl font-semibold whitespace-nowrap lg:block dark:text-white">
             Flowbite
           </span>
         </a>

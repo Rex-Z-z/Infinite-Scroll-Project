@@ -1,25 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { ReadItem } from '@/lib/types'
-import { formatDistanceToNow } from '@/lib/utils'
+
 import {
+  ArrowLeftRight,
   Book,
   BookOpen,
   Calendar as CalendarIcon,
-  ImagePlus,
-  ArrowLeftRight,
-  Star,
   Image,
+  ImagePlus,
+  Star,
 } from 'lucide-react'
+
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import {
   Dialog,
   DialogClose,
@@ -29,6 +20,18 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { ReadItem } from '@/lib/types'
+import { formatDistanceToNow } from '@/lib/utils'
+
 import LastReadDatePicker from './lastread-datepicker'
 import SwitchComicImage from './switch-comic-image'
 

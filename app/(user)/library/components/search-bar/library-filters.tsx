@@ -1,13 +1,20 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Filter, Calendar, Star, Book, Tag } from 'lucide-react'
+
+import { Book, Calendar, Filter, Star, Tag } from 'lucide-react'
+
+import { FilterIcon } from '@/components/icons/custom-icons'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import {
   Select,
   SelectContent,
@@ -16,11 +23,6 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
-import { Badge } from '@/components/ui/badge'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Label } from '@/components/ui/label'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { FilterIcon } from '@/components/icons/custom-icons'
 
 const GENRES = [
   'Action',

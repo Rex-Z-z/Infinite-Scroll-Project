@@ -1,9 +1,12 @@
 import React from 'react'
+
 import {
+  SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-  SidebarInset,
-} from '@/components/ui/sidebar' //
+} from '@/components/ui/sidebar'
+
+//
 import { SettingSidebar } from './components/setting-sidebar'
 
 export default function SettingsLayout({

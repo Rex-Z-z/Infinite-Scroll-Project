@@ -1,5 +1,6 @@
-import "@/app/globals.css";
 import type { Metadata } from 'next'
+
+import '@/app/globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import NavBar from '@/components/ui/navbar'
 
