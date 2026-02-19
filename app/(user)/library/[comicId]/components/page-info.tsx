@@ -20,7 +20,7 @@ const PageInfo = ({ comicId }: { comicId: string }) => {
 	if (error || !read) return <div className="p-4 text-red-500">Error...</div>;
 
 	return (
-		<div className="flex flex-row gap-4 p-4 h-[calc(95vh-2rem)] overflow-hidden">
+		<div className="flex h-[calc(95vh-2rem)] flex-row gap-4 overflow-hidden p-4">
 			<LeftSidePage comicId={comicId} data={read} />
 			<RightSidePage comicId={comicId} data={read} />
 		</div>

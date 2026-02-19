@@ -68,7 +68,7 @@ export const ImageUploader = React.memo(
 
 		return (
 			<div className="flex flex-row gap-3">
-				<div className="relative block w-36 h-52 flex-shrink-0 group">
+				<div className="group relative block h-52 w-36 flex-shrink-0">
 					<input
 						type="file"
 						ref={fileInputRef}
@@ -81,28 +81,28 @@ export const ImageUploader = React.memo(
 							<img
 								src={imagePreview}
 								alt="Cover Preview"
-								className="h-full w-full object-cover rounded-md"
+								className="h-full w-full rounded-md object-cover"
 							/>
 							<div className="absolute inset-0 flex items-center justify-center">
-								<div className="flex flex-row gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
+								<div className="flex flex-row gap-2 opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100">
 									<Button
 										onClick={handleUploadClick}
-										className="text-xs px-2 py-1"
+										className="px-2 py-1 text-xs"
 									>
 										<Upload className="size-3.5" />
 									</Button>
 									<Button
 										variant="destructive"
 										onClick={handleClearImage}
-										className="text-xs px-2 py-1 !bg-destructive !hover:bg-destructive/80"
+										className="!bg-destructive !hover:bg-destructive/80 px-2 py-1 text-xs"
 									>
-										<Trash2 className="size-3.5 text-foreground" />
+										<Trash2 className="text-foreground size-3.5" />
 									</Button>
 								</div>
 							</div>
 						</>
 					) : (
-						<div className="h-full w-full bg-card border rounded-md flex flex-col gap-2 items-center justify-center">
+						<div className="bg-card flex h-full w-full flex-col items-center justify-center gap-2 rounded-md border">
 							<div className="flex flex-row gap-2">
 								<Button
 									variant="default"
@@ -115,12 +115,12 @@ export const ImageUploader = React.memo(
 					)}
 				</div>
 
-				<div className="flex flex-col gap-4 w-full">
+				<div className="flex w-full flex-col gap-4">
 					<DialogHeader>
 						<DialogTitle>
 							{comicData ? "Edit Comic" : "Add New Comic"}
 						</DialogTitle>
-						<DialogDescription className="flex flex-col mt-2 font-semibold">
+						<DialogDescription className="mt-2 flex flex-col font-semibold">
 							{comicData
 								? "Edit the details of your comic."
 								: "Add a new comic to your collection."}

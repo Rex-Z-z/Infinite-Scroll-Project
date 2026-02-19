@@ -21,23 +21,23 @@ const SearchPreview = ({
 	onClearHistory,
 }: SearchPreviewProps) => {
 	return (
-		<div className="absolute top-full left-0 w-full mt-2 bg-card border rounded-md shadow-lg z-50 overflow-hidden">
+		<div className="bg-card absolute top-full left-0 z-50 mt-2 w-full overflow-hidden rounded-md border shadow-lg">
 			{/* Show History when not searching (query is empty) */}
 			{!isSearching && (
 				<div className="p-2">
-					<div className="flex items-center justify-between px-3 py-2 text-xs font-semibold text-muted-foreground uppercase">
+					<div className="text-muted-foreground flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase">
 						<span>Recent Searches</span>
 						{history.length > 0 && (
 							<button
 								onClick={onClearHistory}
-								className="hover:text-red-500 transition-colors"
+								className="transition-colors hover:text-red-500"
 							>
 								Clear All
 							</button>
 						)}
 					</div>
 					{history.length === 0 ? (
-						<div className="px-3 py-4 text-center text-sm text-muted-foreground">
+						<div className="text-muted-foreground px-3 py-4 text-center text-sm">
 							No recent searches
 						</div>
 					) : (
@@ -46,9 +46,9 @@ const SearchPreview = ({
 								<li
 									key={index}
 									onClick={() => onSelectHistory(term)}
-									className="flex items-center gap-3 px-3 py-2 text-sm hover:bg-accent cursor-pointer rounded-md"
+									className="hover:bg-accent flex cursor-pointer items-center gap-3 rounded-md px-3 py-2 text-sm"
 								>
-									<Clock className="w-4 h-4 text-muted-foreground" />
+									<Clock className="text-muted-foreground h-4 w-4" />
 									<span>{term}</span>
 								</li>
 							))}
@@ -60,11 +60,11 @@ const SearchPreview = ({
 			{/* Show Search Results when searching */}
 			{isSearching && (
 				<div className="p-2">
-					<div className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase">
+					<div className="text-muted-foreground px-3 py-2 text-xs font-semibold uppercase">
 						Results
 					</div>
 					{results.length === 0 ? (
-						<div className="px-3 py-4 text-center text-sm text-muted-foreground">
+						<div className="text-muted-foreground px-3 py-4 text-center text-sm">
 							No results found.
 						</div>
 					) : (
@@ -73,10 +73,10 @@ const SearchPreview = ({
 								<li
 									key={item.id}
 									onClick={() => onSelectResult(item)}
-									className="flex items-center gap-3 px-3 py-2 hover:bg-accent cursor-pointer rounded-md"
+									className="hover:bg-accent flex cursor-pointer items-center gap-3 rounded-md px-3 py-2"
 								>
 									{/* Image Thumbnail */}
-									<div className="relative w-24 h-28 shrink-0 overflow-hidden rounded">
+									<div className="relative h-28 w-24 shrink-0 overflow-hidden rounded">
 										<Image
 											src={item.coverImage}
 											alt={item.title}
@@ -86,17 +86,17 @@ const SearchPreview = ({
 									</div>
 
 									{/* Text Info */}
-									<div className="flex flex-col gap-A overflow-hidden">
-										<span className="text-sm font-medium truncate">
+									<div className="gap-A flex flex-col overflow-hidden">
+										<span className="truncate text-sm font-medium">
 											{item.title}
 										</span>
-										<span className="text-xs text-muted-foreground/60 truncate">
+										<span className="text-muted-foreground/60 truncate text-xs">
 											{item.altTitle}
 										</span>
-										<span className="text-sm font-medium text-muted-foreground mt-0.5">
+										<span className="text-muted-foreground mt-0.5 text-sm font-medium">
 											Chapter {item.chapter}
 										</span>
-										<span className="text-xs text-primary mt-0.5">
+										<span className="text-primary mt-0.5 text-xs">
 											{item.type} • {item.rating}
 										</span>
 									</div>

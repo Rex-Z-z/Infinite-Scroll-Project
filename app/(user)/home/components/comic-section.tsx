@@ -95,17 +95,17 @@ const ComicSection = ({
 	};
 
 	return (
-		<section className="flex flex-col w-full p-4 gap-2">
-			<div className="flex flex-row justify-between items-center">
+		<section className="flex w-full flex-col gap-2 p-4">
+			<div className="flex flex-row items-center justify-between">
 				<div className="flex flex-row items-center gap-1">
-					<p className="text-2xl font-semibold hover:underline hover:cursor-pointer">
+					<p className="text-2xl font-semibold hover:cursor-pointer hover:underline">
 						<Link href="/library">{title}</Link>
 					</p>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 20 20"
 						fill="currentColor"
-						className="size-7 mt-[1.5px]"
+						className="mt-[1.5px] size-7"
 					>
 						<path
 							fillRule="evenodd"
@@ -116,7 +116,7 @@ const ComicSection = ({
 				</div>
 
 				{/* Controls: Arrows + Optional Filter */}
-				<div className="flex flex-row gap-1 items-center">
+				<div className="flex flex-row items-center gap-1">
 					{!isLoading && !error && (
 						<div className="flex items-center gap-1">
 							<Button
@@ -176,7 +176,7 @@ const ComicSection = ({
 							reads.map((read) => (
 								<CarouselItem
 									key={read.id}
-									className="pl-2 basis-1/3 md:basis-1/4 xl:basis-1/6 3xl:basis-1/8 4xl:basis-1/12 5xl:basis-1/19"
+									className="3xl:basis-1/8 4xl:basis-1/12 5xl:basis-1/19 basis-1/3 pl-2 md:basis-1/4 xl:basis-1/6"
 								>
 									<ComicCard
 										read={read}

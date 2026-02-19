@@ -5,15 +5,15 @@ import { Button } from "@/components/ui/button";
 
 const AccountSection = () => {
 	return (
-		<div id="account" className="flex flex-col gap-3 scroll-mt-24">
+		<div id="account" className="flex scroll-mt-24 flex-col gap-3">
 			<h1 className="text-2xl font-semibold">Account</h1>
 			<div className="flex flex-col gap-4">
-				<div className="w-full flex flex-col gap-2">
+				<div className="flex w-full flex-col gap-2">
 					<Label>Username</Label>
 					<Input type="text" placeholder="Username" />
 				</div>
 
-				<div className="w-full flex flex-col gap-2">
+				<div className="flex w-full flex-col gap-2">
 					<Label>Email</Label>
 					<Input type="email" placeholder="Email" />
 				</div>

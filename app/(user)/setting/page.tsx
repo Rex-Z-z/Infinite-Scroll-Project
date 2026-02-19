@@ -5,7 +5,7 @@ import SourcesSection from "./components/sources-section";
 
 const page = () => {
 	return (
-		<div className="flex flex-col w-full gap-4">
+		<div className="flex w-full flex-col gap-4">
 			{/* Account Section */}
 			<AccountSection />
 
@@ -18,7 +18,7 @@ const page = () => {
 			{/* Preference Section */}
 			<div
 				id="preferences"
-				className="flex flex-col gap-3 scroll-mt-24 pb-110"
+				className="flex scroll-mt-24 flex-col gap-3 pb-110"
 			>
 				<h1 className="text-2xl font-semibold">Preference</h1>
 				<div className="flex flex-1 flex-col gap-4">

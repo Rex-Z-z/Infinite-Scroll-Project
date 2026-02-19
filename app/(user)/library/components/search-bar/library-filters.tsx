@@ -105,7 +105,7 @@ export function LibraryFilters() {
 			<PopoverTrigger asChild>
 				<Button
 					variant="ghost"
-					className="h-7 gap-2 text-muted-foreground hover:text-foreground px-2"
+					className="text-muted-foreground hover:text-foreground h-7 gap-2 px-2"
 				>
 					{activeFilterCount ? (
 						<FilterIcon isFill className="text-primary size-4.5" />
@@ -115,13 +115,13 @@ export function LibraryFilters() {
 					Filters
 				</Button>
 			</PopoverTrigger>
-			<PopoverContent className="w-[360px] p-0 " align="end">
+			<PopoverContent className="w-[360px] p-0" align="end">
 				{/* Header */}
-				<div className="flex items-center justify-between px-4 py-3 bg-muted/30">
-					<h4 className="font-semibold text-sm">Library Filters</h4>
+				<div className="bg-muted/30 flex items-center justify-between px-4 py-3">
+					<h4 className="text-sm font-semibold">Library Filters</h4>
 					<Button
 						variant="ghost"
-						className="h-auto p-0 text-xs text-muted-foreground hover:text-primary"
+						className="text-muted-foreground hover:text-primary h-auto p-0 text-xs"
 						onClick={handleReset}
 					>
 						Reset
@@ -130,21 +130,18 @@ export function LibraryFilters() {
 				<Separator />
 
 				<ScrollArea className="h-[480px]">
-					<div className="p-4 space-y-6">
+					<div className="space-y-6 p-4">
 						{/* --- Type Section --- */}
 						<div className="space-y-3">
 							<div className="flex items-center gap-2 text-sm font-semibold">
-								<Book className="size-4 text-muted-foreground" />
+								<Book className="text-muted-foreground size-4" />
 								Type
 							</div>
 							<div className="flex flex-wrap gap-2">
 								{Object.entries(types).map(([key, value]) => (
 									<div
 										key={key}
-										className={`
-                                            cursor-pointer select-none rounded-md border px-3 py-1 text-xs font-medium transition-colors
-                                            ${value ? "bg-primary text-primary-foreground border-primary" : "bg-transparent text-muted-foreground hover:bg-muted"}
-                                        `}
+										className={`cursor-pointer rounded-md border px-3 py-1 text-xs font-medium transition-colors select-none ${value ? "bg-primary text-primary-foreground border-primary" : "text-muted-foreground hover:bg-muted bg-transparent"} `}
 										onClick={() =>
 											setTypes((prev) => ({
 												...prev,
@@ -164,12 +161,12 @@ export function LibraryFilters() {
 						<Separator />
 
 						{/* --- Genre Section (Grid Layout) --- */}
-						<div className="h-[130px] space-y-3 overflow-auto custom-scrollbar">
+						<div className="custom-scrollbar h-[130px] space-y-3 overflow-auto">
 							<div className="flex items-center gap-2 text-sm font-semibold">
-								<Tag className="size-4 text-muted-foreground" />
+								<Tag className="text-muted-foreground size-4" />
 								Genres
 							</div>
-							<div className="grid grid-cols-2 gap-y-2 gap-x-4">
+							<div className="grid grid-cols-2 gap-x-4 gap-y-2">
 								{GENRES.map((genre) => (
 									<div
 										key={genre}
@@ -186,7 +183,7 @@ export function LibraryFilters() {
 										/>
 										<Label
 											htmlFor={`genre-${genre}`}
-											className="text-xs font-normal cursor-pointer"
+											className="cursor-pointer text-xs font-normal"
 										>
 											{genre}
 										</Label>
@@ -200,7 +197,7 @@ export function LibraryFilters() {
 						{/* --- Time Section --- */}
 						<div className="space-y-3">
 							<div className="flex items-center gap-2 text-sm font-semibold">
-								<Calendar className="size-4 text-muted-foreground" />
+								<Calendar className="text-muted-foreground size-4" />
 								Time & Relevance
 							</div>
 							<div className="grid grid-cols-2 gap-2">
@@ -217,7 +214,7 @@ export function LibraryFilters() {
 												? "default"
 												: "outline"
 										}
-										className="justify-start text-xs h-8"
+										className="h-8 justify-start text-xs"
 										onClick={() => setTimePreset(period)}
 									>
 										{period}
@@ -232,19 +229,19 @@ export function LibraryFilters() {
 										? "default"
 										: "outline"
 								}
-								className="w-full text-xs h-8"
+								className="h-8 w-full text-xs"
 								onClick={() => setTimePreset("Custom")}
 							>
 								Custom Year Range
 							</Button>
 
 							{timePreset === "Custom" && (
-								<div className="flex items-center gap-2 animate-in fade-in zoom-in-95 duration-200 pt-1">
+								<div className="animate-in fade-in zoom-in-95 flex items-center gap-2 pt-1 duration-200">
 									<Select
 										value={startYear}
 										onValueChange={setStartYear}
 									>
-										<SelectTrigger className="w-full h-8 text-xs">
+										<SelectTrigger className="h-8 w-full text-xs">
 											<SelectValue placeholder="From" />
 										</SelectTrigger>
 										<SelectContent>
@@ -260,14 +257,14 @@ export function LibraryFilters() {
 											)}
 										</SelectContent>
 									</Select>
-									<span className="text-xs text-muted-foreground">
+									<span className="text-muted-foreground text-xs">
 										-
 									</span>
 									<Select
 										value={endYear}
 										onValueChange={setEndYear}
 									>
-										<SelectTrigger className="w-full h-8 text-xs">
+										<SelectTrigger className="h-8 w-full text-xs">
 											<SelectValue placeholder="To" />
 										</SelectTrigger>
 										<SelectContent>
@@ -312,7 +309,7 @@ export function LibraryFilters() {
 										/>
 										<Label
 											htmlFor={`rating-${rating}`}
-											className="text-sm font-normal cursor-pointer"
+											className="cursor-pointer text-sm font-normal"
 										>
 											{rating}
 										</Label>

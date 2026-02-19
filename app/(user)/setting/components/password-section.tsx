@@ -5,21 +5,21 @@ import { Button } from "@/components/ui/button";
 
 const PasswordSection = () => {
 	return (
-		<div id="password" className="flex flex-col gap-3 scroll-mt-24">
+		<div id="password" className="flex scroll-mt-24 flex-col gap-3">
 			<h1 className="text-2xl font-semibold">Password Information</h1>
 			<div className="flex flex-col gap-4">
-				<div className="w-full flex gap-3">
-					<div className="w-full flex flex-col gap-2">
+				<div className="flex w-full gap-3">
+					<div className="flex w-full flex-col gap-2">
 						<Label>Old Password</Label>
 						<Input type="password" placeholder="Old Password" />
 					</div>
-					<div className="w-full flex flex-col gap-2">
+					<div className="flex w-full flex-col gap-2">
 						<Label>New Password</Label>
 						<Input type="password" placeholder="New Password" />
 					</div>
 				</div>
 
-				<div className="w-full flex flex-col gap-2">
+				<div className="flex w-full flex-col gap-2">
 					<Label>Confirm Password</Label>
 					<Input type="password" placeholder="Confirm Password" />
 				</div>

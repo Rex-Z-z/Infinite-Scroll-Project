@@ -40,16 +40,16 @@ const SwitchComicImage = ({
 					<div
 						key={index}
 						onClick={() => setSelectedImage(src)}
-						className={`relative flex h-60 items-center justify-center rounded-md shadow-lg overflow-hidden group cursor-pointer border-4 ${selectedImage === src ? "border-primary" : "border-transparent"}`}
+						className={`group relative flex h-60 cursor-pointer items-center justify-center overflow-hidden rounded-md border-4 shadow-lg ${selectedImage === src ? "border-primary" : "border-transparent"}`}
 					>
 						<img
 							src={src}
 							alt={`Cover option ${index + 1}`}
-							className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+							className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
 						/>
 						{selectedImage === src && (
-							<div className="absolute top-2 right-2 bg-primary rounded-full p-1">
-								<Check className="text-white size-4" />
+							<div className="bg-primary absolute top-2 right-2 rounded-full p-1">
+								<Check className="size-4 text-white" />
 							</div>
 						)}
 					</div>

@@ -92,7 +92,7 @@ const DropdownHome = ({ section = "recent-reads" }: NavBarProps) => {
 			<PopoverTrigger asChild>
 				<Button
 					variant="outline"
-					className="h-9 flex items-center gap-2 px-[9.5px]"
+					className="flex h-9 items-center gap-2 px-[9.5px]"
 				>
 					{activeFilterCount ? (
 						<FilterIcon isFill className="text-primary size-4" />
@@ -103,12 +103,12 @@ const DropdownHome = ({ section = "recent-reads" }: NavBarProps) => {
 			</PopoverTrigger>
 			<PopoverContent className="w-[340px] p-0" align="end">
 				{/* Header */}
-				<div className="flex items-center justify-between px-4 py-3 bg-muted/30">
-					<h4 className="font-semibold text-sm">Filter Content</h4>
+				<div className="bg-muted/30 flex items-center justify-between px-4 py-3">
+					<h4 className="text-sm font-semibold">Filter Content</h4>
 					<Button
 						variant="ghost"
 						size="sm"
-						className="h-auto p-0 text-xs text-muted-foreground hover:text-primary"
+						className="text-muted-foreground hover:text-primary h-auto p-0 text-xs"
 						onClick={handleReset}
 					>
 						Reset
@@ -126,7 +126,7 @@ const DropdownHome = ({ section = "recent-reads" }: NavBarProps) => {
 						{/* --- Date Section --- */}
 						<div className="space-y-3">
 							<div className="flex items-center gap-2">
-								<CalendarCog className="size-4 text-muted-foreground" />
+								<CalendarCog className="text-muted-foreground size-4" />
 								<Label className="font-semibold">
 									Time Period
 								</Label>
@@ -165,7 +165,7 @@ const DropdownHome = ({ section = "recent-reads" }: NavBarProps) => {
 												: "outline"
 										}
 										size="sm"
-										className="w-full text-xs mb-2"
+										className="mb-2 w-full text-xs"
 										onClick={() =>
 											handlePresetChange("Custom")
 										}
@@ -174,12 +174,12 @@ const DropdownHome = ({ section = "recent-reads" }: NavBarProps) => {
 									</Button>
 
 									{dateRange === "Custom" && (
-										<div className="flex w-full items-center gap-2 animate-in fade-in zoom-in-95 duration-200">
+										<div className="animate-in fade-in zoom-in-95 flex w-full items-center gap-2 duration-200">
 											<Select
 												value={startYear}
 												onValueChange={setStartYear}
 											>
-												<SelectTrigger className="w-full h-8">
+												<SelectTrigger className="h-8 w-full">
 													<SelectValue placeholder="From" />
 												</SelectTrigger>
 												<SelectContent>
@@ -197,14 +197,14 @@ const DropdownHome = ({ section = "recent-reads" }: NavBarProps) => {
 													))}
 												</SelectContent>
 											</Select>
-											<span className="text-xs text-muted-foreground">
+											<span className="text-muted-foreground text-xs">
 												to
 											</span>
 											<Select
 												value={endYear}
 												onValueChange={setEndYear}
 											>
-												<SelectTrigger className="w-full h-8">
+												<SelectTrigger className="h-8 w-full">
 													<SelectValue placeholder="To" />
 												</SelectTrigger>
 												<SelectContent>
@@ -235,7 +235,7 @@ const DropdownHome = ({ section = "recent-reads" }: NavBarProps) => {
 								{/* --- Type Section --- */}
 								<div className="space-y-3">
 									<Label className="font-semibold">
-										<Tag className="size-4 text-muted-foreground" />
+										<Tag className="text-muted-foreground size-4" />
 										Type
 									</Label>
 									<div className="flex flex-wrap gap-2">
@@ -243,10 +243,7 @@ const DropdownHome = ({ section = "recent-reads" }: NavBarProps) => {
 											([key, value]) => (
 												<div
 													key={key}
-													className={`
-                                                    cursor-pointer select-none rounded-md border px-3 py-1 text-xs font-medium transition-colors
-                                                    ${value ? "bg-primary text-primary-foreground border-primary" : "bg-transparent text-muted-foreground hover:bg-muted"}
-                                                `}
+													className={`cursor-pointer rounded-md border px-3 py-1 text-xs font-medium transition-colors select-none ${value ? "bg-primary text-primary-foreground border-primary" : "text-muted-foreground hover:bg-muted bg-transparent"} `}
 													onClick={() =>
 														setTypes((prev) => ({
 															...prev,
@@ -291,7 +288,7 @@ const DropdownHome = ({ section = "recent-reads" }: NavBarProps) => {
 												/>
 												<Label
 													htmlFor={`rating-${rating}`}
-													className="text-sm font-normal cursor-pointer"
+													className="cursor-pointer text-sm font-normal"
 												>
 													{rating}
 												</Label>

@@ -80,7 +80,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
 		<div className="flex flex-col gap-2.5">
 			<Label
 				className={cn(
-					"text-xs flex items-center gap-2",
+					"flex items-center gap-2 text-xs",
 					title ? "text-foreground" : "text-muted-foreground",
 				)}
 			>
@@ -130,10 +130,10 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
 			</div>
 
 			<div className="flex flex-row gap-1.5">
-				<div className="flex flex-col gap-2.5 w-full">
+				<div className="flex w-full flex-col gap-2.5">
 					<Label
 						className={cn(
-							"text-xs flex items-center gap-2",
+							"flex items-center gap-2 text-xs",
 							type ? "text-foreground" : "text-muted-foreground",
 						)}
 					>
@@ -154,10 +154,10 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
 					</Select>
 				</div>
 
-				<div className="flex flex-col gap-2.5 w-full">
+				<div className="flex w-full flex-col gap-2.5">
 					<Label
 						className={cn(
-							"text-xs flex items-center gap-2",
+							"flex items-center gap-2 text-xs",
 							chapter
 								? "text-foreground"
 								: "text-muted-foreground",
@@ -177,7 +177,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
 
 			<Label
 				className={cn(
-					"text-xs flex items-center gap-2",
+					"flex items-center gap-2 text-xs",
 					rating ? "text-foreground" : "text-muted-foreground",
 				)}
 			>
@@ -185,11 +185,11 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"
 					fill="currentColor"
-					className={cn("size-4 mb-0.5", ratingColorMap[rating])}
+					className={cn("mb-0.5 size-4", ratingColorMap[rating])}
 				>
 					<Star
 						isFill
-						className={cn("size-4 mb-0.5", ratingColorMap[rating])}
+						className={cn("mb-0.5 size-4", ratingColorMap[rating])}
 					/>
 				</svg>
 				Rating
@@ -203,46 +203,46 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
 						<SelectItem value="Absolute Cinema">
 							<Star
 								isFill
-								className="size-4 mr-2 text-blue-400"
+								className="mr-2 size-4 text-blue-400"
 							/>{" "}
 							Absolute Cinema
 						</SelectItem>
 						<SelectItem value="Awesome">
 							<Star
 								isFill
-								className="size-4 mr-2 text-green-700"
+								className="mr-2 size-4 text-green-700"
 							/>{" "}
 							Awesome
 						</SelectItem>
 						<SelectItem value="Great">
 							<Star
 								isFill
-								className="size-4 mr-2 text-green-500"
+								className="mr-2 size-4 text-green-500"
 							/>{" "}
 							Great
 						</SelectItem>
 						<SelectItem value="Good">
 							<Star
 								isFill
-								className="size-4 mr-2 text-yellow-400"
+								className="mr-2 size-4 text-yellow-400"
 							/>{" "}
 							Good
 						</SelectItem>
 						<SelectItem value="Regular">
 							<Star
 								isFill
-								className="size-4 mr-2 text-orange-400"
+								className="mr-2 size-4 text-orange-400"
 							/>{" "}
 							Regular
 						</SelectItem>
 						<SelectItem value="Bad">
-							<Star isFill className="size-4 mr-2 text-red-500" />{" "}
+							<Star isFill className="mr-2 size-4 text-red-500" />{" "}
 							Bad
 						</SelectItem>
 						<SelectItem value="Garbage">
 							<Star
 								isFill
-								className="size-4 mr-2 text-purple-400"
+								className="mr-2 size-4 text-purple-400"
 							/>{" "}
 							Garbage
 						</SelectItem>
@@ -252,7 +252,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
 
 			<Label
 				className={cn(
-					"text-xs flex items-center gap-2",
+					"flex items-center gap-2 text-xs",
 					status ? "text-foreground" : "text-muted-foreground",
 				)}
 			>
@@ -276,7 +276,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
 			>
 				<Label
 					htmlFor="r1"
-					className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer not-last:transition-colors"
+					className="flex cursor-pointer items-center gap-3 rounded-md border p-2.5 not-last:transition-colors"
 				>
 					<RadioGroupItem
 						value="Ongoing"
@@ -288,7 +288,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
 
 				<Label
 					htmlFor="r2"
-					className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer transition-colors"
+					className="flex cursor-pointer items-center gap-3 rounded-md border p-2.5 transition-colors"
 				>
 					<RadioGroupItem
 						value="Completed"
@@ -300,7 +300,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
 
 				<Label
 					htmlFor="r3"
-					className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer transition-colors"
+					className="flex cursor-pointer items-center gap-3 rounded-md border p-2.5 transition-colors"
 				>
 					<RadioGroupItem
 						value="On Hold"
@@ -312,7 +312,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
 
 				<Label
 					htmlFor="r4"
-					className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer transition-colors"
+					className="flex cursor-pointer items-center gap-3 rounded-md border p-2.5 transition-colors"
 				>
 					<RadioGroupItem
 						value="Plan to Read"
@@ -324,7 +324,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
 
 				<Label
 					htmlFor="r5"
-					className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer transition-colors"
+					className="flex cursor-pointer items-center gap-3 rounded-md border p-2.5 transition-colors"
 				>
 					<RadioGroupItem
 						value="Dropped"
@@ -336,7 +336,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
 
 				<Label
 					htmlFor="r6"
-					className="flex items-center gap-3 p-2.5 border rounded-md cursor-pointer transition-colors"
+					className="flex cursor-pointer items-center gap-3 rounded-md border p-2.5 transition-colors"
 				>
 					<RadioGroupItem
 						value="Cancelled"

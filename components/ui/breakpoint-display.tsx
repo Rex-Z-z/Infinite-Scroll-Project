@@ -111,176 +111,176 @@ function BreakpointDisplay({
 		>
 			{/* Minimum - shows below the first breakpoint */}
 			{firstBreakpoint === "xxs" && (
-				<p className="font-semibold block xxs:hidden">Minimum</p>
+				<p className="xxs:hidden block font-semibold">Minimum</p>
 			)}
 			{firstBreakpoint === "xs" && (
-				<p className="font-semibold block xs:hidden">Minimum</p>
+				<p className="xs:hidden block font-semibold">Minimum</p>
 			)}
 			{firstBreakpoint === "sm" && (
-				<p className="font-semibold block sm:hidden">Minimum</p>
+				<p className="block font-semibold sm:hidden">Minimum</p>
 			)}
 			{firstBreakpoint === "md" && (
-				<p className="font-semibold block md:hidden">Minimum</p>
+				<p className="block font-semibold md:hidden">Minimum</p>
 			)}
 			{firstBreakpoint === "lg" && (
-				<p className="font-semibold block lg:hidden">Minimum</p>
+				<p className="block font-semibold lg:hidden">Minimum</p>
 			)}
 			{firstBreakpoint === "xl" && (
-				<p className="font-semibold block xl:hidden">Minimum</p>
+				<p className="block font-semibold xl:hidden">Minimum</p>
 			)}
 			{firstBreakpoint === "2xl" && (
-				<p className="font-semibold block 2xl:hidden">Minimum</p>
+				<p className="block font-semibold 2xl:hidden">Minimum</p>
 			)}
 			{firstBreakpoint === "3xl" && (
-				<p className="font-semibold block 3xl:hidden">Minimum</p>
+				<p className="3xl:hidden block font-semibold">Minimum</p>
 			)}
 
 			{/* XXS breakpoint */}
 			{activeSet.has("xxs") &&
 				getNextActiveBreakpoint("xxs") === "xs" && (
-					<p className="font-semibold hidden xxs:block xs:hidden">
+					<p className="xxs:block xs:hidden hidden font-semibold">
 						XXS
 					</p>
 				)}
 			{activeSet.has("xxs") &&
 				getNextActiveBreakpoint("xxs") === "sm" && (
-					<p className="font-semibold hidden xxs:block sm:hidden">
+					<p className="xxs:block hidden font-semibold sm:hidden">
 						XXS
 					</p>
 				)}
 			{activeSet.has("xxs") &&
 				getNextActiveBreakpoint("xxs") === "md" && (
-					<p className="font-semibold hidden xxs:block md:hidden">
+					<p className="xxs:block hidden font-semibold md:hidden">
 						XXS
 					</p>
 				)}
 			{activeSet.has("xxs") &&
 				getNextActiveBreakpoint("xxs") === "lg" && (
-					<p className="font-semibold hidden xxs:block lg:hidden">
+					<p className="xxs:block hidden font-semibold lg:hidden">
 						XXS
 					</p>
 				)}
 			{activeSet.has("xxs") &&
 				getNextActiveBreakpoint("xxs") === "xl" && (
-					<p className="font-semibold hidden xxs:block xl:hidden">
+					<p className="xxs:block hidden font-semibold xl:hidden">
 						XXS
 					</p>
 				)}
 			{activeSet.has("xxs") &&
 				getNextActiveBreakpoint("xxs") === "2xl" && (
-					<p className="font-semibold hidden xxs:block 2xl:hidden">
+					<p className="xxs:block hidden font-semibold 2xl:hidden">
 						XXS
 					</p>
 				)}
 			{activeSet.has("xxs") &&
 				getNextActiveBreakpoint("xxs") === "3xl" && (
-					<p className="font-semibold hidden xxs:block 3xl:hidden">
+					<p className="xxs:block 3xl:hidden hidden font-semibold">
 						XXS
 					</p>
 				)}
 			{activeSet.has("xxs") && lastBreakpoint === "xxs" && (
-				<p className="font-semibold hidden xxs:block">XXS</p>
+				<p className="xxs:block hidden font-semibold">XXS</p>
 			)}
 
 			{/* XS breakpoint */}
 			{activeSet.has("xs") && getNextActiveBreakpoint("xs") === "sm" && (
-				<p className="font-semibold hidden xs:block sm:hidden">XS</p>
+				<p className="xs:block hidden font-semibold sm:hidden">XS</p>
 			)}
 			{activeSet.has("xs") && getNextActiveBreakpoint("xs") === "md" && (
-				<p className="font-semibold hidden xs:block md:hidden">XS</p>
+				<p className="xs:block hidden font-semibold md:hidden">XS</p>
 			)}
 			{activeSet.has("xs") && getNextActiveBreakpoint("xs") === "lg" && (
-				<p className="font-semibold hidden xs:block lg:hidden">XS</p>
+				<p className="xs:block hidden font-semibold lg:hidden">XS</p>
 			)}
 			{activeSet.has("xs") && getNextActiveBreakpoint("xs") === "xl" && (
-				<p className="font-semibold hidden xs:block xl:hidden">XS</p>
+				<p className="xs:block hidden font-semibold xl:hidden">XS</p>
 			)}
 			{activeSet.has("xs") && getNextActiveBreakpoint("xs") === "2xl" && (
-				<p className="font-semibold hidden xs:block 2xl:hidden">XS</p>
+				<p className="xs:block hidden font-semibold 2xl:hidden">XS</p>
 			)}
 			{activeSet.has("xs") && getNextActiveBreakpoint("xs") === "3xl" && (
-				<p className="font-semibold hidden xs:block 3xl:hidden">XS</p>
+				<p className="xs:block 3xl:hidden hidden font-semibold">XS</p>
 			)}
 			{activeSet.has("xs") && lastBreakpoint === "xs" && (
-				<p className="font-semibold hidden xs:block">XS</p>
+				<p className="xs:block hidden font-semibold">XS</p>
 			)}
 
 			{/* SM breakpoint */}
 			{activeSet.has("sm") && getNextActiveBreakpoint("sm") === "md" && (
-				<p className="font-semibold hidden sm:block md:hidden">SM</p>
+				<p className="hidden font-semibold sm:block md:hidden">SM</p>
 			)}
 			{activeSet.has("sm") && getNextActiveBreakpoint("sm") === "lg" && (
-				<p className="font-semibold hidden sm:block lg:hidden">SM</p>
+				<p className="hidden font-semibold sm:block lg:hidden">SM</p>
 			)}
 			{activeSet.has("sm") && getNextActiveBreakpoint("sm") === "xl" && (
-				<p className="font-semibold hidden sm:block xl:hidden">SM</p>
+				<p className="hidden font-semibold sm:block xl:hidden">SM</p>
 			)}
 			{activeSet.has("sm") && getNextActiveBreakpoint("sm") === "2xl" && (
-				<p className="font-semibold hidden sm:block 2xl:hidden">SM</p>
+				<p className="hidden font-semibold sm:block 2xl:hidden">SM</p>
 			)}
 			{activeSet.has("sm") && getNextActiveBreakpoint("sm") === "3xl" && (
-				<p className="font-semibold hidden sm:block 3xl:hidden">SM</p>
+				<p className="3xl:hidden hidden font-semibold sm:block">SM</p>
 			)}
 			{activeSet.has("sm") && lastBreakpoint === "sm" && (
-				<p className="font-semibold hidden sm:block">SM</p>
+				<p className="hidden font-semibold sm:block">SM</p>
 			)}
 
 			{/* MD breakpoint */}
 			{activeSet.has("md") && getNextActiveBreakpoint("md") === "lg" && (
-				<p className="font-semibold hidden md:block lg:hidden">MD</p>
+				<p className="hidden font-semibold md:block lg:hidden">MD</p>
 			)}
 			{activeSet.has("md") && getNextActiveBreakpoint("md") === "xl" && (
-				<p className="font-semibold hidden md:block xl:hidden">MD</p>
+				<p className="hidden font-semibold md:block xl:hidden">MD</p>
 			)}
 			{activeSet.has("md") && getNextActiveBreakpoint("md") === "2xl" && (
-				<p className="font-semibold hidden md:block 2xl:hidden">MD</p>
+				<p className="hidden font-semibold md:block 2xl:hidden">MD</p>
 			)}
 			{activeSet.has("md") && getNextActiveBreakpoint("md") === "3xl" && (
-				<p className="font-semibold hidden md:block 3xl:hidden">MD</p>
+				<p className="3xl:hidden hidden font-semibold md:block">MD</p>
 			)}
 			{activeSet.has("md") && lastBreakpoint === "md" && (
-				<p className="font-semibold hidden md:block">MD</p>
+				<p className="hidden font-semibold md:block">MD</p>
 			)}
 
 			{/* LG breakpoint */}
 			{activeSet.has("lg") && getNextActiveBreakpoint("lg") === "xl" && (
-				<p className="font-semibold hidden lg:block xl:hidden">LG</p>
+				<p className="hidden font-semibold lg:block xl:hidden">LG</p>
 			)}
 			{activeSet.has("lg") && getNextActiveBreakpoint("lg") === "2xl" && (
-				<p className="font-semibold hidden lg:block 2xl:hidden">LG</p>
+				<p className="hidden font-semibold lg:block 2xl:hidden">LG</p>
 			)}
 			{activeSet.has("lg") && getNextActiveBreakpoint("lg") === "3xl" && (
-				<p className="font-semibold hidden lg:block 3xl:hidden">LG</p>
+				<p className="3xl:hidden hidden font-semibold lg:block">LG</p>
 			)}
 			{activeSet.has("lg") && lastBreakpoint === "lg" && (
-				<p className="font-semibold hidden lg:block">LG</p>
+				<p className="hidden font-semibold lg:block">LG</p>
 			)}
 
 			{/* XL breakpoint */}
 			{activeSet.has("xl") && getNextActiveBreakpoint("xl") === "2xl" && (
-				<p className="font-semibold hidden xl:block 2xl:hidden">XL</p>
+				<p className="hidden font-semibold xl:block 2xl:hidden">XL</p>
 			)}
 			{activeSet.has("xl") && getNextActiveBreakpoint("xl") === "3xl" && (
-				<p className="font-semibold hidden xl:block 3xl:hidden">XL</p>
+				<p className="3xl:hidden hidden font-semibold xl:block">XL</p>
 			)}
 			{activeSet.has("xl") && lastBreakpoint === "xl" && (
-				<p className="font-semibold hidden xl:block">XL</p>
+				<p className="hidden font-semibold xl:block">XL</p>
 			)}
 
 			{/* 2XL breakpoint */}
 			{activeSet.has("2xl") &&
 				getNextActiveBreakpoint("2xl") === "3xl" && (
-					<p className="font-semibold hidden 2xl:block 3xl:hidden">
+					<p className="3xl:hidden hidden font-semibold 2xl:block">
 						2XL
 					</p>
 				)}
 			{activeSet.has("2xl") && lastBreakpoint === "2xl" && (
-				<p className="font-semibold hidden 2xl:block">2XL</p>
+				<p className="hidden font-semibold 2xl:block">2XL</p>
 			)}
 
 			{/* 3XL breakpoint */}
 			{activeSet.has("3xl") && lastBreakpoint === "3xl" && (
-				<p className="font-semibold hidden 3xl:block">3XL</p>
+				<p className="3xl:block hidden font-semibold">3XL</p>
 			)}
 		</div>
 	);

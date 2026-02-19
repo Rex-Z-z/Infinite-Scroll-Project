@@ -10,10 +10,10 @@ import Link from "next/link";
 const LoginForm = () => {
 	return (
 		<section>
-			<div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
+			<div className="mx-auto flex h-screen flex-col items-center justify-center px-6 py-8 lg:py-0">
 				<Link
 					href="/"
-					className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+					className="mb-6 flex items-center text-2xl font-semibold text-gray-900 dark:text-white"
 				>
 					<Image
 						width={32}
@@ -26,7 +26,7 @@ const LoginForm = () => {
 				</Link>
 				<Card className="w-full sm:max-w-sm md:max-w-md">
 					<CardHeader>
-						<CardTitle className="text-md font-bold leading-tight tracking-tight md:text-2xl">
+						<CardTitle className="text-md leading-tight font-bold tracking-tight md:text-2xl">
 							Sign in to your account
 						</CardTitle>
 					</CardHeader>

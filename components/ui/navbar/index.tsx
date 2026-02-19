@@ -40,7 +40,7 @@ const NavBar = ({ page = "user" }: NavBarProps) => {
 		<nav
 			className={`sticky top-0 z-50 ${page === "user" ? "bg-card shadow-sm" : ""}`}
 		>
-			<div className="flex flex-wrap items-center justify-between mx-auto p-3">
+			<div className="mx-auto flex flex-wrap items-center justify-between p-3">
 				<a
 					href="/home"
 					className="flex items-center space-x-3 rtl:space-x-reverse"
@@ -89,7 +89,7 @@ const NavBar = ({ page = "user" }: NavBarProps) => {
 						size="icon"
 						className={
 							isLibraryPage
-								? "opacity-50 pointer-events-none"
+								? "pointer-events-none opacity-50"
 								: ""
 						}
 						asChild
@@ -107,8 +107,8 @@ const NavBar = ({ page = "user" }: NavBarProps) => {
 								size="icon"
 								className="hover:cursor-pointer"
 							>
-								<Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90 hover:cursor-pointer" />
-								<Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0 hover:cursor-pointer" />
+								<Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all hover:cursor-pointer dark:scale-0 dark:-rotate-90" />
+								<Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all hover:cursor-pointer dark:scale-100 dark:rotate-0" />
 								<span className="sr-only hover:cursor-pointer">
 									Toggle theme
 								</span>
@@ -132,7 +132,7 @@ const NavBar = ({ page = "user" }: NavBarProps) => {
 					{page === "user" ? (
 						<DropdownMenu>
 							<DropdownMenuTrigger asChild>
-								<Avatar className="size-[34px] hover:cursor-pointer rounded-sm">
+								<Avatar className="size-[34px] rounded-sm hover:cursor-pointer">
 									<AvatarImage src="/pictures/profile-pic.jpg" />
 									<AvatarFallback>CN</AvatarFallback>
 								</Avatar>

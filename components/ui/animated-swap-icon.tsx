@@ -24,7 +24,7 @@ export function AnimatedSwapIcon({
 	return (
 		<div
 			className={cn(
-				"relative flex items-center justify-center size-4",
+				"relative flex size-4 items-center justify-center",
 				className,
 			)}
 			{...props}
@@ -34,8 +34,8 @@ export function AnimatedSwapIcon({
 					"absolute size-4 transition-all ease-in-out",
 					transitionClass,
 					crossfade
-						? "scale-0 opacity-0 rotate-90"
-						: "scale-100 opacity-100 rotate-0",
+						? "scale-0 rotate-90 opacity-0"
+						: "scale-100 rotate-0 opacity-100",
 				)}
 			/>
 			<AltIcon
@@ -43,8 +43,8 @@ export function AnimatedSwapIcon({
 					"absolute size-4 transition-all ease-in-out",
 					transitionClass,
 					crossfade
-						? "scale-100 opacity-100 rotate-0"
-						: "scale-0 opacity-0 -rotate-90",
+						? "scale-100 rotate-0 opacity-100"
+						: "scale-0 -rotate-90 opacity-0",
 				)}
 			/>
 		</div>

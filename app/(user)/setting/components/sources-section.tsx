@@ -179,7 +179,7 @@ const SourcesSection = () => {
 			/>
 
 			{/* Toolbar */}
-			<div className="flex gap-2 items-center">
+			<div className="flex items-center gap-2">
 				<InputGroup className="py-[17px]">
 					<InputGroupAddon>
 						<Search className="text-muted-foreground" />
@@ -204,15 +204,15 @@ const SourcesSection = () => {
 			{/* List */}
 			<div
 				className={cn(
-					"flex flex-col gap-2 border rounded-lg p-3 max-h-[400px] min-h-[400px] overflow-y-auto custom-scrollbar",
+					"custom-scrollbar flex max-h-[400px] min-h-[400px] flex-col gap-2 overflow-y-auto rounded-lg border p-3",
 					filteredSources.length === 0 &&
 						"items-center justify-center border-dashed",
 				)}
 			>
 				{filteredSources.length === 0 ? (
-					<div className="flex flex-col gap-2 justify-center text-muted-foreground items-center">
+					<div className="text-muted-foreground flex flex-col items-center justify-center gap-2">
 						<SearchX className="size-10" />
-						<div className="text-center justify-center item-center text-muted-foreground">
+						<div className="item-center text-muted-foreground justify-center text-center">
 							No sources found
 						</div>
 					</div>
@@ -223,34 +223,34 @@ const SourcesSection = () => {
 						return (
 							<div
 								key={source.id}
-								className="flex flex-row gap-2 p-3 items-center bg-muted/50 rounded-lg shadow-lg"
+								className="bg-muted/50 flex flex-row items-center gap-2 rounded-lg p-3 shadow-lg"
 							>
 								{/* Icon */}
-								<div className="relative group">
-									<Avatar className="block w-14 h-14 rounded-md">
+								<div className="group relative">
+									<Avatar className="block h-14 w-14 rounded-md">
 										<AvatarImage
 											src={source.icon}
 											className="object-cover"
 										/>
-										<AvatarFallback className="bg-gray-700 rounded-none">
-											<Globe className="w-8 h-8" />
+										<AvatarFallback className="rounded-none bg-gray-700">
+											<Globe className="h-8 w-8" />
 										</AvatarFallback>
 									</Avatar>
 
 									{isEditing && (
 										<div
-											className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-md cursor-pointer"
+											className="absolute inset-0 flex cursor-pointer items-center justify-center rounded-md bg-black/50"
 											onClick={() =>
 												triggerImageUpload(source.id)
 											}
 										>
-											<Upload className="w-6 h-6 text-white opacity-80 hover:opacity-100" />
+											<Upload className="h-6 w-6 text-white opacity-80 hover:opacity-100" />
 										</div>
 									)}
 								</div>
 
 								{/* Name */}
-								<div className="w-full flex flex-col">
+								<div className="flex w-full flex-col">
 									<Label
 										className={cn(
 											"text-xs",
@@ -275,21 +275,21 @@ const SourcesSection = () => {
 												)
 											}
 											className={cn(
-												"bg-gray-50/50 dark:bg-gray-900/50 transition-colors duration-200",
+												"bg-gray-50/50 transition-colors duration-200 dark:bg-gray-900/50",
 												hasError && !source.name.trim()
 													? "border-destructive focus-visible:ring-destructive/50"
 													: "",
 											)}
 										/>
 									) : (
-										<div className="flex items-center h-9 px-3 text-md font-medium truncate">
+										<div className="text-md flex h-9 items-center truncate px-3 font-medium">
 											{source.name || "Unnamed Source"}
 										</div>
 									)}
 								</div>
 
 								{/* URL */}
-								<div className="w-full flex flex-col">
+								<div className="flex w-full flex-col">
 									<Label
 										className={cn(
 											"text-xs",
@@ -314,19 +314,19 @@ const SourcesSection = () => {
 												)
 											}
 											className={cn(
-												"bg-gray-50/50 dark:bg-gray-900/50 transition-colors duration-200",
+												"bg-gray-50/50 transition-colors duration-200 dark:bg-gray-900/50",
 												hasError && !source.url.trim()
 													? "border-destructive focus-visible:ring-destructive/50"
 													: "",
 											)}
 										/>
 									) : (
-										<div className="flex items-center h-9 px-3 text-md truncate">
+										<div className="text-md flex h-9 items-center truncate px-3">
 											<a
 												href={source.url}
 												target="_blank"
 												rel="noopener noreferrer"
-												className="text-primary hover:underline hover:text-primary/80 truncate"
+												className="text-primary hover:text-primary/80 truncate hover:underline"
 											>
 												{source.url || "No URL"}
 											</a>
@@ -335,7 +335,7 @@ const SourcesSection = () => {
 								</div>
 
 								{/* Actions */}
-								<div className="flex gap-2 mt-5">
+								<div className="mt-5 flex gap-2">
 									{isEditing ? (
 										<Button
 											variant="default"
@@ -346,7 +346,7 @@ const SourcesSection = () => {
 											}
 											title="Save"
 										>
-											<Check className="w-4 h-4" />
+											<Check className="h-4 w-4" />
 										</Button>
 									) : (
 										<Button
@@ -357,7 +357,7 @@ const SourcesSection = () => {
 											}
 											title="Edit"
 										>
-											<Pencil className="w-4 h-4" />
+											<Pencil className="h-4 w-4" />
 										</Button>
 									)}
 
@@ -371,7 +371,7 @@ const SourcesSection = () => {
 											}
 											title="Cancel"
 										>
-											<X className="w-4 h-4" />
+											<X className="h-4 w-4" />
 										</Button>
 									) : (
 										<Button
@@ -383,7 +383,7 @@ const SourcesSection = () => {
 											}
 											title="Remove"
 										>
-											<Trash2 className="w-4 h-4" />
+											<Trash2 className="h-4 w-4" />
 										</Button>
 									)}
 								</div>

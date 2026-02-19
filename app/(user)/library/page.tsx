@@ -20,46 +20,46 @@ const Page = () => {
 	return (
 		<div>
 			<div className="flex flex-col p-4">
-				<h1 className="text-4xl font-semibold tracking-tight mb-3 ml-1">
+				<h1 className="mb-3 ml-1 text-4xl font-semibold tracking-tight">
 					Library
 				</h1>
 
 				<Tabs defaultValue="ongoing" className="w-full">
-					<div className="gap-1.5 mb-1 bg-transparent flex flex-row justify-between">
-						<TabsList className="bg-transparent p-0 m-0">
+					<div className="mb-1 flex flex-row justify-between gap-1.5 bg-transparent">
+						<TabsList className="m-0 bg-transparent p-0">
 							<TabsTrigger
 								value="ongoing"
-								className="px-5 py-[18px] dark:data-[state=active]:text-primary hover:cursor-pointer"
+								className="dark:data-[state=active]:text-primary px-5 py-[18px] hover:cursor-pointer"
 							>
 								<BookOpen /> Ongoing
 							</TabsTrigger>
 							<TabsTrigger
 								value="completed"
-								className="px-5 py-[18px] dark:data-[state=active]:text-primary hover:cursor-pointer"
+								className="dark:data-[state=active]:text-primary px-5 py-[18px] hover:cursor-pointer"
 							>
 								<BookOpenCheck /> Completed
 							</TabsTrigger>
 							<TabsTrigger
 								value="hold"
-								className="px-5 py-[18px] dark:data-[state=active]:text-primary hover:cursor-pointer"
+								className="dark:data-[state=active]:text-primary px-5 py-[18px] hover:cursor-pointer"
 							>
 								<Book /> On Hold
 							</TabsTrigger>
 							<TabsTrigger
 								value="plan"
-								className="px-5 py-[18px] dark:data-[state=active]:text-primary hover:cursor-pointer"
+								className="dark:data-[state=active]:text-primary px-5 py-[18px] hover:cursor-pointer"
 							>
 								<BookMarked /> Plan to Read
 							</TabsTrigger>
 							<TabsTrigger
 								value="dropped"
-								className="px-5 py-[18px] dark:data-[state=active]:text-primary hover:cursor-pointer"
+								className="dark:data-[state=active]:text-primary px-5 py-[18px] hover:cursor-pointer"
 							>
 								<BookAlert /> Dropped
 							</TabsTrigger>
 							<TabsTrigger
 								value="cancelled"
-								className="px-5 py-[18px] dark:data-[state=active]:text-primary hover:cursor-pointer"
+								className="dark:data-[state=active]:text-primary px-5 py-[18px] hover:cursor-pointer"
 							>
 								<BookX /> Cancelled
 							</TabsTrigger>

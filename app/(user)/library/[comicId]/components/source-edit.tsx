@@ -116,14 +116,14 @@ const SourceEdit = ({
 	);
 
 	return (
-		<DialogContent className="sm:max-w-3xl max-h-[85vh] overflow-y-auto">
+		<DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-3xl">
 			<DialogHeader>
-				<div className="flex gap-1 items-center">
+				<div className="flex items-center gap-1">
 					<DialogTitle>Source</DialogTitle>
 					<Popover>
 						<PopoverTrigger asChild>
 							<Button variant="ghost" size="icon-xs">
-								<Info className="w-4 h-4" />
+								<Info className="h-4 w-4" />
 							</Button>
 						</PopoverTrigger>
 						<PopoverContent
@@ -156,10 +156,10 @@ const SourceEdit = ({
 				{linkedSources.map((item, index) => (
 					<div
 						key={index}
-						className="flex flex-row gap-2 items-center animate-in fade-in slide-in-from-top-1"
+						className="animate-in fade-in slide-in-from-top-1 flex flex-row items-center gap-2"
 					>
 						{/* Icon (Read-only) */}
-						<Avatar className="relative block bg-accent w-10 h-10">
+						<Avatar className="bg-accent relative block h-10 w-10">
 							<AvatarImage src={item.icon} />
 							<AvatarFallback>
 								<ImageOff className="size-5" />
@@ -167,7 +167,7 @@ const SourceEdit = ({
 						</Avatar>
 
 						{/* URL (Read-only) */}
-						<InputGroup className="py-[17px] flex-1">
+						<InputGroup className="flex-1 py-[17px]">
 							<InputGroupInput
 								placeholder="URL"
 								defaultValue={item.url}
@@ -181,7 +181,7 @@ const SourceEdit = ({
 											size="icon-xs"
 											disabled
 										>
-											<Info className="w-4 h-4" />
+											<Info className="h-4 w-4" />
 										</InputGroupButton>
 									</InputGroupAddon>
 								</PopoverTrigger>
@@ -196,7 +196,7 @@ const SourceEdit = ({
 							placeholder="Name"
 							defaultValue={item.name}
 							disabled
-							className="w-1/4 bg-transparent text-muted-foreground/30 border-0 disabled:opacity-100"
+							className="text-muted-foreground/30 w-1/4 border-0 bg-transparent disabled:opacity-100"
 						/>
 
 						{/* Remove Button */}
@@ -206,13 +206,13 @@ const SourceEdit = ({
 							className="p-[17px]"
 							onClick={() => handleRemoveSource(index)}
 						>
-							<Trash2 className="w-4 h-4 " />
+							<Trash2 className="h-4 w-4" />
 						</Button>
 					</div>
 				))}
 
 				{/* Add New Source Section */}
-				<div className="flex gap-2 items-center pt-4 border-t">
+				<div className="flex items-center gap-2 border-t pt-4">
 					<Select
 						value={selectedSourceToAdd}
 						onValueChange={setSelectedSourceToAdd}
@@ -229,7 +229,7 @@ const SourceEdit = ({
 											value={source.name}
 										>
 											<div className="flex items-center gap-2">
-												<Avatar className="relative block bg-accent w-6 h-6">
+												<Avatar className="bg-accent relative block h-6 w-6">
 													<AvatarImage
 														src={source.icon}
 													/>
@@ -242,7 +242,7 @@ const SourceEdit = ({
 										</SelectItem>
 									))
 								) : (
-									<div className="p-2 text-sm text-center text-muted-foreground">
+									<div className="text-muted-foreground p-2 text-center text-sm">
 										No more sources available
 									</div>
 								)}

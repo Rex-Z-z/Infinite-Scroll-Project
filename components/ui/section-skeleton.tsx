@@ -20,7 +20,7 @@ const SectionSkeleton = ({ page = "home" }: SectionSkeletonProps) => {
 					className={`flex flex-col gap-3 ${page === "home" ? "w-50 flex-shrink-0" : ""}`}
 				>
 					<Skeleton
-						className={`${page === "home" ? "w-full h-[300px]" : "w-full aspect-[2/3]"}`}
+						className={`${page === "home" ? "h-[300px] w-full" : "aspect-[2/3] w-full"}`}
 					/>
 					<div className="flex flex-col gap-3.5">
 						<Skeleton className="h-4 w-full" />

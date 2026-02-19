@@ -55,7 +55,7 @@ const RightSidePage = ({
 
 	return (
 		<TooltipProvider>
-			<div className="flex flex-col w-full h-full overflow-y-auto custom-scrollbar pr-4">
+			<div className="custom-scrollbar flex h-full w-full flex-col overflow-y-auto pr-4">
 				<Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
 					<SourceEdit
 						source={data?.source}
@@ -78,7 +78,7 @@ const RightSidePage = ({
 									onClick={() =>
 										handleCopy(data?.title, "title")
 									}
-									className="text-3xl font-semibold line-clamp-2 cursor-pointer transition-colors w-fit"
+									className="line-clamp-2 w-fit cursor-pointer text-3xl font-semibold transition-colors"
 									title={data?.title}
 								>
 									{data?.title}
@@ -104,7 +104,7 @@ const RightSidePage = ({
 										onClick={() =>
 											handleCopy(data?.altTitle, "alt")
 										}
-										className="text-lg text-muted-foreground font-semibold line-clamp-1 cursor-pointer transition-colors w-fit"
+										className="text-muted-foreground line-clamp-1 w-fit cursor-pointer text-lg font-semibold transition-colors"
 										title={data?.altTitle}
 									>
 										{data?.altTitle}
@@ -127,7 +127,7 @@ const RightSidePage = ({
 							<Badge
 								key={tag}
 								variant="default"
-								className="px-2.5 py-1.5 hover:bg-primary/80 rounded-2xl"
+								className="hover:bg-primary/80 rounded-2xl px-2.5 py-1.5"
 							>
 								{tag}
 							</Badge>
@@ -135,29 +135,29 @@ const RightSidePage = ({
 					</div>
 
 					<div className="mt-2">
-						<h1 className="text-lg font-semibold mb-1">
+						<h1 className="mb-1 text-lg font-semibold">
 							More Info
 						</h1>
 						<div className="flex flex-col gap-1">
-							<p className="text-sm text-muted-foreground font-semibold">
+							<p className="text-muted-foreground text-sm font-semibold">
 								Published:{" "}
 								<span className="text-foreground">
 									{data?.published || "N/A"}
 								</span>{" "}
 							</p>
-							<p className="text-sm text-muted-foreground font-semibold">
+							<p className="text-muted-foreground text-sm font-semibold">
 								Updated:{" "}
 								<span className="text-foreground">
 									{data?.updated || "N/A"}
 								</span>
 							</p>
-							<p className="text-sm text-muted-foreground font-semibold">
+							<p className="text-muted-foreground text-sm font-semibold">
 								Status:{" "}
 								<span className="text-foreground">
 									{data?.status || "N/A"}
 								</span>
 							</p>
-							<p className="text-sm text-muted-foreground font-semibold">
+							<p className="text-muted-foreground text-sm font-semibold">
 								Chapter:{" "}
 								<span className="text-foreground">
 									{data?.comicChapter || "N/A"}
@@ -171,7 +171,7 @@ const RightSidePage = ({
 						<h1 className="text-md font-semibold">Description</h1>
 						<p
 							className={cn(
-								"text-sm text-muted-foreground font-semibold",
+								"text-muted-foreground text-sm font-semibold",
 								needsTruncation &&
 									!isExpanded &&
 									"line-clamp-3",
@@ -183,7 +183,7 @@ const RightSidePage = ({
 							<Button
 								variant="link"
 								onClick={() => setIsExpanded(!isExpanded)}
-								className="text-primary hover:underline text-sm font-semibold p-0 hover:cursor-pointer"
+								className="text-primary p-0 text-sm font-semibold hover:cursor-pointer hover:underline"
 							>
 								{isExpanded ? "Show Less" : "Show More"}
 							</Button>
@@ -195,7 +195,7 @@ const RightSidePage = ({
 				<div className="flex flex-col gap-4">
 					{/* Source */}
 					<div className="mt-2">
-						<h1 className="text-md font-semibold mb-1">Source</h1>
+						<h1 className="text-md mb-1 font-semibold">Source</h1>
 						<div className="flex gap-2">
 							<div className="flex flex-row gap-1.5">
 								{data?.source?.map((source, index) => (
@@ -207,7 +207,7 @@ const RightSidePage = ({
 										<Badge
 											key={source}
 											variant="secondary"
-											className="px-2.5 py-[6.5px] hover:bg-accent rounded-2xl"
+											className="hover:bg-accent rounded-2xl px-2.5 py-[6.5px]"
 										>
 											<img
 												src={data.sourceIcon[index]}
@@ -234,10 +234,10 @@ const RightSidePage = ({
 					{/* Relation */}
 					{relatedComics.length > 0 && (
 						<div>
-							<h1 className="text-md font-semibold mb-1">
+							<h1 className="text-md mb-1 font-semibold">
 								Relation
 							</h1>
-							<div className="flex flex-row gap-3 overflow-x-auto pb-2 scrollbar-hide">
+							<div className="scrollbar-hide flex flex-row gap-3 overflow-x-auto pb-2">
 								{relatedComics.map((comic) => (
 									<Link
 										key={comic.id}
@@ -245,14 +245,14 @@ const RightSidePage = ({
 									>
 										<div
 											key={comic.id}
-											className="flex-none w-32 flex flex-col gap-2 group cursor-pointer"
+											className="group flex w-32 flex-none cursor-pointer flex-col gap-2"
 										>
-											<div className="relative w-full aspect-[2/3] rounded-md overflow-hidden shadow-md">
+											<div className="relative aspect-[2/3] w-full overflow-hidden rounded-md shadow-md">
 												{comic.coverImage ? (
 													<img
 														src={comic.coverImage}
 														alt={comic.title}
-														className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+														className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
 													/>
 												) : (
 													<div className="flex h-full items-center justify-center">
@@ -260,7 +260,7 @@ const RightSidePage = ({
 													</div>
 												)}
 											</div>
-											<span className="text-xs font-medium text-muted-foreground group-hover:text-primary line-clamp-2 transition-colors">
+											<span className="text-muted-foreground group-hover:text-primary line-clamp-2 text-xs font-medium transition-colors">
 												{comic.title}
 											</span>
 										</div>
@@ -272,13 +272,13 @@ const RightSidePage = ({
 
 					{/* Tags */}
 					<div>
-						<h1 className="text-md font-semibold mb-2.5">Tags</h1>
+						<h1 className="text-md mb-2.5 font-semibold">Tags</h1>
 						<div className="flex flex-row gap-1.5">
 							{data?.category?.map((category) => (
 								<Badge
 									key={category}
 									variant="secondary"
-									className="px-2.5 py-1.5 hover:bg-accent rounded-md"
+									className="hover:bg-accent rounded-md px-2.5 py-1.5"
 								>
 									{category}
 								</Badge>

@@ -30,7 +30,7 @@ const LastReadDatePicker = ({ date, setDate }: LastReadDatePickerProps) => {
 				<Button
 					variant={"outline"}
 					className={cn(
-						"w-full justify-start text-left font-normal h-9.5 px-3",
+						"h-9.5 w-full justify-start px-3 text-left font-normal",
 						!date && "text-muted-foreground",
 					)}
 				>
@@ -52,8 +52,8 @@ const LastReadDatePicker = ({ date, setDate }: LastReadDatePickerProps) => {
 							className="p-0"
 						/>
 					</div>
-					<div className="flex flex-col gap-2 p-3 border-t sm:border-l sm:border-t-0 border-border bg-muted/20 w-full sm:w-auto">
-						<span className="text-xs font-medium text-muted-foreground mb-1">
+					<div className="border-border bg-muted/20 flex w-full flex-col gap-2 border-t p-3 sm:w-auto sm:border-t-0 sm:border-l">
+						<span className="text-muted-foreground mb-1 text-xs font-medium">
 							Quick Select
 						</span>
 						{[
@@ -68,7 +68,7 @@ const LastReadDatePicker = ({ date, setDate }: LastReadDatePickerProps) => {
 								key={preset.value}
 								variant="outline"
 								size="sm"
-								className="w-full justify-start text-xs h-7"
+								className="h-7 w-full justify-start text-xs"
 								onClick={() => {
 									const newDate = addDays(
 										new Date(),

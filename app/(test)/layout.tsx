@@ -22,7 +22,7 @@ export default async function TestLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
-					<main className="flex justify-center items-center p-4">
+					<main className="flex items-center justify-center p-4">
 						{children}
 					</main>
 				</ThemeProvider>

@@ -21,12 +21,12 @@ const page = () => {
 				{/* Content */}
 				<section
 					id="home"
-					className="flex flex-col justify-center items-center h-[80vh] text-center mt-6"
+					className="mt-6 flex h-[80vh] flex-col items-center justify-center text-center"
 				>
-					<p className="text-5xl font-bold tracking-tight text-balance text-white sm:text-7xl w-3/6">
+					<p className="w-3/6 text-5xl font-bold tracking-tight text-balance text-white sm:text-7xl">
 						My Personal Book Collection Project
 					</p>
-					<p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8 w-[55%]">
+					<p className="mt-8 w-[55%] text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
 						This project is my first independent work after
 						completing the full-stack development program. I built
 						it to store my personal book collection and to challenge
@@ -51,10 +51,10 @@ const page = () => {
 
 				{/* Content */}
 				<section id="about">
-					<div className="gap-16 mt-2 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
+					<div className="mx-auto mt-2 max-w-screen-xl items-center gap-16 px-4 py-8 lg:grid lg:grid-cols-2 lg:px-6 lg:py-16">
 						{/* Text Section */}
 						<div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
-							<h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+							<h2 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
 								About This Project
 							</h2>
 							<p className="mb-4">
@@ -77,14 +77,14 @@ const page = () => {
 						</div>
 
 						{/* Project Images */}
-						<div className="grid grid-cols-2 gap-4 mt-8">
+						<div className="mt-8 grid grid-cols-2 gap-4">
 							<img
 								className="w-full rounded-lg"
 								src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-2.png"
 								alt="screenshot of the project"
 							/>
 							<img
-								className="mt-4 w-full lg:mt-10 rounded-lg"
+								className="mt-4 w-full rounded-lg lg:mt-10"
 								src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png"
 								alt="screenshot of the project"
 							/>
@@ -93,24 +93,24 @@ const page = () => {
 				</section>
 
 				<section id="projects" className="mt-32 py-8">
-					<div className="max-w-screen-xl mx-auto px-4 lg:px-6">
-						<h2 className="text-4xl font-extrabold text-center text-gray-900 dark:text-white mb-12">
+					<div className="mx-auto max-w-screen-xl px-4 lg:px-6">
+						<h2 className="mb-12 text-center text-4xl font-extrabold text-gray-900 dark:text-white">
 							Projects
 						</h2>
 
 						<div className="grid gap-12 lg:grid-cols-2">
 							{/* Independent Project */}
-							<div className="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-								<div className="h-96 rounded-lg mb-6 overflow-hidden">
+							<div className="rounded-lg border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
+								<div className="mb-6 h-96 overflow-hidden rounded-lg">
 									<img
 										src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png" // replace with your screenshot
 										alt="Book Collection Project screenshot"
 									/>
 								</div>
-								<h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+								<h3 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
 									Personal Book Collection Website
 								</h3>
-								<p className="text-gray-600 dark:text-gray-400 mb-4">
+								<p className="mb-4 text-gray-600 dark:text-gray-400">
 									My first independent full-stack project
 									after completing my development program. I
 									created this website to store and organize
@@ -118,7 +118,7 @@ const page = () => {
 									what I learned in both frontend and backend
 									development.
 								</p>
-								<p className="text-gray-600 dark:text-gray-400 mb-2">
+								<p className="mb-2 text-gray-600 dark:text-gray-400">
 									<span className="font-semibold">
 										My Role:
 									</span>{" "}
@@ -137,24 +137,24 @@ const page = () => {
 							</div>
 
 							{/* Team Project */}
-							<div className="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-								<div className="h-96 rounded-lg mb-6 overflow-hidden">
+							<div className="rounded-lg border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
+								<div className="mb-6 h-96 overflow-hidden rounded-lg">
 									<img
 										src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png" // replace with your screenshot
 										alt="Team Project screenshot"
 									/>
 								</div>
-								<h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+								<h3 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
 									Team Project: Course Management System
 								</h3>
-								<p className="text-gray-600 dark:text-gray-400 mb-4">
+								<p className="mb-4 text-gray-600 dark:text-gray-400">
 									A collaborative project built during my
 									full-stack development program. The system
 									allowed instructors to create and manage
 									classes, while students could view and
 									enroll in courses.
 								</p>
-								<p className="text-gray-600 dark:text-gray-400 mb-2">
+								<p className="mb-2 text-gray-600 dark:text-gray-400">
 									<span className="font-semibold">
 										My Role:
 									</span>{" "}
@@ -170,15 +170,15 @@ const page = () => {
 									</span>{" "}
 									React, Tailwind CSS, Node.js, Express, MySQL
 								</p>
-								<div className="text-right mt-10">
+								<div className="mt-10 text-right">
 									<a
 										href="https://num-digital-scheduler.fit/signin"
 										target="_blank"
-										className="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline"
+										className="inline-flex items-center font-medium text-blue-600 hover:underline dark:text-blue-500"
 									>
 										Read more
 										<svg
-											className="ml-2 w-4 h-4"
+											className="ml-2 h-4 w-4"
 											fill="currentColor"
 											viewBox="0 0 20 20"
 											xmlns="http://www.w3.org/2000/svg"
@@ -210,7 +210,7 @@ const page = () => {
 					/>
 				</div>
 
-				<footer className="bg-white dark:bg-gray-900 mt-20">
+				<footer className="mt-20 bg-white dark:bg-gray-900">
 					<div className="mx-auto w-full p-4 py-6 lg:py-8">
 						<div className="sm:flex sm:items-center sm:justify-between">
 							<span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
@@ -223,13 +223,13 @@ const page = () => {
 								</a>
 								. All Rights Reserved.
 							</span>
-							<div className="flex mt-4 sm:justify-center sm:mt-0">
+							<div className="mt-4 flex sm:mt-0 sm:justify-center">
 								<a
 									href="#"
 									className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
 								>
 									<svg
-										className="w-4 h-4"
+										className="h-4 w-4"
 										aria-hidden="true"
 										xmlns="http://www.w3.org/2000/svg"
 										fill="currentColor"
@@ -247,10 +247,10 @@ const page = () => {
 								</a>
 								<a
 									href="#"
-									className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
+									className="ms-5 text-gray-500 hover:text-gray-900 dark:hover:text-white"
 								>
 									<svg
-										className="w-4 h-4"
+										className="h-4 w-4"
 										aria-hidden="true"
 										xmlns="http://www.w3.org/2000/svg"
 										fill="currentColor"
@@ -264,10 +264,10 @@ const page = () => {
 								</a>
 								<a
 									href="#"
-									className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
+									className="ms-5 text-gray-500 hover:text-gray-900 dark:hover:text-white"
 								>
 									<svg
-										className="w-4 h-4"
+										className="h-4 w-4"
 										aria-hidden="true"
 										xmlns="http://www.w3.org/2000/svg"
 										fill="currentColor"
@@ -285,10 +285,10 @@ const page = () => {
 								</a>
 								<a
 									href="#"
-									className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
+									className="ms-5 text-gray-500 hover:text-gray-900 dark:hover:text-white"
 								>
 									<svg
-										className="w-4 h-4"
+										className="h-4 w-4"
 										aria-hidden="true"
 										xmlns="http://www.w3.org/2000/svg"
 										fill="currentColor"
@@ -306,10 +306,10 @@ const page = () => {
 								</a>
 								<a
 									href="#"
-									className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
+									className="ms-5 text-gray-500 hover:text-gray-900 dark:hover:text-white"
 								>
 									<svg
-										className="w-4 h-4"
+										className="h-4 w-4"
 										aria-hidden="true"
 										xmlns="http://www.w3.org/2000/svg"
 										fill="currentColor"

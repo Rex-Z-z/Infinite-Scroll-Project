@@ -40,17 +40,17 @@ const ComicCard = ({ read, page = "home", onEdit }: ComicCardProps) => {
 			{isHome ? (
 				// Home
 				<div key={read.id} className="max-w-60">
-					<div className="relative block w-full h-75 aspect-[2/3] overflow-hidden rounded-md shadow-2xl">
+					<div className="relative block aspect-[2/3] h-75 w-full overflow-hidden rounded-md shadow-2xl">
 						{read.coverImage ? (
 							<Image
 								src={read.coverImage}
 								fill
 								alt={`Cover for ${read.title}`}
-								className="absolute object-cover hover:scale-110 transition-all duration-500 ease-in-out"
+								className="absolute object-cover transition-all duration-500 ease-in-out hover:scale-110"
 							/>
 						) : (
-							<div className="relative flex w-full h-75 aspect-[2/2.51] items-center justify-center bg-gray-700 hover:bg-gray-800 rounded-md shadow-lg group">
-								<div className="group-hover:scale-130 transition-all duration-300 ease-in-out">
+							<div className="group relative flex aspect-[2/2.51] h-75 w-full items-center justify-center rounded-md bg-gray-700 shadow-lg hover:bg-gray-800">
+								<div className="transition-all duration-300 ease-in-out group-hover:scale-130">
 									<ImageIcon className="size-16 text-gray-600" />
 								</div>
 							</div>
@@ -60,22 +60,22 @@ const ComicCard = ({ read, page = "home", onEdit }: ComicCardProps) => {
 							onClick={handleEditClick}
 							variant="secondary"
 							size="icon-sm"
-							className="absolute top-2 left-2 hover:bg-accent hover:text-accent-foreground hover:cursor-pointer"
+							className="hover:bg-accent hover:text-accent-foreground absolute top-2 left-2 hover:cursor-pointer"
 						>
 							<Settings2 />
 						</Button>
 					</div>
-					<div className="mt-2 p-1 rounded-md">
+					<div className="mt-2 rounded-md p-1">
 						<h5
-							className="mb-1 text-md hover:text-foreground/80 font-bold tracking-tight max-w-180 truncate"
+							className="text-md hover:text-foreground/80 mb-1 max-w-180 truncate font-bold tracking-tight"
 							title={read.title}
 						>
 							{read.title}
 						</h5>
-						<p className="mb-3 text-sm font-normal text-muted-foreground hover:text-muted-foreground/80">
+						<p className="text-muted-foreground hover:text-muted-foreground/80 mb-3 text-sm font-normal">
 							{formatDistanceToNow(read.lastRead)}
 						</p>
-						<div className="flex flex-row justify-between text-sm font-normal text-muted-foreground">
+						<div className="text-muted-foreground flex flex-row justify-between text-sm font-normal">
 							{read.rating ? (
 								<div className="flex flex-row gap-1">
 									<Badge
@@ -125,17 +125,17 @@ const ComicCard = ({ read, page = "home", onEdit }: ComicCardProps) => {
 			) : (
 				// Library
 				<div key={read.id} className="flex flex-col overflow-hidden">
-					<div className="relative block w-full aspect-[2/3] overflow-hidden rounded-md shadow-2xl">
+					<div className="relative block aspect-[2/3] w-full overflow-hidden rounded-md shadow-2xl">
 						{read.coverImage ? (
 							<Image
 								src={read.coverImage}
 								fill
 								alt={`Cover for ${read.title}`}
-								className="absolute object-cover hover:scale-110 transition-all duration-500 ease-in-out"
+								className="absolute object-cover transition-all duration-500 ease-in-out hover:scale-110"
 							/>
 						) : (
-							<div className="relative flex w-full aspect-[2/3] items-center justify-center bg-gray-700 hover:bg-gray-800 rounded-md cursor-pointer shadow-lg group">
-								<div className="group-hover:scale-130 transition-all duration-300 ease-in-out">
+							<div className="group relative flex aspect-[2/3] w-full cursor-pointer items-center justify-center rounded-md bg-gray-700 shadow-lg hover:bg-gray-800">
+								<div className="transition-all duration-300 ease-in-out group-hover:scale-130">
 									<ImageIcon className="size-16 text-gray-600" />
 								</div>
 							</div>
@@ -145,23 +145,23 @@ const ComicCard = ({ read, page = "home", onEdit }: ComicCardProps) => {
 							onClick={handleEditClick}
 							variant="secondary"
 							size="icon-sm"
-							className="absolute top-2 left-2 hover:bg-accent hover:cursor-pointer"
+							className="hover:bg-accent absolute top-2 left-2 hover:cursor-pointer"
 						>
 							<Settings2 />
 						</Button>
 					</div>
 
-					<div className="mt-2 p-1 rounded-md">
+					<div className="mt-2 rounded-md p-1">
 						<h5
-							className="mb-1 text-sm hover:text-foreground/80 font-semibold tracking-tight max-w-180 truncate"
+							className="hover:text-foreground/80 mb-1 max-w-180 truncate text-sm font-semibold tracking-tight"
 							title={read.title}
 						>
 							{read.title}
 						</h5>
-						<p className="mb-3 text-xs font-normal text-muted-foreground hover:text-muted-foreground/80">
+						<p className="text-muted-foreground hover:text-muted-foreground/80 mb-3 text-xs font-normal">
 							{formatDistanceToNow(read.lastRead)}
 						</p>
-						<div className="flex flex-row justify-between text-sm font-normal text-muted-foreground">
+						<div className="text-muted-foreground flex flex-row justify-between text-sm font-normal">
 							{read.rating ? (
 								<div className="flex flex-row gap-1">
 									<Badge

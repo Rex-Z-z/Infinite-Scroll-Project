@@ -6,9 +6,9 @@ const SkeletonDetails = () => {
 		<div>
 			<div className="flex flex-row gap-4">
 				{/* Left Side */}
-				<div className="flex-none flex-col w-75 h-full">
+				<div className="h-full w-75 flex-none flex-col">
 					{/* Cover */}
-					<Skeleton className="w-full h-98 rounded-lg mb-3" />
+					<Skeleton className="mb-3 h-98 w-full rounded-lg" />
 					{/* Details */}
 					<div className="flex flex-col gap-2">
 						{Array.from({ length: 5 }).map((_, index) => (
@@ -28,49 +28,49 @@ const SkeletonDetails = () => {
 				</div>
 
 				{/* Right Side */}
-				<div className="flex flex-col w-full gap-3">
+				<div className="flex w-full flex-col gap-3">
 					{/* Top Section */}
 					<div className="flex flex-col gap-2 pb-2">
 						{/* Title */}
 						<div className="flex flex-col gap-2">
-							<Skeleton className="w-140 h-8" />
-							<Skeleton className="w-100 h-5" />
+							<Skeleton className="h-8 w-140" />
+							<Skeleton className="h-5 w-100" />
 						</div>
 						{/* Genres */}
 						<div className="flex flex-row gap-1.5">
 							{Array.from({ length: 5 }).map((_, index) => (
 								<Skeleton
 									key={index}
-									className="w-16 h-8 rounded-3xl"
+									className="h-8 w-16 rounded-3xl"
 								/>
 							))}
 						</div>
 						{/* Description */}
-						<div className="flex flex-col gap-2 mt-2.5">
-							<Skeleton className="w-25 h-6" />
+						<div className="mt-2.5 flex flex-col gap-2">
+							<Skeleton className="h-6 w-25" />
 							<div className="flex flex-col gap-2">
-								<Skeleton className="w-[11%] h-4.5" />
-								<Skeleton className="w-[10%] h-4.5" />
-								<Skeleton className="w-[10.5%] h-4.5" />
-								<Skeleton className="w-[9.5%] h-4.5" />
+								<Skeleton className="h-4.5 w-[11%]" />
+								<Skeleton className="h-4.5 w-[10%]" />
+								<Skeleton className="h-4.5 w-[10.5%]" />
+								<Skeleton className="h-4.5 w-[9.5%]" />
 							</div>
 						</div>
 						{/* Description */}
-						<div className="flex flex-col gap-2 mt-2.5 pb-3">
-							<Skeleton className="w-25 h-6" />
+						<div className="mt-2.5 flex flex-col gap-2 pb-3">
+							<Skeleton className="h-6 w-25" />
 							<div className="flex flex-col gap-2">
-								<Skeleton className="w-full h-4" />
-								<Skeleton className="w-[75%] h-4" />
-								<Skeleton className="w-[85%] h-4" />
+								<Skeleton className="h-4 w-full" />
+								<Skeleton className="h-4 w-[75%]" />
+								<Skeleton className="h-4 w-[85%]" />
 							</div>
 						</div>
 						<div className="flex flex-col gap-2">
-							<Skeleton className="w-25 h-6" />
+							<Skeleton className="h-6 w-25" />
 							<div className="flex flex-row gap-1.5">
 								{Array.from({ length: 5 }).map((_, index) => (
 									<Skeleton
 										key={index}
-										className="w-16 h-8 rounded-3xl"
+										className="h-8 w-16 rounded-3xl"
 									/>
 								))}
 							</div>
@@ -81,24 +81,24 @@ const SkeletonDetails = () => {
 					<div className="flex flex-col gap-4">
 						{/* Relation */}
 						<div className="flex flex-col gap-2">
-							<Skeleton className="w-25 h-6" />
+							<Skeleton className="h-6 w-25" />
 							<div className="flex flex-row gap-1.5">
 								{Array.from({ length: 3 }).map((_, index) => (
 									<Skeleton
 										key={index}
-										className="w-32 aspect-[2/3] rounded-md"
+										className="aspect-[2/3] w-32 rounded-md"
 									/>
 								))}
 							</div>
 						</div>
 						{/* Tags */}
 						<div className="flex flex-col gap-2">
-							<Skeleton className="w-25 h-6" />
+							<Skeleton className="h-6 w-25" />
 							<div className="flex flex-row gap-1.5">
 								{Array.from({ length: 5 }).map((_, index) => (
 									<Skeleton
 										key={index}
-										className="w-20 h-8 rounded-md"
+										className="h-8 w-20 rounded-md"
 									/>
 								))}
 							</div>

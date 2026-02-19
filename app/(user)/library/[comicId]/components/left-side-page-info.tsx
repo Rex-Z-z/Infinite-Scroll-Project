@@ -110,7 +110,7 @@ const LeftSidePage = ({
 	};
 
 	return (
-		<div className="flex-none flex-col w-75 h-full overflow-y-auto custom-scrollbar pr-1">
+		<div className="custom-scrollbar h-full w-75 flex-none flex-col overflow-y-auto pr-1">
 			<Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
 				<SwitchComicImage
 					currentCover={data?.coverImage}
@@ -122,12 +122,12 @@ const LeftSidePage = ({
 			</Dialog>
 
 			{/* Cover */}
-			<div className="relative block w-full h-99 aspect-[2/3] rounded-md overflow-hidden mb-3 group">
+			<div className="group relative mb-3 block aspect-[2/3] h-99 w-full overflow-hidden rounded-md">
 				{data.coverImage ? (
 					<img
 						src={data?.coverImage}
 						alt={`Cover for ${data?.title}`}
-						className="absolute h-full w-full object-cover hover:scale-110 transition-all duration-500 ease-in-out"
+						className="absolute h-full w-full object-cover transition-all duration-500 ease-in-out hover:scale-110"
 					/>
 				) : (
 					<>
@@ -139,9 +139,9 @@ const LeftSidePage = ({
 						<Button
 							onClick={handleUploadClick}
 							variant="outline"
-							className="relative flex w-full h-99 aspect-[2/3] items-center justify-center group mb-3 hover:text-muted-foreground"
+							className="group hover:text-muted-foreground relative mb-3 flex aspect-[2/3] h-99 w-full items-center justify-center"
 						>
-							<ImagePlus className="size-18 text-muted-foreground group-hover:scale-130 transition-all duration-300 ease-in-out" />
+							<ImagePlus className="text-muted-foreground size-18 transition-all duration-300 ease-in-out group-hover:scale-130" />
 						</Button>
 					</>
 				)}
@@ -149,17 +149,17 @@ const LeftSidePage = ({
 					onClick={handleSwitch}
 					variant="secondary"
 					size="icon-sm"
-					className="absolute top-2 left-2 hover:bg-accent hover:cursor-pointer"
+					className="hover:bg-accent absolute top-2 left-2 hover:cursor-pointer"
 				>
 					<ArrowLeftRight />
 				</Button>
 			</div>
 
 			{/* Info */}
-			<div className="flex flex-col gap-2 w-full">
+			<div className="flex w-full flex-col gap-2">
 				<div className="flex flex-row gap-1.5">
 					<div
-						className={`p-2 rounded-md ${typeColorMap[type] || "bg-card hover:bg-card/80 border border-foreground/10 text-foreground/20"}`}
+						className={`rounded-md p-2 ${typeColorMap[type] || "bg-card hover:bg-card/80 border-foreground/10 text-foreground/20 border"}`}
 					>
 						<Book className="size-5" />
 					</div>
@@ -185,7 +185,7 @@ const LeftSidePage = ({
 							</Select>
 						) : (
 							<>
-								<h2 className="text-[10px] text-muted-foreground font-semibold">
+								<h2 className="text-muted-foreground text-[10px] font-semibold">
 									Type
 								</h2>
 								<h1 className="text-sm font-semibold">
@@ -198,7 +198,7 @@ const LeftSidePage = ({
 
 				<div className="flex flex-row gap-1.5">
 					<div
-						className={`p-2 rounded-md ${ratingColorMap[rating] || "dark:bg-blue-600 dark:hover:bg-blue-700"}`}
+						className={`rounded-md p-2 ${ratingColorMap[rating] || "dark:bg-blue-600 dark:hover:bg-blue-700"}`}
 					>
 						<Star className="size-5" />
 					</div>
@@ -243,7 +243,7 @@ const LeftSidePage = ({
 							</Select>
 						) : (
 							<>
-								<h2 className="text-[10px] text-muted-foreground font-semibold">
+								<h2 className="text-muted-foreground text-[10px] font-semibold">
 									Rating
 								</h2>
 								<h1 className="text-sm font-semibold">
@@ -256,7 +256,7 @@ const LeftSidePage = ({
 
 				<div className="flex flex-row gap-1.5">
 					<div
-						className={`p-2 rounded-md ${statusColorMap[status] || "dark:bg-blue-600 dark:hover:bg-blue-700"}`}
+						className={`rounded-md p-2 ${statusColorMap[status] || "dark:bg-blue-600 dark:hover:bg-blue-700"}`}
 					>
 						<CalendarIcon className="size-5" />
 					</div>
@@ -293,7 +293,7 @@ const LeftSidePage = ({
 							</Select>
 						) : (
 							<>
-								<h2 className="text-[10px] text-muted-foreground font-semibold">
+								<h2 className="text-muted-foreground text-[10px] font-semibold">
 									Status
 								</h2>
 								<h1 className="text-sm font-semibold">
@@ -305,7 +305,7 @@ const LeftSidePage = ({
 				</div>
 
 				<div className="flex flex-row gap-1.5">
-					<div className="p-2 bg-indigo-600/30 text-indigo-500 border border-indigo-600 rounded-md">
+					<div className="rounded-md border border-indigo-600 bg-indigo-600/30 p-2 text-indigo-500">
 						<Book className="size-5" />
 					</div>
 					<div className="w-full">
@@ -319,7 +319,7 @@ const LeftSidePage = ({
 							/>
 						) : (
 							<>
-								<h2 className="text-[10px] text-muted-foreground font-semibold">
+								<h2 className="text-muted-foreground text-[10px] font-semibold">
 									Chapter
 								</h2>
 								<h1 className="text-sm font-semibold">
@@ -331,7 +331,7 @@ const LeftSidePage = ({
 				</div>
 
 				<div className="flex flex-row gap-1.5">
-					<div className="p-2 bg-violet-600/30 text-violet-500 border border-violet-600 rounded-md">
+					<div className="rounded-md border border-violet-600 bg-violet-600/30 p-2 text-violet-500">
 						<BookOpen className="size-5" />
 					</div>
 					<div className="w-full">
@@ -339,7 +339,7 @@ const LeftSidePage = ({
 							<LastReadDatePicker date={date} setDate={setDate} />
 						) : (
 							<>
-								<h2 className="text-[10px] text-muted-foreground font-semibold">
+								<h2 className="text-muted-foreground text-[10px] font-semibold">
 									Last read
 								</h2>
 								<h1 className="text-sm font-semibold">
@@ -351,7 +351,7 @@ const LeftSidePage = ({
 				</div>
 
 				{isEdit ? (
-					<div className="w-full grid grid-cols-2 gap-1.5">
+					<div className="grid w-full grid-cols-2 gap-1.5">
 						<Button
 							onClick={handleEdit}
 							className="w-full hover:cursor-pointer"
@@ -367,7 +367,7 @@ const LeftSidePage = ({
 						</Button>
 					</div>
 				) : (
-					<div className="w-full grid grid-cols-2 gap-1.5">
+					<div className="grid w-full grid-cols-2 gap-1.5">
 						<Button
 							onClick={handleEdit}
 							className="w-full hover:cursor-pointer"
