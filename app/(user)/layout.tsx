@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import '../globals.css'
+import "@/app/globals.css";
 import NavBar from '@/components/ui/navbar'
 import { ThemeProvider } from '@/components/theme-provider'
 

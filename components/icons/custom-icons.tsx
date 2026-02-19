@@ -121,7 +121,7 @@ export const FilterIcon = ({ className, isFill, strokeWidth }: IconProps) => {
       xmlns="http://www.w3.org/2000/svg"
       fill={isFill ? 'currentColor' : 'none'}
       viewBox="0 0 24 24"
-      stroke-width={cn(isFill ? undefined : strokeWidth)}
+      strokeWidth={cn(isFill ? undefined : strokeWidth)}
       stroke={isFill ? 'none' : 'currentColor'}
       className={cn(`size-6`, className)}
     >

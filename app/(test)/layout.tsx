@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
-import '../globals.css'
-import NavBar from '@/components/ui/navbar'
+import "@/app/globals.css";
 import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata: Metadata = {
