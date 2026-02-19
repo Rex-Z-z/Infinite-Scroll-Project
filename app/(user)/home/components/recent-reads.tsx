@@ -7,15 +7,15 @@ import ComicSection from "./comic-section";
 const fetcher = () => fetchRecentReads();
 
 const RecentReads = () => {
-  return (
-    <ComicSection
-      title="Recent Read"
-      fetcher={fetcher}
-      swrKey={["recent-reads"]}
-      showAddCard={true}
-      filterSection="recent-reads"
-    />
-  );
+	return (
+		<ComicSection
+			title="Recent Read"
+			fetcher={fetcher}
+			swrKey={["recent-reads"]}
+			showAddCard={true}
+			filterSection="recent-reads"
+		/>
+	);
 };
 
 export default RecentReads;

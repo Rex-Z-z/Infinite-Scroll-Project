@@ -23,11 +23,11 @@ A modern, responsive web application for tracking and managing your comic, manga
 ### 📖 Comprehensive Library Management
 
 - **Status Tracking:** Organize your reading list with dedicated tabs:
-  - **Ongoing:** Keep track of active reads.
-  - **Completed:** Archive finished series.
-  - **On Hold:** Pause series to pick up later.
-  - **Dropped:** Manage series you've stopped reading.
-  - **Plan to Read:** Build your backlog.
+    - **Ongoing:** Keep track of active reads.
+    - **Completed:** Archive finished series.
+    - **On Hold:** Pause series to pick up later.
+    - **Dropped:** Manage series you've stopped reading.
+    - **Plan to Read:** Build your backlog.
 - **Search & Filter:** Easily find specific titles within your library.
 
 ### 🛠️ Interactive UI
@@ -45,7 +45,7 @@ Ensure you have [Node.js](https://nodejs.org/) installed on your machine.
 ### Installation
 
 1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/your-username/infinite-scroll-project.git](https://github.com/your-username/infinite-scroll-project.git)
-   cd infinite-scroll-project
-   ```
+    ```bash
+    git clone [https://github.com/your-username/infinite-scroll-project.git](https://github.com/your-username/infinite-scroll-project.git)
+    cd infinite-scroll-project
+    ```

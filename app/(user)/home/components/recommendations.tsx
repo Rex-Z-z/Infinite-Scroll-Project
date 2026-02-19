@@ -7,17 +7,17 @@ import ComicSection from "./comic-section";
 const fetcher = () => fetchRecommendedReads();
 
 const Recommendations = () => {
-  return (
-    <ComicSection
-      title="Recommendation"
-      fetcher={fetcher}
-      swrKey={["recommended-reads"]}
-      showAddCard={false}
-      autoplay={true}
-      loop={true}
-      filterSection="recommendations"
-    />
-  );
+	return (
+		<ComicSection
+			title="Recommendation"
+			fetcher={fetcher}
+			swrKey={["recommended-reads"]}
+			showAddCard={false}
+			autoplay={true}
+			loop={true}
+			filterSection="recommendations"
+		/>
+	);
 };
 
 export default Recommendations;
