@@ -24,14 +24,14 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <NavBar page="landing"/>
-            {children}
-          </ThemeProvider>
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NavBar page="landing" />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

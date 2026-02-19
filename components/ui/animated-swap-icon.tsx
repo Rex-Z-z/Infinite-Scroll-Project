@@ -1,16 +1,16 @@
-import * as React from "react"
-import { LucideIcon } from "lucide-react"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { LucideIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface AnimatedSwapIconProps extends React.HTMLAttributes<HTMLDivElement> {
   /** The default icon to show (when crossfade is false) */
-  icon: LucideIcon
+  icon: LucideIcon;
   /** The icon to switch to (when crossfade is true) */
-  altIcon: LucideIcon
+  altIcon: LucideIcon;
   /** Controls the state of the switch */
-  crossfade: boolean
+  crossfade: boolean;
   /** Optional: specific transition duration class (default: duration-300) */
-  transitionClass?: string
+  transitionClass?: string;
 }
 
 export function AnimatedSwapIcon({
@@ -23,7 +23,10 @@ export function AnimatedSwapIcon({
 }: AnimatedSwapIconProps) {
   return (
     <div
-      className={cn("relative flex items-center justify-center size-4", className)}
+      className={cn(
+        "relative flex items-center justify-center size-4",
+        className,
+      )}
       {...props}
     >
       <Icon
@@ -32,7 +35,7 @@ export function AnimatedSwapIcon({
           transitionClass,
           crossfade
             ? "scale-0 opacity-0 rotate-90"
-            : "scale-100 opacity-100 rotate-0"
+            : "scale-100 opacity-100 rotate-0",
         )}
       />
       <AltIcon
@@ -41,9 +44,9 @@ export function AnimatedSwapIcon({
           transitionClass,
           crossfade
             ? "scale-100 opacity-100 rotate-0"
-            : "scale-0 opacity-0 -rotate-90"
+            : "scale-0 opacity-0 -rotate-90",
         )}
       />
     </div>
-  )
+  );
 }

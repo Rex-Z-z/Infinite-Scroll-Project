@@ -13,23 +13,21 @@ export default async function UserLayout({
 }: {
   children: React.ReactNode;
 }) {
-    return (
-      <html lang="en" suppressHydrationWarning> 
-        <body className="antialiased">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <main>
-              <NavBar />
-              <div className="px-30">
-                {children}
-              </div>
-            </main>
-          </ThemeProvider>
-        </body>
-      </html>
-    );
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className="antialiased">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <main>
+            <NavBar />
+            <div className="lg:px-30">{children}</div>
+          </main>
+        </ThemeProvider>
+      </body>
+    </html>
+  );
 }

@@ -1,5 +1,5 @@
-import { mockReads } from '@/lib/mock-data';
-import { ReadItem } from '@/lib/types';
+import { mockReads } from "@/lib/mock-data";
+import { ReadItem } from "@/lib/types";
 
 export const fetchAllReads = (): Promise<ReadItem[]> => {
   return new Promise((resolve) => {
@@ -7,7 +7,7 @@ export const fetchAllReads = (): Promise<ReadItem[]> => {
       resolve(mockReads);
     }, 1000);
   });
-}
+};
 
 export const fetchRecentReads = (): Promise<ReadItem[]> => {
   return new Promise((resolve) => {
@@ -15,7 +15,7 @@ export const fetchRecentReads = (): Promise<ReadItem[]> => {
       resolve(mockReads);
     }, 1000);
   });
-}
+};
 
 export const fetchRecommendedReads = (): Promise<ReadItem[]> => {
   return new Promise((resolve) => {
@@ -23,4 +23,4 @@ export const fetchRecommendedReads = (): Promise<ReadItem[]> => {
       resolve(mockReads);
     }, 1000);
   });
-}
+};

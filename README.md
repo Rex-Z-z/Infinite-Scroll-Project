@@ -15,11 +15,13 @@ A modern, responsive web application for tracking and managing your comic, manga
 ## ✨ Key Features
 
 ### 🏠 Home Dashboard
+
 - **Recent Reads:** Quickly access the comics you interacted with most recently.
 - **Recommendations:** Curated suggestions for your next read.
 - **Library Preview:** A glimpse into your collection.
 
 ### 📖 Comprehensive Library Management
+
 - **Status Tracking:** Organize your reading list with dedicated tabs:
   - **Ongoing:** Keep track of active reads.
   - **Completed:** Archive finished series.
@@ -29,6 +31,7 @@ A modern, responsive web application for tracking and managing your comic, manga
 - **Search & Filter:** Easily find specific titles within your library.
 
 ### 🛠️ Interactive UI
+
 - **Add & Edit Comics:** Modal-based forms to add new entries with cover images, titles, and reading stats.
 - **Visual Cards:** Rich card displays showing cover art, reading progress (chapters), user ratings, and "Last Read" timestamps.
 - **Dark Mode Support:** Built-in theming for comfortable reading at night.
@@ -45,3 +48,4 @@ Ensure you have [Node.js](https://nodejs.org/) installed on your machine.
    ```bash
    git clone [https://github.com/your-username/infinite-scroll-project.git](https://github.com/your-username/infinite-scroll-project.git)
    cd infinite-scroll-project
+   ```
