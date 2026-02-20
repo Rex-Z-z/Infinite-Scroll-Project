@@ -7,6 +7,7 @@ import { Activity, Book, Calendar, Star, Tag } from 'lucide-react'
 import { FilterIcon } from '@/components/icons/custom-icons'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
+import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
   Popover,
@@ -36,6 +37,28 @@ const GENRES = [
   'Slice of Life',
   'Thriller',
   'Tragedy',
+]
+
+const TAGS = [
+  'Based on a Web Novel',
+  'Badass Male Lead',
+  'Badass Female Lead',
+  'Based on a Novel',
+  'Regular Male Lead',
+  'Regular Female Lead',
+  'Strong Male Lead',
+  'Strong Female Lead',
+  'Handsome Male Lead',
+  'Handsome Female Lead',
+  'Glasses-Wearing Male Lead',
+  'Glasses-Wearing Female Lead',
+  'Older Male Younger Female',
+  'Older Female Younger Male',
+  'Older Male Older Female',
+  'Older Female Older Male',
+  'Childhood Friend/s',
+  'High School',
+  'College',
 ]
 
 const RATINGS = [
@@ -74,10 +97,10 @@ export function LibraryFilters() {
 
   // Genres (Stored as a Set for easier toggling, or just an array)
   const [selectedGenres, setSelectedGenres] = useState<string[]>([])
-
+  // Tags
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
   // Ratings
   const [selectedRatings, setSelectedRatings] = useState<string[]>([])
-
   // Statuses
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([])
 
@@ -85,6 +108,12 @@ export function LibraryFilters() {
   const toggleGenre = (genre: string) => {
     setSelectedGenres((prev) =>
       prev.includes(genre) ? prev.filter((g) => g !== genre) : [...prev, genre]
+    )
+  }
+
+  const toggleTag = (tag: string) => {
+    setSelectedTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
     )
   }
 
@@ -111,12 +140,14 @@ export function LibraryFilters() {
     selectedGenres.length > 0,
     selectedRatings.length > 0,
     selectedStatuses.length > 0,
+    selectedTags.length > 0,
   ].filter(Boolean).length
 
   const handleReset = () => {
     setTimePreset('Recent')
     setTypes({ manga: false, manhwa: false, manhua: false })
     setSelectedGenres([])
+    setSelectedTags([])
     setSelectedRatings([])
     setSelectedStatuses([])
   }
@@ -136,103 +167,19 @@ export function LibraryFilters() {
           Filters
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[360px] p-0" align="end">
+      <PopoverContent className="w-[400px] p-0" align="end">
         {/* Header */}
         <div className="bg-muted/30 flex items-center justify-between px-4 py-3">
           <h4 className="text-sm font-semibold">Library Filters</h4>
-          <Button
-            variant="ghost"
-            className="text-muted-foreground hover:text-primary h-auto p-0 text-xs"
-            onClick={handleReset}
-          >
+          <Button variant="ghost" size="xs" onClick={handleReset}>
             Reset
           </Button>
         </div>
-        <Separator />
 
-        <ScrollArea className="h-[480px]">
-          <div className="space-y-6 p-4">
-            {/* --- Type Section --- */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-sm font-semibold">
-                <Book className="text-muted-foreground size-4" />
-                Type
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {Object.entries(types).map(([key, value]) => (
-                  <div
-                    key={key}
-                    className={`cursor-pointer rounded-md border px-3 py-1 text-xs font-medium transition-colors select-none ${value ? 'bg-primary text-primary-foreground border-primary' : 'text-muted-foreground hover:bg-muted bg-transparent'} `}
-                    onClick={() =>
-                      setTypes((prev) => ({
-                        ...prev,
-                        [key]: !prev[key as keyof typeof types],
-                      }))
-                    }
-                  >
-                    {key.charAt(0).toUpperCase() + key.slice(1)}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <Separator />
-
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-sm font-semibold">
-                <Activity className="text-muted-foreground size-4" />
-                Reading Status
-              </div>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-                {STATUSES.map((status) => (
-                  <div key={status} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={`status-${status}`}
-                      checked={selectedStatuses.includes(status)}
-                      onCheckedChange={() => toggleStatus(status)}
-                    />
-                    <Label
-                      htmlFor={`status-${status}`}
-                      className="cursor-pointer text-xs font-normal"
-                    >
-                      {status}
-                    </Label>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <Separator />
-
-            {/* --- Genre Section (Grid Layout) --- */}
-            <div className="custom-scrollbar h-[130px] space-y-3 overflow-auto">
-              <div className="flex items-center gap-2 text-sm font-semibold">
-                <Tag className="text-muted-foreground size-4" />
-                Genres
-              </div>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-                {GENRES.map((genre) => (
-                  <div key={genre} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={`genre-${genre}`}
-                      checked={selectedGenres.includes(genre)}
-                      onCheckedChange={() => toggleGenre(genre)}
-                    />
-                    <Label
-                      htmlFor={`genre-${genre}`}
-                      className="cursor-pointer text-xs font-normal"
-                    >
-                      {genre}
-                    </Label>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <Separator />
-
+        <ScrollArea className="custom-scrollbar h-[380px]">
+          <div className="space-y-4 px-3 pb-1">
             {/* --- Time Section --- */}
-            <div className="space-y-3">
+            <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm font-semibold">
                 <Calendar className="text-muted-foreground size-4" />
                 Time & Relevance
@@ -260,7 +207,7 @@ export function LibraryFilters() {
               </Button>
 
               {timePreset === 'Custom' && (
-                <div className="animate-in fade-in zoom-in-95 flex items-center gap-2 pt-1 duration-200">
+                <div className="animate-in fade-in zoom-in-95 flex items-center gap-2 duration-200">
                   <Select value={startYear} onValueChange={setStartYear}>
                     <SelectTrigger className="h-8 w-full text-xs">
                       <SelectValue placeholder="From" />
@@ -292,13 +239,141 @@ export function LibraryFilters() {
 
             <Separator />
 
-            {/* --- Rating Section --- */}
+            {/* --- Type Section --- */}
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-sm">
+                <Book className="text-muted-foreground size-4" />
+                Type
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {Object.entries(types).map(([key, value]) => (
+                  <div
+                    key={key}
+                    className={`cursor-pointer rounded-md border px-4 py-2 text-xs font-medium transition-colors select-none ${value ? 'bg-primary text-primary-foreground border-primary' : 'text-muted-foreground hover:bg-muted bg-transparent'} `}
+                    onClick={() =>
+                      setTypes((prev) => ({
+                        ...prev,
+                        [key]: !prev[key as keyof typeof types],
+                      }))
+                    }
+                  >
+                    {key.charAt(0).toUpperCase() + key.slice(1)}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <Separator />
+
+            {/* --- Reading Status Section --- */}
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-sm">
+                <Activity className="text-muted-foreground size-4" />
+                Reading Status
+              </div>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                {STATUSES.map((status) => (
+                  <div key={status} className="flex items-center space-x-2">
+                    <Checkbox
+                      id={`status-${status}`}
+                      checked={selectedStatuses.includes(status)}
+                      onCheckedChange={() => toggleStatus(status)}
+                    />
+                    <Label
+                      htmlFor={`status-${status}`}
+                      className="cursor-pointer text-sm font-normal"
+                    >
+                      {status}
+                    </Label>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <Separator />
+
+            {/* --- Genre Section (Grid Layout) --- */}
             <div className="space-y-3">
+              <div className="flex items-center justify-between gap-6 px-1 pt-1">
+                <div className="flex items-center gap-2 text-sm">
+                  <Tag className="text-muted-foreground size-4" />
+                  Genres
+                </div>
+
+                <Input
+                  type="search"
+                  placeholder="Search genres..."
+                  className="h-8 !text-xs"
+                />
+              </div>
+              <ScrollArea className="h-[130px]">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                  {GENRES.map((genre) => (
+                    <div key={genre} className="flex items-center space-x-1.5">
+                      <Checkbox
+                        id={`genre-${genre}`}
+                        checked={selectedGenres.includes(genre)}
+                        onCheckedChange={() => toggleGenre(genre)}
+                      />
+                      <Label
+                        htmlFor={`genre-${genre}`}
+                        className="text-md cursor-pointer"
+                      >
+                        {genre}
+                      </Label>
+                    </div>
+                  ))}
+                </div>
+              </ScrollArea>
+            </div>
+
+            <Separator />
+
+            {/* --- Tag Section (Grid Layout) --- */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between gap-6 px-1 pt-1">
+                <div className="flex items-center gap-2 text-sm">
+                  <Tag className="text-muted-foreground size-4" />
+                  Tags
+                </div>
+
+                <Input
+                  type="search"
+                  placeholder="Search tags..."
+                  className="h-8 !text-xs"
+                />
+              </div>
+              <ScrollArea className="h-[130px]">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                  {TAGS.map((tag) => (
+                    <div key={tag} className="flex items-center space-x-1.5">
+                      <Checkbox
+                        id={`genre-${tag}`}
+                        checked={selectedGenres.includes(tag)}
+                        onCheckedChange={() => toggleGenre(tag)}
+                      />
+                      <Label
+                        htmlFor={`genre-${tag}`}
+                        className="max-w-[150px] cursor-pointer truncate text-xs"
+                        title={tag}
+                      >
+                        {tag}
+                      </Label>
+                    </div>
+                  ))}
+                </div>
+              </ScrollArea>
+            </div>
+
+            <Separator />
+
+            {/* --- Rating Section --- */}
+            <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm font-semibold">
                 <Star className="size-4" />
                 Rating
               </div>
-              <div className="space-y-2">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                 {RATINGS.map((rating) => (
                   <div key={rating} className="flex items-center space-x-2">
                     <Checkbox
@@ -318,6 +393,9 @@ export function LibraryFilters() {
             </div>
           </div>
         </ScrollArea>
+        <div className="p-2">
+          <Button className="w-full">Apply</Button>
+        </div>
       </PopoverContent>
     </Popover>
   )

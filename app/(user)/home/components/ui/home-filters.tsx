@@ -38,7 +38,7 @@ const RATINGS = [
   'Garbage',
 ]
 
-const DropdownHome = ({ section = 'recent-reads' }: NavBarProps) => {
+const DropdownHome = ({ section = 'recommendations' }: NavBarProps) => {
   // --- State ---
   const [dateRange, setDateRange] = useState('Recent')
   const [preset, setPreset] = useState('Recent')
@@ -107,30 +107,19 @@ const DropdownHome = ({ section = 'recent-reads' }: NavBarProps) => {
       <PopoverContent className="w-[340px] p-0" align="end">
         {/* Header */}
         <div className="bg-muted/30 flex items-center justify-between px-4 py-3">
-          <h4 className="text-sm font-semibold">Filter Content</h4>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-muted-foreground hover:text-primary h-auto p-0 text-xs"
-            onClick={handleReset}
-          >
+          <h4 className="text-lg font-semibold">Filter Content</h4>
+          <Button variant="ghost" size="xs" onClick={handleReset}>
             Reset
           </Button>
         </div>
-        <Separator />
 
-        <ScrollArea
-          className={cn(
-            `px-4 py-4`,
-            section !== 'recent-reads' ? 'h-[400px]' : ''
-          )}
-        >
+        <ScrollArea className="h-[400px] px-3 pb-1">
           <div className="space-y-6">
             {/* --- Date Section --- */}
-            <div className="space-y-3">
+            <div className="space-y-2 px-1">
               <div className="flex items-center gap-2">
                 <CalendarCog className="text-muted-foreground size-4" />
-                <Label className="font-semibold">Time Period</Label>
+                <Label>Time Period</Label>
               </div>
               <div className="grid grid-cols-2 gap-2">
                 {['Recent', '7 Days', '1 Month', '6 Months'].map((period) => (
@@ -145,109 +134,102 @@ const DropdownHome = ({ section = 'recent-reads' }: NavBarProps) => {
                 ))}
               </div>
 
-              {/* Custom Year Range Selection */}
-              {section !== 'recent-reads' && (
-                <div>
-                  <Button
-                    variant={dateRange === 'Custom' ? 'default' : 'outline'}
-                    size="sm"
-                    className="mb-2 w-full text-xs"
-                    onClick={() => handlePresetChange('Custom')}
-                  >
-                    Custom Year Range
-                  </Button>
+              <Button
+                variant={dateRange === 'Custom' ? 'default' : 'outline'}
+                size="sm"
+                className="mb-2 w-full text-xs"
+                onClick={() => handlePresetChange('Custom')}
+              >
+                Custom Year Range
+              </Button>
 
-                  {dateRange === 'Custom' && (
-                    <div className="animate-in fade-in zoom-in-95 flex w-full items-center gap-2 duration-200">
-                      <Select value={startYear} onValueChange={setStartYear}>
-                        <SelectTrigger className="h-8 w-full">
-                          <SelectValue placeholder="From" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {['2023', '2024', '2025'].map((y) => (
-                            <SelectItem key={y} value={y}>
-                              {y}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <span className="text-muted-foreground text-xs">to</span>
-                      <Select value={endYear} onValueChange={setEndYear}>
-                        <SelectTrigger className="h-8 w-full">
-                          <SelectValue placeholder="To" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {['2023', '2024', '2025'].map((y) => (
-                            <SelectItem key={y} value={y}>
-                              {y}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  )}
+              {dateRange === 'Custom' && (
+                <div className="animate-in fade-in zoom-in-95 flex w-full items-center gap-2 duration-200">
+                  <Select value={startYear} onValueChange={setStartYear}>
+                    <SelectTrigger className="h-8 w-full">
+                      <SelectValue placeholder="From" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {['2023', '2024', '2025'].map((y) => (
+                        <SelectItem key={y} value={y}>
+                          {y}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <span className="text-muted-foreground text-xs">to</span>
+                  <Select value={endYear} onValueChange={setEndYear}>
+                    <SelectTrigger className="h-8 w-full">
+                      <SelectValue placeholder="To" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {['2023', '2024', '2025'].map((y) => (
+                        <SelectItem key={y} value={y}>
+                          {y}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               )}
             </div>
 
-            {section !== 'recent-reads' && <Separator />}
-
-            {section !== 'recent-reads' && (
-              <>
-                {/* --- Type Section --- */}
-                <div className="space-y-3">
-                  <Label className="font-semibold">
-                    <Tag className="text-muted-foreground size-4" />
-                    Type
-                  </Label>
-                  <div className="flex flex-wrap gap-2">
-                    {Object.entries(types).map(([key, value]) => (
-                      <div
-                        key={key}
-                        className={`cursor-pointer rounded-md border px-3 py-1 text-xs font-medium transition-colors select-none ${value ? 'bg-primary text-primary-foreground border-primary' : 'text-muted-foreground hover:bg-muted bg-transparent'} `}
-                        onClick={() =>
-                          setTypes((prev) => ({
-                            ...prev,
-                            [key]: !prev[key as keyof typeof types],
-                          }))
-                        }
-                      >
-                        {key.charAt(0).toUpperCase() + key.slice(1)}
-                      </div>
-                    ))}
+            {/* --- Type Section --- */}
+            <div className="space-y-3">
+              <Label>
+                <Tag className="text-muted-foreground size-4" />
+                Type
+              </Label>
+              <div className="flex flex-wrap gap-2">
+                {Object.entries(types).map(([key, value]) => (
+                  <div
+                    key={key}
+                    className={`cursor-pointer rounded-md border px-4 py-2 text-xs font-medium transition-colors select-none ${value ? 'bg-primary text-primary-foreground border-primary' : 'text-muted-foreground hover:bg-muted bg-transparent'} `}
+                    onClick={() =>
+                      setTypes((prev) => ({
+                        ...prev,
+                        [key]: !prev[key as keyof typeof types],
+                      }))
+                    }
+                  >
+                    {key.charAt(0).toUpperCase() + key.slice(1)}
                   </div>
-                </div>
+                ))}
+              </div>
+            </div>
 
-                <Separator />
+            <Separator />
 
-                {/* --- Rating Section --- */}
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2 text-sm font-semibold">
-                    <Star className="size-4" />
-                    Rating
+            {/* --- Rating Section --- */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-sm">
+                <Star className="size-4" />
+                Rating
+              </div>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                {RATINGS.map((rating) => (
+                  <div key={rating} className="flex items-center space-x-2">
+                    <Checkbox
+                      id={`rating-${rating}`}
+                      checked={selectedRatings.includes(rating)}
+                      onCheckedChange={() => toggleRating(rating)}
+                    />
+                    <Label
+                      htmlFor={`rating-${rating}`}
+                      className="cursor-pointer text-sm font-normal"
+                    >
+                      {rating}
+                    </Label>
                   </div>
-                  <div className="space-y-2">
-                    {RATINGS.map((rating) => (
-                      <div key={rating} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={`rating-${rating}`}
-                          checked={selectedRatings.includes(rating)}
-                          onCheckedChange={() => toggleRating(rating)}
-                        />
-                        <Label
-                          htmlFor={`rating-${rating}`}
-                          className="cursor-pointer text-sm font-normal"
-                        >
-                          {rating}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </>
-            )}
+                ))}
+              </div>
+            </div>
           </div>
         </ScrollArea>
+
+        <div className="p-2">
+          <Button className="w-full">Apply</Button>
+        </div>
       </PopoverContent>
     </Popover>
   )

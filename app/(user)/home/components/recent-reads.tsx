@@ -15,7 +15,6 @@ const RecentReads = () => {
       fetcher={fetcher}
       swrKey={['recent-reads']}
       showAddCard={true}
-      filterSection="recent-reads"
     />
   )
 }
