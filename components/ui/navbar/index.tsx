@@ -52,10 +52,10 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
         >
           <Image
             src="https://flowbite.com/docs/images/logo.svg"
-            width={48}
-            height={48}
+            width={32}
+            height={32}
             alt="Flowbite Logo"
-            className="h-6 w-6 md:h-10 md:w-10 lg:h-12 lg:w-12"
+            className="h-6 w-6 md:h-6 md:w-6 lg:h-8 lg:w-8"
           />
           <span className="hidden self-center text-2xl font-semibold whitespace-nowrap lg:block dark:text-white">
             Flowbite
