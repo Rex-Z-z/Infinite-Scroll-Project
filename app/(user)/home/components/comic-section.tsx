@@ -102,9 +102,9 @@ const ComicSection = ({
     <section className="flex w-full flex-col gap-2 p-4">
       <div className="flex flex-row items-center justify-between">
         <div className="flex flex-row items-center gap-0.5 md:gap-1">
-          <p className="text-sm hover:cursor-pointer hover:underline md:text-2xl md:font-semibold">
+          <h2 className="text-sm hover:cursor-pointer hover:underline md:text-2xl md:font-semibold">
             <Link href="/library">{title}</Link>
-          </p>
+          </h2>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
@@ -120,7 +120,7 @@ const ComicSection = ({
         </div>
 
         {/* Controls: Arrows + Optional Filter */}
-        <div className="flex flex-row items-center gap-1">
+        <div className="flex flex-row items-center justify-center gap-1">
           {!isLoading && !error && (
             <div className="flex items-center gap-1">
               <Button
@@ -146,9 +146,9 @@ const ComicSection = ({
 
           {filterSection && <DropdownHome section={filterSection} />}
 
-          {showAddCard && (
-            <Dialog open={isModalOpen} onOpenChange={handleModalOpenChange}>
-              <DialogTrigger>
+          <Dialog open={isModalOpen} onOpenChange={handleModalOpenChange}>
+            {showAddCard && (
+              <DialogTrigger asChild>
                 <Button
                   size="icon"
                   className="size-6 md:size-[36px] [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
@@ -156,9 +156,9 @@ const ComicSection = ({
                   <Plus />
                 </Button>
               </DialogTrigger>
-              <AddNewModal comicData={editingComic} />
-            </Dialog>
-          )}
+            )}
+            <AddNewModal comicData={editingComic} />
+          </Dialog>
         </div>
       </div>
 
