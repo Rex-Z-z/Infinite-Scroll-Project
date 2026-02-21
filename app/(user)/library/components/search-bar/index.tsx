@@ -16,12 +16,15 @@ import { LibraryFilters } from './library-filters'
 const SearchBar = ({ className }: { className?: string }) => {
   return (
     <div className={cn('w-full lg:max-w-xl', className)}>
-      <InputGroup className="py-4.5">
+      <InputGroup className="py-1 md:py-4.5">
         <InputGroupAddon>
-          <Search className="text-muted-foreground" />
+          <Search className="text-muted-foreground size-3 md:size-4" />
         </InputGroupAddon>
 
-        <InputGroupInput placeholder="Search library..." />
+        <InputGroupInput
+          placeholder="Search library..."
+          className="text-xs md:text-base"
+        />
 
         <InputGroupAddon align="inline-end">
           <LibraryFilters />

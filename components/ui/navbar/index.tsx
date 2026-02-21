@@ -55,7 +55,7 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
             width={32}
             height={32}
             alt="Flowbite Logo"
-            className="h-6 w-6 md:h-6 md:w-6 lg:h-8 lg:w-8"
+            className="h-6 w-6 md:h-7.5 md:w-7.5 lg:h-8 lg:w-8"
           />
           <span className="hidden self-center text-2xl font-semibold whitespace-nowrap lg:block dark:text-white">
             Flowbite

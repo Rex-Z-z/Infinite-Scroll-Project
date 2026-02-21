@@ -110,7 +110,8 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
                 </Badge>
               ) : (
                 <Badge variant="outline" className={BadgeStyle}>
-                  No Chapter
+                  <span className="hidden lg:block">No Chapter</span>
+                  <span className="block lg:hidden">No Ch</span>
                 </Badge>
               )}
             </div>
@@ -163,7 +164,7 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
                       isFill
                       className={statusColorMap[read.rating] || 'text-gray-400'}
                     />
-                    <span className="max-w-[35px] truncate md:max-w-[50px]">
+                    <span className="max-w-[35px] truncate md:max-w-[50px] lg:max-w-[70px]">
                       {read.rating}
                     </span>
                   </Badge>
@@ -183,7 +184,8 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
                 </Badge>
               ) : (
                 <Badge variant="outline" className={BadgeStyle}>
-                  No Chapter
+                  <span className="hidden lg:block">No Chapter</span>
+                  <span className="block lg:hidden">No Ch.</span>
                 </Badge>
               )}
             </div>

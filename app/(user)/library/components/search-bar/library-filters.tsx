@@ -157,12 +157,12 @@ export function LibraryFilters() {
       <PopoverTrigger asChild>
         <Button
           variant="ghost"
-          className="text-muted-foreground hover:text-foreground h-7 gap-2 px-2"
+          className="text-muted-foreground hover:text-foreground h-5.5 gap-2 px-1 text-xs md:h-7 md:px-2 md:text-sm"
         >
           {activeFilterCount ? (
-            <FilterIcon isFill className="text-primary size-4.5" />
+            <FilterIcon isFill className="text-primary size-3 md:size-4.5" />
           ) : (
-            <FilterIcon strokeWidth={1.7} className="size-4.5" />
+            <FilterIcon strokeWidth={1.7} className="size-3 md:size-4.5" />
           )}
           Filters
         </Button>
