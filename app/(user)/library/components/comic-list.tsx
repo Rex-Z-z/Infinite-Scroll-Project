@@ -6,7 +6,7 @@ import useSWR from 'swr'
 
 import ComicCard from '@/components/ui/comic-card'
 import { Dialog } from '@/components/ui/dialog'
-import SectionSkeleton from '@/components/ui/section-skeleton'
+import { LibrarySectionSkeleton } from '@/components/ui/section-skeleton'
 import { ReadItem } from '@/lib/types'
 import { fetchComicsByFilters } from '@/services/library/comic.service'
 
@@ -32,7 +32,7 @@ const ComicList = ({ searchParams }: { searchParams?: any }) => {
 
   return (
     <div>
-      {isLoading && <SectionSkeleton page="library" />}
+      {isLoading && <LibrarySectionSkeleton />}
       {error && <p className="text-red-500">{error}</p>}
 
       <div className="4xl:grid-cols-8 grid grid-cols-3 gap-1 md:grid-cols-4 md:gap-2 lg:grid-cols-5">

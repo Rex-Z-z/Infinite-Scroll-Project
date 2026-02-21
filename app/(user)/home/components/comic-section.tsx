@@ -18,7 +18,7 @@ import {
 } from '@/components/ui/carousel'
 import ComicCard from '@/components/ui/comic-card'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
-import SectionSkeleton from '@/components/ui/section-skeleton'
+import { HomeSectionSkeleton } from '@/components/ui/section-skeleton'
 import { ReadItem } from '@/lib/types'
 
 import DropdownHome from './ui/home-filters'
@@ -162,7 +162,7 @@ const ComicSection = ({
         </div>
       </div>
 
-      {isLoading && <SectionSkeleton />}
+      {isLoading && <HomeSectionSkeleton />}
       {error && <p className="text-destructive">{error}</p>}
 
       {!isLoading && !error && (
@@ -180,7 +180,7 @@ const ComicSection = ({
               reads.map((read) => (
                 <CarouselItem
                   key={read.id}
-                  className="3xl:basis-1/8 4xl:basis-1/12 5xl:basis-1/19 basis-1/4 pl-2 md:basis-1/4 xl:basis-1/6"
+                  className="3xl:basis-1/8 4xl:basis-1/10 basis-1/4 pl-1 md:pl-2 xl:basis-1/6"
                 >
                   <ComicCard read={read} onEdit={handleEdit} />
                 </CarouselItem>
