@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react'
 
 import Image from 'next/image'
@@ -51,6 +49,7 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
             {read.coverImage ? (
               <Image
                 src={read.coverImage}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 fill
                 alt={`Cover for ${read.title}`}
                 className="absolute object-cover transition-all duration-500 ease-in-out hover:scale-110"

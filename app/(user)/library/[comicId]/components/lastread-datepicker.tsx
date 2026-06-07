@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import { ChangeEvent, ChangeEventHandler, useState } from 'react'
 
 import { addDays, format } from 'date-fns'
 import { Calendar as CalendarIcon } from 'lucide-react'
+import type { DropdownNavProps, DropdownProps } from 'react-day-picker'
 
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
@@ -10,6 +11,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { cn } from '@/lib/utils'
 
 interface LastReadDatePickerProps {
@@ -24,6 +32,18 @@ const LastReadDatePicker = ({ date, setDate }: LastReadDatePickerProps) => {
   const handleDateSelect = (newDate: Date | undefined) => {
     setDate(newDate)
     // setOpen(false); // Uncomment if you want it to close immediately on click
+  }
+
+  const handleCalendarChange = (
+    _value: string | number,
+    _e: ChangeEventHandler<HTMLSelectElement>
+  ) => {
+    const _event = {
+      target: {
+        value: String(_value),
+      },
+    } as ChangeEvent<HTMLSelectElement>
+    _e(_event)
   }
 
   return (
@@ -44,14 +64,58 @@ const LastReadDatePicker = ({ date, setDate }: LastReadDatePickerProps) => {
         <div className="flex flex-col sm:flex-row sm:flex-wrap">
           <div className="p-3">
             <Calendar
-              mode="single"
               captionLayout="dropdown"
-              selected={date}
+              classNames={{
+                month_caption: 'mx-0',
+              }}
+              components={{
+                Dropdown: (props: DropdownProps) => {
+                  return (
+                    <Select
+                      onValueChange={(value) => {
+                        if (props.onChange && value !== null) {
+                          handleCalendarChange(value, props.onChange)
+                        }
+                      }}
+                      value={String(props.value)}
+                    >
+                      <SelectTrigger className="first:grow">
+                        <SelectValue>
+                          {
+                            props.options?.find(
+                              (option) => option.value === props.value
+                            )?.label
+                          }
+                        </SelectValue>
+                      </SelectTrigger>
+                      <SelectContent align="start">
+                        {props.options?.map((option) => (
+                          <SelectItem
+                            disabled={option.disabled}
+                            key={option.value}
+                            value={String(option.value)}
+                          >
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )
+                },
+                DropdownNav: (props: DropdownNavProps) => {
+                  return (
+                    <div className="flex w-full items-center gap-2">
+                      {props.children}
+                    </div>
+                  )
+                },
+              }}
+              defaultMonth={new Date()}
+              hideNavigation
+              mode="single"
               onSelect={handleDateSelect}
-              month={currentMonth}
-              onMonthChange={setCurrentMonth}
-              fixedWeeks
-              className="p-0"
+              selected={date}
+              startMonth={new Date(1980, 6)}
             />
           </div>
           <div className="border-border bg-muted/20 flex w-full flex-col gap-2 border-t p-3 sm:w-auto sm:border-t-0 sm:border-l">
