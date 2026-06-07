@@ -35,7 +35,7 @@ const ComicList = ({ searchParams }: { searchParams?: any }) => {
       {isLoading && <LibrarySectionSkeleton />}
       {error && <p className="text-red-500">{error}</p>}
 
-      <div className="4xl:grid-cols-8 grid grid-cols-3 gap-1 md:grid-cols-4 md:gap-2 lg:grid-cols-5">
+      <div className="grid grid-cols-3 gap-1 md:grid-cols-4 md:gap-2 lg:grid-cols-8">
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           <AddNewModal comicData={editingComic} />
         </Dialog>

@@ -331,7 +331,7 @@ const LeftSidePage = ({
             </Button>
             <Button
               variant="destructive"
-              className="w-full hover:cursor-pointer"
+              className="w-full text-white hover:cursor-pointer hover:bg-red-700"
             >
               Delete
             </Button>

@@ -208,7 +208,7 @@ const RightSidePage = ({
                 onClick={handleSourceEdit}
                 size="icon-sm"
                 variant="secondary"
-                className="rounded-full"
+                className="!rounded-full"
               >
                 <Plus />
               </Button>

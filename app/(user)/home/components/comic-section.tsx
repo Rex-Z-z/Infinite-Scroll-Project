@@ -21,7 +21,7 @@ import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { HomeSectionSkeleton } from '@/components/ui/section-skeleton'
 import { ReadItem } from '@/lib/types'
 
-import DropdownHome from './ui/home-filters'
+import DropdownHome from './home-filters'
 
 interface ComicSectionProps {
   title: string
@@ -144,7 +144,7 @@ const ComicSection = ({
             </div>
           )}
 
-          {filterSection && <DropdownHome section={filterSection} />}
+          {filterSection && <DropdownHome />}
 
           <Dialog open={isModalOpen} onOpenChange={handleModalOpenChange}>
             {showAddCard && (
