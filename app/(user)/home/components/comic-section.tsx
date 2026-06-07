@@ -1,12 +1,13 @@
+'use client'
+
 import React, { useEffect, useMemo, useState } from 'react'
 
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
 import Autoplay from 'embla-carousel-autoplay'
 import { ChevronLeft, ChevronRight, Plus } from 'lucide-react'
-import useSWR from 'swr'
 
-import AddNewModal from '@/components/ui/add-new-modal'
 import { Button } from '@/components/ui/button'
 import {
   Carousel,
@@ -19,12 +20,21 @@ import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { HomeSectionSkeleton } from '@/components/ui/section-skeleton'
 import { ReadItem } from '@/lib/types'
 
-import DropdownHome from './home-filters'
+const AddNewModal = dynamic(() => import('@/components/ui/add-new-modal'), {
+  loading: () => (
+    <div className="bg-muted size-6 animate-pulse rounded-md md:size-[36px]" />
+  ),
+})
+
+const DropdownHome = dynamic(() => import('./home-filters'), {
+  loading: () => (
+    <div className="bg-muted size-6 animate-pulse rounded-md md:size-[36px]" />
+  ),
+})
 
 interface ComicSectionProps {
   title: string
-  fetcher: () => Promise<ReadItem[]>
-  swrKey: string[]
+  reads: ReadItem[]
   showAddCard?: boolean
   autoplay?: boolean
   loop?: boolean
@@ -33,8 +43,7 @@ interface ComicSectionProps {
 
 const ComicSection = ({
   title,
-  fetcher,
-  swrKey,
+  reads,
   showAddCard = false,
   autoplay = false,
   loop = false,
@@ -42,9 +51,6 @@ const ComicSection = ({
 }: ComicSectionProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingComic, setEditingComic] = useState<ReadItem | null>(null)
-
-  // Pass the swrKey to useSWR so it caches correctly for each section
-  const { data: reads, isLoading, error } = useSWR(swrKey, fetcher)
 
   // Carousel API state
   const [api, setApi] = useState<CarouselApi>()
@@ -119,28 +125,26 @@ const ComicSection = ({
 
         {/* Controls: Arrows + Optional Filter */}
         <div className="flex flex-row items-center justify-center gap-1">
-          {!isLoading && !error && (
-            <div className="flex items-center gap-1">
-              <Button
-                variant="outline"
-                size="icon"
-                className="size-6 md:size-[36px] [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
-                onClick={() => api?.scrollPrev()}
-                disabled={!canScrollPrev}
-              >
-                <ChevronLeft />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                className="size-6 md:size-[36px] [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
-                onClick={() => api?.scrollNext()}
-                disabled={!canScrollNext}
-              >
-                <ChevronRight />
-              </Button>
-            </div>
-          )}
+          <div className="flex items-center gap-1">
+            <Button
+              variant="outline"
+              size="icon"
+              className="size-6 md:size-[36px] [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
+              onClick={() => api?.scrollPrev()}
+              disabled={!canScrollPrev}
+            >
+              <ChevronLeft />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="size-6 md:size-[36px] [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
+              onClick={() => api?.scrollNext()}
+              disabled={!canScrollNext}
+            >
+              <ChevronRight />
+            </Button>
+          </div>
 
           {filterSection && <DropdownHome />}
 
@@ -160,32 +164,27 @@ const ComicSection = ({
         </div>
       </div>
 
-      {isLoading && <HomeSectionSkeleton />}
-      {error && <p className="text-destructive">{error}</p>}
-
-      {!isLoading && !error && (
-        <Carousel
-          setApi={setApi}
-          opts={{
-            align: 'start',
-            loop: loop,
-          }}
-          plugins={plugins}
-          className="w-full"
-        >
-          <CarouselContent className="-ml-2">
-            {reads &&
-              reads.map((read) => (
-                <CarouselItem
-                  key={read.id}
-                  className="3xl:basis-1/8 4xl:basis-1/10 basis-1/4 pl-1 md:pl-2 xl:basis-1/6"
-                >
-                  <ComicCard read={read} onEdit={handleEdit} />
-                </CarouselItem>
-              ))}
-          </CarouselContent>
-        </Carousel>
-      )}
+      <Carousel
+        setApi={setApi}
+        opts={{
+          align: 'start',
+          loop: loop,
+        }}
+        plugins={plugins}
+        className="w-full"
+      >
+        <CarouselContent className="-ml-2">
+          {reads &&
+            reads.map((read) => (
+              <CarouselItem
+                key={read.id}
+                className="3xl:basis-1/8 4xl:basis-1/10 basis-1/4 pl-1 md:pl-2 xl:basis-1/6"
+              >
+                <ComicCard read={read} onEdit={handleEdit} />
+              </CarouselItem>
+            ))}
+        </CarouselContent>
+      </Carousel>
     </section>
   )
 }

@@ -49,7 +49,8 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
             {read.coverImage ? (
               <Image
                 src={read.coverImage}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                loading="lazy"
+                sizes="(max-width: 768px) 33vw, (max-width: 1200px) 20vw, 15vw"
                 fill
                 alt={`Cover for ${read.title}`}
                 className="absolute object-cover transition-all duration-500 ease-in-out hover:scale-110"
@@ -123,6 +124,8 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
             {read.coverImage ? (
               <Image
                 src={read.coverImage}
+                loading="lazy"
+                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
                 fill
                 alt={`Cover for ${read.title}`}
                 className="absolute object-cover transition-all duration-500 ease-in-out hover:scale-110"

@@ -1,19 +1,16 @@
-'use client'
-
 import React from 'react'
 
 import { fetchAllReads } from '@/services/home/comic.service'
 
 import ComicSection from './comic-section'
 
-const fetcher = () => fetchAllReads()
+const LibraryRead = async () => {
+  const allReadsData = await fetchAllReads()
 
-const LibraryRead = () => {
   return (
     <ComicSection
       title="Library"
-      fetcher={fetcher}
-      swrKey={['all-reads']}
+      reads={allReadsData}
       showAddCard={false}
       loop={true}
     />
