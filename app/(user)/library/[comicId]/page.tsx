@@ -1,11 +1,31 @@
 import React from 'react'
 
-import PageInfo from './components/page-info'
+import useSWR from 'swr'
 
-const page = async ({ params }: { params: Promise<{ comicId: string }> }) => {
-  const { comicId } = await params
+import { fetchComickById } from '@/services/library/comic.service'
 
-  return <PageInfo comicId={comicId} />
+import LeftSidePage from './components/left-side-page-info'
+import RightSidePage from './components/right-side-page-info'
+import SkeletonDetails from './components/skeleton'
+
+const page = ({ comicId }: { comicId: string }) => {
+  const fetcher = () => fetchComickById(Number(comicId))
+  const { data: read, isLoading, error } = useSWR(['read', comicId], fetcher)
+
+  if (isLoading)
+    return (
+      <div className="p-4">
+        <SkeletonDetails />
+      </div>
+    )
+  if (error || !read) return <div className="p-4 text-red-500">Error...</div>
+
+  return (
+    <div className="flex h-[calc(95vh-2rem)] flex-row gap-4 overflow-hidden p-4">
+      <LeftSidePage comicId={comicId} data={read} />
+      <RightSidePage comicId={comicId} data={read} />
+    </div>
+  )
 }
 
 export default page

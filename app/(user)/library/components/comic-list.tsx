@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react'
 
+import dynamic from 'next/dynamic'
+
 import useSWR from 'swr'
 
 import ComicCard from '@/components/ui/comic-card'
@@ -10,11 +12,13 @@ import { LibrarySectionSkeleton } from '@/components/ui/section-skeleton'
 import { ReadItem } from '@/lib/types'
 import { fetchComicsByFilters } from '@/services/library/comic.service'
 
-import AddNewModal from '../../../../components/ui/add-new-modal'
+const AddNewModal = dynamic(() => import('@/components/ui/add-new-modal'), {
+  loading: () => (
+    <div className="bg-muted size-6 animate-pulse rounded-md md:size-[36px]" />
+  ),
+})
 
-// You can pass search parameters or filters as props here to trigger re-fetches
 const ComicList = ({ searchParams }: { searchParams?: any }) => {
-  // Use the search parameters as part of the SWR key so it refetches when filters change
   const {
     data: libraryReads,
     error,

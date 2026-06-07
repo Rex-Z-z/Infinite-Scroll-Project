@@ -1,25 +1,20 @@
+'use client'
+
 import React, { useEffect, useRef, useState } from 'react'
+
+import dynamic from 'next/dynamic'
 
 import {
   ArrowLeftRight,
   Book,
   BookOpen,
   Calendar as CalendarIcon,
-  Image,
   ImagePlus,
   Star,
 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
+import { Dialog } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -32,8 +27,21 @@ import {
 import { ReadItem } from '@/lib/types'
 import { formatDistanceToNow } from '@/lib/utils'
 
-import LastReadDatePicker from './lastread-datepicker'
-import SwitchComicImage from './switch-comic-image'
+const LastReadDatePicker = dynamic(() => import('./lastread-datepicker'), {
+  loading: () => (
+    <Input
+      className="py-4.5"
+      type="text"
+      placeholder="Chapter"
+      defaultValue={'Loading....'}
+      disabled
+    />
+  ),
+})
+
+const SwitchComicImage = dynamic(() => import('./switch-comic-image'), {
+  loading: () => <div className="bg-muted" />,
+})
 
 const ratingColorMap: { [key: string]: string } = {
   'Absolute Cinema': 'bg-blue-400/30 text-blue-400 border border-blue-400',
