@@ -58,7 +58,7 @@ const statusColorMap: { [key: string]: string } = {
   Completed: 'bg-green-500/30 text-green-400 border border-green-500',
   'On Hold': 'bg-amber-500/30 text-amber-400 border border-amber-500',
   Dropped: 'bg-rose-500/30 text-rose-400 border border-rose-500',
-  'Plan to watch': 'bg-purple-500/30 text-purple-400 border border-purple-500',
+  'Plan to': 'bg-purple-500/30 text-purple-400 border border-purple-500',
 }
 
 const typeColorMap: { [key: string]: string } = {
@@ -251,7 +251,7 @@ const LeftSidePage = ({
                     <SelectItem value="Ongoing"> Ongoing </SelectItem>
                     <SelectItem value="Completed"> Completed </SelectItem>
                     <SelectItem value="On Hold"> On Hold </SelectItem>
-                    <SelectItem value="Plan to data"> Plan to data </SelectItem>
+                    <SelectItem value="Plan to"> Plan to </SelectItem>
                     <SelectItem value="Dropped"> Dropped </SelectItem>
                   </SelectGroup>
                 </SelectContent>
