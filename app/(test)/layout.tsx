@@ -15,7 +15,7 @@ export default async function TestLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased">
+      <body>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

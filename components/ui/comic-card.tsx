@@ -29,7 +29,7 @@ const statusColorMap: { [key: string]: string } = {
 }
 
 const BadgeStyle =
-  'hover:bg-accent/70 text-[7px] md:text-xs px-1 md:px-2 py-[1px] md:py-0.5 [&>svg]:size-2 md:[&>svg]:size-3 gap-0.5 md:gap-1 [&>svg]:mb-[0.5px]'
+  'hover:bg-accent/70 text-xs md:text-xs px-1 px-2 py-[1px] md:py-0.5 [&>svg]:size-2 md:[&>svg]:size-3 gap-0.5 md:gap-1 [&>svg]:mb-[0.5px]'
 
 const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
   const isHome = page === 'home'
@@ -45,18 +45,18 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
       {isHome ? (
         // Home
         <div key={read.id} className="max-w-60">
-          <div className="relative block aspect-[2/3] h-30 w-full overflow-hidden rounded-md shadow-2xl md:h-75">
+          <div className="relative block aspect-[2/3] h-65 w-full overflow-hidden rounded-md shadow-2xl sm:h-75">
             {read.coverImage ? (
               <Image
                 src={read.coverImage}
-                loading="lazy"
+                loading="eager"
                 sizes="(max-width: 768px) 33vw, (max-width: 1200px) 20vw, 15vw"
                 fill
                 alt={`Cover for ${read.title}`}
                 className="absolute object-cover transition-all duration-500 ease-in-out hover:scale-110"
               />
             ) : (
-              <div className="group relative flex aspect-[2/2.51] h-30 w-full items-center justify-center rounded-md bg-gray-700 shadow-lg hover:bg-gray-800 md:h-75">
+              <div className="group relative flex aspect-[2/2.51] h-65 w-full items-center justify-center rounded-md bg-gray-700 shadow-lg hover:bg-gray-800 md:h-75">
                 <div className="transition-all duration-300 ease-in-out group-hover:scale-130">
                   <ImageIcon className="size-8 text-gray-600 md:size-16" />
                 </div>
@@ -74,12 +74,12 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
           </div>
           <div className="mt-2 rounded-md p-0.5 sm:p-1">
             <h5
-              className="hover:text-foreground/80 mb-0.5 max-w-180 truncate text-[8px] font-semibold tracking-tight md:mb-1 md:text-sm"
+              className="hover:text-foreground/80 mb-0.5 max-w-180 truncate text-xs font-semibold tracking-tight md:mb-1 md:text-sm"
               title={read.title}
             >
               {read.title}
             </h5>
-            <p className="text-muted-foreground hover:text-muted-foreground/80 mb-1.5 text-[7px] font-normal md:mb-3 md:text-xs">
+            <p className="text-muted-foreground hover:text-muted-foreground/80 mb-1.5 text-xs font-normal md:mb-3 md:text-xs">
               {formatDistanceToNow(read.lastRead)}
             </p>
             <div className="text-muted-foreground flex flex-row justify-between text-sm font-normal">
@@ -90,9 +90,7 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
                       isFill
                       className={statusColorMap[read.rating] || 'text-gray-400'}
                     />
-                    <span className="max-w-[20px] truncate md:max-w-[60px]">
-                      {read.rating}
-                    </span>
+                    <span className="max-w-[75px] truncate">{read.rating}</span>
                   </Badge>
                 </div>
               ) : (
@@ -104,14 +102,12 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
 
               {read.chapter ? (
                 <Badge variant="outline" className={BadgeStyle}>
-                  <span className="hidden md:block">Chapter</span>
-                  <span className="block md:hidden">Ch</span>
+                  <span>Ch</span>
                   {read.chapter}
                 </Badge>
               ) : (
                 <Badge variant="outline" className={BadgeStyle}>
-                  <span className="hidden lg:block">No Chapter</span>
-                  <span className="block lg:hidden">No Ch</span>
+                  <span>No Ch</span>
                 </Badge>
               )}
             </div>
@@ -124,7 +120,7 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
             {read.coverImage ? (
               <Image
                 src={read.coverImage}
-                loading="lazy"
+                loading="eager"
                 sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
                 fill
                 alt={`Cover for ${read.title}`}

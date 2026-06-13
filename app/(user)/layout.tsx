@@ -16,7 +16,14 @@ export default async function UserLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased" suppressHydrationWarning>
+      <head>
+        <script
+          async
+          crossOrigin="anonymous"
+          src="https://tweakcn.com/live-preview.min.js"
+        />
+      </head>
+      <body suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

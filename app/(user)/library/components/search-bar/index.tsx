@@ -1,5 +1,7 @@
 import React from 'react'
 
+import dynamic from 'next/dynamic'
+
 import { Search } from 'lucide-react'
 
 import {
@@ -9,7 +11,14 @@ import {
 } from '@/components/ui/input-group'
 import { cn } from '@/lib/utils'
 
-import { LibraryFilters } from './library-filters'
+const DynamicLibraryFilters = dynamic(
+  () => import('./library-filters').then((mod) => mod.LibraryFilters),
+  {
+    loading: () => (
+      <div className="bg-muted h-5.5 w-[80px] animate-pulse rounded-md md:h-7" />
+    ),
+  }
+)
 
 const SearchBar = ({ className }: { className?: string }) => {
   return (
@@ -25,7 +34,7 @@ const SearchBar = ({ className }: { className?: string }) => {
         />
 
         <InputGroupAddon align="inline-end">
-          <LibraryFilters />
+          <DynamicLibraryFilters />
         </InputGroupAddon>
       </InputGroup>
     </div>

@@ -4,13 +4,9 @@ import React, { useState } from 'react'
 
 import dynamic from 'next/dynamic'
 
-import useSWR from 'swr'
-
 import ComicCard from '@/components/ui/comic-card'
 import { Dialog } from '@/components/ui/dialog'
-import { LibrarySectionSkeleton } from '@/components/ui/section-skeleton'
 import { ReadItem } from '@/lib/types'
-import { fetchComicsByFilters } from '@/services/library/comic.service'
 
 const AddNewModal = dynamic(() => import('@/components/ui/add-new-modal'), {
   loading: () => (
@@ -18,14 +14,7 @@ const AddNewModal = dynamic(() => import('@/components/ui/add-new-modal'), {
   ),
 })
 
-const ComicList = ({ searchParams }: { searchParams?: any }) => {
-  const {
-    data: libraryReads,
-    error,
-    isLoading,
-  } = useSWR(['library-comics', searchParams], () =>
-    fetchComicsByFilters(searchParams)
-  )
+const ComicList = ({ initialComics }: { initialComics: ReadItem[] }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingComic, setEditingComic] = useState<ReadItem | null>(null)
 
@@ -34,28 +23,26 @@ const ComicList = ({ searchParams }: { searchParams?: any }) => {
     setIsModalOpen(true)
   }
 
+  if (!initialComics?.length) {
+    return (
+      <p className="text-muted-foreground mt-4 text-center">No comics found.</p>
+    )
+  }
+
   return (
-    <div>
-      {isLoading && <LibrarySectionSkeleton />}
-      {error && <p className="text-red-500">{error}</p>}
+    <div className="3xl:grid-cols-8 grid grid-cols-3 gap-1 md:grid-cols-4 md:gap-2 lg:grid-cols-6">
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <AddNewModal comicData={editingComic} />
+      </Dialog>
 
-      <div className="grid grid-cols-3 gap-1 md:grid-cols-4 md:gap-2 lg:grid-cols-8">
-        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <AddNewModal comicData={editingComic} />
-        </Dialog>
-
-        {!isLoading &&
-          !error &&
-          libraryReads &&
-          libraryReads.map((read) => (
-            <ComicCard
-              key={read.id}
-              read={read}
-              page="library"
-              onEdit={handleEdit}
-            />
-          ))}
-      </div>
+      {initialComics.map((read) => (
+        <ComicCard
+          key={read.id}
+          read={read}
+          page="library"
+          onEdit={handleEdit}
+        />
+      ))}
     </div>
   )
 }

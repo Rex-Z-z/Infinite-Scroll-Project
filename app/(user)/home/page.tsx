@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
 
+import { HomeSectionSkeleton } from '@/components/ui/section-skeleton'
 import {
   fetchRecentReads,
   fetchRecommendedReads,
@@ -33,8 +34,9 @@ const HomePage = async () => {
 
       <Suspense
         fallback={
-          <div className="bg-muted m-4 h-64 animate-pulse rounded-md p-4">
-            Loading Library...
+          <div className="w-full p-2 lg:p-0">
+            <div className="bg-muted mb-4 h-7 w-32 animate-pulse rounded-md"></div>
+            <HomeSectionSkeleton />
           </div>
         }
       >

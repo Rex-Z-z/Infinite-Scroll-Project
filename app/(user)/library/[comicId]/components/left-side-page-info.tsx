@@ -337,10 +337,7 @@ const LeftSidePage = ({
             >
               Edit
             </Button>
-            <Button
-              variant="destructive"
-              className="w-full text-white hover:cursor-pointer hover:bg-red-700"
-            >
+            <Button variant="outline" className="w-full hover:cursor-pointer">
               Delete
             </Button>
           </div>

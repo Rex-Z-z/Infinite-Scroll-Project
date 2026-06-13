@@ -183,7 +183,7 @@ const RightSidePage = ({
           <div className="mt-2">
             <h1 className="text-md mb-1 font-semibold">Source</h1>
             <div className="flex gap-2">
-              <div className="flex flex-row gap-1.5">
+              <div className="flex flex-row flex-wrap gap-1.5">
                 {data?.source?.map((source, index) => (
                   <Link
                     target="_blank"
@@ -254,7 +254,7 @@ const RightSidePage = ({
           {/* Tags */}
           <div>
             <h1 className="text-md mb-2.5 font-semibold">Tags</h1>
-            <div className="flex flex-row gap-1.5">
+            <div className="flex flex-row flex-wrap gap-1.5">
               {data?.category?.map((category) => (
                 <Badge
                   key={category}
