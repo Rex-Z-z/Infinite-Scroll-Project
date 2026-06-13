@@ -1,40 +1,40 @@
+// app/(user)/home/page.tsx
 import React, { Suspense } from 'react'
 
 import { HomeSectionSkeleton } from '@/components/ui/section-skeleton'
-import {
-  fetchRecentReads,
-  fetchRecommendedReads,
-} from '@/services/home/comic.service'
 
-import ComicSection from './components/comic-section'
 import LibraryRead from './components/library'
+import RecentReads from './components/recent-reads'
+import RecommendedReads from './components/recommended-reads'
 
-const HomePage = async () => {
-  const [recentReadsData, recommendedReadsData] = await Promise.all([
-    fetchRecentReads(),
-    fetchRecommendedReads(),
-  ])
-
+export default function HomePage() {
   return (
     <div>
-      <ComicSection
-        title="Recent Read"
-        reads={recentReadsData}
-        showAddCard={true}
-      />
-
-      <ComicSection
-        title="Recommendation"
-        reads={recommendedReadsData}
-        showAddCard={false}
-        autoplay={true}
-        loop={true}
-        filterSection="recommendations"
-      />
+      <Suspense
+        fallback={
+          <div className="mt-5 w-full px-4">
+            <div className="bg-muted mb-4 h-7 w-32 animate-pulse rounded-md"></div>
+            <HomeSectionSkeleton />
+          </div>
+        }
+      >
+        <RecentReads />
+      </Suspense>
 
       <Suspense
         fallback={
-          <div className="w-full p-2 lg:p-0">
+          <div className="mt-8 w-full px-4">
+            <div className="bg-muted mb-4 h-7 w-32 animate-pulse rounded-md"></div>
+            <HomeSectionSkeleton />
+          </div>
+        }
+      >
+        <RecommendedReads />
+      </Suspense>
+
+      <Suspense
+        fallback={
+          <div className="mt-8 w-full px-4">
             <div className="bg-muted mb-4 h-7 w-32 animate-pulse rounded-md"></div>
             <HomeSectionSkeleton />
           </div>
@@ -45,5 +45,3 @@ const HomePage = async () => {
     </div>
   )
 }
-
-export default HomePage

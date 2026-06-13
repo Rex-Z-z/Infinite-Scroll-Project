@@ -49,7 +49,6 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
             {read.coverImage ? (
               <Image
                 src={read.coverImage}
-                loading="eager"
                 sizes="(max-width: 768px) 33vw, (max-width: 1200px) 20vw, 15vw"
                 fill
                 alt={`Cover for ${read.title}`}
@@ -120,7 +119,6 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
             {read.coverImage ? (
               <Image
                 src={read.coverImage}
-                loading="eager"
                 sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
                 fill
                 alt={`Cover for ${read.title}`}
