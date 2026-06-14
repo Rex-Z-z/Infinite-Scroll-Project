@@ -115,7 +115,7 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
       ) : (
         // Library
         <div key={read.id} className="flex flex-col overflow-hidden">
-          <div className="relative block aspect-[2/3] w-full overflow-hidden rounded-md shadow-2xl">
+          <div className="relative block aspect-[2/3] h-100 w-full overflow-hidden rounded-md shadow-2xl">
             {read.coverImage ? (
               <Image
                 src={read.coverImage}
@@ -144,12 +144,12 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
 
           <div className="mt-1 rounded-md p-1 md:mt-2">
             <h5
-              className="hover:text-foreground/80 mb-1 max-w-180 truncate text-[8px] font-semibold tracking-tight md:text-sm"
+              className="hover:text-foreground/80 mb-1 max-w-180 truncate text-[8px] font-semibold tracking-tight md:text-base"
               title={read.title}
             >
               {read.title}
             </h5>
-            <p className="text-muted-foreground hover:text-muted-foreground/80 mb-1 text-[7px] font-normal md:mb-3 md:text-xs">
+            <p className="text-muted-foreground hover:text-muted-foreground/80 mb-1 text-[7px] font-normal md:mb-3 md:text-sm">
               {formatDistanceToNow(read.lastRead)}
             </p>
             <div className="text-muted-foreground flex flex-row justify-between text-sm font-normal">
@@ -160,7 +160,7 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
                       isFill
                       className={statusColorMap[read.rating] || 'text-gray-400'}
                     />
-                    <span className="max-w-[35px] truncate md:max-w-[50px] lg:max-w-[70px]">
+                    <span className="max-w-[35px] truncate md:max-w-[50px] lg:max-w-[120px]">
                       {read.rating}
                     </span>
                   </Badge>

@@ -25,12 +25,16 @@ const ComicList = ({ initialComics }: { initialComics: ReadItem[] }) => {
 
   if (!initialComics?.length) {
     return (
-      <p className="text-muted-foreground mt-4 text-center">No comics found.</p>
+      <div className="bg-card flex h-[calc(100vh-220px)] flex-col items-center justify-center rounded-md">
+        <p className="text-muted-foreground mt-4 text-center text-lg">
+          No comics found.
+        </p>
+      </div>
     )
   }
 
   return (
-    <div className="3xl:grid-cols-8 grid grid-cols-3 gap-1 md:grid-cols-4 md:gap-2 lg:grid-cols-6">
+    <div className="grid grid-cols-3 gap-1 md:grid-cols-4 md:gap-2 lg:grid-cols-6">
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <AddNewModal comicData={editingComic} />
       </Dialog>

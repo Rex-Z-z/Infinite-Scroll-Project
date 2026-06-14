@@ -8,7 +8,7 @@ export const mockReads: ReadItem[] = [
     availableImages: [],
     title: 'Obsessed With Shuelina',
     altTitle: '회귀수선전',
-    desc: "Shuelina has only ever wanted to be loved as she grew up in an orphanage. But after her birth father rejected her in a previous life, she tries to find a family who will accept her in this one. Luckily, Archduke Bylot and his sons fall for her indomitable spirit, and they shower her with the love she has longed for. But once they find out she's the long-lost imperial princess, can she be a part of their family? Or will she have to go back to the people who sent her away in the first place?",
+    desc: "Shuelina has only ever wanted to be loved as she grew up in an orphanage. But after her birth father rejected her in a previous life, she tries to find a family who will accept her in this one. Luckily, Archduke Bylot and his sons fall for her indomitable spirit, and they shower her with the love she has longed for. But once they find out she's the long-lost imperial princess, can she be a part of their family? Or will she have to go back to the people who sent her away in the first place? ",
     published: '2023-01-01',
     updated: '2025-02-01',
     lastRead: '2023-09-12',
