@@ -23,7 +23,7 @@ export default async function UserLayout({
           src="https://tweakcn.com/live-preview.min.js"
         />
       </head>
-      <body suppressHydrationWarning>
+      <body>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

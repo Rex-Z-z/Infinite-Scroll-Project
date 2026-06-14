@@ -12,7 +12,7 @@ export default function HomePage() {
     <div>
       <Suspense
         fallback={
-          <div className="mt-5 w-full px-4">
+          <div className="mt-5 w-full px-28">
             <div className="bg-muted mb-4 h-7 w-32 animate-pulse rounded-md"></div>
             <HomeSectionSkeleton />
           </div>
@@ -23,7 +23,7 @@ export default function HomePage() {
 
       <Suspense
         fallback={
-          <div className="mt-8 w-full px-4">
+          <div className="mt-8 w-full px-28">
             <div className="bg-muted mb-4 h-7 w-32 animate-pulse rounded-md"></div>
             <HomeSectionSkeleton />
           </div>
@@ -34,7 +34,7 @@ export default function HomePage() {
 
       <Suspense
         fallback={
-          <div className="mt-8 w-full px-4">
+          <div className="mt-8 w-full px-28">
             <div className="bg-muted mb-4 h-7 w-32 animate-pulse rounded-md"></div>
             <HomeSectionSkeleton />
           </div>
