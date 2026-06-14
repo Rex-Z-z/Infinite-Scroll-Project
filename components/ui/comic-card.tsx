@@ -44,8 +44,8 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
     <Link href={`/library/${read.id}`} key={read.id}>
       {isHome ? (
         // Home
-        <div key={read.id} className="max-w-60">
-          <div className="relative block aspect-[2/3] h-65 w-full overflow-hidden rounded-md shadow-2xl sm:h-75">
+        <div key={read.id} className="max-w-68">
+          <div className="relative block aspect-[2/3] h-65 w-full overflow-hidden rounded-md shadow-2xl sm:h-85">
             {read.coverImage ? (
               <Image
                 src={read.coverImage}
@@ -55,7 +55,7 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
                 className="absolute object-cover transition-all duration-500 ease-in-out hover:scale-110"
               />
             ) : (
-              <div className="group relative flex aspect-[2/2.51] h-65 w-full items-center justify-center rounded-md bg-gray-700 shadow-lg hover:bg-gray-800 md:h-75">
+              <div className="group relative flex aspect-[2/2.51] h-65 w-full items-center justify-center rounded-md bg-gray-700 shadow-lg hover:bg-gray-800 md:h-85">
                 <div className="transition-all duration-300 ease-in-out group-hover:scale-130">
                   <ImageIcon className="size-8 text-gray-600 md:size-16" />
                 </div>
@@ -73,12 +73,12 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
           </div>
           <div className="mt-2 rounded-md p-0.5 sm:p-1">
             <h5
-              className="hover:text-foreground/80 mb-0.5 max-w-180 truncate text-xs font-semibold tracking-tight md:mb-1 md:text-sm"
+              className="hover:text-foreground/80 mb-0.5 max-w-180 truncate text-xs font-semibold tracking-tight md:mb-1 md:text-base"
               title={read.title}
             >
               {read.title}
             </h5>
-            <p className="text-muted-foreground hover:text-muted-foreground/80 mb-1.5 text-xs font-normal md:mb-3 md:text-xs">
+            <p className="text-muted-foreground hover:text-muted-foreground/80 mb-1.5 text-xs font-normal md:mb-3 md:text-sm">
               {formatDistanceToNow(read.lastRead)}
             </p>
             <div className="text-muted-foreground flex flex-row justify-between text-sm font-normal">

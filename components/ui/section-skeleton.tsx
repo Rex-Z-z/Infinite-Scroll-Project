@@ -5,13 +5,13 @@ import { Skeleton } from './skeleton'
 export const HomeSectionSkeleton = () => {
   return (
     <div className="flex flex-row gap-2 overflow-hidden">
-      {[...Array(10)].map((_, index) => (
+      {[...Array(6)].map((_, index) => (
         <div
           key={index}
-          className="flex w-20 flex-shrink-0 flex-col gap-2.5 md:w-56 md:gap-3"
+          className="flex w-20 flex-shrink-0 flex-col gap-2.5 md:w-67 md:gap-3"
         >
-          <Skeleton className="h-[120px] w-full md:h-[300px]" />
-          <div className="flex flex-col gap-2.5 md:gap-3.5">
+          <Skeleton className="h-[120px] w-full md:h-[340px]" />
+          <div className="flex flex-col gap-2 md:gap-3.5">
             <Skeleton className="h-2 w-full sm:h-4" />
             <Skeleton className="h-2 w-1/2 sm:h-4" />
             <div className="flex flex-row justify-between">
