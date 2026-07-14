@@ -46,10 +46,7 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
       className={`sticky top-0 z-50 ${page === 'user' ? 'bg-card shadow-sm' : ''}`}
     >
       <div className="mx-auto flex flex-wrap items-center justify-between p-3">
-        <a
-          href="/home"
-          className="flex items-center space-x-3 rtl:space-x-reverse"
-        >
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <Image
             src="https://flowbite.com/docs/images/logo.svg"
             width={32}
@@ -61,23 +58,6 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
             Flowbite
           </span>
         </a>
-        <div className="flex">
-          {page === 'user' ? (
-            <SearchBar className="hidden md:block" />
-          ) : (
-            <div className="flex flex-row">
-              <Button variant="link" className="font-bold" asChild>
-                <a href="#">Home</a>
-              </Button>
-              <Button variant="link" className="font-bold" asChild>
-                <a href="#about">About</a>
-              </Button>
-              <Button variant="link" className="font-bold" asChild>
-                <a href="#projects">Project</a>
-              </Button>
-            </div>
-          )}
-        </div>
         <div className="flex items-center justify-center gap-1 md:gap-2">
           <SearchBar className="mb-[1px] block md:hidden" />
 
