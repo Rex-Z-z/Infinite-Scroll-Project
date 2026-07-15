@@ -34,7 +34,7 @@ const ComicList = ({ initialComics }: { initialComics: ReadItem[] }) => {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-1 md:grid-cols-4 md:gap-2 lg:grid-cols-6">
+    <div className="grid grid-cols-3 gap-1 pr-2 md:grid-cols-4 md:gap-2 lg:grid-cols-6">
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <AddNewModal comicData={editingComic} />
       </Dialog>

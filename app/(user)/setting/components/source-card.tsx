@@ -39,7 +39,6 @@ const SourceCard = ({
   }
 
   const handleSave = () => {
-    // 1. Validation: Ensure fields aren't empty
     if (!name.trim() || !url.trim()) {
       setError('Name and URL are required')
       return
@@ -48,7 +47,6 @@ const SourceCard = ({
     setError('')
     setIsEdit(false)
 
-    // 2. Pass data back up to parent
     if (onSave) {
       onSave({ id: source.id, name, url, icon })
     }
@@ -57,10 +55,8 @@ const SourceCard = ({
   const handleCancel = () => {
     setError('')
     if (isNew && onCancel) {
-      // If it's a new card, cancel should remove the card entirely
       onCancel()
     } else {
-      // Otherwise, just revert the local edits
       setIsEdit(false)
       setName(source.name)
       setUrl(source.url)
