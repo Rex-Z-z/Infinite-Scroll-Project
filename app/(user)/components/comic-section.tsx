@@ -104,7 +104,7 @@ const ComicSection = ({
   }
 
   return (
-    <section className="flex w-full flex-col px-28 py-4">
+    <section className="flex w-full flex-col px-8 py-4 md:px-20 lg:px-28">
       <Carousel
         opts={{
           align: 'start',
@@ -153,10 +153,13 @@ const ComicSection = ({
           </div>
         </div>
 
-        <CarouselContent className="-ml-1 sm:-ml-2">
+        <CarouselContent className="-ml-1 lg:-ml-2">
           {reads &&
             reads.map((read) => (
-              <CarouselItem key={read.id} className="basis-1/6 pl-2">
+              <CarouselItem
+                key={read.id}
+                className="basis-1/3 pl-1 md:basis-1/4 lg:basis-1/5 lg:pl-2 2xl:basis-1/6"
+              >
                 <ComicCard read={read} onEdit={handleEdit} />
               </CarouselItem>
             ))}

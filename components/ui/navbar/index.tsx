@@ -58,6 +58,8 @@ const NavBar = ({ page = 'user' }: NavBarProps) => {
             Flowbite
           </span>
         </a>
+        <SearchBar className="mb-[1px] hidden md:block" />
+
         <div className="flex items-center justify-center gap-1 md:gap-2">
           <SearchBar className="mb-[1px] block md:hidden" />
 

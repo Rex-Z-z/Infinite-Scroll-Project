@@ -45,7 +45,7 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
       {isHome ? (
         // Home
         <div key={read.id} className="max-w-68">
-          <div className="relative block aspect-[2/3] h-65 w-full overflow-hidden rounded-md shadow-2xl sm:h-85">
+          <div className="relative block aspect-[2/3] w-full overflow-hidden rounded-md shadow-2xl">
             {read.coverImage ? (
               <Image
                 src={read.coverImage}
@@ -55,7 +55,7 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
                 className="absolute object-cover transition-all duration-500 ease-in-out hover:scale-110"
               />
             ) : (
-              <div className="group relative flex aspect-[2/2.51] h-65 w-full items-center justify-center rounded-md bg-gray-700 shadow-lg hover:bg-gray-800 md:h-85">
+              <div className="group relative flex aspect-[2/3] w-full items-center justify-center rounded-md bg-gray-700 shadow-lg hover:bg-gray-800">
                 <div className="transition-all duration-300 ease-in-out group-hover:scale-130">
                   <ImageIcon className="size-8 text-gray-600 md:size-16" />
                 </div>
@@ -66,30 +66,32 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
               onClick={handleEditClick}
               variant="secondary"
               size="icon-sm"
-              className="hover:bg-accent hover:text-accent-foreground absolute top-1 left-1 size-5 hover:cursor-pointer md:top-2 md:left-2 md:size-8 [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
+              className="hover:bg-accent hover:text-accent-foreground absolute top-1 left-1 size-6 hover:cursor-pointer md:top-2 md:left-2 md:size-8 [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
             >
               <Settings2 />
             </Button>
           </div>
           <div className="mt-2 rounded-md p-0.5 sm:p-1">
             <h5
-              className="hover:text-foreground/80 mb-0.5 max-w-180 truncate text-xs font-semibold tracking-tight md:mb-1 md:text-base"
+              className="hover:text-foreground/80 mb-0.5 max-w-180 truncate text-[9px] font-semibold tracking-tight md:mb-1 md:text-xs lg:text-base"
               title={read.title}
             >
               {read.title}
             </h5>
-            <p className="text-muted-foreground hover:text-muted-foreground/80 mb-1.5 text-xs font-normal md:mb-3 md:text-sm">
+            <p className="text-muted-foreground hover:text-muted-foreground/80 mb-1.5 text-[9px] font-normal md:mb-3 md:text-xs lg:text-sm">
               {formatDistanceToNow(read.lastRead)}
             </p>
             <div className="text-muted-foreground flex flex-row justify-between text-sm font-normal">
               {read.rating ? (
-                <div className="flex flex-row gap-1">
+                <div className="flex flex-row md:gap-1">
                   <Badge variant="outline" className={BadgeStyle}>
                     <Star
                       isFill
                       className={statusColorMap[read.rating] || 'text-gray-400'}
                     />
-                    <span className="max-w-[75px] truncate">{read.rating}</span>
+                    <span className="max-w-[25px] truncate text-[7px] md:max-w-[55px] md:text-[10px] lg:max-w-[75px] lg:text-xs">
+                      {read.rating}
+                    </span>
                   </Badge>
                 </div>
               ) : (
@@ -101,8 +103,12 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
 
               {read.chapter ? (
                 <Badge variant="outline" className={BadgeStyle}>
-                  <span>Ch</span>
-                  {read.chapter}
+                  <span className="text-[7px] md:text-[10px] lg:text-xs">
+                    Ch
+                  </span>
+                  <span className="text-[7px] md:text-[10px] lg:text-xs">
+                    {read.chapter}
+                  </span>
                 </Badge>
               ) : (
                 <Badge variant="outline" className={BadgeStyle}>
