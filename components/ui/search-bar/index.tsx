@@ -78,7 +78,7 @@ const SearchBar = ({ className }: { className?: string }) => {
       <Button
         variant="outline"
         size="icon"
-        className="size-6 md:hidden md:size-9 [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
+        className="size-7.5 md:hidden md:size-9 [&_svg:not([class*='size-'])]:size-3 md:[&_svg:not([class*='size-'])]:size-4"
         onClick={() => {
           setIsMobileOpen(true)
           // Small delay to allow element to render before focusing
