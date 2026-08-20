@@ -67,7 +67,7 @@ export const ImageUploader = React.memo(
 
     return (
       <div className="flex flex-row gap-3">
-        <div className="group relative block h-52 w-36 flex-shrink-0">
+        <div className="group relative block h-37 w-26 flex-shrink-0 md:h-52 md:w-36">
           <input
             type="file"
             ref={fileInputRef}
@@ -88,7 +88,7 @@ export const ImageUploader = React.memo(
                     onClick={handleUploadClick}
                     className="px-2 py-1 text-xs"
                   >
-                    <Upload className="size-3.5" />
+                    <Upload className="size-2 md:size-3.5" />
                   </Button>
                   <Button
                     variant="destructive"
@@ -104,7 +104,7 @@ export const ImageUploader = React.memo(
             <div className="bg-card flex h-full w-full flex-col items-center justify-center gap-2 rounded-md border">
               <div className="flex flex-row gap-2">
                 <Button variant="default" onClick={handleUploadClick}>
-                  <Upload className="size-4" />
+                  <Upload className="size-3 md:size-4" />
                 </Button>
               </div>
             </div>
@@ -112,11 +112,11 @@ export const ImageUploader = React.memo(
         </div>
 
         <div className="flex w-full flex-col gap-4">
-          <DialogHeader>
-            <DialogTitle>
+          <DialogHeader className="text-left">
+            <DialogTitle className="text-sm font-semibold md:text-lg">
               {comicData ? 'Edit Comic' : 'Add New Comic'}
             </DialogTitle>
-            <DialogDescription className="mt-2 flex flex-col font-semibold">
+            <DialogDescription className="mt-2 flex flex-col text-xs font-semibold md:text-sm">
               {comicData
                 ? 'Edit the details of your comic.'
                 : 'Add a new comic to your collection.'}
@@ -124,9 +124,9 @@ export const ImageUploader = React.memo(
                 <Button
                   variant="outline"
                   onClick={handlePasteImage}
-                  className="mt-2 text-xs"
+                  className="mt-2 text-xs md:text-sm"
                 >
-                  <Clipboard className="size-3.5" />
+                  <Clipboard className="size-3 md:size-3.5" />
                   Paste
                 </Button>
                 {showNoImageTooltip && (

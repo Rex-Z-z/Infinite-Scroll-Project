@@ -42,6 +42,25 @@ const statusColorMap: { [key: string]: string } = {
   Cancelled: 'text-red-600',
 }
 
+const ratings = [
+  { name: 'Absolute Cinema', color: 'text-blue-400' },
+  { name: 'Awesome', color: 'text-green-700' },
+  { name: 'Great', color: 'text-green-500' },
+  { name: 'Good', color: 'text-yellow-400' },
+  { name: 'Regular', color: 'text-orange-400' },
+  { name: 'Bad', color: 'text-red-500' },
+  { name: 'Garbage', color: 'text-purple-400' },
+]
+
+const statuses = [
+  { htmlFor: 'r1', name: 'Ongoing', color: 'text-blue-600' },
+  { htmlFor: 'r2', name: 'Completed', color: 'text-green-600' },
+  { htmlFor: 'r3', name: 'On Hold', color: 'text-yellow-600' },
+  { htmlFor: 'r4', name: 'Plan to Read', color: 'text-purple-600' },
+  { htmlFor: 'r5', name: 'Dropped', color: 'text-red-600' },
+  { htmlFor: 'r6', name: 'Cancelled', color: 'text-red-600' },
+]
+
 const ComicForm = ({ comicData }: ComicFormProps) => {
   const [title, setTitle] = useState('')
   const [chapter, setChapter] = useState('')
@@ -95,6 +114,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
+          className="text-xs"
         />
         {title ? (
           <>
@@ -135,7 +155,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
             Type
           </Label>
           <Select onValueChange={setType} value={type}>
-            <SelectTrigger className="w-full py-[17px]">
+            <SelectTrigger className="w-full py-[17px] text-[12px] md:text-sm">
               <SelectValue placeholder="Select a type" />
             </SelectTrigger>
             <SelectContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
@@ -163,6 +183,7 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
             placeholder="Chapter"
             value={chapter}
             onChange={(e) => setChapter(e.target.value)}
+            className="text-xs"
           />
         </div>
       </div>
@@ -187,33 +208,20 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
         Rating
       </Label>
       <Select onValueChange={setRating} value={rating}>
-        <SelectTrigger className="w-full py-[17px]">
+        <SelectTrigger className="w-full py-[17px] text-[12px] md:text-sm">
           <SelectValue placeholder="Select a rating" />
         </SelectTrigger>
         <SelectContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
           <SelectGroup>
-            <SelectItem value="Absolute Cinema">
-              <Star isFill className="mr-2 size-4 text-blue-400" /> Absolute
-              Cinema
-            </SelectItem>
-            <SelectItem value="Awesome">
-              <Star isFill className="mr-2 size-4 text-green-700" /> Awesome
-            </SelectItem>
-            <SelectItem value="Great">
-              <Star isFill className="mr-2 size-4 text-green-500" /> Great
-            </SelectItem>
-            <SelectItem value="Good">
-              <Star isFill className="mr-2 size-4 text-yellow-400" /> Good
-            </SelectItem>
-            <SelectItem value="Regular">
-              <Star isFill className="mr-2 size-4 text-orange-400" /> Regular
-            </SelectItem>
-            <SelectItem value="Bad">
-              <Star isFill className="mr-2 size-4 text-red-500" /> Bad
-            </SelectItem>
-            <SelectItem value="Garbage">
-              <Star isFill className="mr-2 size-4 text-purple-400" /> Garbage
-            </SelectItem>
+            {ratings.map((rating) => (
+              <SelectItem value={rating.name}>
+                <Star
+                  isFill
+                  className={cn('mr-2 size-4 text-blue-400', rating.color)}
+                />
+                {rating.name}
+              </SelectItem>
+            ))}
           </SelectGroup>
         </SelectContent>
       </Select>
@@ -242,61 +250,19 @@ const ComicForm = ({ comicData }: ComicFormProps) => {
         value={status}
         className="grid grid-cols-2 gap-1.5"
       >
-        <Label
-          htmlFor="r1"
-          className="flex cursor-pointer items-center gap-3 rounded-md border p-2.5 not-last:transition-colors"
-        >
-          <RadioGroupItem value="Ongoing" id="r1" className="text-blue-600" />
-          Ongoing
-        </Label>
-
-        <Label
-          htmlFor="r2"
-          className="flex cursor-pointer items-center gap-3 rounded-md border p-2.5 transition-colors"
-        >
-          <RadioGroupItem
-            value="Completed"
-            id="r2"
-            className="text-green-600"
-          />
-          Completed
-        </Label>
-
-        <Label
-          htmlFor="r3"
-          className="flex cursor-pointer items-center gap-3 rounded-md border p-2.5 transition-colors"
-        >
-          <RadioGroupItem value="On Hold" id="r3" className="text-yellow-600" />
-          On Hold
-        </Label>
-
-        <Label
-          htmlFor="r4"
-          className="flex cursor-pointer items-center gap-3 rounded-md border p-2.5 transition-colors"
-        >
-          <RadioGroupItem
-            value="Plan to Read"
-            id="r4"
-            className="text-purple-600"
-          />
-          Plan to Read
-        </Label>
-
-        <Label
-          htmlFor="r5"
-          className="flex cursor-pointer items-center gap-3 rounded-md border p-2.5 transition-colors"
-        >
-          <RadioGroupItem value="Dropped" id="r5" className="text-red-600" />
-          Dropped
-        </Label>
-
-        <Label
-          htmlFor="r6"
-          className="flex cursor-pointer items-center gap-3 rounded-md border p-2.5 transition-colors"
-        >
-          <RadioGroupItem value="Cancelled" id="r6" className="text-red-600" />
-          Cancelled
-        </Label>
+        {statuses.map((status) => (
+          <Label
+            htmlFor={status.htmlFor}
+            className="flex cursor-pointer items-center gap-3 rounded-md border p-2.5 text-xs transition-colors md:text-sm"
+          >
+            <RadioGroupItem
+              value={status.name}
+              id={status.htmlFor}
+              className={cn('size-3 md:size-4', status.color)}
+            />
+            {status.name}
+          </Label>
+        ))}
       </RadioGroup>
     </div>
   )
