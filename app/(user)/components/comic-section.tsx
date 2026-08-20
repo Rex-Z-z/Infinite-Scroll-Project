@@ -39,7 +39,7 @@ const SectionCarouselControls = () => {
       <Button
         variant="outline"
         size="icon"
-        className="size-6 md:size-[36px] [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
+        className="size-7.5 md:size-[36px] [&_svg:not([class*='size-'])]:size-3 md:[&_svg:not([class*='size-'])]:size-4"
         onClick={scrollPrev}
         disabled={!canScrollPrev}
       >
@@ -48,7 +48,7 @@ const SectionCarouselControls = () => {
       <Button
         variant="outline"
         size="icon"
-        className="size-6 md:size-[36px] [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
+        className="size-7.5 md:size-[36px] [&_svg:not([class*='size-'])]:size-3 md:[&_svg:not([class*='size-'])]:size-4"
         onClick={scrollNext}
         disabled={!canScrollNext}
       >
@@ -142,7 +142,7 @@ const ComicSection = ({
                 <DialogTrigger asChild>
                   <Button
                     size="icon"
-                    className="size-6 md:size-[36px] [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
+                    className="size-7.5 md:size-[36px] [&_svg:not([class*='size-'])]:size-3 md:[&_svg:not([class*='size-'])]:size-4"
                   >
                     <Plus />
                   </Button>
