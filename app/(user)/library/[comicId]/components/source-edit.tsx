@@ -195,7 +195,7 @@ const SourceEdit = ({
 
             {/* Remove Button */}
             <Button
-              variant="destructive"
+              variant="outline"
               size="icon-sm"
               className="p-[17px]"
               onClick={() => handleRemoveSource(index)}

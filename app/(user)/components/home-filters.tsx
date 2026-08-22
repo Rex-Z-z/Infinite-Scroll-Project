@@ -90,7 +90,7 @@ const DropdownHome = () => {
         <Button
           variant="outline"
           size="icon"
-          className="size-6 md:size-9 [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
+          className="size-7.5 md:size-9 [&_svg:not([class*='size-'])]:size-3 md:[&_svg:not([class*='size-'])]:size-4"
         >
           {activeFilterCount ? (
             <FilterIcon isFill className="text-primary size-2.5 md:size-4" />

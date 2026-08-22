@@ -2,26 +2,19 @@
 
 import React, { useState } from 'react'
 
-import useSWR from 'swr'
+import dynamic from 'next/dynamic'
 
 import ComicCard from '@/components/ui/comic-card'
 import { Dialog } from '@/components/ui/dialog'
-import { LibrarySectionSkeleton } from '@/components/ui/section-skeleton'
 import { ReadItem } from '@/lib/types'
-import { fetchComicsByFilters } from '@/services/library/comic.service'
 
-import AddNewModal from '../../../../components/ui/add-new-modal'
+const AddNewModal = dynamic(() => import('@/components/ui/add-new-modal'), {
+  loading: () => (
+    <div className="bg-muted size-6 animate-pulse rounded-md md:size-[36px]" />
+  ),
+})
 
-// You can pass search parameters or filters as props here to trigger re-fetches
-const ComicList = ({ searchParams }: { searchParams?: any }) => {
-  // Use the search parameters as part of the SWR key so it refetches when filters change
-  const {
-    data: libraryReads,
-    error,
-    isLoading,
-  } = useSWR(['library-comics', searchParams], () =>
-    fetchComicsByFilters(searchParams)
-  )
+const ComicList = ({ initialComics }: { initialComics: ReadItem[] }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingComic, setEditingComic] = useState<ReadItem | null>(null)
 
@@ -30,28 +23,30 @@ const ComicList = ({ searchParams }: { searchParams?: any }) => {
     setIsModalOpen(true)
   }
 
-  return (
-    <div>
-      {isLoading && <LibrarySectionSkeleton />}
-      {error && <p className="text-red-500">{error}</p>}
-
-      <div className="grid grid-cols-3 gap-1 md:grid-cols-4 md:gap-2 lg:grid-cols-8">
-        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <AddNewModal comicData={editingComic} />
-        </Dialog>
-
-        {!isLoading &&
-          !error &&
-          libraryReads &&
-          libraryReads.map((read) => (
-            <ComicCard
-              key={read.id}
-              read={read}
-              page="library"
-              onEdit={handleEdit}
-            />
-          ))}
+  if (!initialComics?.length) {
+    return (
+      <div className="bg-card flex h-[calc(100vh-220px)] flex-col items-center justify-center rounded-md">
+        <p className="text-muted-foreground mt-4 text-center text-lg">
+          No comics found.
+        </p>
       </div>
+    )
+  }
+
+  return (
+    <div className="grid grid-cols-3 gap-1 pr-2 md:grid-cols-4 md:gap-2 lg:grid-cols-6">
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <AddNewModal comicData={editingComic} />
+      </Dialog>
+
+      {initialComics.map((read) => (
+        <ComicCard
+          key={read.id}
+          read={read}
+          page="library"
+          onEdit={handleEdit}
+        />
+      ))}
     </div>
   )
 }

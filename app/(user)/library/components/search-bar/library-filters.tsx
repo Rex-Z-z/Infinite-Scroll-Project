@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react'
 
+import { useRouter, useSearchParams } from 'next/navigation'
+
 import { Activity, Book, Calendar, Star, Tag } from 'lucide-react'
 
 import { FilterIcon } from '@/components/icons/custom-icons'
@@ -103,6 +105,24 @@ export function LibraryFilters() {
   const [selectedRatings, setSelectedRatings] = useState<string[]>([])
   // Statuses
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([])
+
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const handleApply = () => {
+    const params = new URLSearchParams(searchParams.toString())
+
+    if (selectedStatuses.length) {
+      params.set('statuses', selectedStatuses.join(','))
+    } else {
+      params.delete('statuses')
+    }
+    // ... do this for genres, tags, etc.
+
+    // Pushing to the router triggers the Server Component (page.tsx)
+    // to re-fetch the data automatically without a full page reload!
+    router.push(`?${params.toString()}`)
+  }
 
   // --- Helpers ---
   const toggleGenre = (genre: string) => {

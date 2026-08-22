@@ -1,22 +1,15 @@
-'use client'
-
-import React from 'react'
-
 import { fetchRecentReads } from '@/services/home/comic.service'
 
 import ComicSection from './comic-section'
 
-const fetcher = () => fetchRecentReads()
+export default async function RecentReads() {
+  const recentReadsData = await fetchRecentReads()
 
-const RecentReads = () => {
   return (
     <ComicSection
       title="Recent Read"
-      fetcher={fetcher}
-      swrKey={['recent-reads']}
+      reads={recentReadsData}
       showAddCard={true}
     />
   )
 }
-
-export default RecentReads

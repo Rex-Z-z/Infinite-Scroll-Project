@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
-import { Check } from 'lucide-react'
+import { Check, Image } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -24,9 +24,16 @@ const SwitchComicImage = ({
   onCoverUpdate,
 }: SwitchComicImageProps) => {
   const [selectedImage, setSelectedImage] = useState(currentCover)
+  const [cover, setCover] = useState(currentCover)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleSave = () => {
     onCoverUpdate(selectedImage)
+  }
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) setCover(URL.createObjectURL(file))
   }
 
   return (
@@ -38,6 +45,20 @@ const SwitchComicImage = ({
         </DialogDescription>
       </DialogHeader>
       <div className="grid grid-cols-3 gap-2">
+        <Button
+          className="group bg-muted hover:bg-accent flex h-60 items-center justify-center rounded-md border-2 shadow-lg hover:cursor-pointer"
+          onClick={() => fileInputRef.current?.click()}
+        >
+          <input
+            type="file"
+            accept="image/*"
+            className="hidden"
+            ref={fileInputRef}
+            onChange={handleImageUpload}
+          />
+          <Image className="text-muted-foreground size-12 transition-transform duration-300 group-hover:scale-110" />
+        </Button>
+
         {availableImages.map((src, index) => (
           <div
             key={index}

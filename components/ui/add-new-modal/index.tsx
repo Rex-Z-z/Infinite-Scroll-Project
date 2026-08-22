@@ -13,7 +13,7 @@ import { ImageUploader } from './image-uploader'
 
 const AddNewModal = ({ comicData }: { comicData: ReadItem | null }) => {
   return (
-    <DialogContent className="w-full">
+    <DialogContent className="w-full p-3 md:p-6">
       <div className="flex flex-row gap-3">
         <ImageUploader
           initialImageUrl={comicData?.coverImage || null}
@@ -23,15 +23,15 @@ const AddNewModal = ({ comicData }: { comicData: ReadItem | null }) => {
 
       <ComicForm comicData={comicData} />
 
-      <DialogFooter className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+      <DialogFooter className="grid grid-cols-2 gap-2">
+        <Button type="submit" size="lg" className="hover:cursor-pointer">
+          Save Change
+        </Button>
         <DialogClose asChild>
           <Button variant="outline" size="lg" className="hover:cursor-pointer">
             Cancel
           </Button>
         </DialogClose>
-        <Button type="submit" size="lg" className="hover:cursor-pointer">
-          Save Change
-        </Button>
       </DialogFooter>
     </DialogContent>
   )

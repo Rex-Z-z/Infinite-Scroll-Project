@@ -1,25 +1,20 @@
+'use client'
+
 import React, { useEffect, useRef, useState } from 'react'
+
+import dynamic from 'next/dynamic'
 
 import {
   ArrowLeftRight,
   Book,
   BookOpen,
   Calendar as CalendarIcon,
-  Image,
   ImagePlus,
   Star,
 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
+import { Dialog } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -32,8 +27,21 @@ import {
 import { ReadItem } from '@/lib/types'
 import { formatDistanceToNow } from '@/lib/utils'
 
-import LastReadDatePicker from './lastread-datepicker'
-import SwitchComicImage from './switch-comic-image'
+const LastReadDatePicker = dynamic(() => import('./lastread-datepicker'), {
+  loading: () => (
+    <Input
+      className="py-4.5"
+      type="text"
+      placeholder="Chapter"
+      defaultValue={'Loading....'}
+      disabled
+    />
+  ),
+})
+
+const SwitchComicImage = dynamic(() => import('./switch-comic-image'), {
+  loading: () => <div className="bg-muted" />,
+})
 
 const ratingColorMap: { [key: string]: string } = {
   'Absolute Cinema': 'bg-blue-400/30 text-blue-400 border border-blue-400',
@@ -50,7 +58,7 @@ const statusColorMap: { [key: string]: string } = {
   Completed: 'bg-green-500/30 text-green-400 border border-green-500',
   'On Hold': 'bg-amber-500/30 text-amber-400 border border-amber-500',
   Dropped: 'bg-rose-500/30 text-rose-400 border border-rose-500',
-  'Plan to watch': 'bg-purple-500/30 text-purple-400 border border-purple-500',
+  'Plan to': 'bg-purple-500/30 text-purple-400 border border-purple-500',
 }
 
 const typeColorMap: { [key: string]: string } = {
@@ -243,7 +251,7 @@ const LeftSidePage = ({
                     <SelectItem value="Ongoing"> Ongoing </SelectItem>
                     <SelectItem value="Completed"> Completed </SelectItem>
                     <SelectItem value="On Hold"> On Hold </SelectItem>
-                    <SelectItem value="Plan to data"> Plan to data </SelectItem>
+                    <SelectItem value="Plan to"> Plan to </SelectItem>
                     <SelectItem value="Dropped"> Dropped </SelectItem>
                   </SelectGroup>
                 </SelectContent>
@@ -329,10 +337,7 @@ const LeftSidePage = ({
             >
               Edit
             </Button>
-            <Button
-              variant="destructive"
-              className="w-full text-white hover:cursor-pointer hover:bg-red-700"
-            >
+            <Button variant="outline" className="w-full hover:cursor-pointer">
               Delete
             </Button>
           </div>

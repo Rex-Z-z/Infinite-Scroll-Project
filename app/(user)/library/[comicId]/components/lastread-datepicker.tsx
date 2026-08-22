@@ -1,11 +1,12 @@
 import { ChangeEvent, ChangeEventHandler, useState } from 'react'
 
+import dynamic from 'next/dynamic'
+
 import { addDays, format } from 'date-fns'
 import { Calendar as CalendarIcon } from 'lucide-react'
 import type { DropdownNavProps, DropdownProps } from 'react-day-picker'
 
 import { Button } from '@/components/ui/button'
-import { Calendar } from '@/components/ui/calendar'
 import {
   Popover,
   PopoverContent,
@@ -18,7 +19,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
+
+const Calendar = dynamic(
+  () => import('@/components/ui/calendar').then((mod) => mod.Calendar),
+  {
+    loading: () => (
+      <div>
+        <Skeleton className="h-72 w-62" />
+      </div>
+    ),
+    ssr: false,
+  }
+)
 
 interface LastReadDatePickerProps {
   date: Date | undefined

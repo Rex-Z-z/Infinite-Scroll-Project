@@ -1,19 +1,14 @@
-'use client'
-
-import React from 'react'
-
 import { fetchRecommendedReads } from '@/services/home/comic.service'
 
 import ComicSection from './comic-section'
 
-const fetcher = () => fetchRecommendedReads()
+export default async function RecommendedReads() {
+  const recommendedReadsData = await fetchRecommendedReads()
 
-const Recommendations = () => {
   return (
     <ComicSection
       title="Recommendation"
-      fetcher={fetcher}
-      swrKey={['recommended-reads']}
+      reads={recommendedReadsData}
       showAddCard={false}
       autoplay={true}
       loop={true}
@@ -21,5 +16,3 @@ const Recommendations = () => {
     />
   )
 }
-
-export default Recommendations

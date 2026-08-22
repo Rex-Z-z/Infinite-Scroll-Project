@@ -78,7 +78,7 @@ const SearchBar = ({ className }: { className?: string }) => {
       <Button
         variant="outline"
         size="icon"
-        className="size-6 md:hidden md:size-9 [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
+        className="size-7.5 md:hidden md:size-9 [&_svg:not([class*='size-'])]:size-3 md:[&_svg:not([class*='size-'])]:size-4"
         onClick={() => {
           setIsMobileOpen(true)
           // Small delay to allow element to render before focusing
@@ -93,7 +93,7 @@ const SearchBar = ({ className }: { className?: string }) => {
         className={`bg-card absolute top-0 left-0 z-50 flex h-full w-full items-center px-3 md:relative md:flex md:w-md md:bg-transparent md:px-0 lg:w-xl ${isMobileOpen ? 'flex' : 'hidden'} `}
       >
         <div className="relative flex w-full items-center gap-2">
-          <InputGroup className="h-[23.5px] flex-1 md:h-10">
+          <InputGroup className="h-[23.5px] flex-1 md:h-9">
             <InputGroupAddon align="inline-start">
               <Search className="text-muted-foreground size-2.5 md:size-4" />
             </InputGroupAddon>
