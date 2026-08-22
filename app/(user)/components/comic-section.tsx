@@ -104,7 +104,7 @@ const ComicSection = ({
   }
 
   return (
-    <section className="flex w-full flex-col px-8 py-4 md:px-20 lg:px-28">
+    <section className="flex w-full flex-col px-5 py-4 md:px-20 lg:px-28">
       <Carousel
         opts={{
           align: 'start',

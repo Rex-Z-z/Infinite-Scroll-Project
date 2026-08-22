@@ -97,7 +97,9 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
               ) : (
                 <Badge variant="outline" className={BadgeStyle}>
                   <Star isFill className="text-gray-400" />
-                  No Rating
+                  <span className="max-w-[25px] truncate text-[7px] md:max-w-[55px] md:text-[10px] lg:max-w-[75px] lg:text-xs">
+                    No Rating
+                  </span>
                 </Badge>
               )}
 

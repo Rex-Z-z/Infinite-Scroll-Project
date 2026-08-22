@@ -19,7 +19,7 @@ export default function HomePage() {
     <div>
       <Suspense
         fallback={
-          <div className="w-full px-8 py-4 md:px-20 lg:px-28">
+          <div className="w-full px-5 py-4 md:px-20 lg:px-28">
             <div className="bg-muted mb-3 h-7 w-32 animate-pulse rounded-md"></div>
             <HomeSectionSkeleton />
           </div>
