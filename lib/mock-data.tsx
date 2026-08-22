@@ -14,7 +14,7 @@ export const mockReads: ReadItem[] = [
     lastRead: '2023-09-12',
     status: 'Ongoing',
     comicStatus: 'Publishing',
-    rating: 'Great',
+    rating: '',
     chapter: 12,
     comicChapter: 150,
     tags: ['Action', 'Fantasy', 'Adventure', 'Martial Arts'],

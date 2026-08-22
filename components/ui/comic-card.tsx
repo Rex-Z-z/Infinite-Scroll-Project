@@ -7,7 +7,7 @@ import { Image as ImageIcon, Settings2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { ReadItem } from '@/lib/types'
-import { formatDistanceToNow } from '@/lib/utils'
+import { cn, formatDistanceToNow } from '@/lib/utils'
 
 import { Star } from '../icons/custom-icons'
 import { Badge } from './badge'
@@ -121,7 +121,7 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
       ) : (
         // Library
         <div key={read.id} className="flex flex-col overflow-hidden">
-          <div className="relative block aspect-[2/3] h-100 w-full overflow-hidden rounded-md shadow-2xl">
+          <div className="relative block aspect-[2/3] w-full overflow-hidden rounded-md shadow-2xl">
             {read.coverImage ? (
               <Image
                 src={read.coverImage}
@@ -148,25 +148,28 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
             </Button>
           </div>
 
-          <div className="mt-1 rounded-md p-1 md:mt-2">
+          <div className="mt-1 rounded-md px-0.5 py-0.5 sm:px-1 sm:py-1 md:mt-2">
             <h5
-              className="hover:text-foreground/80 mb-1 max-w-180 truncate text-[8px] font-semibold tracking-tight md:text-base"
+              className="hover:text-foreground/80 mb-1 max-w-180 truncate text-[10px] font-semibold tracking-tight md:text-base"
               title={read.title}
             >
               {read.title}
             </h5>
-            <p className="text-muted-foreground hover:text-muted-foreground/80 mb-1 text-[7px] font-normal md:mb-3 md:text-sm">
+            <p className="text-muted-foreground hover:text-muted-foreground/80 mb-1 text-[8px] font-normal md:mb-3 md:text-sm">
               {formatDistanceToNow(read.lastRead)}
             </p>
-            <div className="text-muted-foreground flex flex-row justify-between text-sm font-normal">
+            <div className="text-muted-foreground flex flex-row justify-between">
               {read.rating ? (
                 <div className="flex flex-row gap-1">
-                  <Badge variant="outline" className={BadgeStyle}>
+                  <Badge
+                    variant="outline"
+                    className={cn('px-0.5 py-0.5 md:px-2', BadgeStyle)}
+                  >
                     <Star
                       isFill
                       className={statusColorMap[read.rating] || 'text-gray-400'}
                     />
-                    <span className="max-w-[35px] truncate md:max-w-[50px] lg:max-w-[120px]">
+                    <span className="mt-0.5 max-w-[35px] truncate text-[7px] md:mt-0 md:max-w-[50px] md:text-xs">
                       {read.rating}
                     </span>
                   </Badge>
@@ -174,20 +177,30 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
               ) : (
                 <Badge variant="outline" className={BadgeStyle}>
                   <Star isFill className="text-gray-400" />
-                  No Rating
+                  <span className="mt-0.5 max-w-[35px] truncate text-[7px] md:mt-0 md:max-w-[50px] md:text-xs">
+                    No Rating
+                  </span>
                 </Badge>
               )}
 
               {read.chapter ? (
                 <Badge variant="outline" className={BadgeStyle}>
-                  <span className="hidden md:block">Chapter</span>
-                  <span className="block md:hidden">Ch</span>
-                  {read.chapter}
+                  <span className="hidden text-[7px] md:text-xs lg:block">
+                    Chapter
+                  </span>
+                  <span className="block text-[7px] md:text-xs lg:hidden">
+                    Ch
+                  </span>
+                  <span className="text-[7px] md:text-xs">{read.chapter}</span>
                 </Badge>
               ) : (
                 <Badge variant="outline" className={BadgeStyle}>
-                  <span className="hidden lg:block">No Chapter</span>
-                  <span className="block lg:hidden">No Ch.</span>
+                  <span className="hidden text-[7px] md:block md:text-xs lg:block">
+                    No Chapter
+                  </span>
+                  <span className="block text-[7px] md:block md:text-xs lg:hidden">
+                    No Ch.
+                  </span>
                 </Badge>
               )}
             </div>

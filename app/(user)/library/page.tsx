@@ -10,7 +10,7 @@ const Page = async ({ searchParams }: { searchParams?: any }) => {
   const initialComics = await fetchComicsByFilters(searchParams)
 
   return (
-    <div className="flex flex-col p-2 md:p-4">
+    <div className="flex flex-col p-1.5 md:p-4">
       <h1 className="mb-1 ml-1 text-lg font-semibold tracking-tight md:mb-2 md:text-4xl">
         Library
       </h1>
