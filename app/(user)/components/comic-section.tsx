@@ -107,6 +107,11 @@ const ComicSection = ({
     <section className="flex w-full flex-col px-5 py-4 md:px-20 lg:px-28">
       <Carousel
         opts={{
+          dragFree: false,
+          skipSnaps: false,
+          duration: 25,
+          dragThreshold: 10,
+          watchDrag: true,
           align: 'start',
           loop: loop,
         }}
@@ -153,7 +158,7 @@ const ComicSection = ({
           </div>
         </div>
 
-        <CarouselContent className="-ml-1 lg:-ml-2">
+        <CarouselContent className="-ml-1 touch-pan-y select-none lg:-ml-2">
           {reads &&
             reads.map((read) => (
               <CarouselItem

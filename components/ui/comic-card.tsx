@@ -52,7 +52,8 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
                 sizes="(max-width: 768px) 33vw, (max-width: 1200px) 20vw, 15vw"
                 fill
                 alt={`Cover for ${read.title}`}
-                className="absolute object-cover transition-all duration-500 ease-in-out hover:scale-110"
+                draggable={false}
+                className="pointer-events-none absolute object-cover transition-all duration-500 ease-in-out select-none hover:scale-110"
               />
             ) : (
               <div className="group relative flex aspect-[2/3] w-full items-center justify-center rounded-md bg-gray-700 shadow-lg hover:bg-gray-800">
@@ -130,7 +131,8 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
                 sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
                 fill
                 alt={`Cover for ${read.title}`}
-                className="absolute object-cover transition-all duration-500 ease-in-out hover:scale-110"
+                draggable={false}
+                className="pointer-events-none absolute object-cover transition-all duration-500 ease-in-out select-none hover:scale-110"
               />
             ) : (
               <div className="group relative flex aspect-[2/3] w-full cursor-pointer items-center justify-center rounded-md bg-gray-700 shadow-lg hover:bg-gray-800">
