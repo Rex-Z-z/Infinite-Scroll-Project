@@ -4,7 +4,16 @@ import React, { useState } from 'react'
 
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import { Activity, Book, Calendar, Star, Tag } from 'lucide-react'
+import {
+  Activity,
+  Book,
+  Calendar,
+  Hash,
+  RotateCcw,
+  Search,
+  Star,
+  Tag,
+} from 'lucide-react'
 
 import { FilterIcon } from '@/components/icons/custom-icons'
 import { Button } from '@/components/ui/button'
@@ -25,6 +34,16 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
+import { cn } from '@/lib/utils'
+
+const TIME_PRESETS = ['Recent', '7 Days', '1 Month', '6 Months'] as const
+const YEARS = ['2023', '2024', '2025', '2026'] as const
+
+const TYPE_OPTIONS = [
+  { key: 'manga', label: 'Manga' },
+  { key: 'manhwa', label: 'Manhwa' },
+  { key: 'manhua', label: 'Manhua' },
+] as const
 
 const GENRES = [
   'Action',
@@ -83,133 +102,218 @@ const STATUSES = [
 ]
 
 export function LibraryFilters() {
-  // --- State ---
-  const [timePreset, setTimePreset] = useState('Recent') // "Recent" | "7 Days" | ... | "Custom"
-
-  // Custom Years
-  const [startYear, setStartYear] = useState('2025')
-  const [endYear, setEndYear] = useState('2025')
-
-  // Type
-  const [types, setTypes] = useState({
-    manga: false,
-    manhwa: false,
-    manhua: false,
-  })
-
-  // Genres (Stored as a Set for easier toggling, or just an array)
-  const [selectedGenres, setSelectedGenres] = useState<string[]>([])
-  // Tags
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
-  // Ratings
-  const [selectedRatings, setSelectedRatings] = useState<string[]>([])
-  // Statuses
-  const [selectedStatuses, setSelectedStatuses] = useState<string[]>([])
-
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  const handleApply = () => {
-    const params = new URLSearchParams(searchParams.toString())
+  const [open, setOpen] = useState(false)
 
-    if (selectedStatuses.length) {
-      params.set('statuses', selectedStatuses.join(','))
-    } else {
-      params.delete('statuses')
-    }
-    // ... do this for genres, tags, etc.
+  // --- Filter State ---
+  const [timePreset, setTimePreset] = useState(
+    () => searchParams.get('time') || 'Recent'
+  )
+  const [startYear, setStartYear] = useState(
+    () => searchParams.get('from') || '2025'
+  )
+  const [endYear, setEndYear] = useState(() => searchParams.get('to') || '2025')
 
-    // Pushing to the router triggers the Server Component (page.tsx)
-    // to re-fetch the data automatically without a full page reload!
-    router.push(`?${params.toString()}`)
-  }
+  const [selectedTypes, setSelectedTypes] = useState<string[]>(
+    () => searchParams.get('types')?.split(',').filter(Boolean) || []
+  )
+  const [selectedStatuses, setSelectedStatuses] = useState<string[]>(
+    () => searchParams.get('statuses')?.split(',').filter(Boolean) || []
+  )
+  const [selectedGenres, setSelectedGenres] = useState<string[]>(
+    () => searchParams.get('genres')?.split(',').filter(Boolean) || []
+  )
+  const [selectedTags, setSelectedTags] = useState<string[]>(
+    () => searchParams.get('tags')?.split(',').filter(Boolean) || []
+  )
+  const [selectedRatings, setSelectedRatings] = useState<string[]>(
+    () => searchParams.get('ratings')?.split(',').filter(Boolean) || []
+  )
 
-  // --- Helpers ---
-  const toggleGenre = (genre: string) => {
-    setSelectedGenres((prev) =>
-      prev.includes(genre) ? prev.filter((g) => g !== genre) : [...prev, genre]
+  // --- Local Search State for Long Lists ---
+  const [genreQuery, setGenreQuery] = useState('')
+  const [tagQuery, setTagQuery] = useState('')
+  // Constants (In production, TOTAL_TAG_COUNT & search results would come from your API/DB)
+  const POPULAR_TAGS_LIMIT = 6
+  const SEARCH_RESULTS_LIMIT = 12
+  const TOTAL_TAG_COUNT = 142850 // Or TAGS.length if local
+
+  // 1. Exclude already-selected tags from the suggestion pool so they don't duplicate
+  const unselectedTags = TAGS.filter((tag) => !selectedTags.includes(tag))
+
+  // 2. Determine which tags to display based on whether the user is searching
+  const isSearchingTags = tagQuery.trim().length > 0
+
+  // Generic array toggle helper
+  const toggleItem = (
+    item: string,
+    setter: React.Dispatch<React.SetStateAction<string[]>>
+  ) => {
+    setter((prev) =>
+      prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
     )
   }
 
-  const toggleTag = (tag: string) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-    )
-  }
+  // Filtered lists based on search inputs
+  const filteredGenres = GENRES.filter((g) =>
+    g.toLowerCase().includes(genreQuery.toLowerCase())
+  )
+  const filteredTags = TAGS.filter((t) =>
+    t.toLowerCase().includes(tagQuery.toLowerCase())
+  )
 
-  const toggleRating = (rating: string) => {
-    setSelectedRatings((prev) =>
-      prev.includes(rating)
-        ? prev.filter((r) => r !== rating)
-        : [...prev, rating]
-    )
-  }
-
-  const toggleStatus = (status: string) => {
-    setSelectedStatuses((prev) =>
-      prev.includes(status)
-        ? prev.filter((s) => s !== status)
-        : [...prev, status]
-    )
-  }
-
-  // Calculate active filters count
+  // Active filter group count
   const activeFilterCount = [
     timePreset !== 'Recent',
-    Object.values(types).some((t) => t),
-    selectedGenres.length > 0,
-    selectedRatings.length > 0,
+    selectedTypes.length > 0,
     selectedStatuses.length > 0,
+    selectedGenres.length > 0,
     selectedTags.length > 0,
+    selectedRatings.length > 0,
   ].filter(Boolean).length
 
   const handleReset = () => {
     setTimePreset('Recent')
-    setTypes({ manga: false, manhwa: false, manhua: false })
+    setStartYear('2025')
+    setEndYear('2025')
+    setSelectedTypes([])
+    setSelectedStatuses([])
     setSelectedGenres([])
     setSelectedTags([])
     setSelectedRatings([])
-    setSelectedStatuses([])
+    setGenreQuery('')
+    setTagQuery('')
   }
 
+  const handleApply = () => {
+    const params = new URLSearchParams(searchParams.toString())
+
+    const setOrDelete = (key: string, values: string[]) => {
+      if (values.length > 0) params.set(key, values.join(','))
+      else params.delete(key)
+    }
+
+    if (timePreset !== 'Recent') {
+      params.set('time', timePreset)
+      if (timePreset === 'Custom') {
+        params.set('from', startYear)
+        params.set('to', endYear)
+      } else {
+        params.delete('from')
+        params.delete('to')
+      }
+    } else {
+      params.delete('time')
+      params.delete('from')
+      params.delete('to')
+    }
+
+    setOrDelete('types', selectedTypes)
+    setOrDelete('statuses', selectedStatuses)
+    setOrDelete('genres', selectedGenres)
+    setOrDelete('tags', selectedTags)
+    setOrDelete('ratings', selectedRatings)
+
+    router.push(`?${params.toString()}`)
+    setOpen(false)
+  }
+
+  const matchingUnselectedTags = isSearchingTags
+    ? unselectedTags.filter((t) =>
+        t.toLowerCase().includes(tagQuery.toLowerCase())
+      )
+    : unselectedTags
+
+  const displayedSuggestedTags = matchingUnselectedTags.slice(
+    0,
+    isSearchingTags ? SEARCH_RESULTS_LIMIT : POPULAR_TAGS_LIMIT
+  )
+
+  // 3. Calculate how many tags are hidden to show in the static counter
+  const remainingTagCount = isSearchingTags
+    ? Math.max(0, matchingUnselectedTags.length - displayedSuggestedTags.length)
+    : Math.max(
+        0,
+        TOTAL_TAG_COUNT - selectedTags.length - displayedSuggestedTags.length
+      )
+
   return (
-    <Popover modal={true}>
+    <Popover open={open} onOpenChange={setOpen} modal={true}>
       <PopoverTrigger asChild>
         <Button
           variant="ghost"
-          className="text-muted-foreground hover:text-foreground h-5.5 gap-2 px-1 text-xs md:h-7 md:px-2 md:text-sm"
-        >
-          {activeFilterCount ? (
-            <FilterIcon isFill className="text-primary size-3 md:size-4.5" />
-          ) : (
-            <FilterIcon strokeWidth={1.7} className="size-3 md:size-4.5" />
+          className={cn(
+            'text-muted-foreground hover:text-foreground h-6 gap-1.5 rounded-md px-2 text-xs md:h-7 md:px-2.5 md:text-sm',
+            activeFilterCount > 0 &&
+              'text-primary hover:text-primary bg-primary/10'
           )}
-          Filters
+        >
+          <FilterIcon
+            isFill={activeFilterCount > 0}
+            strokeWidth={1.7}
+            className={cn(
+              'size-3.5 md:size-4',
+              activeFilterCount > 0 && 'text-primary'
+            )}
+          />
+          <span>Filters</span>
+          {activeFilterCount > 0 && (
+            <span className="bg-primary text-primary-foreground ml-0.5 flex size-4 items-center justify-center rounded-full text-[10px] font-bold">
+              {activeFilterCount}
+            </span>
+          )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[400px] p-0" align="end">
-        {/* Header */}
-        <div className="bg-muted/30 flex items-center justify-between px-4 py-3">
-          <h4 className="text-sm font-semibold">Library Filters</h4>
-          <Button variant="ghost" size="xs" onClick={handleReset}>
-            Reset
-          </Button>
+
+      <PopoverContent
+        className="w-[calc(100vw-2rem)] p-0 sm:w-[420px]"
+        align="end"
+      >
+        {/* Sticky Header */}
+        <div className="bg-muted/30 flex items-center justify-between border-b px-4 py-3">
+          <div className="flex items-center gap-2">
+            <h4 className="text-sm font-semibold">Library Filters</h4>
+            {activeFilterCount > 0 && (
+              <span className="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-[11px] font-medium">
+                {activeFilterCount} active
+              </span>
+            )}
+          </div>
+          {activeFilterCount > 0 && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleReset}
+              className="text-muted-foreground hover:text-foreground h-7 gap-1 px-2 text-xs"
+            >
+              <RotateCcw className="size-3" />
+              Reset
+            </Button>
+          )}
         </div>
 
-        <ScrollArea className="custom-scrollbar h-[380px]">
-          <div className="space-y-4 px-3 pb-1">
-            {/* --- Time Section --- */}
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-sm font-semibold">
-                <Calendar className="text-muted-foreground size-4" />
-                Time & Relevance
+        {/* Single Master ScrollArea */}
+        <ScrollArea className="h-[420px]">
+          <div className="space-y-5 p-4">
+            {/* --- 1. Time & Relevance --- */}
+            <div className="space-y-2.5">
+              <div className="flex items-center gap-1.5">
+                <Calendar className="text-muted-foreground size-3.5" />
+                <Label className="text-xs font-semibold">
+                  Time & Relevance
+                </Label>
               </div>
-              <div className="grid grid-cols-2 gap-2">
-                {['Recent', '7 Days', '1 Month', '6 Months'].map((period) => (
+
+              <div className="grid grid-cols-2 gap-1.5">
+                {TIME_PRESETS.map((period) => (
                   <Button
                     key={period}
+                    type="button"
                     variant={timePreset === period ? 'default' : 'outline'}
-                    className="h-8 justify-start text-xs"
+                    size="sm"
+                    className="h-8 justify-start px-3 text-xs font-normal"
                     onClick={() => setTimePreset(period)}
                   >
                     {period}
@@ -217,37 +321,51 @@ export function LibraryFilters() {
                 ))}
               </div>
 
-              {/* Custom Range Toggle */}
               <Button
+                type="button"
                 variant={timePreset === 'Custom' ? 'default' : 'outline'}
-                className="h-8 w-full text-xs"
+                size="sm"
+                className="h-8 w-full text-xs font-normal"
                 onClick={() => setTimePreset('Custom')}
               >
                 Custom Year Range
               </Button>
 
               {timePreset === 'Custom' && (
-                <div className="animate-in fade-in zoom-in-95 flex items-center gap-2 duration-200">
-                  <Select value={startYear} onValueChange={setStartYear}>
+                <div className="animate-in fade-in zoom-in-95 flex items-center gap-2 pt-1 duration-200">
+                  <Select
+                    value={startYear}
+                    onValueChange={(val) => {
+                      setStartYear(val)
+                      if (Number(val) > Number(endYear)) setEndYear(val)
+                    }}
+                  >
                     <SelectTrigger className="h-8 w-full text-xs">
                       <SelectValue placeholder="From" />
                     </SelectTrigger>
                     <SelectContent>
-                      {['2023', '2024', '2025'].map((y) => (
-                        <SelectItem key={y} value={y}>
+                      {YEARS.map((y) => (
+                        <SelectItem key={y} value={y} className="text-xs">
                           {y}
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
-                  <span className="text-muted-foreground text-xs">-</span>
+
+                  <span className="text-muted-foreground text-xs">to</span>
+
                   <Select value={endYear} onValueChange={setEndYear}>
                     <SelectTrigger className="h-8 w-full text-xs">
                       <SelectValue placeholder="To" />
                     </SelectTrigger>
                     <SelectContent>
-                      {['2023', '2024', '2025'].map((y) => (
-                        <SelectItem key={y} value={y}>
+                      {YEARS.map((y) => (
+                        <SelectItem
+                          key={y}
+                          value={y}
+                          disabled={Number(y) < Number(startYear)}
+                          className="text-xs"
+                        >
                           {y}
                         </SelectItem>
                       ))}
@@ -259,162 +377,281 @@ export function LibraryFilters() {
 
             <Separator />
 
-            {/* --- Type Section --- */}
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-sm">
-                <Book className="text-muted-foreground size-4" />
-                Type
+            {/* --- 2. Type --- */}
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <Book className="text-muted-foreground size-3.5" />
+                  <Label className="text-xs font-semibold">Type</Label>
+                </div>
+                {selectedTypes.length > 0 && (
+                  <span className="text-muted-foreground text-[11px]">
+                    {selectedTypes.length} selected
+                  </span>
+                )}
               </div>
-              <div className="flex flex-wrap gap-2">
-                {Object.entries(types).map(([key, value]) => (
-                  <div
-                    key={key}
-                    className={`cursor-pointer rounded-md border px-4 py-2 text-xs font-medium transition-colors select-none ${value ? 'bg-primary text-primary-foreground border-primary' : 'text-muted-foreground hover:bg-muted bg-transparent'} `}
-                    onClick={() =>
-                      setTypes((prev) => ({
-                        ...prev,
-                        [key]: !prev[key as keyof typeof types],
-                      }))
-                    }
-                  >
-                    {key.charAt(0).toUpperCase() + key.slice(1)}
-                  </div>
-                ))}
+
+              <div className="grid grid-cols-3 gap-1.5">
+                {TYPE_OPTIONS.map(({ key, label }) => {
+                  const isSelected = selectedTypes.includes(key)
+                  return (
+                    <Button
+                      key={key}
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => toggleItem(key, setSelectedTypes)}
+                      className={cn(
+                        'h-8 text-xs font-normal transition-all',
+                        isSelected &&
+                          'border-primary bg-primary/10 text-primary hover:bg-primary/20 hover:text-primary font-medium'
+                      )}
+                    >
+                      {label}
+                    </Button>
+                  )
+                })}
               </div>
             </div>
 
             <Separator />
 
-            {/* --- Reading Status Section --- */}
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-sm">
-                <Activity className="text-muted-foreground size-4" />
-                Reading Status
+            {/* --- 3. Reading Status --- */}
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <Activity className="text-muted-foreground size-3.5" />
+                  <Label className="text-xs font-semibold">
+                    Reading Status
+                  </Label>
+                </div>
+                {selectedStatuses.length > 0 && (
+                  <span className="text-muted-foreground text-[11px]">
+                    {selectedStatuses.length} selected
+                  </span>
+                )}
               </div>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+
+              <div className="grid grid-cols-2 gap-2">
                 {STATUSES.map((status) => (
-                  <div key={status} className="flex items-center space-x-2">
+                  <label
+                    key={status}
+                    htmlFor={`status-${status}`}
+                    className="hover:bg-muted/50 flex cursor-pointer items-center gap-2 rounded-md border px-2.5 py-1.5 text-xs transition-colors"
+                  >
                     <Checkbox
                       id={`status-${status}`}
                       checked={selectedStatuses.includes(status)}
-                      onCheckedChange={() => toggleStatus(status)}
+                      onCheckedChange={() =>
+                        toggleItem(status, setSelectedStatuses)
+                      }
                     />
-                    <Label
-                      htmlFor={`status-${status}`}
-                      className="cursor-pointer text-sm font-normal"
-                    >
-                      {status}
-                    </Label>
-                  </div>
+                    <span className="truncate">{status}</span>
+                  </label>
                 ))}
               </div>
             </div>
 
             <Separator />
 
-            {/* --- Genre Section (Grid Layout) --- */}
-            <div className="space-y-3">
-              <div className="flex items-center justify-between gap-6 px-1 pt-1">
-                <div className="flex items-center gap-2 text-sm">
-                  <Tag className="text-muted-foreground size-4" />
-                  Genres
+            {/* --- 4. Genres (With Live Filter) --- */}
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-1.5">
+                  <Tag className="text-muted-foreground size-3.5" />
+                  <Label className="text-xs font-semibold">Genres</Label>
+                  {selectedGenres.length > 0 && (
+                    <span className="bg-primary/10 text-primary py-0.2 rounded-full px-1.5 text-[10px] font-medium">
+                      {selectedGenres.length}
+                    </span>
+                  )}
                 </div>
 
-                <Input
-                  type="search"
-                  placeholder="Search genres..."
-                  className="h-8 !text-xs"
-                />
+                <div className="relative w-44">
+                  <Search className="text-muted-foreground absolute top-1/2 left-2.5 size-3 -translate-y-1/2" />
+                  <Input
+                    type="search"
+                    value={genreQuery}
+                    onChange={(e) => setGenreQuery(e.target.value)}
+                    placeholder="Filter genres..."
+                    className="h-7 pl-7 text-xs"
+                  />
+                </div>
               </div>
-              <ScrollArea className="h-[130px]">
-                <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-                  {GENRES.map((genre) => (
-                    <div key={genre} className="flex items-center space-x-1.5">
+
+              {filteredGenres.length > 0 ? (
+                <div className="grid grid-cols-2 gap-x-4 gap-y-2 pt-1">
+                  {filteredGenres.map((genre) => (
+                    <div key={genre} className="flex items-center space-x-2">
                       <Checkbox
                         id={`genre-${genre}`}
                         checked={selectedGenres.includes(genre)}
-                        onCheckedChange={() => toggleGenre(genre)}
+                        onCheckedChange={() =>
+                          toggleItem(genre, setSelectedGenres)
+                        }
                       />
                       <Label
                         htmlFor={`genre-${genre}`}
-                        className="text-md cursor-pointer"
+                        className="cursor-pointer text-xs font-normal"
                       >
                         {genre}
                       </Label>
                     </div>
                   ))}
                 </div>
-              </ScrollArea>
+              ) : (
+                <p className="text-muted-foreground py-2 text-center text-xs">
+                  No genres match &ldquo;{genreQuery}&rdquo;
+                </p>
+              )}
             </div>
 
             <Separator />
 
-            {/* --- Tag Section (Grid Layout) --- */}
-            <div className="space-y-3">
-              <div className="flex items-center justify-between gap-6 px-1 pt-1">
-                <div className="flex items-center gap-2 text-sm">
-                  <Tag className="text-muted-foreground size-4" />
-                  Tags
+            {/* --- 5. Tags (Fixed State + Pill Layout) --- */}
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-1.5">
+                  <Hash className="text-muted-foreground size-3.5" />
+                  <Label className="text-xs font-semibold">Tags</Label>
+                  {selectedTags.length > 0 && (
+                    <span className="bg-primary/10 text-primary rounded-full px-1.5 py-0.5 text-[10px] font-medium">
+                      {selectedTags.length}
+                    </span>
+                  )}
                 </div>
 
-                <Input
-                  type="search"
-                  placeholder="Search tags..."
-                  className="h-8 !text-xs"
-                />
+                <div className="relative w-48">
+                  <Search className="text-muted-foreground absolute top-1/2 left-2.5 size-3 -translate-y-1/2" />
+                  <Input
+                    type="search"
+                    value={tagQuery}
+                    onChange={(e) => setTagQuery(e.target.value)}
+                    placeholder="Search all tags..."
+                    className="h-7 pl-7 text-xs"
+                  />
+                </div>
               </div>
-              <ScrollArea className="h-[130px]">
-                <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-                  {TAGS.map((tag) => (
-                    <div key={tag} className="flex items-center space-x-1.5">
-                      <Checkbox
-                        id={`genre-${tag}`}
-                        checked={selectedGenres.includes(tag)}
-                        onCheckedChange={() => toggleGenre(tag)}
-                      />
-                      <Label
-                        htmlFor={`genre-${tag}`}
-                        className="max-w-[150px] cursor-pointer truncate text-xs"
-                        title={tag}
+
+              {selectedTags.length > 0 && (
+                <div className="space-y-1">
+                  <span className="text-muted-foreground text-[10px] font-medium tracking-wider uppercase">
+                    Active
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {selectedTags.map((tag) => (
+                      <button
+                        key={tag}
+                        type="button"
+                        onClick={() => toggleItem(tag, setSelectedTags)}
+                        className="border-primary bg-primary/10 text-primary hover:bg-primary/20 flex cursor-pointer items-center gap-1.5 rounded-md border px-2 py-1 text-left text-xs font-medium transition-colors"
+                      >
+                        <span>{tag}</span>
+                        <span className="text-[10px] leading-none opacity-70 hover:opacity-100">
+                          ✕
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="space-y-1">
+                <span className="text-muted-foreground text-[10px] font-medium tracking-wider uppercase">
+                  {isSearchingTags ? 'Matching Tags' : 'Popular Tags'}
+                </span>
+
+                {displayedSuggestedTags.length > 0 ? (
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {displayedSuggestedTags.map((tag) => (
+                      <button
+                        key={tag}
+                        type="button"
+                        onClick={() => toggleItem(tag, setSelectedTags)}
+                        className="hover:bg-muted text-muted-foreground hover:text-foreground cursor-pointer rounded-md border bg-transparent px-2.5 py-1 text-left text-xs transition-all"
                       >
                         {tag}
-                      </Label>
-                    </div>
-                  ))}
-                </div>
-              </ScrollArea>
+                      </button>
+                    ))}
+
+                    {/* 3. Static Non-Interactive Counter Badge */}
+                    {remainingTagCount > 0 && (
+                      <span
+                        className="text-muted-foreground/70 bg-muted/40 rounded-md border border-dashed px-2 py-1 text-[11px] select-none"
+                        title="Use the search box above to find specific tags"
+                      >
+                        +{remainingTagCount.toLocaleString()} more
+                      </span>
+                    )}
+                  </div>
+                ) : (
+                  <p className="text-muted-foreground py-2 text-xs">
+                    No tags found matching &ldquo;{tagQuery}&rdquo;
+                  </p>
+                )}
+              </div>
             </div>
 
             <Separator />
 
-            {/* --- Rating Section --- */}
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-sm font-semibold">
-                <Star className="size-4" />
-                Rating
+            {/* --- 6. Rating --- */}
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <Star className="text-muted-foreground size-3.5" />
+                  <Label className="text-xs font-semibold">Rating</Label>
+                </div>
+                {selectedRatings.length > 0 && (
+                  <span className="text-muted-foreground text-[11px]">
+                    {selectedRatings.length} selected
+                  </span>
+                )}
               </div>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-                {RATINGS.map((rating) => (
-                  <div key={rating} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={`rating-${rating}`}
-                      checked={selectedRatings.includes(rating)}
-                      onCheckedChange={() => toggleRating(rating)}
-                    />
-                    <Label
-                      htmlFor={`rating-${rating}`}
-                      className="cursor-pointer text-sm font-normal"
+
+              <div className="flex flex-wrap gap-1.5">
+                {RATINGS.map((rating) => {
+                  const isSelected = selectedRatings.includes(rating)
+                  return (
+                    <Button
+                      key={rating}
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => toggleItem(rating, setSelectedRatings)}
+                      className={cn(
+                        'h-7 rounded-full px-3 text-xs font-normal transition-all',
+                        isSelected &&
+                          'border-primary bg-primary/10 text-primary hover:bg-primary/20 hover:text-primary font-medium'
+                      )}
                     >
                       {rating}
-                    </Label>
-                  </div>
-                ))}
+                    </Button>
+                  )
+                })}
               </div>
             </div>
           </div>
         </ScrollArea>
-        <div className="p-2">
-          <Button className="w-full">Apply</Button>
+
+        {/* Sticky Footer */}
+        <div className="bg-background flex items-center gap-2 border-t p-3">
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="h-9 flex-1 text-xs"
+            onClick={() => setOpen(false)}
+          >
+            Cancel
+          </Button>
+          <Button
+            type="button"
+            size="sm"
+            className="h-9 flex-1 text-xs"
+            onClick={handleApply}
+          >
+            Apply Filters
+          </Button>
         </div>
       </PopoverContent>
     </Popover>

@@ -2,18 +2,16 @@
 
 import React, { useState } from 'react'
 
-import { CalendarCog, Star, Tag } from 'lucide-react'
+import { CalendarCog, RotateCcw, Star, Tag } from 'lucide-react'
 
 import { FilterIcon } from '@/components/icons/custom-icons'
 import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import {
   Select,
   SelectContent,
@@ -22,66 +20,76 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
+import { cn } from '@/lib/utils'
 
-const RATINGS = [
-  'Absolute Cinema',
-  'Awesome',
-  'Great',
-  'Good',
-  'Regular',
-  'Bad',
-  'Garbage',
-]
+const TIME_PRESETS = ['Recent', '7 Days', '1 Month', '6 Months'] as const
+const YEARS = ['2023', '2024', '2025', '2026'] as const
+
+const TYPE_OPTIONS = [
+  { key: 'manga', label: 'Manga' },
+  { key: 'manhwa', label: 'Manhwa' },
+  { key: 'manhua', label: 'Manhua' },
+] as const
+
+const RATING_OPTIONS = [
+  { key: 'absoluteCinema', label: 'Absolute Cinema' },
+  { key: 'awesome', label: 'Awesome' },
+  { key: 'great', label: 'Great' },
+  { key: 'good', label: 'Good' },
+  { key: 'regular', label: 'Regular' },
+  { key: 'bad', label: 'Bad' },
+  { key: 'garbage', label: 'Garbage' },
+] as const
 
 const DropdownHome = () => {
-  // --- State ---
-  const [dateRange, setDateRange] = useState('Recent')
-  const [preset, setPreset] = useState('Recent')
-
-  // Custom Years
+  const [preset, setPreset] = useState<string>('Recent')
   const [startYear, setStartYear] = useState('2025')
   const [endYear, setEndYear] = useState('2025')
 
-  // Type
-  const [types, setTypes] = useState({
+  const [types, setTypes] = useState<Record<string, boolean>>({
     manga: false,
     manhwa: false,
     manhua: false,
   })
 
-  // Rating
-  const [selectedRatings, setSelectedRatings] = useState<string[]>([])
+  const [rating, setRating] = useState<Record<string, boolean>>({
+    absoluteCinema: false,
+    awesome: false,
+    great: false,
+    good: false,
+    regular: false,
+    bad: false,
+    garbage: false,
+  })
 
-  const toggleRating = (rating: string) => {
-    setSelectedRatings((prev) =>
-      prev.includes(rating)
-        ? prev.filter((r) => r !== rating)
-        : [...prev, rating]
-    )
-  }
+  // Accurate count of active filter groups
+  const activeTypeCount = Object.values(types).filter(Boolean).length
+  const activeRatingCount = Object.values(rating).filter(Boolean).length
+  const activeFilterCount =
+    (preset !== 'Recent' ? 1 : 0) +
+    (activeTypeCount > 0 ? 1 : 0) +
+    (activeRatingCount > 0 ? 1 : 0)
 
-  // Helper to count active filters for a badge notification
-  const activeFilterCount = [
-    dateRange === 'Custom',
-    preset !== 'Recent',
-    Object.values(types).some((t) => t),
-    selectedRatings.length > 0,
-  ].filter(Boolean).length
+  const toggleType = (key: string) =>
+    setTypes((prev) => ({ ...prev, [key]: !prev[key] }))
 
-  const handlePresetChange = (val: string) => {
-    setPreset(val)
-    if (val !== 'Custom') {
-      setDateRange('Recent')
-    } else {
-      setDateRange('Custom')
-    }
-  }
+  const toggleRating = (key: string) =>
+    setRating((prev) => ({ ...prev, [key]: !prev[key] }))
 
   const handleReset = () => {
     setPreset('Recent')
-    setDateRange('Recent')
+    setStartYear('2025')
+    setEndYear('2025')
     setTypes({ manga: false, manhwa: false, manhua: false })
-    setSelectedRatings([])
+    setRating({
+      absoluteCinema: false,
+      awesome: false,
+      great: false,
+      good: false,
+      regular: false,
+      bad: false,
+      garbage: false,
+    })
   }
 
   return (
@@ -90,147 +98,200 @@ const DropdownHome = () => {
         <Button
           variant="outline"
           size="icon"
-          className="size-7.5 md:size-9 [&_svg:not([class*='size-'])]:size-3 md:[&_svg:not([class*='size-'])]:size-4"
+          className="relative size-8 md:size-9"
         >
-          {activeFilterCount ? (
-            <FilterIcon isFill className="text-primary size-2.5 md:size-4" />
-          ) : (
-            <FilterIcon strokeWidth={1.7} className="size-2.5 md:size-4" />
+          <FilterIcon
+            isFill={activeFilterCount > 0}
+            strokeWidth={1.7}
+            className={cn(
+              'size-3.5 transition-colors md:size-4',
+              activeFilterCount > 0 && 'text-primary'
+            )}
+          />
+          {activeFilterCount > 0 && (
+            <span className="bg-primary text-primary-foreground absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full text-[10px] font-bold shadow-xs">
+              {activeFilterCount}
+            </span>
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[250px] p-0 md:w-[340px]" align="end">
+
+      <PopoverContent className="w-80 p-4 md:w-96" align="end">
         {/* Header */}
-        <div className="bg-muted/30 flex items-center justify-between px-2 py-1 md:px-4 md:py-3">
-          <h4 className="text-xs font-semibold md:text-lg">Filter Content</h4>
-          <Button
-            variant="ghost"
-            size="xs"
-            onClick={handleReset}
-            className="h-4 gap-1 rounded-sm px-1.5 text-[10px] has-[>svg]:px-1.5 md:h-6 md:rounded-md md:px-2 md:text-xs [&_svg:not([class*='size-'])]:size-3"
-          >
-            Reset
-          </Button>
+        <div className="mb-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <h4 className="text-sm font-semibold">Filter Content</h4>
+            {activeFilterCount > 0 && (
+              <span className="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-[11px] font-medium">
+                {activeFilterCount} active
+              </span>
+            )}
+          </div>
+          {activeFilterCount > 0 && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleReset}
+              className="text-muted-foreground hover:text-foreground h-7 gap-1 px-2 text-xs"
+            >
+              <RotateCcw className="size-3" />
+              Reset
+            </Button>
+          )}
         </div>
 
-        <ScrollArea className="h-[400px] px-3 pb-1">
-          <div className="space-y-2 md:space-y-6">
-            {/* --- Date Section --- */}
-            <div className="space-y-1 px-0.5 md:space-y-2 md:px-1">
-              <div className="flex items-center gap-1 md:gap-2">
-                <CalendarCog className="text-muted-foreground size-3 md:size-4" />
-                <Label className="text-xs md:text-sm">Time Period</Label>
-              </div>
-              <div className="grid grid-cols-2 gap-1 md:gap-2">
-                {['Recent', '7 Days', '1 Month', '6 Months'].map((period) => (
-                  <Button
-                    key={period}
-                    variant={preset === period ? 'default' : 'outline'}
-                    className="h-6 justify-start rounded-sm px-2 py-2 text-[10px] has-[>svg]:px-3 md:h-9 md:rounded-md md:px-4 md:text-xs"
-                    onClick={() => handlePresetChange(period)}
-                  >
-                    {period}
-                  </Button>
-                ))}
-              </div>
+        <div className="space-y-4">
+          {/* --- Time Period Section --- */}
+          <div className="space-y-2">
+            <div className="flex items-center gap-1.5">
+              <CalendarCog className="text-muted-foreground size-3.5" />
+              <Label className="text-xs font-medium">Time Period</Label>
+            </div>
 
-              <Button
-                variant={dateRange === 'Custom' ? 'default' : 'outline'}
-                size="sm"
-                className="mb-1 h-6 w-full rounded-sm px-2 py-2 text-xs text-[10px] has-[>svg]:px-3 md:mb-2 md:h-9 md:rounded-md md:px-4 md:text-xs"
-                onClick={() => handlePresetChange('Custom')}
-              >
-                Custom Year Range
-              </Button>
+            <div className="grid grid-cols-2 gap-1.5">
+              {TIME_PRESETS.map((period) => (
+                <Button
+                  key={period}
+                  variant={preset === period ? 'default' : 'outline'}
+                  size="sm"
+                  className="h-8 justify-start px-3 text-xs font-normal"
+                  onClick={() => setPreset(period)}
+                >
+                  {period}
+                </Button>
+              ))}
+            </div>
 
-              {dateRange === 'Custom' && (
-                <div className="animate-in fade-in zoom-in-95 flex w-full items-center gap-2 duration-200">
-                  <Select value={startYear} onValueChange={setStartYear}>
-                    <SelectTrigger className="md:text-md h-4 w-full py-1 pr-1 text-[10px] md:h-8 md:py-2 md:pr-2">
-                      <SelectValue placeholder="From" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {['2023', '2024', '2025'].map((y) => (
-                        <SelectItem key={y} value={y}>
-                          {y}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <span className="text-muted-foreground text-[10px] md:text-xs">
-                    to
-                  </span>
-                  <Select value={endYear} onValueChange={setEndYear}>
-                    <SelectTrigger className="md:text-md h-4 w-full py-1 pr-1 text-[10px] md:h-8 md:py-2 md:pr-2">
-                      <SelectValue placeholder="To" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {['2023', '2024', '2025'].map((y) => (
-                        <SelectItem key={y} value={y}>
-                          {y}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+            <Button
+              variant={preset === 'Custom' ? 'default' : 'outline'}
+              size="sm"
+              className="h-8 w-full justify-center text-xs font-normal"
+              onClick={() => setPreset('Custom')}
+            >
+              Custom Year Range
+            </Button>
+
+            {preset === 'Custom' && (
+              <div className="animate-in fade-in zoom-in-95 flex items-center gap-2 pt-1 duration-200">
+                <Select
+                  value={startYear}
+                  onValueChange={(val) => {
+                    setStartYear(val)
+                    if (Number(val) > Number(endYear)) setEndYear(val)
+                  }}
+                >
+                  <SelectTrigger className="h-8 w-full text-xs">
+                    <SelectValue placeholder="From" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {YEARS.map((y) => (
+                      <SelectItem key={y} value={y} className="text-xs">
+                        {y}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <span className="text-muted-foreground text-xs">to</span>
+
+                <Select value={endYear} onValueChange={setEndYear}>
+                  <SelectTrigger className="h-8 w-full text-xs">
+                    <SelectValue placeholder="To" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {YEARS.map((y) => (
+                      <SelectItem
+                        key={y}
+                        value={y}
+                        disabled={Number(y) < Number(startYear)}
+                        className="text-xs"
+                      >
+                        {y}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+          </div>
+
+          <Separator />
+
+          {/* --- Type Section (Inline 3-col Grid) --- */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5">
+                <Tag className="text-muted-foreground size-3.5" />
+                <Label className="text-xs font-medium">Type</Label>
+              </div>
+              {activeTypeCount > 0 && (
+                <span className="text-muted-foreground text-[11px]">
+                  {activeTypeCount} selected
+                </span>
               )}
             </div>
 
-            {/* --- Type Section --- */}
-            <div className="space-y-3">
-              <Label>
-                <Tag className="text-muted-foreground size-4" />
-                Type
-              </Label>
-              <div className="flex flex-wrap gap-2">
-                {Object.entries(types).map(([key, value]) => (
-                  <div
+            <div className="grid grid-cols-3 gap-1.5">
+              {TYPE_OPTIONS.map(({ key, label }) => {
+                const isSelected = types[key]
+                return (
+                  <Button
                     key={key}
-                    className={`cursor-pointer rounded-md border px-4 py-2 text-xs font-medium transition-colors select-none ${value ? 'bg-primary text-primary-foreground border-primary' : 'text-muted-foreground hover:bg-muted bg-transparent'} `}
-                    onClick={() =>
-                      setTypes((prev) => ({
-                        ...prev,
-                        [key]: !prev[key as keyof typeof types],
-                      }))
-                    }
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => toggleType(key)}
+                    className={cn(
+                      'h-8 text-xs font-normal transition-all',
+                      isSelected &&
+                        'border-primary bg-primary/10 text-primary hover:bg-primary/20 hover:text-primary font-medium'
+                    )}
                   >
-                    {key.charAt(0).toUpperCase() + key.slice(1)}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <Separator />
-
-            {/* --- Rating Section --- */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-sm">
-                <Star className="size-4" />
-                Rating
-              </div>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-                {RATINGS.map((rating) => (
-                  <div key={rating} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={`rating-${rating}`}
-                      checked={selectedRatings.includes(rating)}
-                      onCheckedChange={() => toggleRating(rating)}
-                    />
-                    <Label
-                      htmlFor={`rating-${rating}`}
-                      className="cursor-pointer text-sm font-normal"
-                    >
-                      {rating}
-                    </Label>
-                  </div>
-                ))}
-              </div>
+                    {label}
+                  </Button>
+                )
+              })}
             </div>
           </div>
-        </ScrollArea>
 
-        <div className="p-2">
-          <Button className="w-full">Apply</Button>
+          <Separator />
+
+          {/* --- Rating Section (Inline Flex Pills) --- */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5">
+                <Star className="text-muted-foreground size-3.5" />
+                <Label className="text-xs font-medium">Rating</Label>
+              </div>
+              {activeRatingCount > 0 && (
+                <span className="text-muted-foreground text-[11px]">
+                  {activeRatingCount} selected
+                </span>
+              )}
+            </div>
+
+            <div className="flex flex-wrap gap-1.5">
+              {RATING_OPTIONS.map(({ key, label }) => {
+                const isSelected = rating[key]
+                return (
+                  <Button
+                    key={key}
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => toggleRating(key)}
+                    className={cn(
+                      'h-7 rounded-full px-3 text-xs font-normal transition-all',
+                      isSelected &&
+                        'border-primary bg-primary/10 text-primary hover:bg-primary/20 hover:text-primary font-medium'
+                    )}
+                  >
+                    {label}
+                  </Button>
+                )
+              })}
+            </div>
+          </div>
         </div>
       </PopoverContent>
     </Popover>
