@@ -45,7 +45,7 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
       {isHome ? (
         // Home
         <div key={read.id} className="max-w-68">
-          <div className="relative block aspect-[2/3] w-full overflow-hidden rounded-md shadow-2xl">
+          <div className="group/button relative block aspect-[2/3] w-full overflow-hidden rounded-md shadow-2xl">
             {read.coverImage ? (
               <Image
                 src={read.coverImage}
@@ -53,11 +53,11 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
                 fill
                 alt={`Cover for ${read.title}`}
                 draggable={false}
-                className="pointer-events-none absolute object-cover transition-all duration-500 ease-in-out select-none hover:scale-110"
+                className="pointer-events-none absolute object-cover transition-all duration-500 ease-in-out select-none group-hover/button:scale-110"
               />
             ) : (
-              <div className="group relative flex aspect-[2/3] w-full items-center justify-center rounded-md bg-gray-700 shadow-lg hover:bg-gray-800">
-                <div className="transition-all duration-300 ease-in-out group-hover:scale-130">
+              <div className="group/image relative flex aspect-[2/3] w-full items-center justify-center rounded-md bg-gray-700 shadow-lg hover:bg-gray-800">
+                <div className="transition-all duration-300 ease-in-out group-hover/image:scale-110">
                   <ImageIcon className="size-8 text-gray-600 md:size-16" />
                 </div>
               </div>
@@ -67,7 +67,7 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
               onClick={handleEditClick}
               variant="secondary"
               size="icon-sm"
-              className="hover:bg-accent hover:text-accent-foreground absolute top-1 left-1 size-6 hover:cursor-pointer md:top-2 md:left-2 md:size-8 [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
+              className="hover:bg-accent/50 bg-secondary/40 hover:text-accent-foreground absolute top-1 left-1 size-6 backdrop-blur-sm transition-discrete ease-in group-hover/button:visible hover:cursor-pointer md:top-2 md:left-2 md:size-8 lg:invisible [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
             >
               <Settings2 />
             </Button>
@@ -123,7 +123,10 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
         </div>
       ) : (
         // Library
-        <div key={read.id} className="flex flex-col overflow-hidden">
+        <div
+          key={read.id}
+          className="group/button flex flex-col overflow-hidden"
+        >
           <div className="relative block aspect-[2/3] w-full overflow-hidden rounded-md shadow-2xl">
             {read.coverImage ? (
               <Image
@@ -132,11 +135,11 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
                 fill
                 alt={`Cover for ${read.title}`}
                 draggable={false}
-                className="pointer-events-none absolute object-cover transition-all duration-500 ease-in-out select-none hover:scale-110"
+                className="pointer-events-none absolute object-cover transition-all duration-500 ease-in-out select-none group-hover/button:scale-110"
               />
             ) : (
-              <div className="group relative flex aspect-[2/3] w-full cursor-pointer items-center justify-center rounded-md bg-gray-700 shadow-lg hover:bg-gray-800">
-                <div className="transition-all duration-300 ease-in-out group-hover:scale-130">
+              <div className="group/image relative flex aspect-[2/3] w-full cursor-pointer items-center justify-center rounded-md bg-gray-700 shadow-lg hover:bg-gray-800">
+                <div className="transition-all duration-300 ease-in-out group-hover/image:scale-110">
                   <ImageIcon className="size-8 text-gray-600 md:size-16" />
                 </div>
               </div>
@@ -146,7 +149,7 @@ const ComicCard = ({ read, page = 'home', onEdit }: ComicCardProps) => {
               onClick={handleEditClick}
               variant="secondary"
               size="icon-sm"
-              className="hover:bg-accent hover:text-accent-foreground absolute top-1 left-1 size-5 hover:cursor-pointer md:top-2 md:left-2 md:size-8 [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
+              className="hover:bg-accent/50 bg-secondary/40 hover:text-accent-foreground absolute top-1 left-1 size-6 backdrop-blur-sm transition-discrete ease-in group-hover/button:visible hover:cursor-pointer md:top-2 md:left-2 md:size-8 lg:invisible [&_svg:not([class*='size-'])]:size-2.5 md:[&_svg:not([class*='size-'])]:size-4"
             >
               <Settings2 />
             </Button>
